@@ -13,3 +13,6 @@
 
 # Ignore all tempfiles.
 /tmp
+
+# Ignore .idea directory
+/.idea
