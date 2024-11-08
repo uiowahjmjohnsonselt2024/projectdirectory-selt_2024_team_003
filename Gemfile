@@ -15,6 +15,9 @@ gem 'coffee-rails', '~> 4.1.0'
 
 
 group :development, :test do
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
+  gem 'rspec-rails'
 end
 
 group :development do
