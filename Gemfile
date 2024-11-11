@@ -25,9 +25,9 @@ gem 'rails-ujs', '~> 0.1.0'
 gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
-  gem 'cucumber-rails', require: false
-  gem 'database_cleaner'
-  gem 'rspec-rails'
+    gem 'cucumber-rails', require: false
+    gem 'database_cleaner'
+    gem 'rspec-rails'
 end
 
 group :development do

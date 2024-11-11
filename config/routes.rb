@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+
+  resources :games do
+    collection do
+      post 'join', to: 'games#join'
+    end
+  end
+
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
   post 'signup', to: 'registrations#create'
