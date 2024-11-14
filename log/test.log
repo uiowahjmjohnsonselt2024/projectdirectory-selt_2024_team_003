@@ -1,0 +1,60 @@
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Started GET "/pages/grid" for 127.0.0.1 at 2024-11-14 14:00:46 -0600
+Processing by PagesController#grid as HTML
+  Rendered pages/grid.html.erb within layouts/application (16.3ms)
+Completed 200 OK in 4172ms (Views: 4126.8ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Started GET "/pages/grid" for 127.0.0.1 at 2024-11-14 14:00:50 -0600
+Processing by PagesController#grid as HTML
+  Rendered pages/grid.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 1ms (Views: 1.2ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Started GET "/pages/grid" for 127.0.0.1 at 2024-11-14 14:00:50 -0600
+Processing by PagesController#grid as HTML
+  Rendered pages/grid.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 1ms (Views: 1.1ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started GET "/pages/grid" for 127.0.0.1 at 2024-11-14 14:00:50 -0600
+Processing by PagesController#grid as HTML
+  Rendered pages/grid.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started GET "/pages/grid" for 127.0.0.1 at 2024-11-14 14:00:50 -0600
+Processing by PagesController#grid as HTML
+  Rendered pages/grid.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 1ms (Views: 1.2ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Started GET "/pages/grid" for 127.0.0.1 at 2024-11-14 14:02:07 -0600
+Processing by PagesController#grid as HTML
+  Rendered pages/grid.html.erb within layouts/application (11.3ms)
+Completed 200 OK in 724ms (Views: 685.0ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started GET "/pages/grid" for 127.0.0.1 at 2024-11-14 14:02:08 -0600
+Processing by PagesController#grid as HTML
+  Rendered pages/grid.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 1ms (Views: 1.2ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started GET "/pages/grid" for 127.0.0.1 at 2024-11-14 14:02:08 -0600
+Processing by PagesController#grid as HTML
+  Rendered pages/grid.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started GET "/pages/grid" for 127.0.0.1 at 2024-11-14 14:02:08 -0600
+Processing by PagesController#grid as HTML
+  Rendered pages/grid.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started GET "/pages/grid" for 127.0.0.1 at 2024-11-14 14:02:08 -0600
+Processing by PagesController#grid as HTML
+  Rendered pages/grid.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 1ms (Views: 1.2ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.0ms)[0m  rollback transaction

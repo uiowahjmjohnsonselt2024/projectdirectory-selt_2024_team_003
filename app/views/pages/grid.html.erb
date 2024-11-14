@@ -1,0 +1,70 @@
+<!-- app/views/pages/grid.html.erb -->
+<div class="container">
+  <!-- Left Column -->
+  <aside class="left-column">
+    <div class="profile">
+      <div class="profile-picture-placeholder">[Profile Picture]</div>
+      <div class="username-placeholder">Username</div>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="stat-name">Stat 1:</span> <span class="stat-value">Value</span></div>
+      <div class="stat"><span class="stat-name">Stat 2:</span> <span class="stat-value">Value</span></div>
+      <div class="stat"><span class="stat-name">Stat 3:</span> <span class="stat-value">Value</span></div>
+    </div>
+  </aside>
+
+  <!-- Middle Grid (this will be squished between left and right columns) -->
+  <main class="grid-container">
+    <% 8.times do %>
+      <div class="grid-row">
+        <% 8.times do %>
+          <div class="grid-square">
+            <div class="square-content">
+              [Image Placeholder]
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </main>
+
+  <!-- Right Column (Shop) -->
+  <aside class="right-column">
+    <div class="shop">
+      <div class="shop-header">Shop</div>
+
+      <!-- Shop Item 1 -->
+      <div class="shop-item">
+        <img class="item-image" src="item1.jpg" alt="Item 1" />
+        <div class="item-details">
+          <div class="item-title">Item 1</div>
+          <div class="item-price">Price: 50 Shards</div>
+          <div class="item-inventory">In Inventory: 10</div>
+          <button class="buy-button">Buy</button> <!-- Added Buy Button -->
+        </div>
+      </div>
+
+      <!-- Shop Item 2 -->
+      <div class="shop-item">
+        <img class="item-image" src="item2.jpg" alt="Item 2" />
+        <div class="item-details">
+          <div class="item-title">Item 2</div>
+          <div class="item-price">Price: 100 Shards</div>
+          <div class="item-inventory">In Inventory: 5</div>
+          <button class="buy-button">Buy</button> <!-- Added Buy Button -->
+        </div>
+      </div>
+
+      <!-- Add more items as needed -->
+    </div>
+  </aside>
+
+  <!-- Chat Section -->
+  <div class="chat-section">
+    <div class="chat-messages" id="chat-messages"></div>
+    <div class="chat-input">
+      <input type="text" id="chat-input" placeholder="Type a message..." />
+      <button id="send-button">Send</button>
+    </div>
+  </div>
+</div>
