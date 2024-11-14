@@ -1,5 +1,5 @@
 class Game < ActiveRecord::Base
-    validates :name, presence: true
+    validates :name, presence: true, length: { minimum: 0, maximum: 50 }
     validates_uniqueness_of :code
   
     before_create :generate_unique_code

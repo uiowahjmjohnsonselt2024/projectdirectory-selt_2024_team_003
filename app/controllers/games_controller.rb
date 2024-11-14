@@ -1,15 +1,18 @@
 class GamesController < ApplicationController
   def index
     @games = Game.all
+    # Get current user username
   end
 
   def create
-    @game = Game.new(game_params)
+    @game = Game.new(game_params) # create new game(name, code)
     if @game.save
       puts "Game successfully created"
+      # go to the grid page associated with this game
       redirect_to games_path
     else
       puts "Game unsuccessfully created"
+      # add flash warning
       redirect_to games_path
     end
   end
@@ -19,6 +22,7 @@ class GamesController < ApplicationController
 
     if @game
       puts "Game successfully joined"
+      # go to grid page associated with that game
       redirect_to games_path
     else
       puts "Game unsuccessfully joined"

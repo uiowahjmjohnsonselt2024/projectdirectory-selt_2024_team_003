@@ -1,5 +1,7 @@
 <h1>Games Menu</h1>
 
+<li>Current user username: </li>
+
 <%= form_for Game.new, url: games_path, html: { method: :post, local: true } do |form| %>
     <%= form.label :name, 'Game Name:' %>
     <%= form.text_field :name %>
