@@ -1,8 +1,8 @@
 %div.center-container
   %h1.shards-title= @welcome_message
   .button-container
-    = link_to @login_button, login_path, class: 'btn btn-login'
-    = link_to @create_button, create_path, class: 'btn btn-create'
+    = link_to @login_button, login_button_path, class: 'btn btn-login'
+    = link_to @create_button, create_button_path, class: 'btn btn-create'
 
 %footer.footer
   %p!= @copyright_text
