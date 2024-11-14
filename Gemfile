@@ -14,6 +14,12 @@ gem 'coffee-rails', '~> 4.1.0'
 
 gem 'haml-rails'
 
+gem 'jquery-rails'
+
+gem 'turbolinks', '~> 5'
+
+gem 'bootstrap', '~> 5.0.0'
+
 
 
 

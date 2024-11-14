@@ -1,1 +1,11 @@
--#  This file is app/views/home/index.html.haml
+%div.center-container
+  %h1.shards-title= @welcome_message
+  .button-container
+    = link_to @login_button, login_path, class: 'btn btn-login'
+    = link_to @create_button, create_path, class: 'btn btn-create'
+
+%footer.footer
+  %p!= @copyright_text
+  -# Below are optional; we will think about them later
+  -# %a{ href: "/terms" } Terms of Service
+  -# %a{ href: "/privacy" } Privacy Policy

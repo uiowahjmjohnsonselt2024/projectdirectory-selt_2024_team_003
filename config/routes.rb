@@ -59,4 +59,11 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  # Set the root of your site to the HomeController's index action
+  root 'home#index'
+
+  # Define routes for the login and create actions
+  get 'login', to: 'sessions#new', as: 'login'
+  get 'create', to: 'registrations#new', as: 'create'
+
 end
