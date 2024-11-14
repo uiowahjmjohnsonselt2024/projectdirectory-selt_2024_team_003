@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
-  root "home#index"
-  get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
-  get 'signup', to: 'registrations#new'
   post 'signup', to: 'registrations#create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -63,7 +60,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   # Define routes for the login and create actions
-  get 'login', to: 'sessions#new', as: 'login'
-  get 'create', to: 'registrations#new', as: 'create'
+  get 'login', to: 'sessions#new', as: 'login_button'
+  get 'create', to: 'registrations#new', as: 'create_button'
 
 end

@@ -20,13 +20,8 @@ gem 'turbolinks', '~> 5'
 
 gem 'bootstrap', '~> 5.0.0'
 
-
-
-
 gem 'activerecord', '~> 4.2.10'
-gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'rails-ujs', '~> 0.1.0'
-gem 'turbolinks', '~> 5.0'
 gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
