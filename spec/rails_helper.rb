@@ -6,6 +6,17 @@ require File.expand_path('../config/environment', __dir__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+# Threading issue fixed based on ruby version
+if RUBY_VERSION >= '2.6.0' && Rails.version < '5'
+  class ActionController::TestResponse < ActionDispatch::TestResponse
+    def recycle!
+      # Avoid MonitorMixin double-initialize error
+      @mon_mutex_owner_object_id = nil
+      @mon_mutex = nil
+      initialize
+    end
+  end
+end
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
