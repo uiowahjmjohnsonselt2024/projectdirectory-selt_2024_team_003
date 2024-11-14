@@ -1,0 +1,24 @@
+
+
+Started GET "/" for 2604:2d80:d502:a000:8915:59e0:f4b9:f6ff at 2024-11-14 19:29:44 +0000
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/railties-4.2.10/lib/rails/templates/rails/welcome/index.html.erb (2.4ms)
+Completed 200 OK in 15ms (Views: 14.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 2604:2d80:d502:a000:8915:59e0:f4b9:f6ff at 2024-11-14 19:29:45 +0000
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/railties-4.2.10/lib/rails/templates/rails/welcome/index.html.erb (0.1ms)
+Completed 200 OK in 1ms (Views: 1.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 2604:2d80:d502:a000:8915:59e0:f4b9:f6ff at 2024-11-14 19:29:53 +0000
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/railties-4.2.10/lib/rails/templates/rails/welcome/index.html.erb (0.0ms)
+Completed 200 OK in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 2604:2d80:d502:a000:8915:59e0:f4b9:f6ff at 2024-11-14 19:30:03 +0000
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/railties-4.2.10/lib/rails/templates/rails/welcome/index.html.erb (2.7ms)
+Completed 200 OK in 18ms (Views: 17.4ms | ActiveRecord: 0.0ms)
