@@ -1,31 +1,43 @@
 class GamesController < ApplicationController
   def index
-    @games = Game.all
-    # Get current user username
+    @games = current_user.games
   end
 
   def create
     @game = Game.new(game_params) # create new game(name, code)
+    GameUser.create(game: @game, user: current_user)
     if @game.save
-      puts "Game successfully created"
+      flash[:notice] = "Game was successfully created."
       # go to the grid page associated with this game
       redirect_to games_path
     else
-      puts "Game unsuccessfully created"
+      flash[:alert] = "Failed to create game"
       # add flash warning
       redirect_to games_path
     end
   end
 
   def join
+    # Find the game by the provided code (converted to uppercase for consistency)
     @game = Game.find_by(code: params[:code].upcase)
 
-    if @game
-      puts "Game successfully joined"
-      # go to grid page associated with that game
+    if @game.nil?
+      # Game does not exist
+      flash[:alert] = "The game with code #{params[:code]} does not exist."
       redirect_to games_path
     else
-      puts "Game unsuccessfully joined"
+      # Game exists, check if the user has already joined
+      @game_user = GameUser.find_by(user: current_user, game: @game)
+
+      if @game_user
+        # User has already joined the game
+        flash[:alert] = "You have already joined this game."
+      else
+        # User has not joined the game, so create a new GameUser entry
+        GameUser.create(user: current_user, game: @game)
+        flash[:notice] = "Successfully joined the game!"
+      end
+
       redirect_to games_path
     end
   end

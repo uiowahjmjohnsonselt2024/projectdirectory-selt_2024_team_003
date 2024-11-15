@@ -11,19 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20241114165743) do
-  create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "email"
-    t.string "password_digest"
+ActiveRecord::Schema.define(version: 20241115003605) do
+
+  create_table "game_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "game_id"
   end
-end
-ActiveRecord::Schema.define(version: 20241111204228) do
+
+  add_index "game_users", ["game_id"], name: "index_game_users_on_game_id"
+  add_index "game_users", ["user_id"], name: "index_game_users_on_user_id"
+
   create_table "games", force: :cascade do |t|
     t.string   "name"
     t.string   "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "email"
+    t.string "password_digest"
   end
 
 end

@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   # Adds methods to set and authenticate against a BCrypt password.
   # Requires `password_digest` attribute to be present in the database.
   has_secure_password
+  has_many :game_users
+  has_many :games, through: :game_users
 
   # Validations
   validates :username, presence: true, uniqueness: true, length: { minimum: 3, maximum: 25 }
