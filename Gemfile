@@ -33,5 +33,6 @@ group :development do
 end
 
 group :production do
-  gem 'pg'
+  gem 'pg', '~> 0.2'
+  gem 'rails_12factors'
 end

@@ -21,10 +21,12 @@ test: &test
   database: db/test.sqlite3
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
-  url: <%= ENV['DATABASE_URL'] %>
+    adapter: postgresql
+    encoding: unicode
+    pool: 5
+    database: <%= ENV['DATABASE_NAME'] %>
+    username: <%= ENV['DATABASE_USER'] %>
+    password: <%= ENV['DATABASE_PASSWORD'] %>
 
 cucumber:
   <<: *test
