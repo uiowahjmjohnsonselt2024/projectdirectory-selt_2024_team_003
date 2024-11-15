@@ -552,3 +552,89 @@ Migrations are pending. To resolve this issue, run:
   Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
   Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.5ms)
   Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (35.9ms)
+  [1m[36m (71.8ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (76.2ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateGames (20241111204228)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  CREATE TABLE "games" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "code" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20241111204228"]]
+  [1m[35m (64.3ms)[0m  commit transaction
+Migrating to CreateUsers (20241114165743)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar, "email" varchar, "password_digest" varchar) 
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20241114165743"]]
+  [1m[35m (85.0ms)[0m  commit transaction
+Migrating to CreateGameUsers (20241115003605)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "game_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "game_id" integer) 
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_game_users_on_user_id" ON "game_users" ("user_id")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_game_users_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_game_users_on_user_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_game_users_on_game_id" ON "game_users" ("game_id")[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20241115003605"]]
+  [1m[36m (66.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_game_users_on_game_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_game_users_on_game_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_game_users_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_game_users_on_user_id' AND type='index'
+
+
+
+Started GET "/" for 128.255.234.15 at 2024-11-15 19:29:02 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (6.8ms)
+Completed 200 OK in 5626ms (Views: 5612.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/games.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 128.255.234.15 at 2024-11-15 19:29:08 +0000
+
+
+Started GET "/assets/pages.self-2cbd9f99c92acaf97b3b34db63a00cb81b91773bbe3544a17eb66e853b0a419e.css?body=1" for 128.255.234.15 at 2024-11-15 19:29:08 +0000
+
+
+Started GET "/assets/home.self-43190ae2519b9e0a946e622f90c4fd9de50bcda9afd8b54e8e13008d600ca4a1.css?body=1" for 128.255.234.15 at 2024-11-15 19:29:08 +0000
+
+
+Started GET "/assets/application.self-3643cd3033898fa67cca8c080218717177c29887e9edb06142cd89efc5e10e53.css?body=1" for 128.255.234.15 at 2024-11-15 19:29:08 +0000
+
+
+Started GET "/assets/application.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1" for 128.255.234.15 at 2024-11-15 19:29:08 +0000
+
+
+Started GET "/login" for 128.255.234.15 at 2024-11-15 19:29:11 +0000
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 29ms (Views: 27.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/create" for 128.255.234.15 at 2024-11-15 19:29:13 +0000
+Processing by RegistrationsController#new as HTML
+  Rendered registrations/new.html.erb within layouts/application (32.3ms)
+Completed 200 OK in 74ms (Views: 46.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/login" for 128.255.234.15 at 2024-11-15 19:29:19 +0000
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 9ms (Views: 8.9ms | ActiveRecord: 0.0ms)
