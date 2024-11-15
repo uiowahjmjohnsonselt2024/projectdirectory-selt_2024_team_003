@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+
+  resources :games do
+    collection do
+      post 'join', to: 'games#join'
+    end
+  end
+
+  post 'login', to: 'sessions#create'
+  get 'logout', to: 'sessions#destroy', as: :logout
+  post 'signup', to: 'registrations#create'
   get 'pages/grid'
   get 'grid', to: 'pages#grid'  # This defines the route for /grid
 
@@ -56,4 +66,11 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  # Set the root of your site to the HomeController's index action
+  root 'home#index'
+
+  # Define routes for the login and create actions
+  get 'login', to: 'sessions#new', as: 'login_button'
+  get 'create', to: 'registrations#new', as: 'create_button'
+
 end

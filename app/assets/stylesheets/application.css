@@ -13,3 +13,33 @@
  *= require_tree .
  *= require_self
  */
+/* app/assets/stylesheets/custom.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+.alert {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    border-radius: 4px;
+}
+
+.success {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #00ff98;
+    border: 1px solid #0a2b1d;
+    color: #000000;
+    border-radius: 4px;
+}
+

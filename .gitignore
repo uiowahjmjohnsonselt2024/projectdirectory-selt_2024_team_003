@@ -16,3 +16,6 @@
 
 # Ignore .idea directory
 /.idea
+
+# Ignore log directory
+/log
