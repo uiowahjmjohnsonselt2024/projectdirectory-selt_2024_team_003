@@ -254,7 +254,7 @@ DEPENDENCIES
   database_cleaner
   haml-rails
   jquery-rails
-  pg (~> 0.15)
+  pg (~> 0.21)
   rails (= 4.2.10)
   rails-ujs (~> 0.1.0)
   rspec-rails
