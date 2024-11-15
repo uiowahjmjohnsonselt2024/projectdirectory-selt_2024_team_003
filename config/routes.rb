@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy', as: :logout
   post 'signup', to: 'registrations#create'
+  get 'pages/grid'
+  get 'grid', to: 'pages#grid'  # This defines the route for /grid
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
