@@ -2,18 +2,14 @@
 <html>
 <head>
   <title>ShardsOfTheGrid</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': true %>
   <%= csrf_meta_tags %>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <%= yield :stylesheets %> <!-- This will include the view-specific stylesheets -->
 </head>
 <body>
-<% if logged_in? %>
-  <p>Welcome, <%= current_user.username %>!</p>
-  <p>Email: <%= current_user.email %></p>
-  <%= link_to "Logout", logout_path, method: :delete %>
-<% end %>
-<%= yield %>
-
+<%= yield %> <!-- Main content of the view will be inserted here -->
 </body>
 </html>
