@@ -1,3 +1,117 @@
 // Place all the styles related to the Home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* Video background */
+.background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2; /* Behind everything, including the overlay */
+  opacity: 0.7; /* Slightly clearer video for a more dramatic effect */
+}
+
+/* Overlay for improving text readability */
+.video-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3); /* Dark overlay with 30% opacity */
+  z-index: -1; /* Above the video but behind the content */
+}
+
+/* Remove default margins and padding from the body */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #1e3c72; /* Fallback background color */
+  color: #fff;
+  font-family: 'Roboto', sans-serif; /* Consistent font styling */
+  overflow: hidden; /* Prevents scrolling */
+}
+
+/* Center container for main content */
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align content to the top */
+  text-align: center;
+  z-index: 1;
+  padding-top: 75px; /* Adjusted padding to move content higher */
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Styling for the title */
+.shards-title {
+  font-size: 4rem; /* Increased size for better impact */
+  font-weight: bold;
+  margin-bottom: 20px; /* Space below the title */
+  color: #ffffff; /* Bright white color for better contrast */
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6); /* Stronger shadow for better contrast */
+  line-height: 1.2;
+}
+
+/* Button container */
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 25px; /* Increased space between buttons */
+  margin-top: 20px; /* Space above the buttons */
+}
+
+/* Base styles for buttons */
+.btn {
+  padding: 15px 30px; /* More padding for bolder buttons */
+  font-size: 1.2rem; /* Slightly larger font size */
+  border: none;
+  border-radius: 10px; /* More rounded corners */
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s; /* Smooth transition for hover effects */
+  border: 2px solid rgba(255, 255, 255, 0.2); /* Subtle border for definition */
+}
+
+/* Styling for the Login button */
+.btn-login {
+  background-color: #00bcd4; /* Aqua blue */
+  color: #fff;
+}
+
+.btn-login:hover {
+  transform: translateY(-5px); /* More pronounced hover effect */
+  box-shadow: 0 8px 20px rgba(0, 188, 212, 0.5); /* Stronger shadow */
+  border-color: rgba(0, 188, 212, 0.6); /* Border color change on hover */
+  background-color: #0097a7; /* Slightly darker aqua on hover */
+}
+
+/* Styling for the Create button */
+.btn-create {
+  background-color: #4caf50; /* Emerald green */
+  color: #fff;
+}
+
+.btn-create:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.5); /* Stronger shadow */
+  border-color: rgba(76, 175, 80, 0.6); /* Border color change on hover */
+  background-color: #388e3c; /* Darker emerald green on hover */
+}
+
+/* Center and style the footer */
+.footer {
+  text-align: center;
+  padding: 10px; /* Reduced padding */
+  color: #e0e0e0; /* Lighter gray color */
+  font-size: 0.8rem;
+  position: absolute;
+  bottom: 20px; /* Moved up slightly */
+  width: 100%;
+  background-color: transparent;
+}

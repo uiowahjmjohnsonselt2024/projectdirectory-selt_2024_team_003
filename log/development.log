@@ -638,3 +638,358 @@ Started GET "/login" for 128.255.234.15 at 2024-11-15 19:29:19 +0000
 Processing by SessionsController#new as HTML
   Rendered sessions/new.html.erb within layouts/application (0.6ms)
 Completed 200 OK in 9ms (Views: 8.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-15 18:46:21 -0600
+
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+	bin/rake db:migrate RAILS_ENV=development
+
+):
+  activerecord (4.2.10) lib/active_record/migration.rb:392:in `check_pending!'
+  activerecord (4.2.10) lib/active_record/migration.rb:373:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.10) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.10) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.13) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.13) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.10) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.13) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.13) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.10) lib/rails/engine.rb:518:in `call'
+  railties (4.2.10) lib/rails/application.rb:165:in `call'
+  rack (1.6.13) lib/rack/lock.rb:17:in `call'
+  rack (1.6.13) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.13) lib/rack/handler/webrick.rb:88:in `service'
+  /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+  /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+  /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+
+
+  Rendered /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/gems/2.6.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.9ms)
+  Rendered /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/gems/2.6.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (14.0ms)
+  Rendered /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/gems/2.6.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/gems/2.6.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (83.4ms)
+  [1m[36m (17.9ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.5ms)[0m  select sqlite_version(*)
+  [1m[36m (12.4ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (2.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateGames (20241111204228)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (6.8ms)[0m  CREATE TABLE "games" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "code" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (1.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20241111204228"]]
+  [1m[35m (15.7ms)[0m  commit transaction
+Migrating to CreateUsers (20241114165743)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (7.8ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar, "email" varchar, "password_digest" varchar) 
+  [1m[36mSQL (1.9ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20241114165743"]]
+  [1m[35m (11.4ms)[0m  commit transaction
+Migrating to CreateGameUsers (20241115003605)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (8.1ms)[0m  CREATE TABLE "game_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "game_id" integer) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_game_users_on_user_id" ON "game_users" ("user_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_game_users_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_game_users_on_user_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_game_users_on_game_id" ON "game_users" ("game_id")[0m
+  [1m[35mSQL (2.6ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20241115003605"]]
+  [1m[36m (15.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (4.4ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (1.8ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_game_users_on_game_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_game_users_on_game_id' AND type='index'
+[0m
+  [1m[35m (1.8ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_game_users_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_game_users_on_user_id' AND type='index'
+
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-15 18:47:25 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (2.9ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (6838.5ms)
+Completed 200 OK in 8237ms (Views: 8161.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/games.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2024-11-15 18:47:36 -0600
+
+
+Started GET "/assets/home.self-0bc3ce793d403f7762372fe8c0546330e2cb4976690a745e7c87b7a4412585b8.css?body=1" for 127.0.0.1 at 2024-11-15 18:47:37 -0600
+
+
+Started GET "/assets/pages.self-2cbd9f99c92acaf97b3b34db63a00cb81b91773bbe3544a17eb66e853b0a419e.css?body=1" for 127.0.0.1 at 2024-11-15 18:47:37 -0600
+
+
+Started GET "/assets/application.self-3643cd3033898fa67cca8c080218717177c29887e9edb06142cd89efc5e10e53.css?body=1" for 127.0.0.1 at 2024-11-15 18:47:37 -0600
+
+
+Started GET "/assets/application.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1" for 127.0.0.1 at 2024-11-15 18:47:37 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 18:47:38 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 18:47:39 -0600
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-15 18:48:52 -0600
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (122.2ms)
+Completed 200 OK in 3340ms (Views: 3333.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/home.self-f048877c91f37b46812d14a1e8c2680b11bf459fc102d655a9504861463887bd.css?body=1" for 127.0.0.1 at 2024-11-15 18:48:56 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 18:48:56 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 18:48:59 -0600
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-15 18:50:53 -0600
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (132.7ms)
+Completed 200 OK in 2993ms (Views: 2991.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/home.self-5b356e584eaf761a49f3dc347ad970b84aa935cd67c402a987e7d4fedc0319e1.css?body=1" for 127.0.0.1 at 2024-11-15 18:50:56 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 18:50:57 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 18:50:59 -0600
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-15 18:51:09 -0600
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (148.6ms)
+Completed 200 OK in 3313ms (Views: 3311.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/home.self-3e5f4bd5e175786931013cfc5d22d8c0044be0c10311ff4daf8aef45bd7f498b.css?body=1" for 127.0.0.1 at 2024-11-15 18:51:13 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 18:51:13 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 18:51:14 -0600
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-15 18:51:22 -0600
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (172.9ms)
+Completed 200 OK in 3217ms (Views: 3216.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/home.self-c995934482bf33d5c777ad1b288251dffb12e46472756c08c50e37db7a6396e3.css?body=1" for 127.0.0.1 at 2024-11-15 18:51:26 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 18:51:26 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 18:51:28 -0600
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-15 18:51:37 -0600
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (165.8ms)
+Completed 200 OK in 3293ms (Views: 3291.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/home.self-6a788677a69ad83047c3a48c546f27a9bbab0e5b72615282fe9a0154a003b766.css?body=1" for 127.0.0.1 at 2024-11-15 18:51:41 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 18:51:41 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 18:51:42 -0600
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-15 18:52:16 -0600
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (170.0ms)
+Completed 200 OK in 1229ms (Views: 1228.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 18:52:18 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 18:52:20 -0600
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-15 18:52:49 -0600
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (151.3ms)
+Completed 200 OK in 3099ms (Views: 3097.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/home.self-0a11872fc5cf022048b7658656e2203fa14bd510c4672d2289e7724353be40c3.css?body=1" for 127.0.0.1 at 2024-11-15 18:52:52 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 18:52:52 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 18:52:54 -0600
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-15 18:53:53 -0600
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (67.6ms)
+Completed 200 OK in 2822ms (Views: 2820.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/home.self-8abbd765487ba647caf8010b8ce3d1c258af367627f1a1eb8f96068d87cab7ca.css?body=1" for 127.0.0.1 at 2024-11-15 18:53:57 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 18:53:57 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 18:53:59 -0600
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-15 18:55:57 -0600
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (114.7ms)
+Completed 200 OK in 3327ms (Views: 3325.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/home.self-36036f074c47ca4af5a380ef0b03aa9e9beaaeb96a88ccd1bebfcfb6dd09fd2a.css?body=1" for 127.0.0.1 at 2024-11-15 18:56:01 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 18:56:01 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 18:56:02 -0600
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-15 19:00:26 -0600
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (164.4ms)
+Completed 200 OK in 2712ms (Views: 2709.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/home.self-1a3a65af4c01f4c027d8ef473f98a93867cfb34c6e7e1cda47c7be6263c5a25f.css?body=1" for 127.0.0.1 at 2024-11-15 19:00:29 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 19:00:30 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 19:00:31 -0600
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-15 19:03:39 -0600
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (178.5ms)
+Completed 200 OK in 4499ms (Views: 4496.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/home.self-79e2d90e791318c4eca75f376add4cce512862852fbd23f8f4e119359276936c.css?body=1" for 127.0.0.1 at 2024-11-15 19:03:43 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 19:03:44 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 19:03:46 -0600
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-15 19:04:32 -0600
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (54.9ms)
+Completed 200 OK in 2977ms (Views: 2975.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/home.self-5f37afeb228b4ea30cb3fb5c646746397b22819b8977c920991f48516da87306.css?body=1" for 127.0.0.1 at 2024-11-15 19:04:35 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 19:04:35 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 19:04:37 -0600
+
+
+Started GET "/login" for 127.0.0.1 at 2024-11-15 19:04:45 -0600
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (8.5ms)
+Completed 200 OK in 1315ms (Views: 1314.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/create" for 127.0.0.1 at 2024-11-15 19:04:50 -0600
+Processing by RegistrationsController#new as HTML
+  Rendered registrations/new.html.erb within layouts/application (291.5ms)
+Completed 200 OK in 1893ms (Views: 1564.9ms | ActiveRecord: 40.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-15 19:16:32 -0600
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (1051.7ms)
+Completed   in 8567ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-15 19:19:41 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (3.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (2422.3ms)
+Completed 200 OK in 3503ms (Views: 3460.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 19:19:47 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 19:19:49 -0600
+
+
+Started GET "/login" for 127.0.0.1 at 2024-11-15 19:20:07 -0600
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 852ms (Views: 850.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-15 19:20:12 -0600
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (78.1ms)
+Completed 200 OK in 706ms (Views: 704.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 19:20:12 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-15 19:20:14 -0600
+
+
+Started GET "/login" for 127.0.0.1 at 2024-11-15 19:20:23 -0600
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 1012ms (Views: 1011.8ms | ActiveRecord: 0.0ms)

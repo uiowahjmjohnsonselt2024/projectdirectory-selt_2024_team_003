@@ -1,3 +1,8 @@
+.video-overlay
+%video.background-video{ autoplay: true, loop: true, muted: true, playsinline: true }
+  %source{ src: asset_path('test.mov'), type: 'video/mp4' }
+  Your browser does not support the video tag.
+
 %div.center-container
   %h1.shards-title= @welcome_message
   .button-container
