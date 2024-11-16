@@ -1,75 +1,70 @@
-/* Dark Mode Styles */
-body {
-  background-color: #121212;
-  color: #e0e0e0;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
+/* Updated Styles */
 .container {
   display: flex;
-  min-height: 100vh;
+  flex-direction: column;
   width: 100%;
+  flex-grow: 1; /* Allow it to fill the space without exceeding it */
+  overflow: hidden; /* Prevent extra scrollbars from appearing */
+}
+
+.main-layout {
+  height: 100%; /* Use percentage or viewport units to control growth */
+  display: flex;
+  flex: 1;
 }
 
 .left-column {
-  flex: 0 0 auto;  /* Let the left column take its natural width */
+  flex: 0 0 auto;
   padding: 20px;
   background-color: #1e1e1e;
   color: #e0e0e0;
   display: flex;
   flex-direction: column;
+
+  /* Styling the Red Button */
+  .red-button {
+    background-color: #ff4d4d; /* Red color */
+    color: white;
+    font-size: 0.9rem;
+    padding: 10px 10px;
+    margin-bottom: 20px; /* Space below the button */
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    width: 80%; /* Makes it full width, can adjust */
+
+    &:hover {
+      background-color: #ff1a1a; /* Darker red on hover */
+    }
+  }
 }
 
-.profile-picture-placeholder,
-.username-placeholder {
-  background-color: #444;
-  color: #fff;
-  padding: 10px;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.stats {
-  margin-top: 20px;
-}
-
-.stat {
-  margin: 10px 0;
-  background-color: #333;
-  padding: 10px;
-  border-radius: 4px;
-}
-
-.stat-name {
-  font-weight: bold;
-}
-
-.stat-value {
-  font-style: italic;
-}
-
-/* Middle Grid (Adjusts width based on left and right columns) */
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);  /* Create 8 equal columns */
-  grid-template-rows: repeat(8, 1fr);     /* Create 8 equal rows */
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
   gap: 0;
-  padding: 20px;
-  width: 100%; /* Will be updated dynamically by JavaScript */
-}
-
-.grid-row {
-  display: contents; /* Ensures the grid squares align correctly */
+  padding-left: 300px;
+  padding-right: 300px;
+  padding-top: 100px;
+  flex: 1;
+  height: 100vh;
 }
 
 .grid-square {
   background-color: #333;
   border: 1px solid #555;
   transition: transform 0.3s ease, background-color 0.3s ease;
-  aspect-ratio: 1; /* Keeps the square aspect ratio */
+  aspect-ratio: 1;
   position: relative;
+}
+
+.image-class {
+  height: 100%;
+  width: 100%;
 }
 
 .grid-square:hover {
@@ -77,73 +72,16 @@ body {
   transform: scale(1.1);
 }
 
-.square-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: #e0e0e0;
-  font-size: 12px;
-  font-weight: bold;
-}
-
-/* Right Column (Shop) */
 .right-column {
-  position: fixed; /* Fix the right column */
-  top: 0;
-  right: 0;
-  width: auto; /* Let the right column take its natural width */
-  height: 100vh; /* Ensure the right column takes full height */
+  flex: 0 0 auto;
+  width: auto;
   background-color: #1e1e1e;
   padding: 20px;
   color: #e0e0e0;
-  overflow-y: auto; /* Add scrolling if content overflows */
+  overflow-y: auto;
 }
 
-.shop-header {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.shop-item {
-  display: flex;
-  align-items: center;
-  background-color: #333;
-  margin-bottom: 15px;
-  padding: 10px;
-  border-radius: 4px;
-}
-
-.item-image {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  margin-right: 10px;
-}
-
-.item-details {
-  display: flex;
-  flex-direction: column;
-}
-
-.item-title {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.item-price,
-.item-inventory {
-  font-size: 14px;
-  color: #bbb;
-}
-
-/* Chat Section */
 .chat-section {
-  position: fixed;
-  bottom: 0;
   width: 100%;
   background-color: #1e1e1e;
   border-top: 1px solid #444;
@@ -152,53 +90,93 @@ body {
   flex-direction: column;
 }
 
-.chat-messages {
-  flex-grow: 1;
-  overflow-y: auto;
-  max-height: 200px;
-  padding: 5px;
-  background-color: #222;
-  border-bottom: 1px solid #444;
-}
-
-.chat-input {
+.dark-mode-theme {
+  background-color: #121212; /* Dark mode background color */
+  color: #e0e0e0;           /* Text color for dark mode */
+  width: 100%;              /* Full width */
   display: flex;
+  flex-direction: column;
 }
 
-#chat-input {
-  flex-grow: 1;
-  padding: 5px;
-  margin-right: 10px;
-  border: 1px solid #444;
-  border-radius: 4px;
+.dark-mode-theme .container {
+  flex: 1; /* Allows content to grow */
+}
+
+.dark-mode-theme .left-column {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+.dark-mode-theme .grid-container {
+  background-color: #121212;
+}
+
+.dark-mode-theme .grid-square {
   background-color: #333;
-  color: #fff;
+  border: 1px solid #555;
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-#send-button {
-  padding: 5px 10px;
-  border: none;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
+.dark-mode-theme .grid-square:hover {
+  background-color: #555;
 }
 
-#send-button:hover {
-  background-color: #0056b3;
+.dark-mode-theme .right-column {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
 }
 
-.buy-button {
-  background-color: darkred; /* Red background for the button */
-  color: white;          /* White text color */
-  padding: 5px 7px;     /* Add some padding to the button */
-  margin-top: 10px;       /* Space between inventory and button */
-  border: none;
-  border-radius: 4px;     /* Rounded corners for the button */
-  cursor: pointer;       /* Change cursor to indicate it's clickable */
-  font-size: 14px;
+.dark-mode-theme .chat-section {
+  background-color: #1e1e1e;
+  border-top: 1px solid #444;
 }
 
-.buy-button:hover {
-  background-color: #550505; /* Darker red when hovered */
-}
+.right-column {
+  flex: 0 0 auto;
+  width: auto;
+  background-color: #1e1e1e;
+  padding: 20px;
+  color: #e0e0e0;
+  overflow-y: auto;
 
+  .player-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .player {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #2a2a2a; /* Distinct background for players */
+    border-radius: 8px;
+    border: 1px solid #444;
+
+    .player-picture {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%; /* Make it circular */
+      margin-right: 15px;
+      background-color: #444; /* Placeholder background */
+    }
+
+    .player-details {
+      display: flex;
+      flex-direction: column;
+      color: #e0e0e0;
+
+      .player-username {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .player-stats {
+        .stat {
+          font-size: 0.9rem;
+          color: #ccc; /* Slightly lighter text for stats */
+        }
+      }
+    }
+  }
+}
