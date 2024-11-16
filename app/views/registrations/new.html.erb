@@ -1,33 +1,42 @@
-<h1>Create Account</h1>
-
-<%= form_for @user, url: signup_path do |f| %>
-  <div>
-    <%= f.label :username %>
-    <%= f.text_field :username %>
+<div id="registration-page">
+  <div class="video-overlay">
+    <video class="background-video" autoplay loop muted playsinline>
+      <source src="<%= asset_path('test.mov') %>" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
   </div>
 
-  <div>
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-  </div>
+  <div class="form-container">
+    <h1>Create Account</h1>
 
-  <div>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </div>
+    <%= form_for @user, url: signup_path do |f| %>
+      <div class="form-group">
+        <%= f.label :username %>
+        <%= f.text_field :username, class: 'form-control', placeholder: "Enter your username" %>
+      </div>
 
-  <div>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
-  </div>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.text_field :email, class: 'form-control', placeholder: "Enter your email" %>
+      </div>
 
-  <div>
-    <%= f.submit "Sign Up" %>
-  </div>
-<% end %>
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control', placeholder: "Enter your password" %>
+      </div>
 
-<% if flash[:alert].present? %>
-  <div class="alert alert-danger">
-    <%= flash[:alert] %> <!-- This will display the error message -->
+      <div class="form-group">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: 'form-control', placeholder: "Confirm your password" %>
+      </div>
+
+      <%= f.submit "Sign Up", class: 'btn btn-primary' %>
+    <% end %>
+
+    <% if flash[:alert].present? %>
+      <div class="alert alert-danger">
+        <%= flash[:alert] %> <!-- This will display the error message -->
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>

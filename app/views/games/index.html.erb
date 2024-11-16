@@ -1,36 +1,32 @@
-<h1>Games Menu</h1>
-
-<li>Current user username: <%= current_user.username %></li>
-
-<% if flash[:alert].present? %>
-  <div class="alert alert-danger">
-    <%= flash[:alert] %> <!-- This will display the error message -->
+<div id="games-menu">
+  <div class="current-user">
+    Current User: <%= current_user.username %>
   </div>
-<% end %>
 
-<% if flash[:notice].present? %>
-  <div class="success">
-    <%= flash[:notice] %> <!-- This will display the error message -->
+  <div class="form-container">
+    <%= form_for Game.new, url: games_path, html: { method: :post, local: true } do |form| %>
+      <div>
+        <%= form.label :name, 'Game Name:' %>
+        <%= form.text_field :name %>
+      </div>
+      <%= form.submit 'Create Game', class: 'button' %>
+    <% end %>
+
+    <%= form_tag join_games_path, method: :post, local: true do %>
+      <div>
+        <%= label_tag :code, 'Game Code:' %>
+        <%= text_field_tag :code %>
+      </div>
+      <%= submit_tag 'Join Game', class: 'button' %>
+    <% end %>
   </div>
-<% end %>
 
-<%= form_for Game.new, url: games_path, html: { method: :post, local: true } do |form| %>
-    <%= form.label :name, 'Game Name:' %>
-    <%= form.text_field :name %>
-    <%= form.submit 'Create Game' %>
-<% end %>
-  
-
-<%= form_tag join_games_path, method: :post, local: true do %>
-  <%= label_tag :code, 'Game Code:' %>
-  <%= text_field_tag :code %>
-  <%= submit_tag 'Join Game' %>
-<% end %>
-
-<h3>Games List</h3>
-<ul>
-  <% @games.each do |game| %>
-    <li><strong>Name:</strong> <%= game.name %> | <strong>Code:</strong> <%= game.code %></li>
-  <% end %>
-</ul>
-
+  <div class="games-list-container">
+    <h3>Games List</h3>
+    <ul>
+      <% @games.each do |game| %>
+        <li><strong>Name:</strong> <%= game.name %> | <strong>Code:</strong> <%= game.code %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

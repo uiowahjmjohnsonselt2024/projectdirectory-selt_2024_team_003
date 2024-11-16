@@ -1,0 +1,108 @@
+/* app/assets/stylesheets/registration.scss */
+
+#registration-page {
+  /* Use flexbox to center the form container */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+
+  .video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .background-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+  }
+
+  .form-container {
+    max-width: 400px;
+    width: 100%;
+    padding: 40px 35px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    text-align: left; /* Align text to the left */
+    z-index: 1;
+    transform: translateY(-20px); /* Slight upward adjustment for aesthetics */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+  }
+
+  h1 {
+    font-size: 30px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 25px;
+    text-align: center; /* Center the heading text */
+  }
+
+  .form-group {
+    width: 100%; /* Make form groups take full width */
+    margin-bottom: 20px;
+  }
+
+  label {
+    font-weight: 700;
+    color: #444;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  .form-control {
+    width: 100%; /* Ensure input fields take full width */
+    padding: 12px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    background-color: #f8f8f8;
+    font-size: 15px;
+    color: #333;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    outline: none;
+  }
+
+  .btn-primary {
+    width: 100%; /* Make the button take full width */
+    padding: 12px 0;
+    border: none;
+    border-radius: 6px;
+    background-color: #007bff;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 86, 179, 0.4);
+  }
+
+  .alert {
+    margin-top: 20px;
+    color: #721c24;
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #f5c6cb;
+  }
+}
