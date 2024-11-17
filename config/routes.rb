@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :games do
     collection do
       post 'join', to: 'games#join'
+      post 'add_friend', to: 'games#add_friend'
     end
   end
 

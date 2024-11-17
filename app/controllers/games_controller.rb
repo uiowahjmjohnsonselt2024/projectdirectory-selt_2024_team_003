@@ -51,6 +51,19 @@ class GamesController < ApplicationController
       @users = User.where.not(id: current_user.id)
     end
   end
+
+  def add_friend
+    friend = User.find(params[:friend_id])
+
+    if current_user.friends.include?(friend)
+      flash[:alert] = "#{friend.username} is already your friend."
+    else
+      current_user.friendships.create(friend: friend)
+      flash[:notice] = "#{friend.username} has been added to your friends list!"
+    end
+
+    redirect_to games_path
+  end
   
 
   private

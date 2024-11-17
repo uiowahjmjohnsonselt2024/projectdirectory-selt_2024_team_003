@@ -3087,3 +3087,361 @@ Processing by GamesController#index as HTML
   [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE ("users"."id" != ?)[0m  [["id", 1]]
   Rendered games/index.html.erb within layouts/application (2.3ms)
 Completed 200 OK in 13ms (Views: 11.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/games?utf8=%E2%9C%93&search=&commit=Search" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:02:30 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by GamesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"", "commit"=>"Search"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mGame Load (0.4ms)[0m  [1mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE ("users"."id" != ?)  [["id", 1]]
+  Rendered games/index.html.erb within layouts/application (30.5ms)
+Completed 200 OK in 3167ms (Views: 3075.9ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/assets/home.self-914ef87f1924ea1f04cf7397433f2f68489434042ed3da5cbb108241dbd2fab3.css?body=1" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:02:34 +0000
+
+
+Started GET "/logout" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:02:36 +0000
+Processing by SessionsController#destroy as HTML
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:02:36 +0000
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (20.0ms)
+Completed 200 OK in 59ms (Views: 50.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:02:37 +0000
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (8.4ms)
+Completed 200 OK in 52ms (Views: 50.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/create" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:02:39 +0000
+Processing by RegistrationsController#new as HTML
+  Rendered registrations/new.html.erb within layouts/application (24.7ms)
+Completed 200 OK in 44ms (Views: 42.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signup" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:02:49 +0000
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"26CAmjLgzTiyZuT7I4iL6u7D1pFqDtRmJ9cKP1D0W9W3Ahsxedun7WAXOHBC0HQvyN5wdw9Wyyf41ntjEE5P0Q==", "user"=>{"username"=>"user1", "email"=>"user1@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign Up"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."username" = 'user1' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'user1@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (1.1ms)[0m  INSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)  [["username", "user1"], ["email", "user1@gmail.com"], ["password_digest", "$2a$12$OmOkJIyElD/7b0GBvKX2/Oi8TRBtY9nkEFmEhTrMZ3SJUV5yMbqB."]]
+  [1m[36m (60.4ms)[0m  [1mcommit transaction[0m
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/
+Completed 302 Found in 428ms (ActiveRecord: 61.9ms)
+
+
+Started GET "/" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:02:50 +0000
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/games
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/games" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:02:50 +0000
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mGame Load (0.2ms)[0m  SELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?  [["user_id", 2]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE ("users"."id" != ?)[0m  [["id", 2]]
+  Rendered games/index.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 26ms (Views: 22.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/logout" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:03:02 +0000
+Processing by SessionsController#destroy as HTML
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:03:02 +0000
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (1.9ms)
+Completed 200 OK in 15ms (Views: 14.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/create" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:03:03 +0000
+Processing by RegistrationsController#new as HTML
+  Rendered registrations/new.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 24ms (Views: 23.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signup" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:03:15 +0000
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"zwImd9m2CqfJZEkKyiFCWpBnoSJnqq/tEbDBiRzFzkqjoL3cko1gchsVlYGreb2ftnoHxALysKzOsbDVXH/aTg==", "user"=>{"username"=>"alphauser", "email"=>"alphauser@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign Up"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."username" = 'alphauser' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'alphauser@gmail.com' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)[0m  [["username", "alphauser"], ["email", "alphauser@gmail.com"], ["password_digest", "$2a$12$zfZl9njlk048pEqZt55eJOdKkdvN1XWxBI.P1OK6biDHnYof2vX76"]]
+  [1m[35m (60.7ms)[0m  commit transaction
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/
+Completed 302 Found in 458ms (ActiveRecord: 61.4ms)
+
+
+Started GET "/" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:03:16 +0000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/games
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/games" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:03:16 +0000
+Processing by GamesController#index as HTML
+  [1m[35mUser Load (0.8ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mGame Load (0.1ms)[0m  [1mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 3]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE ("users"."id" != ?)  [["id", 3]]
+  Rendered games/index.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 19ms (Views: 15.7ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/logout" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:03:17 +0000
+Processing by SessionsController#destroy as HTML
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:03:18 +0000
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (1.7ms)
+Completed 200 OK in 14ms (Views: 13.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/create" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:03:20 +0000
+Processing by RegistrationsController#new as HTML
+  Rendered registrations/new.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 13ms (Views: 11.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signup" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:03:42 +0000
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"f4AqsDqovwdv3Je4qYAzYVITY7qW5oLTVXpXkHFOPFUTIrEbcZPV0r2tSzPI2MykdA7FXPO+nZKKeybMMfQoUQ==", "user"=>{"username"=>"user2", "email"=>"user2@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign Up"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."username" = 'user2' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'user2@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)  [["username", "user2"], ["email", "user2@gmail.com"], ["password_digest", "$2a$12$lUTm3y4i2yxcU3XQKE1OBeTBXarlbcTIwy8RaNEQ.0MwK54jAf7.W"]]
+  [1m[36m (63.0ms)[0m  [1mcommit transaction[0m
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/
+Completed 302 Found in 389ms (ActiveRecord: 63.9ms)
+
+
+Started GET "/" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:03:43 +0000
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 4]]
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/games
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms)
+
+
+Started GET "/games" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:03:43 +0000
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35mGame Load (0.1ms)[0m  SELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?  [["user_id", 4]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE ("users"."id" != ?)[0m  [["id", 4]]
+  Rendered games/index.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 32ms (Views: 29.5ms | ActiveRecord: 0.3ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateFriendships (20241117193936)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "friendships" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "friend_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_friendships_on_user_id" ON "friendships" ("user_id")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_friendships_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_friendships_on_user_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_friendships_on_friend_id" ON "friendships" ("friend_id")[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20241117193936"]]
+  [1m[36m (57.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_friendships_on_friend_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_friendships_on_friend_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_friendships_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_friendships_on_user_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_game_users_on_game_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_game_users_on_game_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_game_users_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_game_users_on_user_id' AND type='index'
+
+
+
+Started GET "/" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:45:37 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 4]]
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/games
+Completed 302 Found in 34ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/games" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:45:37 +0000
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35mGame Load (0.3ms)[0m  SELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?  [["user_id", 4]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE ("users"."id" != ?)[0m  [["id", 4]]
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?  [["user_id", 4]]
+  Rendered games/index.html.erb within layouts/application (36.8ms)
+Completed 200 OK in 418ms (Views: 381.2ms | ActiveRecord: 1.6ms)
+
+
+Started POST "/games/add_friend?friend_id=1" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:45:41 +0000
+Processing by GamesController#add_friend as HTML
+  Parameters: {"authenticity_token"=>"5BtYL1n8OCpOTPmxIo7WxaOuQzGGKDRDXAOg2/F5IbiIucOEEsdS/5w9JTpD1ikAhbPl1+NwKwKDAtGHscM1vA==", "friend_id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ? AND "users"."id" = ? LIMIT 1[0m  [["user_id", 4], ["id", 1]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFriendship Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "friendships" WHERE ("friendships"."user_id" = 4 AND "friendships"."friend_id" = 1) LIMIT 1[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "friendships" ("friend_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["friend_id", 1], ["user_id", 4], ["created_at", "2024-11-17 19:45:41.507876"], ["updated_at", "2024-11-17 19:45:41.507876"]]
+  [1m[36m (58.2ms)[0m  [1mcommit transaction[0m
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/games
+Completed 302 Found in 85ms (ActiveRecord: 59.6ms)
+
+
+Started GET "/games" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:45:41 +0000
+Processing by GamesController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mGame Load (0.1ms)[0m  [1mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 4]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE ("users"."id" != ?)  [["id", 4]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?[0m  [["user_id", 4]]
+  Rendered games/index.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 19ms (Views: 16.2ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/games/add_friend?friend_id=2" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:45:43 +0000
+Processing by GamesController#add_friend as HTML
+  Parameters: {"authenticity_token"=>"ludH/WIX5Lbk437qdxIiUoT4x0IHOyZpUYNZZLUDJsT6RdxWKSyOYzaSomEWSt2XouVhpGJjOSiOgig49bkywA==", "friend_id"=>"2"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ? AND "users"."id" = ? LIMIT 1  [["user_id", 4], ["id", 2]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mFriendship Exists (0.2ms)[0m  SELECT  1 AS one FROM "friendships" WHERE ("friendships"."user_id" = 4 AND "friendships"."friend_id" = 2) LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "friendships" ("friend_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["friend_id", 2], ["user_id", 4], ["created_at", "2024-11-17 19:45:43.733656"], ["updated_at", "2024-11-17 19:45:43.733656"]]
+  [1m[35m (63.0ms)[0m  commit transaction
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/games
+Completed 302 Found in 102ms (ActiveRecord: 64.0ms)
+
+
+Started GET "/games" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:45:43 +0000
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35mGame Load (0.1ms)[0m  SELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?  [["user_id", 4]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE ("users"."id" != ?)[0m  [["id", 4]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?  [["user_id", 4]]
+  Rendered games/index.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 17ms (Views: 15.1ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/games/add_friend?friend_id=1" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:45:45 +0000
+Processing by GamesController#add_friend as HTML
+  Parameters: {"authenticity_token"=>"lDJ2T7N5LHHEFrwMFFRn890prL6bYPvDbou2xDOBlsH4kO3k+EJGpBZnYId1DJg2+zQKWP445IKxiseYczuCxQ==", "friend_id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ? AND "users"."id" = ? LIMIT 1[0m  [["user_id", 4], ["id", 1]]
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/games
+Completed 302 Found in 6ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/games" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:45:45 +0000
+Processing by GamesController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mGame Load (0.1ms)[0m  [1mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 4]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE ("users"."id" != ?)  [["id", 4]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?[0m  [["user_id", 4]]
+  Rendered games/index.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 21ms (Views: 18.8ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/games/add_friend?friend_id=1" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:45:46 +0000
+Processing by GamesController#add_friend as HTML
+  Parameters: {"authenticity_token"=>"tzYMIxJVSkXvVZczSAw6GOqUffPjdiMzJXfqWi+zO3vblJeIWW4gkD0kS7gpVMXdzInbFYYuPHL6dpsGbwkvfw==", "friend_id"=>"1"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ? AND "users"."id" = ? LIMIT 1  [["user_id", 4], ["id", 1]]
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/games
+Completed 302 Found in 5ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/games" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:45:46 +0000
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35mGame Load (0.1ms)[0m  SELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?  [["user_id", 4]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE ("users"."id" != ?)[0m  [["id", 4]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?  [["user_id", 4]]
+  Rendered games/index.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 27ms (Views: 24.1ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/games/add_friend?friend_id=2" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:45:48 +0000
+Processing by GamesController#add_friend as HTML
+  Parameters: {"authenticity_token"=>"EnBZMQTnt6SHdj80wruAumUcthzV+jcgzbBGAIJVBat+0sKaT9zdcVUH47+j439/QwEQ+rCiKGESsTdcwu8Rrw==", "friend_id"=>"2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ? AND "users"."id" = ? LIMIT 1[0m  [["user_id", 4], ["id", 2]]
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/games
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/games" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:45:48 +0000
+Processing by GamesController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mGame Load (0.1ms)[0m  [1mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 4]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE ("users"."id" != ?)  [["id", 4]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?[0m  [["user_id", 4]]
+  Rendered games/index.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 15ms (Views: 12.9ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/games/add_friend?friend_id=3" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:45:49 +0000
+Processing by GamesController#add_friend as HTML
+  Parameters: {"authenticity_token"=>"SdWtrVuuHQ3Gt70dNBHAvNUTQh567/mrynxHmpeVEgAldzYGEJV32BTGYZZVST958w7k+B+35uoVfTbG1y8GBA==", "friend_id"=>"3"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ? AND "users"."id" = ? LIMIT 1  [["user_id", 4], ["id", 3]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mFriendship Exists (0.2ms)[0m  SELECT  1 AS one FROM "friendships" WHERE ("friendships"."user_id" = 4 AND "friendships"."friend_id" = 3) LIMIT 1
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "friendships" ("friend_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["friend_id", 3], ["user_id", 4], ["created_at", "2024-11-17 19:45:49.370431"], ["updated_at", "2024-11-17 19:45:49.370431"]]
+  [1m[35m (60.1ms)[0m  commit transaction
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/games
+Completed 302 Found in 68ms (ActiveRecord: 61.1ms)
+
+
+Started GET "/games" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 19:45:49 +0000
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35mGame Load (0.1ms)[0m  SELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?  [["user_id", 4]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE ("users"."id" != ?)[0m  [["id", 4]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?  [["user_id", 4]]
+  Rendered games/index.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 16ms (Views: 13.7ms | ActiveRecord: 0.5ms)
