@@ -42,6 +42,17 @@ class GamesController < ApplicationController
     end
   end
 
+  def index
+    @games = current_user.games
+
+    if params[:search].present?
+      @users = User.where("username LIKE ?", "%#{params[:search]}%").where.not(id: current_user.id)
+    else
+      @users = User.where.not(id: current_user.id)
+    end
+  end
+  
+
   private
 
   def game_params

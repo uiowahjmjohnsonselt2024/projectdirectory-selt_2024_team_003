@@ -2699,3 +2699,391 @@ ActionController::RoutingError (No route matches [GET] "/item2.jpg"):
   Rendered /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/gems/2.6.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.3ms)
   Rendered /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/gems/2.6.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
   Rendered /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/gems/2.6.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (19.3ms)
+
+
+Started GET "/" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 17:47:31 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (5741.3ms)
+Completed 200 OK in 5778ms (Views: 5769.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/games.self-ac7ea31303b5d364ac87948e35513f54e76f7e8840b869e51b922fec30167383.css?body=1" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 17:47:37 +0000
+
+
+Started GET "/assets/pages.self-6b3b262282fb9c5530889ed53d7beb6b60e1eb96fe422b664274d516acd76e02.css?body=1" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 17:47:37 +0000
+
+
+Started GET "/assets/home.self-7690250145b0a51d7bf0a20f1ce40497cf84b9c512d9ce657902d6d13ed14f6d.css?body=1" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 17:47:37 +0000
+
+
+Started GET "/assets/registration.self-458d9a0c3823b74316c0e3ba095d20002bce5e3f215256751eb47a898044a9c6.css?body=1" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 17:47:37 +0000
+
+
+Started GET "/assets/sessions.self-695d90fb138caeaba775dd2e8105e758b0fdf845f2616c09e23298cf59e05954.css?body=1" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 17:47:37 +0000
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 17:47:38 +0000
+
+
+Started GET "/login" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 17:47:40 +0000
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 17ms (Views: 16.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 17:47:41 +0000
+
+
+Started POST "/login" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 17:47:46 +0000
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"eFjXFJaEWseOtjkyeiEQPtVMA68qbpnr0cvWpbsfmjcU+ky/3b8wElzH5bkbee/781GlSU82hqoOyqf5+6WOMw==", "login"=>"user", "password"=>"[FILTERED]", "commit"=>"Login"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE (email = 'user' OR username = 'user') LIMIT 1
+  Rendered sessions/new.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 23ms (Views: 11.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/create" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 17:47:49 +0000
+Processing by RegistrationsController#new as HTML
+  Rendered registrations/new.html.erb within layouts/application (36.2ms)
+Completed 200 OK in 54ms (Views: 50.5ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/signup" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 17:47:58 +0000
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"8xg2jDJdex/9VJvIuHZJnqIAHFWIWRw9G+7jNlG4Vsqfuq0neWYRyi8lR0PZLrZbhB26s+0BA3zE75JqEQJCzg==", "user"=>{"username"=>"user", "email"=>"user@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign Up"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."username" = 'user' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'user@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)  [["username", "user"], ["email", "user@gmail.com"], ["password_digest", "$2a$12$0TnzpD2Z33WvuD2.4xDue.GJKW5AT0cIEb9jxGkcVFMbPv1XS3lAC"]]
+  [1m[36m (71.9ms)[0m  [1mcommit transaction[0m
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/
+Completed 302 Found in 416ms (ActiveRecord: 72.9ms)
+
+
+Started GET "/" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 17:47:59 +0000
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/games
+Completed 302 Found in 16ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/games" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 17:47:59 +0000
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mGame Load (0.3ms)[0m  SELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?  [["user_id", 1]]
+  Rendered games/index.html.erb within layouts/application (10.1ms)
+Completed 200 OK in 78ms (Views: 24.1ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/games" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 17:48:06 +0000
+Processing by GamesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"L9WTcHSbOKLDwhS6zX3mgtZaEOWmyEst6LNaDL2TxGFDdwjbP6BSdxGzyDGsJRlH8Ee2A8OQVGw3sitQ/SnQZQ==", "game"=>{"name"=>"user"}, "commit"=>"Create Game"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mGame Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "games" WHERE "games"."code" IS NULL LIMIT 1[0m
+  [1m[35mGame Exists (0.1ms)[0m  SELECT  1 AS one FROM "games" WHERE "games"."code" = ? LIMIT 1  [["code", "EMXF"]]
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "games" ("name", "created_at", "updated_at", "code") VALUES (?, ?, ?, ?)[0m  [["name", "user"], ["created_at", "2024-11-17 17:48:06.573816"], ["updated_at", "2024-11-17 17:48:06.573816"], ["code", "EMXF"]]
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "game_users" ("user_id", "game_id") VALUES (?, ?)  [["user_id", 1], ["game_id", 1]]
+  [1m[36m (61.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mGame Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "games" WHERE ("games"."code" = 'EMXF' AND "games"."id" != 1) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/grid
+Completed 302 Found in 84ms (ActiveRecord: 63.4ms)
+
+
+Started GET "/grid" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 17:48:06 +0000
+Processing by PagesController#grid as HTML
+  Rendered pages/grid.html.erb within layouts/application (8.6ms)
+Completed 200 OK in 25ms (Views: 24.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/placeholder.jpg" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 17:48:06 +0000
+
+ActionController::RoutingError (No route matches [GET] "/placeholder.jpg"):
+  actionpack (4.2.10) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.10) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.13) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.13) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.10) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.13) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.13) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.10) lib/rails/engine.rb:518:in `call'
+  railties (4.2.10) lib/rails/application.rb:165:in `call'
+  rack (1.6.13) lib/rack/lock.rb:17:in `call'
+  rack (1.6.13) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.13) lib/rack/handler/webrick.rb:88:in `service'
+  /usr/share/rvm/rubies/ruby-2.6.10/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+  /usr/share/rvm/rubies/ruby-2.6.10/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+  /usr/share/rvm/rubies/ruby-2.6.10/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+
+
+  Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.7ms)
+  Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.2ms)
+  Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/routes/_table.html.erb (3.4ms)
+  Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.6ms)
+  Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (53.9ms)
+
+
+Started GET "/assets/castle-2c472066026a654ceca65a490ec4d76c1af2089b72d4b3789d4215ec4dcfc6c8.PNG" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 17:48:06 +0000
+
+
+Started GET "/games" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 17:48:08 +0000
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mGame Load (0.1ms)[0m  SELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?  [["user_id", 1]]
+  Rendered games/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 13ms (Views: 11.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/games" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 17:55:54 +0000
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mGame Load (0.1ms)[0m  SELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?  [["user_id", 1]]
+  Rendered games/index.html.erb within layouts/application (21.5ms)
+Completed 500 Internal Server Error in 24ms (ActiveRecord: 0.2ms)
+
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    32:   <div id="users-list-container">
+    33:   <h3>All Users</h3>
+    34:   <ul>
+    35:     <% @users.each do |user| %>
+    36:       <li><strong>Username:</strong> <%= user.username %> | <strong>Email:</strong> <%= user.email %></li>
+    37:     <% end %>
+    38:   </ul>
+  app/views/games/index.html.erb:35:in `_app_views_games_index_html_erb__2956574113477548008_63879076181120'
+
+
+  Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.7ms)
+  Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.3ms)
+  Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (26.3ms)
+
+
+Started GET "/" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 18:11:20 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/games
+Completed 302 Found in 27ms (ActiveRecord: 0.6ms)
+
+
+Started GET "/games" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 18:11:20 +0000
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mGame Load (0.3ms)[0m  SELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?  [["user_id", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  Rendered games/index.html.erb within layouts/application (23.5ms)
+Completed 200 OK in 3732ms (Views: 3700.2ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/home.self-a4740584b02aeae84c0e356c77a4e70931ec572c791c45ba7d4677b651b571df.css?body=1" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 18:11:24 +0000
+
+
+Started GET "/games" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 18:12:27 +0000
+Processing by GamesController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mGame Load (0.1ms)[0m  [1mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"
+  Rendered games/index.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 31ms (Views: 27.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 18:12:38 +0000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/games
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms)
+
+
+Started GET "/games" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 18:12:38 +0000
+Processing by GamesController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mGame Load (0.1ms)[0m  [1mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"
+  Rendered games/index.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 44ms (Views: 39.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 18:12:51 +0000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/games
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms)
+
+
+Started GET "/games" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 18:12:51 +0000
+Processing by GamesController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mGame Load (0.2ms)[0m  [1mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"
+  Rendered games/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 19ms (Views: 16.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/games" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 18:14:58 +0000
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mGame Load (0.3ms)[0m  SELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?  [["user_id", 1]]
+  Rendered games/index.html.erb within layouts/application (56.8ms)
+Completed 500 Internal Server Error in 107ms (ActiveRecord: 3.0ms)
+
+ActionView::Template::Error (undefined method `form_with' for #<#<Class:0x00007443c5500be0>:0x00007443c54e5930>
+Did you mean?  form_tag):
+    31:   </div>
+    32:   <div id="user-search-container">
+    33:     <h3>Search for Users</h3>
+    34:     <%= form_with url: games_path, method: :get, local: true do |form| %>
+    35:       <div>
+    36:         <%= form.label :search, "Search Users:" %>
+    37:         <%= form.text_field :search, value: params[:search], placeholder: "Enter username" %>
+  app/views/games/index.html.erb:34:in `_app_views_games_index_html_erb___3476165609851452848_63917211088660'
+
+
+  Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.6ms)
+  Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.1ms)
+  Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (24.4ms)
+
+
+Started GET "/games" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 18:16:21 +0000
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mGame Load (0.1ms)[0m  SELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?  [["user_id", 1]]
+  Rendered games/index.html.erb within layouts/application (5.7ms)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.3ms)
+
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    44:   <div id="users-list-container">
+    45:     <h3>Search Results</h3>
+    46:     <ul>
+    47:       <% @users.each do |user| %>
+    48:         <li><strong>Username:</strong> <%= user.username %> | <strong>Email:</strong> <%= user.email %></li>
+    49:       <% end %>
+    50:     </ul>
+  app/views/games/index.html.erb:47:in `_app_views_games_index_html_erb___3476165609851452848_63917217191500'
+
+
+  Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.0ms)
+  Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.8ms)
+  Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /home/codio/.rvm/gems/ruby-2.6.10/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (27.9ms)
+
+
+Started GET "/" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 18:19:27 +0000
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+Redirected to https://cementorinoco-tahitipaul-3000.codio.io/games
+Completed 302 Found in 9ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/games" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 18:19:27 +0000
+Processing by GamesController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mGame Load (0.2ms)[0m  [1mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"
+  Rendered games/index.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 1495ms (Views: 1486.2ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/home.self-f55b753459def464668e2f07d17042158863bcdf7e2ede97e3a7966627b497bb.css?body=1" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 18:19:28 +0000
+
+
+Started GET "/games?utf8=%E2%9C%93&search=user&commit=Search" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 18:19:34 +0000
+Processing by GamesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"user", "commit"=>"Search"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mGame Load (0.2ms)[0m  SELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?  [["user_id", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE (username LIKE '%user%')[0m
+  Rendered games/index.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 19ms (Views: 16.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/games?utf8=%E2%9C%93&search=user&commit=Search" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 18:19:35 +0000
+Processing by GamesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"user", "commit"=>"Search"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mGame Load (0.2ms)[0m  [1mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE (username LIKE '%user%')
+  Rendered games/index.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 22ms (Views: 18.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/games?utf8=%E2%9C%93&search=us&commit=Search" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 18:19:38 +0000
+Processing by GamesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"us", "commit"=>"Search"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mGame Load (0.1ms)[0m  SELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?  [["user_id", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE (username LIKE '%us%')[0m
+  Rendered games/index.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 48ms (Views: 45.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/games?utf8=%E2%9C%93&search=asda&commit=Search" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 18:19:40 +0000
+Processing by GamesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"asda", "commit"=>"Search"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mGame Load (0.1ms)[0m  [1mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE (username LIKE '%asda%')
+  Rendered games/index.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 25ms (Views: 22.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/games?utf8=%E2%9C%93&search=user&commit=Search" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 18:19:43 +0000
+Processing by GamesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"user", "commit"=>"Search"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mGame Load (0.1ms)[0m  SELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?  [["user_id", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE (username LIKE '%user%')[0m
+  Rendered games/index.html.erb within layouts/application (6.2ms)
+Completed 200 OK in 23ms (Views: 20.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/games?utf8=%E2%9C%93&search=user&commit=Search" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 18:46:19 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by GamesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"user", "commit"=>"Search"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mGame Load (0.3ms)[0m  [1mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE (username LIKE '%user%') AND ("users"."id" != ?)  [["id", 1]]
+  Rendered games/index.html.erb within layouts/application (33.3ms)
+Completed 200 OK in 428ms (Views: 368.9ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/games?utf8=%E2%9C%93&search=user&commit=Search" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 18:46:51 +0000
+Processing by GamesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"user", "commit"=>"Search"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mGame Load (0.1ms)[0m  SELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?  [["user_id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE (username LIKE '%user%') AND ("users"."id" != ?)[0m  [["id", 1]]
+  Rendered games/index.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 18ms (Views: 15.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/games?utf8=%E2%9C%93&search=&commit=Search" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 18:46:55 +0000
+Processing by GamesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"", "commit"=>"Search"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mGame Load (0.1ms)[0m  [1mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE ("users"."id" != ?)  [["id", 1]]
+  Rendered games/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 41ms (Views: 39.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/games?utf8=%E2%9C%93&search=&commit=Search" for 2604:2d80:d502:a000:6c37:8828:d88e:ac60 at 2024-11-17 18:46:56 +0000
+Processing by GamesController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"", "commit"=>"Search"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mGame Load (0.1ms)[0m  SELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?  [["user_id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE ("users"."id" != ?)[0m  [["id", 1]]
+  Rendered games/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 13ms (Views: 11.5ms | ActiveRecord: 0.3ms)
