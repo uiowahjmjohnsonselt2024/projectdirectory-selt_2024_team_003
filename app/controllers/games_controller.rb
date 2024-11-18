@@ -65,6 +65,20 @@ class GamesController < ApplicationController
     redirect_to games_path
   end
   
+  def remove_friend
+    friend = User.find(params[:friend_id])
+
+    friendship = current_user.friendships.find_by(friend: friend)
+    if friendship
+      friendship.destroy
+      flash[:notice] = "#{friend.username} has been removed from your friends list."
+    else
+      flash[:alert] = "#{friend.username} is not your friend."
+    end
+
+    redirect_to games_path
+  end
+  
 
   private
 

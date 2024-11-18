@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     collection do
       post 'join', to: 'games#join'
       post 'add_friend', to: 'games#add_friend'
+      delete 'remove_friend', to: 'games#remove_friend'
     end
   end
 
