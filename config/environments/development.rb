@@ -41,11 +41,11 @@ Rails.application.configure do
   #
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',  # or smtp.mailgun.org, smtp.sendgrid.net, etc.
+    address: 'smtp.gmail.com',
     port: 587,
-    domain: 'gmail.com',  # Use your email domain (or the service's domain)
-    user_name: 'eli.m.paulsen@gmail.com',  # Your email address
-    password: 'kxxyvtarbbauatmm',  # Gmail app password or service-specific password
+    domain: ENV['SMTP_DOMAIN'],  # Use your email domain (or the service's domain)
+    user_name: ENV['SMTP_USERNAME'],  # Email address
+    password: ENV['SMTP_PASSWORD'],  # App password or service-specific password
     authentication: 'plain',
     enable_starttls_auto: true
   }
