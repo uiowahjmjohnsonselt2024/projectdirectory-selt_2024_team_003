@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20241115003605) do
+ActiveRecord::Schema.define(version: 20241119081613) do
 
   create_table "game_users", force: :cascade do |t|
     t.integer "user_id"
@@ -29,9 +29,11 @@ ActiveRecord::Schema.define(version: 20241115003605) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "email"
-    t.string "password_digest"
+    t.string   "username"
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
   end
 
 end

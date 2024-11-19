@@ -1,0 +1,19 @@
+<div id="login-page">
+  <div class="video-overlay">
+    <video class="background-video" autoplay loop muted playsinline>
+      <source src="<%= asset_path('test.mov') %>" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div class="login-container">
+    <h2>Check your email!</h2>
+
+    <% if flash[:email].present? %>
+      <div class="alert alert-danger">
+        <%= flash[:email] %>
+      </div>
+  <% end %>
+    <%= link_to 'Home', root_path, class: 'create-account-link' %>
+  </div>
+</div>
