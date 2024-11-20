@@ -9,9 +9,16 @@ class User < ActiveRecord::Base
   has_many :games, through: :game_users
 
   # Validations
-  validates :username, presence: true, uniqueness: true, length: { minimum: 3, maximum: 25 }
-  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, length: { minimum: 6 }, if: -> { new_record? || !password.nil? }
+  validates :username, presence: { message: "Username is required" },
+            uniqueness: { message: "Username has already been taken" },
+            length: { minimum: 3, maximum: 20, message: "Username must be between 3 and 20 characters" }
+
+  validates :email, presence: { message: "Email is required" },
+            uniqueness: { message: "Email has already been taken" },
+            format: { with: URI::MailTo::EMAIL_REGEXP, message: "Invalid email format" }
+
+  validates :password, length: { minimum: 6, message: "Password must be at least 6 characters long" },
+            if: -> { new_record? || !password.nil? }
 
   # Generate a reset password token and set its expiration time
   def generate_reset_password_token!
