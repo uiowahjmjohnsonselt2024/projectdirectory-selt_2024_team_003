@@ -161,3 +161,733 @@ Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.0ms)
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
   Rendered home/index.html.haml (0.2ms)
   [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."username" = 'user1' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'user1@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)  [["username", "user1"], ["email", "user1@example.com"], ["password_digest", "$2a$04$Frbu2Iiw4BWSE8MlJpf57uaflqFsQvnG5aPOc0mUt07HcxHByi9o2"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."username" = 'user2' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'user2@example.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)[0m  [["username", "user2"], ["email", "user2@example.com"], ["password_digest", "$2a$04$slDGEr7mPCCLDWbzWZGyZu6HPzKv3nHIYc3h8GX7zDM4zPUMcIc56"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by GamesController#add_friend as HTML
+  Parameters: {"params"=>{"friend_id"=>"2"}}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", nil]]
+Completed 404 Not Found in 10ms (ActiveRecord: 0.1ms)
+  [1m[35m (0.4ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."username" = 'user1' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'user1@example.com' LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)[0m  [["username", "user1"], ["email", "user1@example.com"], ["password_digest", "$2a$04$SaGtHdOc3KhDMUWbnTn89uwNh8C0laj25ti.KjhSzT3BJW/ef432O"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."username" = 'user2' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'user2@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)  [["username", "user2"], ["email", "user2@example.com"], ["password_digest", "$2a$04$h1Lp4y4LANoeTjwmwbJICuTiHBjUOJEZvaa2oJ7OzaVyjvY.zY8K6"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mFriendship Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "friendships" WHERE ("friendships"."user_id" = 1 AND "friendships"."friend_id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "friendships" ("friend_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["friend_id", 2], ["user_id", 1], ["created_at", "2024-11-21 23:10:06.072775"], ["updated_at", "2024-11-21 23:10:06.072775"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by GamesController#add_friend as HTML
+  Parameters: {"params"=>{"friend_id"=>"2"}}
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", nil]]
+Completed 404 Not Found in 0ms (ActiveRecord: 0.0ms)
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."username" = 'user1' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'user1@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)  [["username", "user1"], ["email", "user1@example.com"], ["password_digest", "$2a$04$hKAji/0R9.D.NDi8ceu3Q.euGgWcXcRJYw1y0pFx7JWcDunEkg9hK"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."username" = 'user2' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'user2@example.com' LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)[0m  [["username", "user2"], ["email", "user2@example.com"], ["password_digest", "$2a$04$4Nc2koTdBi0T.q911c40D.EhW0tQLR92Ra7Ik/CGbFWooRqfNuqHy"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mFriendship Exists (0.1ms)[0m  SELECT  1 AS one FROM "friendships" WHERE ("friendships"."user_id" = 1 AND "friendships"."friend_id" = 2) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "friendships" ("friend_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["friend_id", 2], ["user_id", 1], ["created_at", "2024-11-21 23:10:06.086511"], ["updated_at", "2024-11-21 23:10:06.086511"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by GamesController#remove_friend as HTML
+  Parameters: {"params"=>{"friend_id"=>"2"}}
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", nil]]
+Completed 404 Not Found in 0ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."username" = 'user1' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'user1@example.com' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)[0m  [["username", "user1"], ["email", "user1@example.com"], ["password_digest", "$2a$04$myPI9Vk5cZECp/k38tyn9OIo1M7xe8MlXOE4eKZsw8PoYwA12cupy"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."username" = 'user2' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'user2@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)  [["username", "user2"], ["email", "user2@example.com"], ["password_digest", "$2a$04$wTuIC6IBfeF/bDPI5fchCu17h2Z4/dIPn/JzvwCTGihksuWKiLb/W"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mFriendship Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "friendships" WHERE ("friendships"."user_id" = 1 AND "friendships"."friend_id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "friendships" ("friend_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["friend_id", 2], ["user_id", 1], ["created_at", "2024-11-21 23:10:06.101121"], ["updated_at", "2024-11-21 23:10:06.101121"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."username" = 'user3' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'user3@example.com' LIMIT 1
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)[0m  [["username", "user3"], ["email", "user3@example.com"], ["password_digest", "$2a$04$X.jH3SVhzSfxmeQSt14XZeiP0oHgHT9lmJW56DgsT2Z7vhN66QdsK"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by GamesController#remove_friend as HTML
+  Parameters: {"params"=>{"friend_id"=>"3"}}
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", nil]]
+Completed 404 Not Found in 0ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Processing by HomeController#index as HTML
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered home/index.html.haml within layouts/application (0.4ms)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+Completed 200 OK in 21ms (Views: 20.5ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Processing by HomeController#index as HTML
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered home/index.html.haml within layouts/application (0.4ms)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+Completed 200 OK in 1ms (Views: 1.0ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Processing by HomeController#index as HTML
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered home/index.html.haml within layouts/application (0.4ms)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Processing by HomeController#index as HTML
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered home/index.html.haml within layouts/application (0.4ms)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+Completed 200 OK in 2ms (Views: 1.1ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Processing by HomeController#index as HTML
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered home/index.html.haml within layouts/application (0.4ms)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Processing by RegistrationsController#new as HTML
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered registrations/new.html.erb within layouts/application (0.4ms)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+Completed 200 OK in 11ms (Views: 10.4ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Processing by RegistrationsController#new as HTML
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered registrations/new.html.erb within layouts/application (0.4ms)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+Completed 200 OK in 3ms (Views: 3.0ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "users"
+Processing by RegistrationsController#create as HTML
+  Parameters: {"params"=>{"user"=>{"username"=>"testuser", "email"=>"test@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Processing by RegistrationsController#create as HTML
+  Parameters: {"params"=>{"user"=>{"username"=>"testuser", "email"=>"test@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Processing by RegistrationsController#create as HTML
+  Parameters: {"params"=>{"user"=>{"username"=>"testuser", "email"=>"test@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "users"[0m
+Processing by RegistrationsController#create as HTML
+  Parameters: {"params"=>{"user"=>{"username"=>"", "email"=>"invalidemail", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Processing by RegistrationsController#create as HTML
+  Parameters: {"params"=>{"user"=>{"username"=>"", "email"=>"invalidemail", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Processing by SessionsController#new as HTML
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered sessions/new.html.erb within layouts/application (0.4ms)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+Completed 200 OK in 7ms (Views: 6.4ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Started GET "/pages/grid" for 127.0.0.1 at 2024-11-21 23:10:06 +0000
+Processing by PagesController#grid as HTML
+  Rendered pages/grid.html.erb within layouts/application (269.5ms)
+Completed 200 OK in 287ms (Views: 278.4ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started GET "/pages/grid" for 127.0.0.1 at 2024-11-21 23:10:06 +0000
+Processing by PagesController#grid as HTML
+  Rendered pages/grid.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 7ms (Views: 7.1ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started GET "/pages/grid" for 127.0.0.1 at 2024-11-21 23:10:06 +0000
+Processing by PagesController#grid as HTML
+  Rendered pages/grid.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 7ms (Views: 7.1ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Started GET "/pages/grid" for 127.0.0.1 at 2024-11-21 23:10:06 +0000
+Processing by PagesController#grid as HTML
+  Rendered pages/grid.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 9ms (Views: 8.3ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mGame Exists (0.1ms)[0m  SELECT  1 AS one FROM "games" WHERE "games"."code" IS NULL LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mGame Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "games" WHERE "games"."code" IS NULL LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mGame Exists (0.1ms)[0m  SELECT  1 AS one FROM "games" WHERE "games"."code" IS NULL LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mGame Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "games" WHERE "games"."code" IS NULL LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mGame Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "games" WHERE "games"."code" = 'ABCD' LIMIT 1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "games" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "Game One"], ["code", "ABCD"], ["created_at", "2024-11-21 23:10:06.671353"], ["updated_at", "2024-11-21 23:10:06.671353"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mGame Exists (0.1ms)[0m  SELECT  1 AS one FROM "games" WHERE "games"."code" = 'ABCD' LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mGame Exists (0.2ms)[0m  SELECT  1 AS one FROM "games" WHERE "games"."code" IS NULL LIMIT 1
+  [1m[36mGame Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "games" WHERE "games"."code" = ? LIMIT 1[0m  [["code", "FJ74"]]
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "games" ("name", "created_at", "updated_at", "code") VALUES (?, ?, ?, ?)  [["name", "Game with Auto Code"], ["created_at", "2024-11-21 23:10:06.678996"], ["updated_at", "2024-11-21 23:10:06.678996"], ["code", "FJ74"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mGame Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "games" WHERE "games"."code" = 'TEST' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "games" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "Game with Predefined Code"], ["code", "TEST"], ["created_at", "2024-11-21 23:10:06.689377"], ["updated_at", "2024-11-21 23:10:06.689377"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mGame Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "games" WHERE "games"."code" IS NULL LIMIT 1[0m
+  [1m[35mGame Exists (0.0ms)[0m  SELECT  1 AS one FROM "games" WHERE "games"."code" = ? LIMIT 1  [["code", "PXGZ"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "games" ("name", "created_at", "updated_at", "code") VALUES (?, ?, ?, ?)[0m  [["name", "Game One"], ["created_at", "2024-11-21 23:10:06.693051"], ["updated_at", "2024-11-21 23:10:06.693051"], ["code", "PXGZ"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mGame Exists (0.1ms)[0m  SELECT  1 AS one FROM "games" WHERE "games"."code" IS NULL LIMIT 1
+  [1m[36mGame Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "games" WHERE "games"."code" = ? LIMIT 1[0m  [["code", "PTUM"]]
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "games" ("name", "created_at", "updated_at", "code") VALUES (?, ?, ?, ?)  [["name", "Game Two"], ["created_at", "2024-11-21 23:10:06.696040"], ["updated_at", "2024-11-21 23:10:06.696040"], ["code", "PTUM"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mGame Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "games" WHERE "games"."code" = 'ABCD' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "games" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "Game One"], ["code", "ABCD"], ["created_at", "2024-11-21 23:10:06.700441"], ["updated_at", "2024-11-21 23:10:06.700441"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mGame Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "games" WHERE "games"."code" IS NULL LIMIT 1[0m
+  [1m[35mGame Exists (0.0ms)[0m  SELECT  1 AS one FROM "games" WHERE "games"."code" = ? LIMIT 1  [["code", "ABCD"]]
+  [1m[36mGame Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "games" WHERE "games"."code" = ? LIMIT 1[0m  [["code", "EFGH"]]
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "games" ("name", "created_at", "updated_at", "code") VALUES (?, ?, ?, ?)  [["name", "Game Two"], ["created_at", "2024-11-21 23:10:06.702702"], ["updated_at", "2024-11-21 23:10:06.702702"], ["code", "EFGH"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."username" = 'user1' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'user1@example.com' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)[0m  [["username", "user1"], ["email", "user1@example.com"], ["password_digest", "$2a$04$lgfkPM9ukDdeRuFHzUSn/.JsqkgIemHrs1F7q4YfhH49geIBwaYFm"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."username" = 'user2' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'user2@example.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)[0m  [["username", "user2"], ["email", "user2@example.com"], ["password_digest", "$2a$04$d59bSO8R/h6GpeIyyIOZOe3owyMbJSUlZBMwtH7dbFjeBnU.lfrWO"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mFriendship Exists (0.1ms)[0m  SELECT  1 AS one FROM "friendships" WHERE ("friendships"."user_id" = 1 AND "friendships"."friend_id" = 2) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "friendships" ("friend_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["friend_id", 2], ["user_id", 1], ["created_at", "2024-11-21 23:10:06.727126"], ["updated_at", "2024-11-21 23:10:06.727126"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."username" = 'user1' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'user1@example.com' LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)[0m  [["username", "user1"], ["email", "user1@example.com"], ["password_digest", "$2a$04$MTV3Zaz4kAsMSWeavJOdJ.e5/0JQdsdmbtsUa3QZJA0sdVKOe7S2G"]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."username" = 'user2' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'user2@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)  [["username", "user2"], ["email", "user2@example.com"], ["password_digest", "$2a$04$UQSm5GslL2GZuIUwYP.23.6sQgJNJ/YEjWkl3rn.SU4AZX1KU2.m2"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mFriendship Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "friendships" WHERE ("friendships"."user_id" = 1 AND "friendships"."friend_id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "friendships" ("friend_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["friend_id", 2], ["user_id", 1], ["created_at", "2024-11-21 23:10:06.743889"], ["updated_at", "2024-11-21 23:10:06.743889"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mFriendship Exists (0.1ms)[0m  SELECT  1 AS one FROM "friendships" WHERE ("friendships"."user_id" = 1 AND "friendships"."friend_id" = 2) LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."username" = 'user1' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'user1@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)  [["username", "user1"], ["email", "user1@example.com"], ["password_digest", "$2a$04$mk/GGI8FUDOnkisMdPYDNOS1DoB/HCtey9.N/QhLNEu2J.AOVSKum"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."username" = 'user2' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'user2@example.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)[0m  [["username", "user2"], ["email", "user2@example.com"], ["password_digest", "$2a$04$5WXAt/KHKn.BnjL/HW/3QeHgNg2T9d.Kqyz.KnRd1wXC.aClXdw7i"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mFriendship Exists (0.1ms)[0m  SELECT  1 AS one FROM "friendships" WHERE ("friendships"."user_id" = 1 AND "friendships"."friend_id" = 2) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "friendships" ("friend_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["friend_id", 2], ["user_id", 1], ["created_at", "2024-11-21 23:10:06.763337"], ["updated_at", "2024-11-21 23:10:06.763337"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mFriendship Load (0.2ms)[0m  SELECT  "friendships".* FROM "friendships" WHERE "friendships"."user_id" = ? AND "friendships"."friend_id" = 2 LIMIT 1  [["user_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  DELETE FROM "friendships" WHERE "friendships"."id" = ?  [["id", 1]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?  [["user_id", 1]]
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Started GET "/games/index" for 127.0.0.1 at 2024-11-21 23:10:06 +0000
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Started GET "/pages/grid" for 127.0.0.1 at 2024-11-21 23:10:06 +0000
+Processing by PagesController#grid as HTML
+  Rendered pages/grid.html.erb within layouts/application (7.6ms)
+Completed 200 OK in 10ms (Views: 9.2ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  Rendered home/index.html.haml (8.9ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  Rendered home/index.html.haml (0.7ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  Rendered home/index.html.haml (0.7ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  Rendered home/index.html.haml (0.7ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."username" = 'user1' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'user1@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)  [["username", "user1"], ["email", "user1@example.com"], ["password_digest", "$2a$04$h5aVra7J/wTDFj4AhkRDEOI6b6d1.3N3JNwxb7FuwiwUySWkstRpG"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."username" = 'user2' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'user2@example.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)[0m  [["username", "user2"], ["email", "user2@example.com"], ["password_digest", "$2a$04$rkD0yzysO2yP4nzFvQVCw.xJsLI27mPhx7KXK/dCIoX1ycMAEaQNi"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by GamesController#add_friend as HTML
+  Parameters: {"params"=>{"friend_id"=>"2"}}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", nil]]
+Completed 404 Not Found in 7ms (ActiveRecord: 0.1ms)
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."username" = 'user1' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'user1@example.com' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)[0m  [["username", "user1"], ["email", "user1@example.com"], ["password_digest", "$2a$04$03Oo9iMi/jwMJawLWogesuscUiWzvej/GdZ80SvxbFlN21MZ7jakO"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."username" = 'user2' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'user2@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)  [["username", "user2"], ["email", "user2@example.com"], ["password_digest", "$2a$04$Ieb7phdm/QPkvn48SBU8SOElc/1aQqbmdxCLF//gnAvDlLEoGKXAO"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mFriendship Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "friendships" WHERE ("friendships"."user_id" = 1 AND "friendships"."friend_id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "friendships" ("friend_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["friend_id", 2], ["user_id", 1], ["created_at", "2024-11-21 23:10:40.654099"], ["updated_at", "2024-11-21 23:10:40.654099"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by GamesController#add_friend as HTML
+  Parameters: {"params"=>{"friend_id"=>"2"}}
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", nil]]
+Completed 404 Not Found in 1ms (ActiveRecord: 0.0ms)
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."username" = 'user1' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'user1@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)  [["username", "user1"], ["email", "user1@example.com"], ["password_digest", "$2a$04$dF/6NxA071af2z/0q38XYO5VACTO.t1U8S0chHec4m8HUVrUgGZPy"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."username" = 'user2' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'user2@example.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)[0m  [["username", "user2"], ["email", "user2@example.com"], ["password_digest", "$2a$04$62vEaR4J7G0jZ6SDIjlKo.loyQYg15wJUCa25knqfhAuRKG1Bnzqe"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mFriendship Exists (0.1ms)[0m  SELECT  1 AS one FROM "friendships" WHERE ("friendships"."user_id" = 1 AND "friendships"."friend_id" = 2) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "friendships" ("friend_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["friend_id", 2], ["user_id", 1], ["created_at", "2024-11-21 23:10:40.668686"], ["updated_at", "2024-11-21 23:10:40.668686"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by GamesController#remove_friend as HTML
+  Parameters: {"params"=>{"friend_id"=>"2"}}
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", nil]]
+Completed 404 Not Found in 1ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."username" = 'user1' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'user1@example.com' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)[0m  [["username", "user1"], ["email", "user1@example.com"], ["password_digest", "$2a$04$seJMqKtVotQx/927qEE.OOSa5Nj29pB.I0fSbDeCM9d4WIPs5Yw2K"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."username" = 'user2' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'user2@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)  [["username", "user2"], ["email", "user2@example.com"], ["password_digest", "$2a$04$3Lonjqa3xGhiHvyNph74NeBhMSkCu5rNIeshd.QswNE05hMp.b4xq"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mFriendship Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "friendships" WHERE ("friendships"."user_id" = 1 AND "friendships"."friend_id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "friendships" ("friend_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["friend_id", 2], ["user_id", 1], ["created_at", "2024-11-21 23:10:40.683477"], ["updated_at", "2024-11-21 23:10:40.683477"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."username" = 'user3' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'user3@example.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)[0m  [["username", "user3"], ["email", "user3@example.com"], ["password_digest", "$2a$04$mvdQd73SqnTrujQNNdhqM.P98UeAKa7DxxJImlAYsSH8Y3JUIGxJS"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by GamesController#remove_friend as HTML
+  Parameters: {"params"=>{"friend_id"=>"3"}}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", nil]]
+Completed 404 Not Found in 1ms (ActiveRecord: 0.1ms)
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."username" = 'user1' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'user1@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)  [["username", "user1"], ["email", "user1@example.com"], ["password_digest", "$2a$04$5Q4yVMx11EJ8zK6kzV/.xOMsGNamSjk6LaQaBoIvz5k4L3O4A3YZ6"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?  [["user_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."username" = 'user2' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'user2@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)  [["username", "user2"], ["email", "user2@example.com"], ["password_digest", "$2a$04$XGxvRGQOsMddh9/eSfgd/.h35ejpj9MykGf1YYwJvZH9tRY86d6z."]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mFriendship Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "friendships" WHERE ("friendships"."user_id" = 1 AND "friendships"."friend_id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "friendships" ("friend_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["friend_id", 2], ["user_id", 1], ["created_at", "2024-11-21 23:11:29.185506"], ["updated_at", "2024-11-21 23:11:29.185506"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?  [["user_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."username" = 'user1' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'user1@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)  [["username", "user1"], ["email", "user1@example.com"], ["password_digest", "$2a$04$5PZ9TEQEoBY6/BYIhDwwQ.4OdYunpeKxMJjlRk6B8FY.OI114uf.q"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."username" = 'user2' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'user2@example.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)[0m  [["username", "user2"], ["email", "user2@example.com"], ["password_digest", "$2a$04$7YWhEyZHKgZaFh7Hp4CKmOSBYKauKq1dbAj0k/VCDVD3wOfiNnmli"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mFriendship Exists (0.1ms)[0m  SELECT  1 AS one FROM "friendships" WHERE ("friendships"."user_id" = 1 AND "friendships"."friend_id" = 2) LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "friendships" ("friend_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["friend_id", 2], ["user_id", 1], ["created_at", "2024-11-21 23:11:29.199627"], ["updated_at", "2024-11-21 23:11:29.199627"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mFriendship Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "friendships" WHERE ("friendships"."user_id" = 1 AND "friendships"."friend_id" = 2) LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."username" = 'user1' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'user1@example.com' LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)[0m  [["username", "user1"], ["email", "user1@example.com"], ["password_digest", "$2a$04$jMmtpFp.hHi0T8foHjtIP.EGfaJ7CWKc60sm8CJeuJIvLadDSrRw6"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."username" = 'user2' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'user2@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)  [["username", "user2"], ["email", "user2@example.com"], ["password_digest", "$2a$04$FLZ7CElmDF4xH1H6i9CCsuR.KBmG.yyPSfoJqQT0mzrhteIGUa77m"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mFriendship Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "friendships" WHERE ("friendships"."user_id" = 1 AND "friendships"."friend_id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "friendships" ("friend_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["friend_id", 2], ["user_id", 1], ["created_at", "2024-11-21 23:11:29.224120"], ["updated_at", "2024-11-21 23:11:29.224120"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?  [["user_id", 1]]
+  [1m[36mFriendship Load (0.2ms)[0m  [1mSELECT  "friendships".* FROM "friendships" WHERE "friendships"."user_id" = ? AND "friendships"."friend_id" = 2 LIMIT 1[0m  [["user_id", 1]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "friendships" WHERE "friendships"."id" = ?[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Processing by HomeController#index as HTML
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered home/index.html.haml within layouts/application (0.4ms)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+Completed 200 OK in 13ms (Views: 13.2ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Processing by HomeController#index as HTML
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered home/index.html.haml within layouts/application (0.4ms)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+Completed 200 OK in 1ms (Views: 1.1ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Processing by HomeController#index as HTML
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered home/index.html.haml within layouts/application (0.4ms)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+Completed 200 OK in 1ms (Views: 1.2ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Processing by HomeController#index as HTML
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered home/index.html.haml within layouts/application (0.3ms)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+Completed 200 OK in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Processing by HomeController#index as HTML
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered home/index.html.haml within layouts/application (0.3ms)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+Completed 200 OK in 1ms (Views: 0.8ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Processing by RegistrationsController#new as HTML
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered registrations/new.html.erb within layouts/application (0.4ms)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+Completed 200 OK in 10ms (Views: 6.3ms | ActiveRecord: 0.4ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Processing by RegistrationsController#new as HTML
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered registrations/new.html.erb within layouts/application (0.3ms)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+Completed 200 OK in 1ms (Views: 1.1ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "users"[0m
+Processing by RegistrationsController#create as HTML
+  Parameters: {"params"=>{"user"=>{"username"=>"testuser", "email"=>"test@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Processing by RegistrationsController#create as HTML
+  Parameters: {"params"=>{"user"=>{"username"=>"testuser", "email"=>"test@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Processing by RegistrationsController#create as HTML
+  Parameters: {"params"=>{"user"=>{"username"=>"testuser", "email"=>"test@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "users"
+Processing by RegistrationsController#create as HTML
+  Parameters: {"params"=>{"user"=>{"username"=>"", "email"=>"invalidemail", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Processing by RegistrationsController#create as HTML
+  Parameters: {"params"=>{"user"=>{"username"=>"", "email"=>"invalidemail", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Processing by SessionsController#new as HTML
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered sessions/new.html.erb within layouts/application (0.4ms)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+Completed 200 OK in 6ms (Views: 6.0ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Started GET "/pages/grid" for 127.0.0.1 at 2024-11-21 23:20:24 +0000
+Processing by PagesController#grid as HTML
+  Rendered pages/grid.html.erb within layouts/application (287.7ms)
+Completed 200 OK in 302ms (Views: 294.7ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Started GET "/pages/grid" for 127.0.0.1 at 2024-11-21 23:20:24 +0000
+Processing by PagesController#grid as HTML
+  Rendered pages/grid.html.erb within layouts/application (6.2ms)
+Completed 200 OK in 8ms (Views: 7.6ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Started GET "/pages/grid" for 127.0.0.1 at 2024-11-21 23:20:24 +0000
+Processing by PagesController#grid as HTML
+  Rendered pages/grid.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 8ms (Views: 7.7ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Started GET "/pages/grid" for 127.0.0.1 at 2024-11-21 23:20:24 +0000
+Processing by PagesController#grid as HTML
+  Rendered pages/grid.html.erb within layouts/application (6.5ms)
+Completed 200 OK in 8ms (Views: 7.7ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mGame Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "games" WHERE "games"."code" IS NULL LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mGame Exists (0.1ms)[0m  SELECT  1 AS one FROM "games" WHERE "games"."code" IS NULL LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mGame Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "games" WHERE "games"."code" IS NULL LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mGame Exists (0.1ms)[0m  SELECT  1 AS one FROM "games" WHERE "games"."code" IS NULL LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mGame Exists (0.1ms)[0m  SELECT  1 AS one FROM "games" WHERE "games"."code" = 'ABCD' LIMIT 1
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "games" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Game One"], ["code", "ABCD"], ["created_at", "2024-11-21 23:20:24.652727"], ["updated_at", "2024-11-21 23:20:24.652727"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mGame Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "games" WHERE "games"."code" = 'ABCD' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mGame Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "games" WHERE "games"."code" IS NULL LIMIT 1[0m
+  [1m[35mGame Exists (0.1ms)[0m  SELECT  1 AS one FROM "games" WHERE "games"."code" = ? LIMIT 1  [["code", "OELY"]]
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "games" ("name", "created_at", "updated_at", "code") VALUES (?, ?, ?, ?)[0m  [["name", "Game with Auto Code"], ["created_at", "2024-11-21 23:20:24.657383"], ["updated_at", "2024-11-21 23:20:24.657383"], ["code", "OELY"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mGame Exists (0.1ms)[0m  SELECT  1 AS one FROM "games" WHERE "games"."code" = 'TEST' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "games" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Game with Predefined Code"], ["code", "TEST"], ["created_at", "2024-11-21 23:20:24.669854"], ["updated_at", "2024-11-21 23:20:24.669854"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mGame Exists (0.1ms)[0m  SELECT  1 AS one FROM "games" WHERE "games"."code" IS NULL LIMIT 1
+  [1m[36mGame Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "games" WHERE "games"."code" = ? LIMIT 1[0m  [["code", "WVOK"]]
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "games" ("name", "created_at", "updated_at", "code") VALUES (?, ?, ?, ?)  [["name", "Game One"], ["created_at", "2024-11-21 23:20:24.673448"], ["updated_at", "2024-11-21 23:20:24.673448"], ["code", "WVOK"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mGame Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "games" WHERE "games"."code" IS NULL LIMIT 1[0m
+  [1m[35mGame Exists (0.0ms)[0m  SELECT  1 AS one FROM "games" WHERE "games"."code" = ? LIMIT 1  [["code", "CQSG"]]
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "games" ("name", "created_at", "updated_at", "code") VALUES (?, ?, ?, ?)[0m  [["name", "Game Two"], ["created_at", "2024-11-21 23:20:24.676425"], ["updated_at", "2024-11-21 23:20:24.676425"], ["code", "CQSG"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mGame Exists (0.1ms)[0m  SELECT  1 AS one FROM "games" WHERE "games"."code" = 'ABCD' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "games" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Game One"], ["code", "ABCD"], ["created_at", "2024-11-21 23:20:24.689094"], ["updated_at", "2024-11-21 23:20:24.689094"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mGame Exists (0.1ms)[0m  SELECT  1 AS one FROM "games" WHERE "games"."code" IS NULL LIMIT 1
+  [1m[36mGame Exists (0.0ms)[0m  [1mSELECT  1 AS one FROM "games" WHERE "games"."code" = ? LIMIT 1[0m  [["code", "ABCD"]]
+  [1m[35mGame Exists (0.0ms)[0m  SELECT  1 AS one FROM "games" WHERE "games"."code" = ? LIMIT 1  [["code", "EFGH"]]
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "games" ("name", "created_at", "updated_at", "code") VALUES (?, ?, ?, ?)[0m  [["name", "Game Two"], ["created_at", "2024-11-21 23:20:24.691233"], ["updated_at", "2024-11-21 23:20:24.691233"], ["code", "EFGH"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."username" = 'user1' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'user1@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)  [["username", "user1"], ["email", "user1@example.com"], ["password_digest", "$2a$04$bp54yXOY.wNndb0dDCtNWegk2GinFG5AygLPyQQ3fuuoxsXjhxZfO"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?  [["user_id", 1]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."username" = 'user2' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'user2@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)  [["username", "user2"], ["email", "user2@example.com"], ["password_digest", "$2a$04$GXtWOqcxWr7WhOO.VkpG5O/xxTvCjjE71sa76UgmMnruIKT2bUbiK"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mFriendship Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "friendships" WHERE ("friendships"."user_id" = 1 AND "friendships"."friend_id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "friendships" ("friend_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["friend_id", 2], ["user_id", 1], ["created_at", "2024-11-21 23:20:24.777537"], ["updated_at", "2024-11-21 23:20:24.777537"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?  [["user_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."username" = 'user1' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'user1@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)  [["username", "user1"], ["email", "user1@example.com"], ["password_digest", "$2a$04$Ey/Mh1mFVqKLQqEDDTEPgeFfQN2HveGIZ.hiM/HBpNRmpquTGjNq."]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."username" = 'user2' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'user2@example.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)[0m  [["username", "user2"], ["email", "user2@example.com"], ["password_digest", "$2a$04$ZvfZ/CVc.Lkm6ZTK6YlOYu5M8x4kcNS3lE15fMBBjJX4NcLTlm/nq"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mFriendship Exists (0.1ms)[0m  SELECT  1 AS one FROM "friendships" WHERE ("friendships"."user_id" = 1 AND "friendships"."friend_id" = 2) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "friendships" ("friend_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["friend_id", 2], ["user_id", 1], ["created_at", "2024-11-21 23:20:24.791390"], ["updated_at", "2024-11-21 23:20:24.791390"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mFriendship Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "friendships" WHERE ("friendships"."user_id" = 1 AND "friendships"."friend_id" = 2) LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."username" = 'user1' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'user1@example.com' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)[0m  [["username", "user1"], ["email", "user1@example.com"], ["password_digest", "$2a$04$giC95Dn5ewUP33ujfgH6Iu1rDQS0M9uvfs.STKuRIi0AgUg8K7N1y"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."username" = 'user2' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'user2@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?)  [["username", "user2"], ["email", "user2@example.com"], ["password_digest", "$2a$04$idOQS0ZYA8cIdGC1EjEvNeNrKF3O2uH8BEyogNLmvh6Fl1sCeU4lK"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mFriendship Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "friendships" WHERE ("friendships"."user_id" = 1 AND "friendships"."friend_id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "friendships" ("friend_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["friend_id", 2], ["user_id", 1], ["created_at", "2024-11-21 23:20:24.805879"], ["updated_at", "2024-11-21 23:20:24.805879"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?  [["user_id", 1]]
+  [1m[36mFriendship Load (0.2ms)[0m  [1mSELECT  "friendships".* FROM "friendships" WHERE "friendships"."user_id" = ? AND "friendships"."friend_id" = 2 LIMIT 1[0m  [["user_id", 1]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "friendships" WHERE "friendships"."id" = ?[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started GET "/games/index" for 127.0.0.1 at 2024-11-21 23:20:24 +0000
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started GET "/pages/grid" for 127.0.0.1 at 2024-11-21 23:20:24 +0000
+Processing by PagesController#grid as HTML
+  Rendered pages/grid.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 7ms (Views: 7.2ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  Rendered home/index.html.haml (7.4ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  Rendered home/index.html.haml (0.6ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  Rendered home/index.html.haml (0.6ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  Rendered home/index.html.haml (0.7ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
