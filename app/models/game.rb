@@ -8,7 +8,10 @@ class Game < ActiveRecord::Base
   
     private
   
-    # Generate a unique 4-character game code
+    
+    # Generates a unique 4-character code for this game.
+    # This is called by the before_create callback.
+    # The code is generated randomly and is checked for uniqueness before it is assigned.
     def generate_unique_code
       self.code ||= loop do
         random_code = SecureRandom.alphanumeric(4).upcase

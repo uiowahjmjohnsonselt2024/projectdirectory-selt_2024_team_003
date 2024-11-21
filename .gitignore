@@ -18,4 +18,4 @@
 /.idea
 
 # Ignore log directory
-/log
+log/development.log
