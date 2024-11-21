@@ -22,6 +22,9 @@ gem 'activerecord', '~> 4.2.10'
 gem 'rails-ujs', '~> 0.1.0'
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'mini_magick'
+
+
 group :development, :test do
   gem 'sqlite3'
   gem 'cucumber-rails', require: false
