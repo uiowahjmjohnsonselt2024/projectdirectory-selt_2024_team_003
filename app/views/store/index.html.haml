@@ -1,0 +1,254 @@
+!!! 5
+%html
+  %head
+    %meta{ charset: "UTF-8" }
+    %meta{ name: "viewport", content: "width=device-width, initial-scale=1.0" }
+    %title In-Game Store
+    :css
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .background-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures the video covers the entire screen */
+        z-index: -1; /* Sends the video behind other elements */
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+        color: white;
+        z-index: 1; /* Makes sure the header is above the video */
+      }
+
+      .shards {
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      .tabs {
+        display: flex;
+        gap: 15px;
+      }
+
+      .tabs button {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .tabs button.active {
+        border-bottom: 2px solid #f39c12;
+      }
+
+      .store-container {
+        padding: 20px;
+        z-index: 1; /* Makes sure the store content is above the video */
+      }
+
+      .item-list {
+        display: flex;
+        gap: 15px;
+        overflow-x: auto;
+        padding: 10px 0;
+      }
+
+      .item {
+        color: black;
+        min-width: 150px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: white;
+        text-align: center;
+        padding: 10px;
+      }
+
+      .item img {
+        width: 150px;         /* Set the fixed width */
+        height: 150px;        /* Set the fixed height */
+        object-fit: cover;    /* Ensures the image covers the area without distortion */
+        border-radius: 8px;   /* Optionally, give the image rounded corners */
+      }
+
+      .background-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('#{asset_path('shopBackground.jpg')}'); /* Your background image */
+        background-size: cover; /* Ensures the image covers the entire screen */
+        background-position: center; /* Centers the image */
+        background-repeat: no-repeat; /* Prevents image from repeating */
+        z-index: -1; /* Sends the background behind other content */
+      }
+
+      /* New CSS for Description Styling */
+      .item .description {
+        font-size: 14px;
+        color: #666;
+        margin-top: 10px;
+        padding: 0 10px;
+        text-align: center;
+      }
+
+  %body
+    -# %video.background-video{ autoplay: true, loop: true, muted: true, playsinline: true }
+    -#   %source{ src: asset_path("test.mov"), type: "video/mp4" }
+    %div.background-img{ style: "background-image: url('#{asset_path('shopBackground.jfif')}');" }
+
+    .header
+      .shards
+        Shards: 1000
+      .tabs
+        %button{ class: "active", onclick: "showCategory('shards')" } Shards
+        %button{ onclick: "showCategory('avatars')" } Avatars
+        %button{ onclick: "showCategory('consumables')" } Consumables
+        %button{ onclick: "showCategory('utility')" } Utility
+        %button{ onclick: "showCategory('weapons')" } Weapons
+
+    .store-container
+      .item-list{ id: "shards-list" }
+        .item
+          %img{ src: asset_path("gem1.gif"), alt: "Shard Item 1" }
+          %h3 100 Shards
+          %p Price: $0.99
+          %p.description A small shard, perfect for minor upgrades.
+          %button Purchase
+        .item
+          %img{ src: asset_path("gem2.gif"), alt: "Shard Item 2" }
+          %h3 500 Shards
+          %p Price: $3.00
+          %p.description A medium-sized shard, useful for moderate upgrades.
+          %button Purchase
+        .item
+          %img{ src: asset_path("gem3.gif"), alt: "Shard Item 3" }
+          %h3 2500 Shards
+          %p Price: $14.99
+          %p.description A large shard, ideal for powerful upgrades.
+          %button Purchase
+
+      .item-list{ id: "avatars-list", style: "display:none" }
+        .item
+          %img{ src: asset_path("avatar_1.jpg"), alt: "Avatar 1" }
+          %h3 Avatar 1
+          %p Price: 300 Shards
+          %p.description A warrior avatar with enhanced strength.
+          %button Purchase
+        .item
+          %img{ src: asset_path("avatar_2.jpg"), alt: "Avatar 2" }
+          %h3 Avatar 2
+          %p Price: 450 Shards
+          %p.description A mage avatar with powerful spells.
+          %button Purchase
+
+      .item-list{ id: "consumables-list", style: "display:none" }
+        .item
+          %img{ src: asset_path("healthPotion.gif"), alt: "Potion 1" }
+          %h3 Health Potion
+          %p Price: 100 Shards
+          %p.description Restores health over time.
+          %button Purchase
+        .item
+          %img{ src: asset_path("acidPotion.gif"), alt: "Potion 2" }
+          %h3 Acid Potion
+          %p Price: 150 Shards
+          %p.description Deals damage to enemies upon contact.
+          %button Purchase
+        .item
+          %img{ src: asset_path("revive.gif"), alt: "Potion 2" }
+          %h3 Revive
+          %p Price: 150 Shards
+          %p.description Revives a fallen ally.
+          %button Purchase
+        .item
+          %img{ src: asset_path("invisibilityPotion.gif"), alt: "Potion 3" }
+          %h3 Invisibility Potion
+          %p Price: 150 Shards
+          %p.description Grants temporary invisibility.
+          %button Purchase
+
+      .item-list{ id: "weapons-list", style: "display:none" }
+        .item
+          %img{ src: asset_path("bowAndArrow.gif"), alt: "Utility Item 1" }
+          %h3 Bow and Arrow
+          %p Price: 250 Shards
+          %p.description A ranged weapon for quick attacks.
+          %button Purchase
+        .item
+          %img{ src: asset_path("grenade.gif"), alt: "Utility Item 1" }
+          %h3 Grenade
+          %p Price: 250 Shards
+          %p.description Explodes on impact, dealing area damage.
+          %button Purchase
+        .item
+          %img{ src: asset_path("sword.gif"), alt: "Utility Item 1" }
+          %h3 Sword
+          %p Price: 250 Shards
+          %p.description A close combat weapon with high damage.
+          %button Purchase
+        .item
+          %img{ src: asset_path("dynamite.gif"), alt: "Utility Item 1" }
+          %h3 Dynamite
+          %p Price: 250 Shards
+          %p.description Deals massive area damage on detonation.
+          %button Purchase
+        .item
+          %img{ src: asset_path("sniper.gif"), alt: "Utility Item 2" }
+          %h3 Sniper
+          %p Price: 400 Shards
+          %p.description A long-range weapon for precise shots.
+          %button Purchase
+
+      .item-list{ id: "utility-list", style: "display:none" }
+        .item
+          %img{ src: asset_path("portal.gif"), alt: "Utility Item 1" }
+          %h3 Portal
+          %p Price: 250 Shards
+          %p.description Teleports you to a distant location.
+          %button Purchase
+        .item
+          %img{ src: asset_path("trap.gif"), alt: "Utility Item 2" }
+          %h3 Trap
+          %p Price: 400 Shards
+          %p.description Place a trap that stuns enemies upon activation.
+          %button Purchase
+        .item
+          %img{ src: asset_path("horse.gif"), alt: "Utility Item 2" }
+          %h3 Horse
+          %p Price: 400 Shards
+          %p.description A mount for faster movement across the map.
+          %button Purchase
+        .item
+          %img{ src: asset_path("banana.gif"), alt: "Utility Item 2" }
+          %h3 Banana
+          %p Price: 400 Shards
+          %p.description A slippery banana peel that causes enemies to slip.
+          %button Purchase
+
+    :javascript
+      function showCategory(category) {
+        document.querySelectorAll('.item-list').forEach(list => {
+          list.style.display = 'none';
+        });
+        document.getElementById(`${category}-list`).style.display = 'flex';
+
+        document.querySelectorAll('.tabs button').forEach(tab => {
+          tab.classList.remove('active');
+        });
+        event.target.classList.add('active');
+      }
