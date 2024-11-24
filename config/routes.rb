@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   post 'signup', to: 'registrations#create'
   get 'pages/grid'
   get 'grid', to: 'pages#grid'  # This defines the route for /grid
+  get 'chat_with_user', to: 'chats#show', as: 'chat_with_user'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

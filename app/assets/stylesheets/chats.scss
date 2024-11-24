@@ -1,0 +1,107 @@
+// Place all the styles related to the Chats controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* General styling */
+/* General styling */
+body {
+  background-color: #000; /* Dark background for the whole page */
+  color: #f1f1f1;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Ensures body takes full height */
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centers the chat window vertically and horizontally */
+}
+
+#chat-container {
+  background-color: #222;
+  color: #f1f1f1;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  width: 100%; /* Makes the chat window responsive */
+  max-width: 1000px; /* Maximum width of the chat window */
+  margin: 20px;
+}
+
+#chat-container h2 {
+  font-size: 28px;
+  color: #ffcc00;
+  text-align: center;
+  margin-bottom: 30px; /* Adds more space below the header */
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+#message-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: #333;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+#message-input-container label {
+  font-weight: bold;
+  color: #ffcc00;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+#message-input {
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #444;
+  color: #f1f1f1;
+  font-size: 16px;
+  border: 1px solid #555;
+  resize: none;
+  transition: border-color 0.3s;
+  min-height: 150px; /* Increases the height of the textarea */
+}
+
+#message-input:focus {
+  border-color: #ffcc00;
+}
+
+.send-message-button {
+  background-color: #28a745;
+  color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  border: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  width: 100%; /* Full-width button */
+}
+
+.send-message-button:hover {
+  background-color: #218838;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+.send-message-button:active {
+  background-color: #1e7e34;
+}
+
+.send-message-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.message {
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #444;
+  border-radius: 5px;
+  color: #fff;
+}
+
