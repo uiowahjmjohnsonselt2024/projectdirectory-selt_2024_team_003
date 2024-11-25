@@ -11,8 +11,8 @@ class BackgroundRemover
 
     # Process the image to make the specified purple color transparent
     image.combine_options do |config|
-      config.fuzz "10%"           # Adjust tolerance for color variations
-      config.transparent "#68336B"  # Make the specified purple color transparent
+      config.fuzz "20%"           # Adjust tolerance for color variations
+      config.transparent "#A16EAD"  # Make the specified purple color transparent
     end
 
     image.write(output_path)

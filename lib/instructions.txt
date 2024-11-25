@@ -1,0 +1,2 @@
+require Rails.root.join('lib', 'background_removal')
+BackgroundRemover.remove_background("input_image.png", "output_image.png")
