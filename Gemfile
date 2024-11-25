@@ -21,7 +21,7 @@ gem 'bootstrap', '~> 5.0.0'
 gem 'activerecord', '~> 4.2.10'
 gem 'rails-ujs', '~> 0.1.0'
 gem 'bcrypt', '~> 3.1.7'
-
+gem 'dotenv-rails'
 group :development, :test do
   gem 'sqlite3'
   gem 'cucumber-rails', require: false
