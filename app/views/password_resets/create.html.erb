@@ -7,13 +7,7 @@
   </div>
 
   <div class="login-container">
-    <h2>Check your email!</h2>
-
-    <% if flash[:email].present? %>
-      <div class="alert alert-danger">
-        <%= flash[:email] %>
-      </div>
-  <% end %>
+    <h2>If this email has an account you will receive email with link to reset your password</h2>
     <%= link_to 'Home', root_path, class: 'create-account-link' %>
   </div>
 </div>
