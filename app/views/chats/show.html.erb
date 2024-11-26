@@ -1,9 +1,24 @@
+<%= link_to 'Back to Games', games_path, class: 'back-to-games-button' %>
 <div id="chat-container">
   <h2>Chat with <%= @friend.username %></h2>
-  
-  <div id="message-input-container">
-    <label for="message-input">Send a message:</label>
-    <textarea id="message-input" placeholder="Type your message here..." rows="4" cols="50"></textarea>
-    <button class="button send-message-button">Send</button>
+
+  <div id="messages-container" style="max-height: 400px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;">
+    <% @messages.each do |message| %>
+      <div class="message <%= message.user == current_user ? 'sent' : 'received' %>">
+        <p><strong><%= message.user.username %>:</strong> <%= message.content %></p>
+        <% if message.read %>
+          <span class="read-receipt">(Read)</span>
+        <% end %>
+      </div>
+    <% end %>
   </div>
+
+  <div id="message-input-container">
+    <%= form_with(model: @new_message, url: send_message_path(friend_id: @friend.id), local: true) do |form| %>
+      <%= form.text_area :content, rows: 3, placeholder: "Type your message..." %>
+      <%= form.submit "Send", class: "button" %>
+    <% end %>
+  </div>
+
+  <button onclick="window.location.reload();" class="button">Refresh</button>
 </div>

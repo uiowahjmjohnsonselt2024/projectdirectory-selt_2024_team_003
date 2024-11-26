@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get 'pages/grid'
   get 'grid', to: 'pages#grid'  # This defines the route for /grid
   get 'chat_with_user', to: 'chats#show', as: 'chat_with_user'
+  post 'send_message', to: 'chats#create', as: 'send_message'
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
