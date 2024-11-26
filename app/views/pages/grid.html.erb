@@ -11,24 +11,57 @@
           <div class="username-placeholder"><%= @user_name %></div>
         </div>
         <div class="stats">
-        <% @stats.each do |stat| %>
-          <div class="stat">
-            <span class="stat-name"><%= stat[:name] %>:</span> 
-            <span class="stat-value"><%= stat[:value] %></span>
-          </div>
-        <% end %>
-      </div>
+          <% @stats.each do |stat| %>
+            <div class="stat">
+              <span class="stat-name"><%= stat[:name] %>:</span>
+              <span class="stat-value"><%= stat[:value] %></span>
+            </div>
+          <% end %>
+        </div>
       </aside>
-
 
       <!-- Middle Grid -->
       <main class="grid-container">
-        <% 6.times do %>
+        <%
+          # Initialize the array with 36 "castle.PNG" entries
+          images = ['astronaut1', 'rocket2.gif', 'ruins.gif', 'road.gif', 'cave.gif', 'farm.gif',
+                             'volcano.gif', 'village1.gif', 'viking.gif', 'road.gif', 'forest.gif', 'lake.jfif',
+                             'monster3.gif', 'mountains1.gif', 'colloseum.gif', 'road2.gif', 'forest.gif', 'island.gif',
+                             'castle1.gif', 'mountains2.gif', 'hospital.gif', 'road.gif', 'forest.gif', 'trail1.gif',
+                             'dragon1.gif', 'desert2.gif', 'wormDesert.gif', 'road.gif', 'forest.gif', 'farm2.gif',
+                             'monster2.gif', 'vegas.gif', 'desert3.gif', 'road.gif', 'bunker.gif', 'swamp.gif']
+        %>
+
+        <%
+          # Add descriptions matching the images
+          descriptions = [
+            'An astronaut on a mission.', 'A rocket ready for launch.', 'Ancient ruins.', 'A winding road.', 'A dark cave.',
+            'A peaceful farm.', 'A fiery volcano.', 'A bustling village.', 'Viking settlements.', 'Another road.',
+            'A dense forest.', 'A serene lake.', 'A monstrous beast.', 'Snow-capped mountains.', 'The grand colosseum.',
+            'A narrow trail.', 'A lush forest.', 'An isolated island.', 'A medieval castle.', 'Rocky highlands.',
+            'A busy hospital.', 'Another path.', 'Forest greenery.', 'A hidden trail.', 'A menacing dragon.',
+            'Arid desert sands.', 'A mysterious worm in the desert.', 'Another road.', 'Enchanted woods.', 'Farmland.',
+            'A wild monster.', 'A city of lights.', 'An expansive desert.', 'A dirt road.', 'An underground bunker.',
+            'A murky swamp.'
+          ]
+        %>
+
+        <%# images.each_with_index do |image, index| %>
+<!--          <div class="grid-square" data-description="<%#= descriptions[index] %>">-->
+<!--            <div class="square-content">-->
+              <%#= image_tag image, alt: "Map Tile #{index + 1}", style: "width: 100%; height: 100px; max-width: 100%; display: block;" %>
+<!--            </div>-->
+<!--          </div>-->
+        <%# end %>
+
+
+        <% images.each_slice(6).with_index do |row_images, row_index| %>
           <div class="grid-row">
-            <% 6.times do %>
-              <div class="grid-square">
+            <% row_images.each_with_index do |image, col_index| %>
+              <div class="grid-square" data-description="<%= descriptions[col_index] %>">
                 <div class="square-content">
-                  <%= image_tag 'castle.PNG', alt: 'Map Tile', class: 'image-class' %>
+                  <!-- Use images from the array -->
+                  <%= image_tag image, alt: "Map Tile #{row_index * 6 + col_index + 1}", style: "width: 100%; height: 80px; max-width: 100%; display: block;" %>
                 </div>
               </div>
             <% end %>
@@ -42,12 +75,10 @@
           <% if @players.present? %>
             <% @players.each do |player| %>
               <div class="player">
-                <img class="player-picture" src="<%='placeholder.jpg' %>" alt="Player Picture">
+                <img class="player-picture" src="<%= 'placeholder.jpg' %>" alt="Player Picture">
                 <div class="player-details">
                   <div class="player-username"><%= player.user.username %></div>
-                  <div class="player-stats">
-                    
-                  </div>
+                  <div class="player-stats"></div>
                 </div>
               </div>
             <% end %>
@@ -68,3 +99,45 @@
     </div>
   </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const gridSquares = document.querySelectorAll('.grid-square');
+        const tooltip = document.createElement('div');
+        tooltip.className = 'tooltip';
+        document.body.appendChild(tooltip);
+
+        gridSquares.forEach(square => {
+            square.addEventListener('mouseenter', (event) => {
+                const description = square.getAttribute('data-description');
+                tooltip.innerHTML = formatDescription(description);
+                tooltip.style.opacity = 1;
+                tooltip.style.left = `${event.pageX + 10}px`;
+                tooltip.style.top = `${event.pageY + 10}px`;
+            });
+
+            square.addEventListener('mousemove', (event) => {
+                tooltip.style.left = `${event.pageX + 10}px`;
+                tooltip.style.top = `${event.pageY + 10}px`;
+            });
+
+            square.addEventListener('mouseleave', () => {
+                tooltip.style.opacity = 0;
+            });
+        });
+
+        function formatDescription(description) {
+            // Example logic to highlight keywords
+            const keywords = ['astronaut', 'rocket', 'village', 'dragon'];
+            let formattedDescription = description;
+            keywords.forEach(keyword => {
+                const regex = new RegExp(`(${keyword})`, 'gi');
+                formattedDescription = formattedDescription.replace(
+                    regex,
+                    '<span class="keyword">$1</span>'
+                );
+            });
+            return formattedDescription;
+        }
+    });
+</script>
