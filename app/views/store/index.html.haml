@@ -9,8 +9,9 @@
         margin: 0;
         font-family: Arial, sans-serif;
         background-color: #f5f5f5;
-        position: relative;
         overflow: hidden;
+        display: flex; /* Ensure a consistent layout */
+        flex-direction: column; /* Stack child elements vertically */
       }
 
       .background-video {
@@ -28,9 +29,11 @@
         align-items: center;
         justify-content: space-between;
         padding: 10px 20px;
-        background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+        background-color: rgba(0, 0, 0, 0.8);
         color: white;
-        z-index: 1; /* Makes sure the header is above the video */
+        z-index: 1;
+        width: 100%; /* Ensures the header spans the full width */
+        box-sizing: border-box; /* Includes padding in width calculations */
       }
 
       .shards {
@@ -56,8 +59,9 @@
       }
 
       .store-container {
+        margin-top: 20px; /* Adds spacing below the header */
         padding: 20px;
-        z-index: 1; /* Makes sure the store content is above the video */
+        z-index: 1;
       }
 
       .item-list {
