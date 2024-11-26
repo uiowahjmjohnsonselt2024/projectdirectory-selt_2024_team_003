@@ -1,18 +1,14 @@
-// Place all the styles related to the Chats controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
 /* General styling */
 body {
-  background-color: #000; /* Dark background for the whole page */
+  background-color: #000;
   color: #f1f1f1;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  height: 100vh; /* Ensures body takes full height */
+  height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center; /* Centers the chat window vertically and horizontally */
+  align-items: center;
 }
 
 #chat-container {
@@ -21,8 +17,8 @@ body {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  width: 100%; /* Makes the chat window responsive */
-  max-width: 800px; /* Maximum width of the chat window */
+  width: 100%;
+  max-width: 800px;
   margin: 20px;
   display: flex;
   flex-direction: column;
@@ -37,17 +33,15 @@ body {
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
-/* Chat messages list */
-#messages-list {
-  background-color: #333;
-  border-radius: 8px;
+#messages-container {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
   padding: 10px;
-  max-height: 400px; /* Set a fixed height for the scrollable area */
-  overflow-y: auto; /* Enables scrolling for messages */
-  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.5);
+  flex-grow: 1;
+  margin-bottom: 20px;
 }
 
-/* Styling individual messages */
 .message {
   padding: 10px;
   margin: 5px 0;
@@ -56,31 +50,29 @@ body {
   line-height: 1.5;
 }
 
-/* Sent messages */
 .message.sent {
   background-color: #0056b3;
   color: #fff;
-  align-self: flex-end; /* Align sent messages to the right */
+  align-self: flex-end;
 }
 
-/* Received messages */
 .message.received {
   background-color: #444;
   color: #fff;
-  align-self: flex-start; /* Align received messages to the left */
+  align-self: flex-start;
 }
 
-/* Read receipts */
 .read-receipt {
   font-size: 12px;
   color: #28a745;
   margin-left: 5px;
 }
 
-/* Message input section */
 #message-input-container {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
   gap: 10px;
 }
 
@@ -92,42 +84,34 @@ body {
   font-size: 16px;
   border: 1px solid #555;
   resize: none;
-  transition: border-color 0.3s;
-  min-height: 100px; /* Adjusted height for the textarea */
+  width: 80%; /* Make the input span the majority of the container width */
 }
 
-#message-input:focus {
-  border-color: #ffcc00;
-}
-
-/* Buttons */
-.chat-button {
+.send-message-button {
   background-color: #28a745;
   color: #fff;
   padding: 10px;
   border-radius: 5px;
   border: none;
-  font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  text-transform: uppercase;
   transition: all 0.3s;
+  width: 20%; /* Small submit button */
 }
 
-.chat-button:hover {
+.send-message-button:hover {
   background-color: #218838;
 }
 
-.chat-button:active {
+.send-message-button:active {
   background-color: #1e7e34;
 }
 
-.chat-button:disabled {
+.send-message-button:disabled {
   background-color: #6c757d;
   cursor: not-allowed;
 }
 
-/* Refresh button */
 .refresh-button {
   background-color: #ffc107;
   color: #000;
@@ -138,7 +122,6 @@ body {
   font-weight: bold;
   cursor: pointer;
   text-transform: uppercase;
-  transition: all 0.3s;
 }
 
 .refresh-button:hover {
@@ -148,13 +131,19 @@ body {
 .refresh-button:active {
   background-color: #c69500;
 }
+
+.refresh-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
 .back-to-games-button {
   position: absolute;
   top: 20px;
   left: 20px;
   background-color: #007bff;
   color: #fff;
-  padding: 8px 16px; /* Smaller padding */
+  padding: 8px 16px;
   border-radius: 8px;
   border: none;
   font-weight: bold;
@@ -162,7 +151,7 @@ body {
   transition: all 0.3s;
   text-align: center;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  font-size: 14px; /* Smaller text size */
+  font-size: 14px;
 }
 
 .back-to-games-button:hover {

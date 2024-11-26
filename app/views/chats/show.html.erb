@@ -2,7 +2,7 @@
 <div id="chat-container">
   <h2>Chat with <%= @friend.username %></h2>
 
-  <div id="messages-container" style="max-height: 400px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;">
+  <div id="messages-container">
     <% @messages.each do |message| %>
       <div class="message <%= message.user == current_user ? 'sent' : 'received' %>">
         <p><strong><%= message.user.username %>:</strong> <%= message.content %></p>
@@ -15,10 +15,9 @@
 
   <div id="message-input-container">
     <%= form_with(model: @new_message, url: send_message_path(friend_id: @friend.id), local: true) do |form| %>
-      <%= form.text_area :content, rows: 3, placeholder: "Type your message..." %>
-      <%= form.submit "Send", class: "button" %>
+      <%= form.text_area :content, rows: 1, placeholder: "Type your message...", id: 'message-input' %>
+      <%= form.submit "Send", class: "send-message-button" %>
     <% end %>
+    <button onclick="window.location.reload();" class="refresh-button">Refresh</button>
   </div>
-
-  <button onclick="window.location.reload();" class="button">Refresh</button>
 </div>

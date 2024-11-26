@@ -23,6 +23,12 @@ class ChatsController < ApplicationController
     redirect_to chat_with_user_path(friend_id: params[:friend_id])
   end
 
+  def mark_as_read
+    @friend = User.find(params[:friend_id])
+    Message.where(user: @friend, recipient: current_user, read: false).update_all(read: true)
+    head :ok
+  end
+
   private
 
   def message_params
