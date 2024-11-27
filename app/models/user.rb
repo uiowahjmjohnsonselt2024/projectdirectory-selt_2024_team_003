@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :received_messages, class_name: "Message", foreign_key: "recipient_id"
 
   # Validations
+  validates :health, :attack, :defense, :iq, presence: true, numericality: { only_integer: true }
   validates :username, presence: true, uniqueness: true, length: { minimum: 3, maximum: 25 }
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, length: { minimum: 6 }, if: -> { new_record? || !password.nil? }

@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_27_034623) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_27_183323) do
+  create_table "enemies", force: :cascade do |t|
+    t.string "name"
+    t.integer "health", default: 300
+    t.integer "attack", default: 20
+    t.integer "defense", default: 10
+    t.integer "iq", default: 5
+    t.integer "game_id"
+    t.integer "x_position"
+    t.integer "y_position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_enemies_on_game_id"
+  end
+
   create_table "friendships", force: :cascade do |t|
     t.integer "user_id"
     t.integer "friend_id"
@@ -50,7 +64,12 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_27_034623) do
     t.string "username"
     t.string "email"
     t.string "password_digest"
+    t.integer "health", default: 100
+    t.integer "attack", default: 10
+    t.integer "defense", default: 5
+    t.integer "iq", default: 1
   end
 
+  add_foreign_key "enemies", "games"
   add_foreign_key "messages", "users"
 end

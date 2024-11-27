@@ -1,29 +1,29 @@
 class InteractionsController < ApplicationController
   def show
-    # Fetch the current position of the player from params
-    @x_position = params[:x]
-    @y_position = params[:y]
-
-    # Initialize enemy health in session if it's not already set
-    session[:enemy_health] ||= 300
-
-    @enemy_health = session[:enemy_health]
-    @attack_message = nil
+    @game = Game.find_by(code: params[:game_id])  # Get the game by ID
+    @game_user = @game.game_users.find_by(user: current_user)  # Find the GameUser for the current user
+    @enemy = @game.enemies.find_by(x_position: @game_user.x_position, y_position: @game_user.y_position)  # Find the enemy at the player's position
+    @player = current_user  # Assuming you still want access to the player's overall stats
   end
 
   def attack
-    # Reduce enemy health by 50 for each attack
-    session[:enemy_health] -= 50
+    @game = Game.find_by(code: params[:game_id])
+    @game_user = @game.game_users.find_by(user: current_user)  # Find the GameUser for the current user
+    @enemy = @game.enemies.find_by(x_position: @game_user.x_position, y_position: @game_user.y_position)  # Find the enemy
+    @player = current_user
+    @game_id = params[:game_id]
 
-    # Check if enemy health reaches 0 or below
-    if session[:enemy_health] <= 0
-      session[:enemy_health] = 0
-      @attack_message = "You win!"
+    # Decrease enemy health by the player's attack value
+    @enemy.update(health: @enemy.health - @player.attack)
+
+    # Check if the enemy's health is 0 or below
+    if @enemy.health <= 0
+      @enemy.update(health: 0)
+      message = "You win!"
     else
-      @attack_message = "You attacked the enemy! Enemy health: #{session[:enemy_health]}"
+      message = "You attacked the enemy! Enemy health: #{@enemy.health}"
     end
 
-    # Render the updated attack message
-    render json: { success: true, message: @attack_message, health: session[:enemy_health] }
+    render json: { success: true, message: message, enemy_health: @enemy.health }
   end
 end

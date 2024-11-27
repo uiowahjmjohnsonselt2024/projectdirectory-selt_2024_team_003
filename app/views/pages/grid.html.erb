@@ -64,7 +64,8 @@
               <div class="grid-square"
                    data-x="<%= 5 - col_index %>"
                    data-y="<%= row_index %>"
-                   data-description="<%= descriptions[row_index * 6 + col_index] %>">
+                   data-description="<%= descriptions[row_index * 6 + col_index] %>"
+                   data-game-id="<%= @game.code %>">
                 <div class="square-content">
                   <%= image_tag image, alt: "Map Tile #{row_index * 6 + col_index + 1}", style: "width: 100%; height: 80px; max-width: 100%; display: block;" %>
                 </div>
@@ -140,6 +141,7 @@
                 const x = square.getAttribute('data-x');
                 const y = square.getAttribute('data-y');
                 const movePath = "<%= @move_path %>"; // Embed the Ruby variable here
+                const gameId = square.getAttribute('data-game-id');
 
                 // Send a request to update the player's position
                 fetch(movePath, {
@@ -158,7 +160,7 @@
                             // Successful move
                             //console.log("successful");
                             //window.location.reload(); // Reload to update the grid
-                            window.location.href = `/interaction?x=${x}&y=${y}`;
+                            window.location.href = `/interaction?game_id=${gameId}&x=${x}&y=${y}`;
                         } else {
                             // Failed move
                             //console.log("fail");

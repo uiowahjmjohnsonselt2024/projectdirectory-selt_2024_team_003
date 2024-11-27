@@ -1,18 +1,19 @@
 <div class="interaction-page">
-  <div class="interaction-header">
-    <h1>Interaction Page</h1>
-    <p class="position">You are currently at position (<%= @x_position %>, <%= @y_position %>).</p>
-  </div>
+  <h1>Interaction with Enemy</h1>
+  <p>Your position: (<%= @game_user.x_position %>, <%= @game_user.y_position %>)</p>
 
-  <!-- Example Enemy Section -->
+  <!-- Display enemy stats -->
   <div class="enemy-info">
-    <h3>Example Enemy</h3>
-    <p>Health: <span id="enemy-health"><%= @enemy_health %></span></p>
-    <p id="attack-message"><%= @attack_message %></p>
+    <h3><%= @enemy.name %></h3>
+    <p>Health: <span id="enemy-health"><%= @enemy.health %></span></p>
+    <p>Attack: <%= @enemy.attack %></p>
+    <p>Defense: <%= @enemy.defense %></p>
+    <p>IQ: <%= @enemy.iq %></p>
+    <p id="attack-message"></p>
   </div>
 
   <!-- Attack Button -->
-  <button id="attack-button" class="attack-button">Attack</button>
+  <button id="attack-button" data-game-id="<%= @game.code %>">Attack</button>
 
   <div class="interaction-footer">
     <%= link_to 'Return to Grid', grid_path, class: 'back-button' %>
@@ -26,28 +27,27 @@
         const attackMessage = document.getElementById('attack-message');
 
         attackButton.addEventListener('click', () => {
-            // Make the attack request
-            fetch('/attack', {
+            const gameId = attackButton.getAttribute('data-game-id');
+            fetch(`/interactions/${gameId}/attack`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
-                }
+                },
+                body: JSON.stringify({ game_id: gameId })
             })
                 .then(response => response.json())
                 .then(data => {
-                    // Update the UI based on the server's response
-                    enemyHealthDisplay.textContent = data.health;
+                    enemyHealthDisplay.textContent = data.enemy_health;
                     attackMessage.textContent = data.message;
 
-                    // If the enemy's health is 0, disable the attack button
+                    // Disable the attack button if the enemy is defeated
                     if (data.message === "You win!") {
                         attackButton.disabled = true;
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('An unexpected error occurred.');
                 });
         });
     });

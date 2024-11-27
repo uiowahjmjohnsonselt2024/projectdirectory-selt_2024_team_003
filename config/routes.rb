@@ -8,6 +8,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :interactions, param: :game_id do
+    post 'attack', on: :member
+  end
+
   resources :pages do
     post :move, on: :collection
   end
