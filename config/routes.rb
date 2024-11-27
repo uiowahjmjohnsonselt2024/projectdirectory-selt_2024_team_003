@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     post 'attack', on: :member
   end
 
+  resources :selections, only: [:index]
+
   resources :pages do
     post :move, on: :collection
   end

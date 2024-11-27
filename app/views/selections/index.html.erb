@@ -1,0 +1,30 @@
+<div class="character-selection-page">
+  <div class="video-overlay">
+    <video class="background-video" autoplay loop muted playsinline>
+      <source src="<%= asset_path('test.mov') %>" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <div class="character-selection">
+    <div class="card high-attack-iq">
+      <h3>Arcane Strategist</h3>
+      <img src="<%= asset_path('attack.png') %>" alt="High Attack and IQ" width="200" height="200">
+      <p>Favors intelligence and powerful attacks at the cost of defense.</p>
+      <button>Select</button>
+    </div>
+
+    <div class="card high-defense-health">
+      <h3>Iron Guardian</h3>
+      <img src="<%= asset_path('defense.png') %>" alt="High Defense and Health" width="200" height="200">
+      <p>Excels in defense and survivability at the cost of attack power.</p>
+      <button>Select</button>
+    </div>
+
+    <div class="card balanced">
+      <h3>Omni Knight</h3>
+      <img src="<%= asset_path('balanced.png') %>" alt="Balanced" width="200" height="200">
+      <p>Equally strong across all stats for adaptability in different situations.</p>
+      <button>Select</button>
+    </div>
+  </div>
+</div>
