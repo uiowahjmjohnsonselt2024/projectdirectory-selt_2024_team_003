@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_26_234149) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_27_034623) do
   create_table "friendships", force: :cascade do |t|
     t.integer "user_id"
     t.integer "friend_id"
@@ -23,8 +23,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_26_234149) do
   create_table "game_users", force: :cascade do |t|
     t.integer "user_id"
     t.integer "game_id"
-    t.integer "x_position"
-    t.integer "y_position"
+    t.integer "x_position", default: 0
+    t.integer "y_position", default: 0
     t.index ["game_id"], name: "index_game_users_on_game_id"
     t.index ["user_id"], name: "index_game_users_on_user_id"
   end

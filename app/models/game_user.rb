@@ -11,7 +11,7 @@ class GameUser < ActiveRecord::Base
     if (new_x - x_position).abs <= 1 && (new_y - y_position).abs <= 1
       update(x_position: new_x, y_position: new_y)
     else
-      errors.add(:base, "Invalid move. You can only move to adjacent spaces.")
+      false
     end
   end
 end

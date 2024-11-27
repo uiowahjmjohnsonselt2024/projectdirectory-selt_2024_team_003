@@ -61,9 +61,11 @@
         <% images.each_slice(6).with_index do |row_images, row_index| %>
           <div class="grid-row">
             <% row_images.each_with_index do |image, col_index| %>
-              <div class="grid-square" data-description="<%= descriptions[col_index] %>">
+              <div class="grid-square"
+                   data-x="<%= 5 - col_index %>"
+                   data-y="<%= row_index %>"
+                   data-description="<%= descriptions[row_index * 6 + col_index] %>">
                 <div class="square-content">
-                  <!-- Use images from the array -->
                   <%= image_tag image, alt: "Map Tile #{row_index * 6 + col_index + 1}", style: "width: 100%; height: 80px; max-width: 100%; display: block;" %>
                 </div>
               </div>
@@ -83,7 +85,7 @@
                   <div class="player-username"><%= player.user.username %></div>
                   <div class="player-stats"></div>
                   <div class="current-position">
-                    Current Position: (<%= @current_game_user&.x_position %>, <%= @current_game_user&.y_position %>)
+                    Current Position: (<%= player.x_position %>, <%= player.y_position %>)
                   </div>
                 </div>
               </div>
@@ -116,8 +118,11 @@
         gridSquares.forEach(square => {
             square.addEventListener('mouseenter', (event) => {
                 const description = square.getAttribute('data-description');
+                const x = square.getAttribute('data-x');
+                const y = square.getAttribute('data-y');
                 tooltip.innerHTML = formatDescription(description);
                 tooltip.style.opacity = 1;
+                tooltip.innerHTML = `${description} (${x}, ${y})`;
                 tooltip.style.left = `${event.pageX + 10}px`;
                 tooltip.style.top = `${event.pageY + 10}px`;
             });
@@ -129,6 +134,40 @@
 
             square.addEventListener('mouseleave', () => {
                 tooltip.style.opacity = 0;
+            });
+
+            square.addEventListener('click', () => {
+                const x = square.getAttribute('data-x');
+                const y = square.getAttribute('data-y');
+                const movePath = "<%= @move_path %>"; // Embed the Ruby variable here
+
+                // Send a request to update the player's position
+                fetch(movePath, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify({
+                        x_position: x,
+                        y_position: y
+                    })
+                }).then(response => response.json()) // Parse the JSON response
+                    .then(data => {
+                        if (data.success) {
+                            // Successful move
+                            //console.log("successful");
+                            window.location.reload(); // Reload to update the grid
+                        } else {
+                            // Failed move
+                            //console.log("fail");
+                            //alert(data.error || 'Error moving to the new position.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An unexpected error occurred.');
+                    });
             });
         });
 
@@ -144,40 +183,6 @@
                 );
             });
             return formattedDescription;
-        }
-        gridSquares.forEach(square => {
-            square.addEventListener('click', () => {
-                const x = parseInt(square.dataset.x, 10);
-                const y = parseInt(square.dataset.y, 10);
-
-                fetch('/pages/move', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-Token': csrfToken,
-                    },
-                    body: JSON.stringify({ x_position: x, y_position: y }),
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            updateGridAndProfile(data.position);
-                        } else {
-                            alert(data.errors.join(', '));
-                        }
-                    });
-            });
-        });
-
-        function updateGridAndProfile(position) {
-            document.querySelector('.current-position').textContent = `Current Position: (${position.x}, ${position.y})`;
-
-            // Highlight new current square
-            document.querySelectorAll('.grid-square').forEach(square => {
-                square.classList.remove('current-square');
-            });
-            const newSquare = document.querySelector(`[data-x="${position.x}"][data-y="${position.y}"]`);
-            newSquare.classList.add('current-square');
         }
     });
 </script>
