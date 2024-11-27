@@ -157,7 +157,8 @@
                         if (data.success) {
                             // Successful move
                             //console.log("successful");
-                            window.location.reload(); // Reload to update the grid
+                            //window.location.reload(); // Reload to update the grid
+                            window.location.href = `/interaction?x=${x}&y=${y}`;
                         } else {
                             // Failed move
                             //console.log("fail");

@@ -8,6 +8,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :pages do
+    post :move, on: :collection
+  end
+
   post 'login', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy', as: :logout
   post 'signup', to: 'registrations#create'
@@ -16,9 +20,8 @@ Rails.application.routes.draw do
   get 'chat_with_user', to: 'chats#show', as: 'chat_with_user'
   post 'send_message', to: 'chats#create', as: 'send_message'
   patch 'mark_as_read', to: 'chats#mark_as_read', as: 'mark_as_read'
-  resources :pages do
-    post :move, on: :collection
-  end
+  get 'interaction', to: 'interactions#show'
+  post 'attack', to: 'interactions#attack'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

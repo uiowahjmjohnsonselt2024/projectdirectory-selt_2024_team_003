@@ -1,0 +1,54 @@
+<div class="interaction-page">
+  <div class="interaction-header">
+    <h1>Interaction Page</h1>
+    <p class="position">You are currently at position (<%= @x_position %>, <%= @y_position %>).</p>
+  </div>
+
+  <!-- Example Enemy Section -->
+  <div class="enemy-info">
+    <h3>Example Enemy</h3>
+    <p>Health: <span id="enemy-health"><%= @enemy_health %></span></p>
+    <p id="attack-message"><%= @attack_message %></p>
+  </div>
+
+  <!-- Attack Button -->
+  <button id="attack-button" class="attack-button">Attack</button>
+
+  <div class="interaction-footer">
+    <%= link_to 'Return to Grid', grid_path, class: 'back-button' %>
+  </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const attackButton = document.getElementById('attack-button');
+        const enemyHealthDisplay = document.getElementById('enemy-health');
+        const attackMessage = document.getElementById('attack-message');
+
+        attackButton.addEventListener('click', () => {
+            // Make the attack request
+            fetch('/attack', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Update the UI based on the server's response
+                    enemyHealthDisplay.textContent = data.health;
+                    attackMessage.textContent = data.message;
+
+                    // If the enemy's health is 0, disable the attack button
+                    if (data.message === "You win!") {
+                        attackButton.disabled = true;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An unexpected error occurred.');
+                });
+        });
+    });
+</script>
