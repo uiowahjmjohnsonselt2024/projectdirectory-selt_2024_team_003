@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_27_183323) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_27_215327) do
   create_table "enemies", force: :cascade do |t|
     t.string "name"
     t.integer "health", default: 300
@@ -68,6 +68,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_27_183323) do
     t.integer "attack", default: 10
     t.integer "defense", default: 5
     t.integer "iq", default: 1
+    t.string "archetype"
   end
 
   add_foreign_key "enemies", "games"

@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   end
 
   resources :selections, only: [:index]
+  patch 'selections/update_archetype', to: 'selections#update_archetype'
+
 
   resources :pages do
     post :move, on: :collection

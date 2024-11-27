@@ -19,6 +19,33 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true, length: { minimum: 3, maximum: 25 }
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, length: { minimum: 6 }, if: -> { new_record? || !password.nil? }
+
+  def set_archetype_stats(archetype)
+    case archetype
+    when 'high_attack_iq'
+      self.attack = 30
+      self.iq = 10
+      self.defense = 5
+      self.health = 100
+    when 'high_defense_health'
+      self.attack = 10
+      self.iq = 1
+      self.defense = 30
+      self.health = 200
+    when 'balanced'
+      self.attack = 20
+      self.iq = 5
+      self.defense = 20
+      self.health = 150
+    else
+      # Default values or error handling
+      self.attack = 20
+      self.iq = 5
+      self.defense = 20
+      self.health = 150
+    end
+    save
+  end
 end
 
 

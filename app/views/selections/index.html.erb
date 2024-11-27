@@ -6,25 +6,57 @@
     </video>
   </div>
   <div class="character-selection">
-    <div class="card high-attack-iq">
+    <div class="card high-attack-iq" data-archetype="high_attack_iq">
       <h3>Arcane Strategist</h3>
       <img src="<%= asset_path('attack.png') %>" alt="High Attack and IQ" width="200" height="200">
-      <p>Favors intelligence and powerful attacks at the cost of defense.</p>
+      <p>Favors intelligence and powerful attacks while sacrificing defense.</p>
       <button>Select</button>
     </div>
 
-    <div class="card high-defense-health">
+    <div class="card high-defense-health" data-archetype="high_defense_health">
       <h3>Iron Guardian</h3>
       <img src="<%= asset_path('defense.png') %>" alt="High Defense and Health" width="200" height="200">
-      <p>Excels in defense and survivability at the cost of attack power.</p>
+      <p>Excels in defense and survivability with reduced attack power.</p>
       <button>Select</button>
     </div>
 
-    <div class="card balanced">
+    <div class="card balanced" data-archetype="balanced">
       <h3>Omni Knight</h3>
       <img src="<%= asset_path('balanced.png') %>" alt="Balanced" width="200" height="200">
-      <p>Equally strong across all stats for adaptability in different situations.</p>
+      <p>Equally strong across all stats, adaptable to various challenges.</p>
       <button>Select</button>
     </div>
   </div>
 </div>
+
+<script>
+    document.querySelectorAll('.card button').forEach(button => {
+        button.addEventListener('click', function() {
+            const archetype = this.closest('.card').getAttribute('data-archetype');
+
+            // Send an AJAX request to update the user's archetype and stats
+            fetch('/selections/update_archetype', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+                },
+                body: JSON.stringify({ archetype: archetype })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle success or error
+                    if (data.success) {
+                        // Optionally, redirect to another page, such as the user's profile
+                        window.location.href = '/games';
+                    } else {
+                        alert('Failed to update stats.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred.');
+                });
+        });
+    });
+</script>
