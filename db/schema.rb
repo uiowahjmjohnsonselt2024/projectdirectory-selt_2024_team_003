@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_26_011027) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_26_234149) do
   create_table "friendships", force: :cascade do |t|
     t.integer "user_id"
     t.integer "friend_id"
@@ -23,6 +23,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_26_011027) do
   create_table "game_users", force: :cascade do |t|
     t.integer "user_id"
     t.integer "game_id"
+    t.integer "x_position"
+    t.integer "y_position"
     t.index ["game_id"], name: "index_game_users_on_game_id"
     t.index ["user_id"], name: "index_game_users_on_user_id"
   end
@@ -30,8 +32,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_26_011027) do
   create_table "games", force: :cascade do |t|
     t.string "name"
     t.string "code"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "messages", force: :cascade do |t|
@@ -50,7 +52,5 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_26_011027) do
     t.string "password_digest"
   end
 
-  add_foreign_key "friendships", "friends"
-  add_foreign_key "friendships", "users"
   add_foreign_key "messages", "users"
 end
