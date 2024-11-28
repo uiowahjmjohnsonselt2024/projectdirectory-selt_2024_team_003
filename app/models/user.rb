@@ -22,17 +22,17 @@ class User < ActiveRecord::Base
 
   def set_archetype_stats(archetype)
     case archetype
-    when 'high_attack_iq'
+    when 'Arcane Strategist'
       self.attack = 30
       self.iq = 10
       self.defense = 5
       self.health = 100
-    when 'high_defense_health'
+    when 'Iron Guardian'
       self.attack = 10
       self.iq = 1
       self.defense = 30
       self.health = 200
-    when 'balanced'
+    when 'Omni Knight'
       self.attack = 20
       self.iq = 5
       self.defense = 20
@@ -45,6 +45,34 @@ class User < ActiveRecord::Base
       self.health = 150
     end
     save
+  end
+
+  def level_up
+    self.experience -= self.level * 100
+    puts self.level * 100
+    puts self.experience
+    puts "------------------------------------"
+
+    self.level += 1
+    stat_increase = case archetype
+                    when 'Arcane Strategist'
+                      { health: 20, attack: 10, defense: 5, iq: 3 }
+                    when 'Iron Guardian'
+                      { health: 30, attack: 5, defense: 10, iq: 1 }
+                    when 'Omni Knight'
+                      { health: 25, attack: 7, defense: 7, iq: 2 }
+                    else
+                      { health: 25, attack: 7, defense: 7, iq: 2 }
+                    end
+
+    self.health += stat_increase[:health]
+    self.attack += stat_increase[:attack]
+    self.defense += stat_increase[:defense]
+    self.iq += stat_increase[:iq]
+
+    save!
+
+    game_users.each { |game_user| game_user.update_health }
   end
 end
 

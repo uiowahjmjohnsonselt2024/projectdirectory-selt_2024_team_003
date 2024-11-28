@@ -19,7 +19,10 @@ class InteractionsController < ApplicationController
     # Check if the enemy's health is 0 or below
     if @enemy.health <= 0
       @enemy.update(health: 0)
-      message = "You win!"
+      @player.update(experience: @player.experience + 100)
+      puts "experience should be added"
+      level_up_if_needed(@player)
+      message = "You defeated the enemy and gained 100 XP!"
     else
       message = "You attacked the enemy! Enemy health: #{@enemy.health}"
     end
@@ -36,5 +39,12 @@ class InteractionsController < ApplicationController
       player_health: player_health,
       max_player_health: max_player_health
     }
+  end
+
+  def level_up_if_needed(player)
+    xp_threshold = player.level * 100
+    if player.experience >= xp_threshold
+      player.level_up
+    end
   end
 end

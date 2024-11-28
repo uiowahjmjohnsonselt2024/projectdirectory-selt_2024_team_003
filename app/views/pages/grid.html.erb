@@ -1,14 +1,18 @@
 <div class="dark-mode-theme">
   <div class="container">
     <div class="main-layout">
-      <!-- Left Column -->
       <aside class="left-column">
-        <!-- Red Button -->
         <%= link_to 'Return to Menu', games_path, class: 'red-button' %>
 
         <div class="profile">
           <div class="profile-picture-placeholder">[Profile Picture]</div>
           <div class="username-placeholder"><%= @user_name %></div>
+          <p>Level: <%= current_user.level %></p>
+          <div class="player-experience">
+            <h3>Your Experience</h3>
+            <progress id="player-experience" value="<%= @current_experience %>" max="<%= @experience_for_next_level %>"></progress>
+            <p>XP: <span id="player-experience-text"><%= @current_experience %> / <%= @experience_for_next_level %></span></p>
+          </div>
         </div>
         <div class="stats">
           <% @stats.each do |stat| %>
