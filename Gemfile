@@ -30,6 +30,10 @@ group :development, :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'rspec-rails'
+  gem 'webmock'
+  gem 'capybara'
+  gem 'factory_bot_rails'
+  gem 'selenium-webdriver'
 end
 
 group :development do
