@@ -28,7 +28,7 @@ class PagesController < ApplicationController
     @move_path = move_pages_path
     @player = current_user
 
-    @level = @current_game_user.level || 1
+    @level = @player.level || 1
     @current_experience = @player.experience || 0
     @experience_for_next_level = 100 * @level # Example: Next level requires 100 * current level experience points
     @experience_percentage = (@current_experience.to_f / @experience_for_next_level * 100).round(2)

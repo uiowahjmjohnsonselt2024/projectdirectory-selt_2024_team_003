@@ -22,18 +22,20 @@ class Game < ActiveRecord::Base
     end
 
     def generate_enemies
-      # Generate an enemy for each grid square (you can adjust the number of grid squares)
-      grid_size = 10  # For example, a 10x10 grid
+      grid_size = 10
       grid_size.times do |x|
         grid_size.times do |y|
+          level = (x * 3) + y + 1
           enemies.create(
             name: "Enemy #{x},#{y}",
-            health: 300,
-            attack: 20,
-            defense: 10,
-            iq: 5,
+            health: 300 + (level * 20),
+            attack: 20 + (level * 2),
+            defense: 10 + (level * 2),
+            iq: 5 + (level * 1),
             x_position: x,
-            y_position: y
+            y_position: y,
+            max_health: 300 + (level * 20),
+            level: level
           )
         end
       end

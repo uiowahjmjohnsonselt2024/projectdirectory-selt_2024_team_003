@@ -19,7 +19,8 @@ class InteractionsController < ApplicationController
     # Check if the enemy's health is 0 or below
     if @enemy.health <= 0
       @enemy.update(health: 0)
-      @player.update(experience: @player.experience + 100)
+      experience_gain = @enemy.level * 50
+      @player.update(experience: @player.experience + experience_gain)
       puts "experience should be added"
       level_up_if_needed(@player)
       message = "You defeated the enemy and gained 100 XP!"
