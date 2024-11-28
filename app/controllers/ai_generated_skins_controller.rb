@@ -1,26 +1,36 @@
+#NOTE: http://localhost:3000/ai_generated_skins/new is route
 class AiGeneratedSkinsController < ApplicationController
-  #NOTE: http://localhost:3000/ai_generated_skins/generate is route for ai generated images
   require 'net/http'
   require 'json'
   require 'mini_magick'
   require 'open-uri'
 
+  def new
+    # This action simply renders the form
+  end
+
   def generate
-    #Generate the AI Image using OpenAI API
+    character_description = params[:character_description]
+
+    # Validate character_description
+    if character_description.blank?
+      @error = true
+      render :new and return
+    end
+
+    # Generate the AI Image using OpenAI API
     uri = URI("https://api.openai.com/v1/images/generations")
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
 
     request = Net::HTTP::Post.new(uri)
-
-    #Add authentication key
-    request['Authorization'] = "Bearer sk-openAI-API-key here"
+    request['Authorization'] = "Bearer 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"
     request['Content-Type'] = "application/json"
     request.body = {
-      prompt: "A dragon in retro animated style, featuring vibrant colors like red, green, and yellow, " \
-        "fully centered on a solid plum purple background with the exact color value of hex #8E4585. " \
-        "The dragon should have some pixelation in a clean, detailed style, with defined features and proportions. " \
-        "Ensure the entire dragon is visible and does not go off the edges of the image. " \
+      prompt: "#{character_description} in retro animated style, featuring vibrant colors like red, green, and yellow, " \
+        "fully centered on a solid purple background, where each pixel has same color hex value" \
+        "The #{character_description} should have some defined features and proportions. " \
+        "Ensure the entire #{character_description} is visible and does not go off the edges of the image. " \
         "The background should remain plain with no additional features or textures.",
       n: 1,
       size: "1024x1024"
@@ -35,18 +45,17 @@ class AiGeneratedSkinsController < ApplicationController
       # Pass the original image URL to the view
       @original_image_url = generated_image_url
 
-      #Save the process image in an image object
+      # Save the processed image in an image object
       processed_image = process_image(generated_image_url)
 
-      # Convert the processed image to a base64 string for embedding directly in the view - ChatGPT assisted
+      # Convert the processed image to a base64 string for embedding directly in the view
       @image_base64 = Base64.strict_encode64(processed_image.to_blob)
     else
-      @error = "Unable To Generate Skin Image"
+      @error = true
     end
 
-    render :show
+    render :new
   end
-
 
   private
 
