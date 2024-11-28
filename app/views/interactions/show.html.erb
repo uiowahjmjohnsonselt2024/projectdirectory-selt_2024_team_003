@@ -82,6 +82,8 @@
               .then(data => {
 
                   if (data.win) {
+                      enemyHealthDisplay.value = 0;
+                      enemyHealthText.textContent = 0;
                       attackMessage.textContent += " Redirecting to the win page...";
                       setTimeout(() => {
                           window.location.href = `/win_game?game_id=${gameId}`;

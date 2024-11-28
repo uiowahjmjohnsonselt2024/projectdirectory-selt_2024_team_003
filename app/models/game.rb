@@ -28,14 +28,9 @@ class Game < ActiveRecord::Base
           level = (x * 3) + y + 1
           enemies.create(
             name: "Enemy #{x},#{y}",
-            health: 300 + (level * 20),
-            attack: 20 + (level * 2),
-            defense: 10 + (level * 2),
-            iq: 5 + (level * 1),
+            level: level,
             x_position: x,
             y_position: y,
-            max_health: 300 + (level * 20),
-            level: level
           )
         end
       end

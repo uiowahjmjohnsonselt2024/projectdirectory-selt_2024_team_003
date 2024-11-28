@@ -15,6 +15,7 @@ class PagesController < ApplicationController
     @user_name = current_user.username
     @profile_picture_url = "/path/to/profile.jpg"
     @stats = [
+      { name: "Archetype", value: current_user.archetype },
       { name: "Attack", value: current_user.attack },
       { name: "Defense", value: current_user.defense },
       { name: "IQ", value: current_user.iq }

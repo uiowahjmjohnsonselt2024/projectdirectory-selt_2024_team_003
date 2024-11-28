@@ -60,5 +60,22 @@ RSpec.describe Game, type: :model do
       expect(game.code).to eq('EFGH').or(eq('WXYZ'))
     end
   end
+  describe '#generate_enemies' do
+    it 'creates enemies for the grid with correct attributes' do
+      game = Game.create(name: 'Game with Enemies')
+      enemies = game.enemies
+
+      expect(enemies.count).to eq(100) # 10x10 grid
+      enemies.each do |enemy|
+        level = (enemy.x_position * 3) + enemy.y_position + 1
+        expect(enemy.health).to eq(300 + (level * 20))
+        expect(enemy.attack).to eq(20 + (level * 2))
+        expect(enemy.defense).to eq(10 + (level * 2))
+        expect(enemy.iq).to eq(5 + level)
+        expect(enemy.max_health).to eq(300 + (level * 20))
+        expect(enemy.level).to eq(level)
+      end
+    end
+  end
 end
 
