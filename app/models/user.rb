@@ -23,22 +23,25 @@ class User < ActiveRecord::Base
   def set_archetype_stats(archetype)
     case archetype
     when 'Arcane Strategist'
+      self.archetype = 'Arcane Strategist'
       self.attack = 30
       self.iq = 10
       self.defense = 5
       self.health = 100
     when 'Iron Guardian'
+      self.archetype = 'Iron Guardian'
       self.attack = 10
       self.iq = 1
       self.defense = 30
       self.health = 200
     when 'Omni Knight'
+      self.archetype = 'Omni Knight'
       self.attack = 20
       self.iq = 5
       self.defense = 20
       self.health = 150
     else
-      # Default values or error handling
+      self.archetype = 'None'
       self.attack = 20
       self.iq = 5
       self.defense = 20
