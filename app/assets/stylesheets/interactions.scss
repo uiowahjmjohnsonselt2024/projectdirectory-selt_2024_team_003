@@ -84,3 +84,11 @@ progress::-webkit-progress-value {
   background-color: #76c7c0; /* Color for the progress value */
   transition: background-color 0.3s ease; /* Optional smooth background color change */
 }
+
+#player-health::-webkit-progress-value {
+  background-color: var(--health-bar-color, #66cc66); /* Default green */
+}
+
+#player-health::-moz-progress-bar {
+  background-color: var(--health-bar-color, #66cc66); /* Default green */
+}

@@ -66,6 +66,60 @@
   position: relative;
 }
 
+progress {
+  width: 100%;
+  height: 20px; /* Adjust height for visibility */
+  border-radius: 5px; /* Rounded corners */
+  margin-bottom: 10px; /* Space between bar and text */
+}
+
+/* XP Progress Bar */
+#player-experience {
+  background-color: #444; /* Dark gray background */
+}
+
+#player-experience::-webkit-progress-bar {
+  background-color: #444; /* Dark background */
+}
+
+#player-experience::-webkit-progress-value {
+  background-color: #00b0b0; /* XP color (light blue or teal) */
+}
+
+#player-experience::-moz-progress-bar {
+  background-color: #00b0b0; /* XP color */
+}
+
+#player-health {
+  background-color: #444; /* Dark background */
+}
+
+#player-health::-webkit-progress-bar {
+  background-color: #444; /* Dark background */
+}
+
+#player-health::-webkit-progress-value {
+  background-color: var(--health-bar-color, #66cc66); /* Default green */
+}
+
+#player-health::-moz-progress-bar {
+  background-color: var(--health-bar-color, #66cc66); /* Default green */
+}
+
+/* XP Text Styling */
+#player-experience-text {
+  font-size: 14px;
+  font-weight: bold;
+  color: #00b0b0;
+}
+
+/* Health Text Styling */
+#player-health-text {
+  font-size: 14px;
+  font-weight: bold;
+  color: #66cc66;
+}
+
 .image-class {
   height: 100%;
   width: 100%;

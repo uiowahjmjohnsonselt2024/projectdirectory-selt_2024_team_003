@@ -38,20 +38,41 @@
         const playerHealthText = document.getElementById('player-health-text');
         const attackMessage = document.getElementById('attack-message');
 
-        // Function to animate health changes
-        function animateHealthBar(healthBar, newHealth, duration) {
-            const currentHealth = healthBar.value;
-            const step = (newHealth - currentHealth) / (duration / 50); // Change per frame (50ms intervals)
+        // Function to change the health bar color based on health percentage
+        function updateHealthBarColor(healthBar, health, maxHealth) {
+            const healthPercentage = (health / maxHealth) * 100;
+            if (healthPercentage < 25) {
+                healthBar.style.setProperty('--health-bar-color', 'red');
+            } else if (healthPercentage < 50) {
+                healthBar.style.setProperty('--health-bar-color', 'yellow');
+            } else {
+                healthBar.style.setProperty('--health-bar-color', '#66cc66'); // Default green
+            }
+        }
 
-            let currentValue = currentHealth;
-            const interval = setInterval(() => {
-                currentValue += step;
-                healthBar.value = Math.min(Math.max(currentValue, 0), newHealth); // Ensure health doesn't go below 0 or above max health
+        // Disable the attack button if either player's or enemy's health is 0
+        function disableButtonIfNeeded(playerHealth, enemyHealth) {
+            if (playerHealth <= 0 || enemyHealth <= 0) {
+                attackButton.disabled = true;
+            } else {
+                attackButton.disabled = false;
+            }
+        }
 
-                if (Math.abs(currentValue - newHealth) <= Math.abs(step)) {
-                    clearInterval(interval); // Stop once the health reaches the target
-                }
-            }, 50); // Update every 50ms for a smooth transition
+        // Disable attack button if enemy is defeated
+        function checkEnemyStatus(enemyHealth) {
+            if (enemyHealth <= 0) {
+                attackButton.disabled = true; // Disable the button if the enemy is defeated
+            }
+        }
+
+        // Function to check if the player is in a grid with a defeated enemy
+        function checkIfEnemyDefeated(enemyHealth) {
+            if (enemyHealth <= 0) {
+                attackButton.disabled = true; // Disable if the enemy is already defeated
+            } else {
+                attackButton.disabled = false;
+            }
         }
 
         attackButton.addEventListener('click', () => {
@@ -64,27 +85,36 @@
                 },
                 body: JSON.stringify({ game_id: gameId })
             })
-                .then(response => response.json())
-                .then(data => {
-                    // Animate enemy's health change
-                    animateHealthBar(enemyHealthDisplay, data.enemy_health, 1000); // 1000ms = 1 second
-                    enemyHealthText.textContent = data.enemy_health;
+              .then(response => response.json())
+              .then(data => {
+                  // Directly set the new health values without animation
+                  enemyHealthDisplay.value = data.enemy_health;
+                  enemyHealthText.textContent = data.enemy_health;
 
-                    // Animate player's health change (if needed)
-                    animateHealthBar(playerHealthDisplay, data.player_health, 1000); // 1000ms = 1 second
-                    playerHealthText.textContent = `${data.player_health} / ${data.max_player_health}`;
+                  playerHealthDisplay.value = data.player_health;
+                  playerHealthText.textContent = `${data.player_health} / ${data.max_player_health}`;
 
-                    // Update attack message
-                    attackMessage.textContent = data.message;
+                  // Update attack message
+                  attackMessage.textContent = data.message;
+                  updateHealthBarColor(playerHealthDisplay, data.player_health, parseInt(playerHealthDisplay.getAttribute('max')));
 
-                    // Disable the attack button if the enemy is defeated
-                    if (data.message === "You win!") {
-                        attackButton.disabled = true;
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+
+                  // Disable the attack button if the enemy is defeated or player health is 0
+                  if (data.message === "You win!" || data.player_health <= 0 || data.enemy_health <= 0) {
+                      attackButton.disabled = true;
+                  }
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+              });
         });
+
+        // On page load, check initial enemy status
+        const initialEnemyHealth = parseInt(enemyHealthText.textContent, 10);
+        const initialPlayerHealth = parseInt(playerHealthText.textContent, 10);
+        disableButtonIfNeeded(initialPlayerHealth, initialEnemyHealth);
+        checkIfEnemyDefeated(initialEnemyHealth);
+        updateHealthBarColor(playerHealthDisplay, initialPlayerHealth, parseInt(playerHealthDisplay.getAttribute('max')));
     });
 </script>
+

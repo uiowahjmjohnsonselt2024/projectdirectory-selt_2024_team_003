@@ -28,6 +28,9 @@ class PagesController < ApplicationController
     @move_path = move_pages_path
     @player = current_user
 
+    @current_health = @current_game_user.health
+    @max_health = @player.health
+
     @level = @player.level || 1
     @current_experience = @player.experience || 0
     @experience_for_next_level = 100 * @level # Example: Next level requires 100 * current level experience points
