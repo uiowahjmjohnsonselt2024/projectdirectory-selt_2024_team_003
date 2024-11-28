@@ -1,9 +1,9 @@
 class Game < ActiveRecord::Base
     validates :name, presence: true, length: { minimum: 0, maximum: 50 }
     validates_uniqueness_of :code
-    has_many :game_users
+    has_many :game_users , dependent: :destroy
     has_many :users, through: :game_users
-    has_many :enemies
+    has_many :enemies, dependent: :destroy
 
     before_create :generate_unique_code
     after_create :generate_enemies

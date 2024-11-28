@@ -49,10 +49,6 @@ class User < ActiveRecord::Base
 
   def level_up
     self.experience -= self.level * 100
-    puts self.level * 100
-    puts self.experience
-    puts "------------------------------------"
-
     self.level += 1
     stat_increase = case archetype
                     when 'Arcane Strategist'

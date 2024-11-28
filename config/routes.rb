@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     post :move, on: :collection
   end
 
+  get 'win_game', to: 'games#win', as: 'win_game'
+  delete 'end_game/:game_code', to: 'games#end', as: 'end_game'
   post 'login', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy', as: :logout
   post 'signup', to: 'registrations#create'

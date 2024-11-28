@@ -87,6 +87,17 @@ class GamesController < ApplicationController
 
     redirect_to games_path
   end
+
+  def win
+    @game = Game.find_by(code: params[:game_id])
+    @game_code = params[:game_id]
+  end
+
+  def end
+    @game = Game.find_by(code: params[:game_code])
+    @game.destroy
+    redirect_to games_path, notice: 'Game has ended. Thank you for playing!'
+  end
   
 
   private

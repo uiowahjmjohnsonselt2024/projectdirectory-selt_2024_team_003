@@ -28,6 +28,9 @@ class InteractionsController < ApplicationController
       @player.update(experience: @player.experience + experience_gain)
       level_up_if_needed(@player)
       message += " You defeated the enemy and gained #{experience_gain} XP!"
+      if @enemy.x_position == 5 && @enemy.y_position == 5
+        render json: { success: true, win: true, message: message } and return
+      end
     else
       enemy_damage, enemy_critical = calculate_damage(@enemy, @player)
       @game_user.update(health: @game_user.health - enemy_damage)
