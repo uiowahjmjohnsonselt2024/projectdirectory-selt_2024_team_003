@@ -12,8 +12,10 @@ class GamesController < ApplicationController
   def create
     @game = Game.new(game_params) # create new game(name, code)
     GameUser.create(game: @game, user: current_user)
+    puts "||||||||||||}}}}}}}}}}}}}}}}}}}}"
     if @game.save
       flash[:notice] = "Game was successfully created."
+      session[:game_code] = @game.code
       # go to the grid page associated with this game
       redirect_to grid_path
     else

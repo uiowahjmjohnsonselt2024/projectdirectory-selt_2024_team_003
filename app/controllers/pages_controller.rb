@@ -9,7 +9,7 @@ class PagesController < ApplicationController
   # * `@user_name`: The current user's username.
   # * `@players`: An array of players in the current game, excluding the current
   #   user.
-  before_action :set_game_user, only: [:move]
+  before_action :set_game_user
 
   def grid
     @user_name = current_user.username
@@ -50,6 +50,8 @@ class PagesController < ApplicationController
   def set_game_user
     current_game = Game.find_by(code: session[:game_code])
     @game_user = current_user.game_users.find_by(game_id: current_game&.id)
+    puts "|||||||||||||||||||||||||||||||~~~~~~~~~~~~~~~~~~~~~~"
+    puts @game_user.health
     unless @game_user
       render json: { success: false, errors: ["Player not found in this game"] }, status: :unprocessable_entity
     end

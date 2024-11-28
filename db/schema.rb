@@ -22,7 +22,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_27_231848) do
     t.integer "y_position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "max_health", default: 100
+    t.integer "max_health", default: 300
     t.index ["game_id"], name: "index_enemies_on_game_id"
   end
 
