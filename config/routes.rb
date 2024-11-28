@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post 'signup', to: 'registrations#create'
   get 'pages/grid'
   get 'grid', to: 'pages#grid'  # This defines the route for /grid
+  get 'ai_generated_skins/generate', to: 'ai_generated_skins#generate'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
