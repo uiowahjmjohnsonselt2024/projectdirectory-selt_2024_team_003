@@ -2,10 +2,18 @@
   <h1>Interaction with Enemy</h1>
   <p>Your position: (<%= @game_user.x_position %>, <%= @game_user.y_position %>)</p>
 
-  <!-- Display enemy stats -->
+  <!-- Display player health bar -->
+  <div class="player-info">
+    <h3>Your Health</h3>
+    <progress id="player-health" value="<%= @game_user.health %>" max="<%= @player.health %>"></progress>
+    <p>Health: <span id="player-health-text"><%= @game_user.health %> / <%= @player.health %></span></p>
+  </div>
+
+  <!-- Display enemy stats and health bar -->
   <div class="enemy-info">
     <h3><%= @enemy.name %></h3>
-    <p>Health: <span id="enemy-health"><%= @enemy.health %></span></p>
+    <progress id="enemy-health" value="<%= @enemy.health %>" max="<%= @enemy.max_health %>"></progress>
+    <p>Health: <span id="enemy-health-text"><%= @enemy.health %></span></p>
     <p>Attack: <%= @enemy.attack %></p>
     <p>Defense: <%= @enemy.defense %></p>
     <p>IQ: <%= @enemy.iq %></p>
@@ -24,7 +32,26 @@
     document.addEventListener('DOMContentLoaded', () => {
         const attackButton = document.getElementById('attack-button');
         const enemyHealthDisplay = document.getElementById('enemy-health');
+        const playerHealthDisplay = document.getElementById('player-health');
+        const enemyHealthText = document.getElementById('enemy-health-text');
+        const playerHealthText = document.getElementById('player-health-text');
         const attackMessage = document.getElementById('attack-message');
+
+        // Function to animate health changes
+        function animateHealthBar(healthBar, newHealth, duration) {
+            const currentHealth = healthBar.value;
+            const step = (newHealth - currentHealth) / (duration / 50); // Change per frame (50ms intervals)
+
+            let currentValue = currentHealth;
+            const interval = setInterval(() => {
+                currentValue += step;
+                healthBar.value = Math.min(Math.max(currentValue, 0), newHealth); // Ensure health doesn't go below 0 or above max health
+
+                if (Math.abs(currentValue - newHealth) <= Math.abs(step)) {
+                    clearInterval(interval); // Stop once the health reaches the target
+                }
+            }, 50); // Update every 50ms for a smooth transition
+        }
 
         attackButton.addEventListener('click', () => {
             const gameId = attackButton.getAttribute('data-game-id');
@@ -38,7 +65,15 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    enemyHealthDisplay.textContent = data.enemy_health;
+                    // Animate enemy's health change
+                    animateHealthBar(enemyHealthDisplay, data.enemy_health, 1000); // 1000ms = 1 second
+                    enemyHealthText.textContent = data.enemy_health;
+
+                    // Animate player's health change (if needed)
+                    animateHealthBar(playerHealthDisplay, data.player_health, 1000); // 1000ms = 1 second
+                    playerHealthText.textContent = `${data.player_health} / ${data.max_player_health}`;
+
+                    // Update attack message
                     attackMessage.textContent = data.message;
 
                     // Disable the attack button if the enemy is defeated

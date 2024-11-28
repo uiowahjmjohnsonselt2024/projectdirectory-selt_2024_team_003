@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_27_215327) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_27_231848) do
   create_table "enemies", force: :cascade do |t|
     t.string "name"
     t.integer "health", default: 300
@@ -22,6 +22,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_27_215327) do
     t.integer "y_position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "max_health", default: 100
     t.index ["game_id"], name: "index_enemies_on_game_id"
   end
 
@@ -39,6 +40,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_27_215327) do
     t.integer "game_id"
     t.integer "x_position", default: 0
     t.integer "y_position", default: 0
+    t.integer "health", default: 100
     t.index ["game_id"], name: "index_game_users_on_game_id"
     t.index ["user_id"], name: "index_game_users_on_user_id"
   end

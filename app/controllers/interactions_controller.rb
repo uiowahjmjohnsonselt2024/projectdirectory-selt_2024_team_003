@@ -24,6 +24,17 @@ class InteractionsController < ApplicationController
       message = "You attacked the enemy! Enemy health: #{@enemy.health}"
     end
 
-    render json: { success: true, message: message, enemy_health: @enemy.health }
+    # Calculate the current player health (based on your game logic)
+    player_health = @game_user.health # Adjust this if the player's health changes based on game logic
+    max_player_health = @player.health
+
+    render json: {
+      success: true,
+      message: message,
+      enemy_health: @enemy.health,
+      enemy_max_health: @enemy.max_health,
+      player_health: player_health,
+      max_player_health: max_player_health
+    }
   end
 end

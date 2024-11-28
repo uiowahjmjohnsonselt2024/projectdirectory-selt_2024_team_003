@@ -21,7 +21,11 @@ class PagesController < ApplicationController
       { name: "IQ", value: current_user.iq }
     ]
     @players = Game.find_by(code: session[:game_code])&.game_users&.reject { |player| player.user.username == @user_name } || []
+    puts session[:game_code]
+    puts "|||||||||||||||||||||||||||"
     @game = Game.find_by(code: session[:game_code])
+    puts @game.code
+    puts "|||||||||||||||||||||||||||"
 
     # Current player's position
     current_game = Game.find_by(code: session[:game_code])

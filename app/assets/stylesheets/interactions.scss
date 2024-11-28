@@ -65,3 +65,22 @@ button:hover,
 .interaction-footer {
   margin-top: 20px;
 }
+
+progress {
+  width: 100%;
+  height: 20px;
+  appearance: none; /* Remove default styles on progress bars */
+  background-color: #333; /* Background of the bar */
+  border-radius: 5px; /* Optional rounded corners */
+  overflow: hidden;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Optional subtle shadow */
+}
+
+progress::-webkit-progress-bar {
+  background-color: #444; /* Background color of the progress bar */
+}
+
+progress::-webkit-progress-value {
+  background-color: #76c7c0; /* Color for the progress value */
+  transition: background-color 0.3s ease; /* Optional smooth background color change */
+}
