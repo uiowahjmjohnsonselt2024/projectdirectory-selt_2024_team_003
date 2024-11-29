@@ -8,6 +8,27 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :interactions, param: :game_id do
+    post 'attack', on: :member
+  end
+
+  resources :selections, only: [:index]
+  patch 'selections/update_archetype', to: 'selections#update_archetype'
+
+
+  resources :pages do
+    post :move, on: :collection
+  end
+
+  resources :interactions, only: [] do
+    member do
+      post :magic_attack
+      post :magic_heal
+    end
+  end
+
+  get 'win_game', to: 'games#win', as: 'win_game'
+  delete 'end_game/:game_code', to: 'games#end', as: 'end_game'
   post 'login', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy', as: :logout
   post 'signup', to: 'registrations#create'
@@ -17,9 +38,8 @@ Rails.application.routes.draw do
   get 'chat_with_user', to: 'chats#show', as: 'chat_with_user'
   post 'send_message', to: 'chats#create', as: 'send_message'
   patch 'mark_as_read', to: 'chats#mark_as_read', as: 'mark_as_read'
-  resources :pages do
-    post :move, on: :collection
-  end
+  get 'interaction', to: 'interactions#show'
+  post 'attack', to: 'interactions#attack'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
