@@ -3,6 +3,7 @@
     Current User: <%= current_user.username %>
   </span>
   <%= link_to "Logout", logout_path, method: :get, class: "logout-button" %>
+  <%= link_to "Shop", store_path, class: "shop-button" %>
 
   <div class="form-container">
     <%= form_for Game.new, url: games_path, html: { method: :post, local: true } do |form| %>

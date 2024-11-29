@@ -33,7 +33,8 @@ Rails.application.routes.draw do
   get 'logout', to: 'sessions#destroy', as: :logout
   post 'signup', to: 'registrations#create'
   get 'pages/grid'
-  get 'grid', to: 'pages#grid'
+  get 'grid', to: 'pages#grid'  # This defines the route for /grid
+  get 'store', to: 'store#index'
   get 'chat_with_user', to: 'chats#show', as: 'chat_with_user'
   post 'send_message', to: 'chats#create', as: 'send_message'
   patch 'mark_as_read', to: 'chats#mark_as_read', as: 'mark_as_read'
