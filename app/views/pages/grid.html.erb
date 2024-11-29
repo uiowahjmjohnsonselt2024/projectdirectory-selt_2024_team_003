@@ -1,14 +1,28 @@
 <div class="dark-mode-theme">
   <div class="container">
     <div class="main-layout">
-      <!-- Left Column -->
       <aside class="left-column">
-        <!-- Red Button -->
         <%= link_to 'Return to Menu', games_path, class: 'red-button' %>
 
         <div class="profile">
           <div class="profile-picture-placeholder">[Profile Picture]</div>
           <div class="username-placeholder"><%= @user_name %></div>
+          <p>Level: <%= current_user.level %></p>
+          <div class="player-experience">
+            <h3>Your Experience</h3>
+            <progress id="player-experience" value="<%= @current_experience %>" max="<%= @experience_for_next_level %>"></progress>
+            <p>XP: <span id="player-experience-text"><%= @current_experience %> / <%= @experience_for_next_level %></span></p>
+          </div>
+          <div class="player-health">
+            <h3>Your Health</h3>
+            <progress id="player-health" value="<%= @current_health %>" max="<%= @max_health %>"></progress>
+            <p>Health: <span id="player-health-text"><%= @current_health %> / <%= @max_health %></span></p>
+          </div>
+          <div class="player-mana">
+            <h3>Your Mana</h3>
+            <progress id="player-mana" value="<%= @current_mana %>" max="<%= @max_mana %>"></progress>
+            <p>Mana: <span id="player-mana-text"><%= @current_mana %> / <%= @max_mana %></span></p>
+          </div>
         </div>
         <div class="stats">
           <% @stats.each do |stat| %>
@@ -64,7 +78,8 @@
               <div class="grid-square"
                    data-x="<%= 5 - col_index %>"
                    data-y="<%= row_index %>"
-                   data-description="<%= descriptions[row_index * 6 + col_index] %>">
+                   data-description="<%= descriptions[row_index * 6 + col_index] %>"
+                   data-game-id="<%= @game.code %>">
                 <div class="square-content">
                   <%= image_tag image, alt: "Map Tile #{row_index * 6 + col_index + 1}", style: "width: 100%; height: 80px; max-width: 100%; display: block;" %>
                 </div>
@@ -114,6 +129,19 @@
         const tooltip = document.createElement('div');
         tooltip.className = 'tooltip';
         document.body.appendChild(tooltip);
+        const healthBar = document.getElementById('player-health');
+        const currentHealth = parseInt(healthBar.getAttribute('value'));
+        const maxHealth = parseInt(healthBar.getAttribute('max'));
+
+        const healthPercentage = (currentHealth / maxHealth) * 100;
+
+        if (healthPercentage < 25) {
+            healthBar.style.setProperty('--health-bar-color', 'red');
+        } else if (healthPercentage < 50) {
+            healthBar.style.setProperty('--health-bar-color', 'yellow');
+        } else {
+            healthBar.style.setProperty('--health-bar-color', '#66cc66'); // Default green
+        }
 
         gridSquares.forEach(square => {
             square.addEventListener('mouseenter', (event) => {
@@ -140,6 +168,7 @@
                 const x = square.getAttribute('data-x');
                 const y = square.getAttribute('data-y');
                 const movePath = "<%= @move_path %>"; // Embed the Ruby variable here
+                const gameId = square.getAttribute('data-game-id');
 
                 // Send a request to update the player's position
                 fetch(movePath, {
@@ -157,7 +186,8 @@
                         if (data.success) {
                             // Successful move
                             //console.log("successful");
-                            window.location.reload(); // Reload to update the grid
+                            //window.location.reload(); // Reload to update the grid
+                            window.location.href = `/interaction?game_id=${gameId}&x=${x}&y=${y}`;
                         } else {
                             // Failed move
                             //console.log("fail");

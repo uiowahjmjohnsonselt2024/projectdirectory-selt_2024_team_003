@@ -14,6 +14,7 @@ class GamesController < ApplicationController
     GameUser.create(game: @game, user: current_user)
     if @game.save
       flash[:notice] = "Game was successfully created."
+      session[:game_code] = @game.code
       # go to the grid page associated with this game
       redirect_to grid_path
     else
@@ -85,6 +86,17 @@ class GamesController < ApplicationController
     end
 
     redirect_to games_path
+  end
+
+  def win
+    @game = Game.find_by(code: params[:game_id])
+    @game_code = params[:game_id]
+  end
+
+  def end
+    @game = Game.find_by(code: params[:game_code])
+    @game.destroy
+    redirect_to games_path, notice: 'Game has ended. Thank you for playing!'
   end
   
 

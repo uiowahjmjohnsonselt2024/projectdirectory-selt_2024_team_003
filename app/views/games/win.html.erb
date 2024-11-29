@@ -1,0 +1,26 @@
+<div class="win-game-page">
+  <h1>Congratulations!</h1>
+  <p>You have defeated the champion and won the game!</p>
+  <%= button_to 'End Game', end_game_path(@game_code), method: :delete, class: 'end-game-button' %>
+</div>
+
+<style>
+    .win-game-page {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .end-game-button {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .end-game-button:hover {
+        background-color: #218838;
+    }
+</style>

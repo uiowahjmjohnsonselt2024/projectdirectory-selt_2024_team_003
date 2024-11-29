@@ -33,4 +33,22 @@ RSpec.describe GameUser, type: :model do
       expect(invalid_game_user.errors[:y_position]).to include("is not a number")
     end
   end
+  describe '#update_health' do
+    it 'updates health to match the user health' do
+      user = create(:user, health: 150)
+      game_user = create(:game_user, user: user, health: 100)
+      game_user.update_health
+
+      expect(game_user.health).to eq(150)
+    end
+  end
+
+  describe '#take_damage' do
+    it 'reduces health when damage is taken' do
+      game_user = create(:game_user, health: 100)
+      game_user.take_damage(30)
+
+      expect(game_user.health).to eq(70)
+    end
+  end
 end
