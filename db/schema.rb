@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_28_044702) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_29_042648) do
   create_table "enemies", force: :cascade do |t|
     t.string "name"
     t.integer "health", default: 300
@@ -24,6 +24,10 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_28_044702) do
     t.datetime "updated_at", null: false
     t.integer "max_health", default: 300
     t.integer "level", default: 0
+    t.integer "special_attack"
+    t.integer "special_defense"
+    t.integer "mana"
+    t.integer "max_mana"
     t.index ["game_id"], name: "index_enemies_on_game_id"
   end
 
@@ -43,6 +47,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_28_044702) do
     t.integer "y_position", default: 0
     t.integer "health", default: 100
     t.integer "level", default: 1
+    t.integer "mana"
     t.index ["game_id"], name: "index_game_users_on_game_id"
     t.index ["user_id"], name: "index_game_users_on_user_id"
   end
@@ -75,6 +80,9 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_28_044702) do
     t.string "archetype"
     t.integer "level", default: 1
     t.integer "experience", default: 0
+    t.integer "mana"
+    t.integer "special_attack"
+    t.integer "special_defense"
   end
 
   add_foreign_key "enemies", "games"

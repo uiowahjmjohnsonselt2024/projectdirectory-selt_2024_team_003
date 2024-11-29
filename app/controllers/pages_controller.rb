@@ -17,7 +17,9 @@ class PagesController < ApplicationController
     @stats = [
       { name: "Archetype", value: current_user.archetype },
       { name: "Attack", value: current_user.attack },
+      { name: "Special Attack", value: current_user.special_attack },
       { name: "Defense", value: current_user.defense },
+      { name: "Special Defense", value: current_user.special_defense },
       { name: "IQ", value: current_user.iq }
     ]
     @players = Game.find_by(code: session[:game_code])&.game_users&.reject { |player| player.user.username == @user_name } || []
@@ -30,6 +32,8 @@ class PagesController < ApplicationController
 
     @current_health = @current_game_user.health
     @max_health = @player.health
+    @current_mana = @current_game_user.mana
+    @max_mana = @player.mana
 
     @level = @player.level || 1
     @current_experience = @player.experience || 0

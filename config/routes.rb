@@ -20,6 +20,13 @@ Rails.application.routes.draw do
     post :move, on: :collection
   end
 
+  resources :interactions, only: [] do
+    member do
+      post :magic_attack
+      post :magic_heal
+    end
+  end
+
   get 'win_game', to: 'games#win', as: 'win_game'
   delete 'end_game/:game_code', to: 'games#end', as: 'end_game'
   post 'login', to: 'sessions#create'

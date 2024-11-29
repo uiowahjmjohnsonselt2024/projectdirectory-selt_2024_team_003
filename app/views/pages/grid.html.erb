@@ -18,6 +18,11 @@
             <progress id="player-health" value="<%= @current_health %>" max="<%= @max_health %>"></progress>
             <p>Health: <span id="player-health-text"><%= @current_health %> / <%= @max_health %></span></p>
           </div>
+          <div class="player-mana">
+            <h3>Your Mana</h3>
+            <progress id="player-mana" value="<%= @current_mana %>" max="<%= @max_mana %>"></progress>
+            <p>Mana: <span id="player-mana-text"><%= @current_mana %> / <%= @max_mana %></span></p>
+          </div>
         </div>
         <div class="stats">
           <% @stats.each do |stat| %>

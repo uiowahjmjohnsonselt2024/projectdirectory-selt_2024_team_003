@@ -3,7 +3,7 @@ class GameUser < ActiveRecord::Base
   belongs_to :user
   belongs_to :game
 
-  before_create :set_health
+  before_create :set_health_and_mana
 
   validates :x_position, :y_position, presence: true, numericality: { only_integer: true }
 
@@ -15,18 +15,31 @@ class GameUser < ActiveRecord::Base
     end
   end
 
-  def update_health
+  def update_health_and_mana
     self.health = user.health
+    self.mana = user.mana
     self.level = user.level
     save!
   end
 
-  def set_health
+  def set_health_and_mana
     self.health = user.health
+    self.mana = user.mana
   end
 
   def take_damage(damage)
     self.health -= damage
     self.save
   end
+
+  def use_mana(amount)
+    if mana >= amount
+      self.mana -= amount
+      save!
+      true
+    else
+      false
+    end
+  end
+
 end

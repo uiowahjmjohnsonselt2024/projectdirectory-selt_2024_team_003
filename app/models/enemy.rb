@@ -3,7 +3,7 @@ class Enemy < ActiveRecord::Base
   belongs_to :game
 
 
-  validates :health, :attack, :defense, :iq, presence: true, numericality: { only_integer: true }
+  validates :health, :attack, :defense, :iq, :special_attack, :special_defense, :mana, presence: true, numericality: { only_integer: true }
   validates :level, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
 
   after_initialize :set_default_stats, if: :new_record?
@@ -15,6 +15,16 @@ class Enemy < ActiveRecord::Base
     self.attack = 20 + (level * 2)
     self.defense = 10 + (level * 2)
     self.iq = 5 + (level * 1)
+    self.special_attack = 15 + (level * 3)
+    self.special_defense = 10 + (level * 2)
+    self.mana = 50 + (level * 5)
     self.max_health = self.health
+    self.max_mana = self.mana
+  end
+
+  def use_mana(amount)
+    return false if amount > mana
+    self.mana -= amount
+    save
   end
 end
