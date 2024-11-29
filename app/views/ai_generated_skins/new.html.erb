@@ -1,26 +1,35 @@
-<h1>Generate AI Skin</h1>
+<div id="ai-generated-skins-page">
+  <!-- Form on the left -->
+  <div class="form-container" id="form-container">
+    <h1>Generate AI Skin</h1>
 
-<!-- Form to accept character description -->
-<%= form_tag generate_ai_generated_skin_path, method: :post do %>
-  <div>
-    <label for="character_description">Character Description:</label>
-    <input type="text" id="character_description" name="character_description" placeholder="Enter character description" required>
+    <!-- Form to accept character description -->
+    <%= form_tag generate_ai_generated_skin_path, method: :post, id: "generate-form" do %>
+      <div>
+        <label for="character_description">Character Description:</label>
+        <input type="text" id="character_description" name="character_description" placeholder="Enter character description" required>
+      </div>
+      <div>
+        <button type="submit">Generate</button>
+      </div>
+    <% end %>
   </div>
-  <div>
-    <button type="submit">Generate</button>
+
+  <!-- Loading animation -->
+  <div id="loading-container" style="display: none;">
+    <div class="loading-spinner"></div>
+    <p>Generating your AI skin... Please wait!</p>
   </div>
-<% end %>
 
-<!-- Display Error Message -->
-<% if @error %>
-  <p style="color: red; font-weight: bold;">Unable To Generate Skin</p>
-<% end %>
-
-<!-- Display Generated Images -->
-<% if @original_image_url %>
-  <h2>Original Image</h2>
-  <img src="<%= @original_image_url %>" alt="Original AI Skin" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
-
-  <h2>Image with Transparent Background</h2>
-  <img src="data:image/png;base64,<%= @image_base64 %>" alt="Processed AI Skin" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
-<% end %>
+  <!-- Image or Error Message on the right -->
+  <div class="image-container">
+    <% if @error %>
+      <p class="error-message">Unable To Generate Skin</p>
+    <% elsif @image_base64 %>
+      <h2>Generated AI Skin</h2>
+      <img src="data:image/png;base64,<%= @image_base64 %>" alt="Processed AI Skin">
+    <% else %>
+      <p class="placeholder-message">Describe your character to see its AI-generated appearance here!</p>
+    <% end %>
+  </div>
+</div>

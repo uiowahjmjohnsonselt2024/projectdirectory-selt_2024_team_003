@@ -3496,3 +3496,343 @@ Processing by AiGeneratedSkinsController#generate as HTML
   Parameters: {"utf8"=>"✓", "authenticity_token"=>"Ve0qhkexd3/iJuRO0ZTMTkW/1PAtBhZEcpLf0TTsmEb4u+AdbIEE0dSIRUHIYLS6L+bipiJY5Nsw24/ae/622Q==", "character_description"=>"dragon"}
   Rendered ai_generated_skins/new.html.erb within layouts/application (6.2ms)
 Completed 200 OK in 19425ms (Views: 1717.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-28 22:35:12 -0600
+
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+	bin/rake db:migrate RAILS_ENV=development
+
+):
+  activerecord (4.2.10) lib/active_record/migration.rb:392:in `check_pending!'
+  activerecord (4.2.10) lib/active_record/migration.rb:373:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.10) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.10) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.13) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.13) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.10) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.13) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.13) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.10) lib/rails/engine.rb:518:in `call'
+  railties (4.2.10) lib/rails/application.rb:165:in `call'
+  rack (1.6.13) lib/rack/lock.rb:17:in `call'
+  rack (1.6.13) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.13) lib/rack/handler/webrick.rb:88:in `service'
+  /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+  /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+  /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+
+
+  Rendered /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/gems/2.6.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.9ms)
+  Rendered /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/gems/2.6.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.6ms)
+  Rendered /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/gems/2.6.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/gems/2.6.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (77.7ms)
+  [1m[36m (44.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.3ms)[0m  select sqlite_version(*)
+  [1m[36m (36.4ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (3.5ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateGames (20241111204228)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (18.3ms)[0m  CREATE TABLE "games" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "code" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (5.7ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20241111204228"]]
+  [1m[35m (27.2ms)[0m  commit transaction
+Migrating to CreateUsers (20241114165743)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (18.7ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar, "email" varchar, "password_digest" varchar) 
+  [1m[36mSQL (5.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20241114165743"]]
+  [1m[35m (23.5ms)[0m  commit transaction
+Migrating to CreateGameUsers (20241115003605)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (14.4ms)[0m  CREATE TABLE "game_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "game_id" integer) 
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_game_users_on_user_id" ON "game_users" ("user_id")[0m
+  [1m[35m (0.3ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_game_users_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_game_users_on_user_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_game_users_on_game_id" ON "game_users" ("game_id")[0m
+  [1m[35mSQL (3.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20241115003605"]]
+  [1m[36m (27.9ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (6.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (5.8ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_game_users_on_game_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_game_users_on_game_id' AND type='index'
+[0m
+  [1m[35m (6.9ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_game_users_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_game_users_on_user_id' AND type='index'
+
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-28 22:36:51 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (6.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (11853.4ms)
+Completed 200 OK in 13760ms (Views: 13643.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-28 22:37:10 -0600
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (197.4ms)
+Completed 200 OK in 1928ms (Views: 1927.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-28 22:37:12 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-28 22:37:14 -0600
+
+
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-28 22:37:22 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendered ai_generated_skins/new.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 1779ms (Views: 1778.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/ai_generated_skins/generate" for 127.0.0.1 at 2024-11-28 22:37:30 -0600
+Processing by AiGeneratedSkinsController#generate as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"3qQaaxub0w3TC46jCn7ERhmN+2SIrbsojd2NEOHRw8i3tMLArTFDP0cK1OHYTPlKkw2Z/2WCXb06HT6wREx0Eg==", "character_description"=>"dragon"}
+  Rendered ai_generated_skins/new.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 18842ms (Views: 1216.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/ai_generated_skins/generate" for 127.0.0.1 at 2024-11-28 22:38:07 -0600
+Processing by AiGeneratedSkinsController#generate as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z1zOJ8IYsMzgEB9HYgnPGyiyrF5eF4clCHDHZxmaY1KmTBaMdLIg/nQRRQWwO/IXojLOxbM4YbC/sHTHvAfUiA==", "character_description"=>"airplane"}
+  Rendered ai_generated_skins/new.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 17221ms (Views: 1754.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-11-28 23:06:43 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (4.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (5220.6ms)
+Completed 200 OK in 7081ms (Views: 6991.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ai_generated_skins.self-ae632b34c9be712d9fb97ad1d2abe022700abbae4d5850c052ae53a85eda6808.css?body=1" for 127.0.0.1 at 2024-11-28 23:06:54 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-28 23:06:56 -0600
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-28 23:06:58 -0600
+
+
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-28 23:07:02 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendered ai_generated_skins/new.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 1366ms (Views: 1365.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-28 23:07:04 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendered ai_generated_skins/new.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 1677ms (Views: 1676.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/ai_generated_skins/generate" for 127.0.0.1 at 2024-11-28 23:07:12 -0600
+Processing by AiGeneratedSkinsController#generate as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"xHUhmCyC+aCUUEYiDBJ7mcfDD+heivsx61PTf5eX9oqtZfkzmihpkgBRHGDeIEaVTUNtc7OlHaRck2DfMgpBUA==", "character_description"=>"Dragon"}
+  Rendered ai_generated_skins/new.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 16088ms (Views: 1139.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/ai_generated_skins/generate" for 127.0.0.1 at 2024-11-28 23:08:30 -0600
+Processing by AiGeneratedSkinsController#generate as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uBno8x4nhl3kxpUUF83KQ3yUOXjE6ubCvTAuvceDlJvRCTBYqI0Wb3DHz1bF//dP9hRb4ynFAFcK8J0dYh4jQQ==", "character_description"=>"Dragon"}
+  Rendered ai_generated_skins/new.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 1228ms (Views: 819.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/ai_generated_skins/generate" for 127.0.0.1 at 2024-11-28 23:13:55 -0600
+Processing by AiGeneratedSkinsController#generate as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uBno8x4nhl3kxpUUF83KQ3yUOXjE6ubCvTAuvceDlJvRCTBYqI0Wb3DHz1bF//dP9hRb4ynFAFcK8J0dYh4jQQ==", "character_description"=>"Dragon"}
+  Rendered ai_generated_skins/new.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 18942ms (Views: 3055.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ai_generated_skins.self-ef6a9ec10b0bf4e19c2b6fbe64ddeda4854c6e0b3ce8e6ebfb8ebccf3137de1e.css?body=1" for 127.0.0.1 at 2024-11-28 23:14:14 -0600
+
+
+Started POST "/ai_generated_skins/generate" for 127.0.0.1 at 2024-11-28 23:14:52 -0600
+Processing by AiGeneratedSkinsController#generate as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uBno8x4nhl3kxpUUF83KQ3yUOXjE6ubCvTAuvceDlJvRCTBYqI0Wb3DHz1bF//dP9hRb4ynFAFcK8J0dYh4jQQ==", "character_description"=>"Dragon"}
+  Rendered ai_generated_skins/new.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 14735ms (Views: 832.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-28 23:15:07 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendered ai_generated_skins/new.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 575ms (Views: 574.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/ai_generated_skins/generate" for 127.0.0.1 at 2024-11-28 23:16:09 -0600
+Processing by AiGeneratedSkinsController#generate as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"tRqie5KBfHtHOxYacLVybN062Ls4oDp0w6vF5ECNJyzcCnrQJCvsSdM6TFiih09gV7q6INWP3OF0a3ZE5RCQ9g==", "character_description"=>"Dragon"}
+  Rendered ai_generated_skins/new.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 1275ms (Views: 935.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-28 23:17:38 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendered ai_generated_skins/new.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 2879ms (Views: 2878.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ai_generated_skins.self-1c02dd056a905e7d9d5363e50825ee9d7031e0afec52b765862b2a3dd07c6de2.css?body=1" for 127.0.0.1 at 2024-11-28 23:17:42 -0600
+
+
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-28 23:19:08 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendered ai_generated_skins/new.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 3024ms (Views: 3022.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ai_generated_skins.self-2f6ec29bb2303b841932224f740c7d62f4f2c4ae6e26798259bb1fccef154b4d.css?body=1" for 127.0.0.1 at 2024-11-28 23:19:11 -0600
+
+
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-28 23:19:32 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendered ai_generated_skins/new.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 1271ms (Views: 1269.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-28 23:19:52 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendered ai_generated_skins/new.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 1390ms (Views: 1389.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-28 23:20:51 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendered ai_generated_skins/new.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 1342ms (Views: 1341.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-28 23:21:15 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendered ai_generated_skins/new.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 968ms (Views: 967.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-28 23:28:17 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendered ai_generated_skins/new.html.erb within layouts/application (7.5ms)
+Completed 200 OK in 4114ms (Views: 4112.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ai_generated_skins.self-6f7ba29f94924905ddb024c0182c8876d646ff0d929a7559fdf8f38f90d8cf86.css?body=1" for 127.0.0.1 at 2024-11-28 23:28:22 -0600
+
+
+Started GET "/assets/application.self-d2d61ae88a196bf4ff76f8e57842900c127b7be0744789aba9a44215eb3ad532.js?body=1" for 127.0.0.1 at 2024-11-28 23:28:22 -0600
+
+
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-28 23:28:26 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendered ai_generated_skins/new.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 1266ms (Views: 1265.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/ai_generated_skins/generate" for 127.0.0.1 at 2024-11-28 23:28:31 -0600
+Processing by AiGeneratedSkinsController#generate as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"zoVuk3cVPti+rA4gwTxu7DzDhrYRBjCSCyIlgd3MSXanlbY4wb+u6iqtVGITDlPgtkPkLfwp1ge84pYheFH+rA==", "character_description"=>"Dragon"}
+  Rendered ai_generated_skins/new.html.erb within layouts/application (7.1ms)
+Completed 200 OK in 17917ms (Views: 1159.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/ai_generated_skins/" for 127.0.0.1 at 2024-11-28 23:30:19 -0600
+
+ActionController::RoutingError (No route matches [GET] "/ai_generated_skins"):
+  actionpack (4.2.10) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.10) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.13) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.13) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.10) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.13) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.13) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.10) lib/rails/engine.rb:518:in `call'
+  railties (4.2.10) lib/rails/application.rb:165:in `call'
+  rack (1.6.13) lib/rack/lock.rb:17:in `call'
+  rack (1.6.13) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.13) lib/rack/handler/webrick.rb:88:in `service'
+  /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+  /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+  /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+
+
+  Rendered /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/gems/2.6.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.2ms)
+  Rendered /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/gems/2.6.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.8ms)
+  Rendered /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/gems/2.6.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/routes/_table.html.erb (73.2ms)
+  Rendered /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/gems/2.6.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (3.1ms)
+  Rendered /home/shaunrichter547/.rbenv/versions/2.6.10/lib/ruby/gems/2.6.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (163.4ms)
+
+
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-28 23:30:25 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendered ai_generated_skins/new.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 3437ms (Views: 3436.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ai_generated_skins.self-2a7d56596d6aed5cd095b500833a2251e0427f7843b465e745dbd3d243d4d28d.css?body=1" for 127.0.0.1 at 2024-11-28 23:30:29 -0600
+
+
+Started POST "/ai_generated_skins/generate" for 127.0.0.1 at 2024-11-28 23:30:34 -0600
+Processing by AiGeneratedSkinsController#generate as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"iAGhpTmjJO0H2XTMuMqmwxZD/C4nqb8OtLhOhFySKLHhEXkOjwm035PYLo5q+JvPnMOetcqGWZsDeP0k+Q+faw==", "character_description"=>"airplane"}
+  Rendered ai_generated_skins/new.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 17847ms (Views: 1225.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-28 23:31:28 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendered ai_generated_skins/new.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 3076ms (Views: 3074.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ai_generated_skins.self-f39f7f748e14dd87a542e702d41d8e5555bf17014fbf4374e5599f030ddfa6de.css?body=1" for 127.0.0.1 at 2024-11-28 23:31:32 -0600
+
+
+Started POST "/ai_generated_skins/generate" for 127.0.0.1 at 2024-11-28 23:31:36 -0600
+Processing by AiGeneratedSkinsController#generate as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"TLZx/Tgfcisq3cIZtmqAqVU98/syxnwJyddOVPFv0zYlpqlWjrXiGb7cmFtkWL2l372RYN/pmpx+F/30VPJk7A==", "character_description"=>"airplane"}
+  Rendered ai_generated_skins/new.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 16593ms (Views: 1306.5ms | ActiveRecord: 0.0ms)

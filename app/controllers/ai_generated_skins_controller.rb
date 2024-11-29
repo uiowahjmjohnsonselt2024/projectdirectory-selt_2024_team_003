@@ -24,7 +24,7 @@ class AiGeneratedSkinsController < ApplicationController
     http.use_ssl = true
 
     request = Net::HTTP::Post.new(uri)
-    request['Authorization'] = "Bearer openAi api key here"
+    request['Authorization'] = "Bearer openAI_API_KEY"
     request['Content-Type'] = "application/json"
     request.body = {
       prompt: "#{character_description} in retro animated style, featuring vibrant colors like red, green, and yellow, " \
@@ -77,7 +77,7 @@ class AiGeneratedSkinsController < ApplicationController
 
     # Make the background color transparent
     image.combine_options do |config|
-      config.fuzz "10%" # 10% Tolerance
+      config.fuzz "25%" # 25% Tolerance
       config.transparent hex_color
     end
   end
