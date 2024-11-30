@@ -13,7 +13,7 @@ class RegistrationsController < ApplicationController
       session[:user_id] = @user.id  # Log the user in after registration
       redirect_to selections_path
     else
-      flash.now[:alert] = "Invalid"
+      flash.now[:alert] = @user.errors.full_messages[0] # Display the first error
       render :new
     end
   end
