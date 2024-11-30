@@ -13,7 +13,7 @@ class RegistrationsController < ApplicationController
       session[:user_id] = @user.id  # Log the user in after registration
       redirect_to root_path, notice: "Account created successfully."
     else
-      flash.now[:alert] = user.errors.full_messages[0] # Display the first error
+      flash.now[:alert] = @user.errors.full_messages[0] # Display the first error
       render :new
     end
   end
