@@ -86,7 +86,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_29_042648) do
   end
 
   add_foreign_key "enemies", "games"
-  add_foreign_key "friendships", "friends"
   add_foreign_key "friendships", "users"
   add_foreign_key "messages", "users"
 end
