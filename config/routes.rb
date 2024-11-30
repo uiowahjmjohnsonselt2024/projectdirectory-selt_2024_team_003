@@ -3,8 +3,6 @@ Rails.application.routes.draw do
   resources :games do
     collection do
       post 'join', to: 'games#join'
-      post 'add_friend', to: 'games#add_friend'
-      delete 'remove_friend', to: 'games#remove_friend'
     end
   end
 
@@ -27,13 +25,16 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'account', to: 'user#index'
+  post 'add_friend', to: 'user#add_friend'
+  delete 'remove_friend', to: 'user#remove_friend'
   get 'win_game', to: 'games#win', as: 'win_game'
   delete 'end_game/:game_code', to: 'games#end', as: 'end_game'
   post 'login', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy', as: :logout
   post 'signup', to: 'registrations#create'
   get 'pages/grid'
-  get 'grid', to: 'pages#grid'  # This defines the route for /grid
+  get 'grid', to: 'pages#grid'
   get 'store', to: 'store#index'
   get 'chat_with_user', to: 'chats#show', as: 'chat_with_user'
   post 'send_message', to: 'chats#create', as: 'send_message'
