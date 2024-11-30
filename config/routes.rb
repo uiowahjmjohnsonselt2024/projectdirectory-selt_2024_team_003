@@ -41,6 +41,11 @@ Rails.application.routes.draw do
   get 'interaction', to: 'interactions#show'
   post 'attack', to: 'interactions#attack'
 
+  # Route to display the form (text box and button)
+  get 'ai_generated_skins/new', to: 'ai_generated_skins#new', as: 'new_ai_generated_skin'
+  # Route to handle the form submission and generate the image
+  post 'ai_generated_skins/generate', to: 'ai_generated_skins#generate', as: 'generate_ai_generated_skin'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

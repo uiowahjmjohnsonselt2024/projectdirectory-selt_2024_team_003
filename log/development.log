@@ -1,0 +1,800 @@
+DEPRECATION WARNING: `to_time` will always preserve the receiver timezone rather than system local time in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/config/initializers/to_time_preserves_timezone.rb:10)
+Started GET "/" for 127.0.0.1 at 2024-11-29 18:08:32 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (16.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 16 pending migrations:
+
+db/migrate/20241117193936_create_friendships.rb
+db/migrate/20241126011027_create_messages.rb
+db/migrate/20241126234149_add_position_to_game_users.rb
+db/migrate/20241127034623_add_defaults_to_game_users.rb
+db/migrate/20241127183030_add_stats_to_users.rb
+db/migrate/20241127183323_create_enemies.rb
+db/migrate/20241127215327_add_archetype_to_users.rb
+db/migrate/20241127225514_add_health_to_game_users.rb
+db/migrate/20241127231848_add_max_health_to_enemies.rb
+db/migrate/20241128035336_add_level_to_game_users.rb
+db/migrate/20241128035348_add_level_to_users.rb
+db/migrate/20241128040845_add_experience_to_users.rb
+db/migrate/20241128044702_add_level_to_enemies.rb
+db/migrate/20241129030957_add_special_stats_to_users.rb
+db/migrate/20241129031001_add_mana_to_game_users.rb
+db/migrate/20241129042648_add_special_stats_to_enemies.rb
+
+
+):
+  
+activerecord (8.0.0) lib/active_record/migration.rb:743:in `check_pending_migrations'
+activerecord (8.0.0) lib/active_record/migration.rb:660:in `block (2 levels) in call'
+activesupport (8.0.0) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (8.0.0) lib/active_record/migration.rb:665:in `block in call'
+activerecord (8.0.0) lib/active_record/migration.rb:657:in `synchronize'
+activerecord (8.0.0) lib/active_record/migration.rb:657:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.0) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.0) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.0) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.0) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.0) lib/rails/engine.rb:535:in `call'
+rack (2.2.10) lib/rack/handler/webrick.rb:95:in `service'
+webrick (1.9.0) lib/webrick/httpserver.rb:140:in `service'
+webrick (1.9.0) lib/webrick/httpserver.rb:96:in `run'
+webrick (1.9.0) lib/webrick/server.rb:310:in `block in start_thread'
+DEPRECATION WARNING: `to_time` will always preserve the receiver timezone rather than system local time in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/config/initializers/to_time_preserves_timezone.rb:10)
+  [1m[36mActiveRecord::InternalMetadata Load (11.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (22.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-11-30 00:09:09.461129', '2024-11-30 00:09:09.461134') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (11.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateFriendships (20241117193936)
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "friendships" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "friend_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_e3733b59b7"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_d78dc9c7fd"
+FOREIGN KEY ("friend_id")
+  REFERENCES "friends" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_friendships_on_user_id" ON "friendships" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_friendships_on_friend_id" ON "friendships" ("friend_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241117193936') RETURNING "version"[0m
+  [1m[36mTRANSACTION (12.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Migrating to CreateMessages (20241126011027)
+  [1m[36mTRANSACTION (6.7ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (8.1ms)[0m  [1m[35mCREATE TABLE "messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "content" text, "user_id" integer NOT NULL, "recipient_id" integer NOT NULL, "read" boolean DEFAULT 0, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_273a25a7a6"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_messages_on_user_id" ON "messages" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241126011027') RETURNING "version"[0m
+  [1m[36mTRANSACTION (10.2ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Migrating to AddPositionToGameUsers (20241126234149)
+  [1m[36mTRANSACTION (6.5ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (8.1ms)[0m  [1m[35mALTER TABLE "game_users" ADD "x_position" integer[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "game_users" ADD "y_position" integer[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241126234149') RETURNING "version"[0m
+  [1m[36mTRANSACTION (7.4ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Migrating to AddDefaultsToGameUsers (20241127034623)
+  [1m[36mTRANSACTION (5.5ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "agame_users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "game_id" integer, "x_position" integer, "y_position" integer)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_agame_users_on_game_id" ON "agame_users" ("game_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_agame_users_on_user_id" ON "agame_users" ("user_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "agame_users" ("id","user_id","game_id","x_position","y_position")
+                     SELECT "id","user_id","game_id","x_position","y_position" FROM "game_users"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "game_users"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "game_users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "game_id" integer, "x_position" integer DEFAULT 0, "y_position" integer)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_game_users_on_user_id" ON "game_users" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_game_users_on_game_id" ON "game_users" ("game_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "game_users" ("id","user_id","game_id","x_position","y_position")
+                     SELECT "id","user_id","game_id","x_position","y_position" FROM "agame_users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "agame_users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "agame_users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "game_id" integer, "x_position" integer DEFAULT 0, "y_position" integer)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_agame_users_on_game_id" ON "agame_users" ("game_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_agame_users_on_user_id" ON "agame_users" ("user_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "agame_users" ("id","user_id","game_id","x_position","y_position")
+                     SELECT "id","user_id","game_id","x_position","y_position" FROM "game_users"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "game_users"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "game_users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "game_id" integer, "x_position" integer DEFAULT 0, "y_position" integer DEFAULT 0)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_game_users_on_user_id" ON "game_users" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_game_users_on_game_id" ON "game_users" ("game_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "game_users" ("id","user_id","game_id","x_position","y_position")
+                     SELECT "id","user_id","game_id","x_position","y_position" FROM "agame_users"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "agame_users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241127034623') RETURNING "version"[0m
+  [1m[36mTRANSACTION (13.7ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Migrating to AddStatsToUsers (20241127183030)
+  [1m[36mTRANSACTION (6.5ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (8.3ms)[0m  [1m[35mALTER TABLE "users" ADD "health" integer DEFAULT 100[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "attack" integer DEFAULT 10[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "defense" integer DEFAULT 5[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "iq" integer DEFAULT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241127183030') RETURNING "version"[0m
+  [1m[36mTRANSACTION (6.3ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Migrating to CreateEnemies (20241127183323)
+  [1m[36mTRANSACTION (5.7ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (7.5ms)[0m  [1m[35mCREATE TABLE "enemies" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "health" integer DEFAULT 300, "attack" integer DEFAULT 20, "defense" integer DEFAULT 10, "iq" integer DEFAULT 5, "game_id" integer, "x_position" integer, "y_position" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_a9efd1752c"
+FOREIGN KEY ("game_id")
+  REFERENCES "games" ("id")
+)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_enemies_on_game_id" ON "enemies" ("game_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241127183323') RETURNING "version"[0m
+  [1m[36mTRANSACTION (9.9ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Migrating to AddArchetypeToUsers (20241127215327)
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (4.6ms)[0m  [1m[35mALTER TABLE "users" ADD "archetype" varchar[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241127215327') RETURNING "version"[0m
+  [1m[36mTRANSACTION (3.9ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Migrating to AddHealthToGameUsers (20241127225514)
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (3.8ms)[0m  [1m[35mALTER TABLE "game_users" ADD "health" integer DEFAULT 100[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241127225514') RETURNING "version"[0m
+  [1m[36mTRANSACTION (3.8ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Migrating to AddMaxHealthToEnemies (20241127231848)
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (3.7ms)[0m  [1m[35mALTER TABLE "enemies" ADD "max_health" integer DEFAULT 300[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241127231848') RETURNING "version"[0m
+  [1m[36mTRANSACTION (3.3ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Migrating to AddLevelToGameUsers (20241128035336)
+  [1m[36mTRANSACTION (3.8ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (5.0ms)[0m  [1m[35mALTER TABLE "game_users" ADD "level" integer DEFAULT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241128035336') RETURNING "version"[0m
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Migrating to AddLevelToUsers (20241128035348)
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (4.4ms)[0m  [1m[35mALTER TABLE "users" ADD "level" integer DEFAULT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241128035348') RETURNING "version"[0m
+  [1m[36mTRANSACTION (3.3ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Migrating to AddExperienceToUsers (20241128040845)
+  [1m[36mTRANSACTION (3.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (3.8ms)[0m  [1m[35mALTER TABLE "users" ADD "experience" integer DEFAULT 0[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241128040845') RETURNING "version"[0m
+  [1m[36mTRANSACTION (7.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Migrating to AddLevelToEnemies (20241128044702)
+  [1m[36mTRANSACTION (6.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (7.6ms)[0m  [1m[35mALTER TABLE "enemies" ADD "level" integer DEFAULT 0[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241128044702') RETURNING "version"[0m
+  [1m[36mTRANSACTION (6.6ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Migrating to AddSpecialStatsToUsers (20241129030957)
+  [1m[36mTRANSACTION (6.9ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (8.5ms)[0m  [1m[35mALTER TABLE "users" ADD "mana" integer[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "special_attack" integer[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "special_defense" integer[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241129030957') RETURNING "version"[0m
+  [1m[36mTRANSACTION (7.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Migrating to AddManaToGameUsers (20241129031001)
+  [1m[36mTRANSACTION (6.2ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (7.8ms)[0m  [1m[35mALTER TABLE "game_users" ADD "mana" integer[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241129031001') RETURNING "version"[0m
+  [1m[36mTRANSACTION (7.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Migrating to AddSpecialStatsToEnemies (20241129042648)
+  [1m[36mTRANSACTION (5.4ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (6.9ms)[0m  [1m[35mALTER TABLE "enemies" ADD "special_attack" integer[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "enemies" ADD "special_defense" integer[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "enemies" ADD "mana" integer[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "enemies" ADD "max_mana" integer[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241129042648') RETURNING "version"[0m
+  [1m[36mTRANSACTION (6.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: `to_time` will always preserve the receiver timezone rather than system local time in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/config/initializers/to_time_preserves_timezone.rb:10)
+Started GET "/" for 127.0.0.1 at 2024-11-29 18:09:37 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (28.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.haml within layouts/application
+Started GET "/" for 127.0.0.1 at 2024-11-29 18:09:46 -0600
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.haml within layouts/application
+Started GET "/" for 127.0.0.1 at 2024-11-29 18:09:58 -0600
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.haml within layouts/application
+  Rendered home/index.html.haml within layouts/application (Duration: 9013.5ms | GC: 183.6ms)
+  Rendered home/index.html.haml within layouts/application (Duration: 27183.0ms | GC: 407.4ms)
+  Rendered home/index.html.haml within layouts/application (Duration: 21226.9ms | GC: 359.7ms)
+  Rendered layout layouts/application.html.erb (Duration: 27639.5ms | GC: 466.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 9543.5ms | GC: 256.8ms)
+Completed 200 OK in 28235ms (Views: 27778.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 466.2ms)
+
+
+Completed 200 OK in 9546ms (Views: 9545.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 256.8ms)
+
+
+Started GET "/assets/chats.self-ef7749de6781c11b581481b60473ea2364425cd5d75e05faee37c9fe41bc70d2.css?body=1" for 127.0.0.1 at 2024-11-29 18:10:08 -0600
+  Rendered layout layouts/application.html.erb (Duration: 21730.4ms | GC: 368.5ms)
+Started GET "/assets/games.self-88b45c788eaabe9bfc82330116f3df77d35da3a5a42adcf2488319c6198f0b44.css?body=1" for 127.0.0.1 at 2024-11-29 18:10:08 -0600
+Started GET "/assets/store.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2024-11-29 18:10:08 -0600
+Completed 200 OK in 21737ms (Views: 21735.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 368.5ms)
+
+
+Started GET "/assets/selections.self-e69eb6a9ab23d2f3580e418fa49e7e9eac6483532e14a6e61f9691546b3d77c0.css?body=1" for 127.0.0.1 at 2024-11-29 18:10:08 -0600
+Started GET "/assets/pages.self-0d7961c6c9e3825bba1b1b65d2bd71083e7c0e55cfe4f3a171f62f03cd205bd9.css?body=1" for 127.0.0.1 at 2024-11-29 18:10:08 -0600
+Started GET "/assets/interactions.self-5b779763b151c6bd694312d26a74110ec942f74a295793fb60d5609b99622f12.css?body=1" for 127.0.0.1 at 2024-11-29 18:10:08 -0600
+Started GET "/assets/application.self-61cd63f787078f3b02530990f8a24561f54aa26fe07746188b94335c3aeb3597.css?body=1" for 127.0.0.1 at 2024-11-29 18:10:08 -0600
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-29 18:10:09 -0600
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-29 18:10:13 -0600
+Started GET "/create" for 127.0.0.1 at 2024-11-29 18:10:15 -0600
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.html.erb within layouts/application
+  Rendered registrations/new.html.erb within layouts/application (Duration: 136.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1598.7ms | GC: 89.6ms)
+Completed 200 OK in 2061ms (Views: 1606.0ms | ActiveRecord: 74.9ms (0 queries, 0 cached) | GC: 89.6ms)
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-29 18:10:17 -0600
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-29 18:10:20 -0600
+Started POST "/signup" for 127.0.0.1 at 2024-11-29 18:10:31 -0600
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"vm_Dcw19Kmx6ZOBSVRP2Udg3gamCCB85Kmr53fTGRMp_VWKELg17HsUpK_uPYLUHF5iuW1fW2XU22AUdGxWcgw", "user"=>{"username"=>"user", "email"=>"user@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign Up"}
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mUser Exists? (26.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "user"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "user@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?) RETURNING "id"[0m  [["username", "user"], ["email", "user@gmail.com"], ["password_digest", "[FILTERED]"]]
+  [1m[36mTRANSACTION (16.6ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Redirected to http://localhost:3000/selections
+Completed 302 Found in 868ms (ActiveRecord: 46.4ms (3 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/selections" for 127.0.0.1 at 2024-11-29 18:10:33 -0600
+Processing by SelectionsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering selections/index.html.erb within layouts/application
+  Rendered selections/index.html.erb within layouts/application (Duration: 300.9ms | GC: 0.1ms)
+  Rendered layout layouts/application.html.erb (Duration: 1374.5ms | GC: 0.3ms)
+Completed 200 OK in 1418ms (Views: 1387.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/assets/attack-a64ec08b5fbdd7c20b43f4d788e92b60211106d61c19d9a82d34168cc96bcbf6.png" for 127.0.0.1 at 2024-11-29 18:10:35 -0600
+Started GET "/assets/defense-c698de1901599ebf6c3e5ab4de6f3356e7e3b494d6a9ef5b44b113e884447895.png" for 127.0.0.1 at 2024-11-29 18:10:35 -0600
+Started GET "/assets/balanced-c8c17b9c88eb5db460a7c85cb55f58d76c984dbd14b7da471b1d0ce1bfd63f0c.png" for 127.0.0.1 at 2024-11-29 18:10:35 -0600
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-29 18:10:35 -0600
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-11-29 18:10:39 -0600
+Started PATCH "/selections/update_archetype" for 127.0.0.1 at 2024-11-29 18:10:43 -0600
+Processing by SelectionsController#update_archetype as */*
+  Parameters: {"archetype"=>"Iron Guardian", "selection"=>{"archetype"=>"Iron Guardian"}}
+  [1m[36mUser Load (5.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = ? AND "users"."id" != ? LIMIT ?[0m  [["username", "user"], ["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "user@gmail.com"], ["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Update (0.2ms)[0m  [1m[33mUPDATE "users" SET "health" = ?, "defense" = ?, "archetype" = ?, "mana" = ?, "special_attack" = ?, "special_defense" = ? WHERE "users"."id" = ?[0m  [["health", 200], ["defense", 30], ["archetype", "Iron Guardian"], ["mana", 50], ["special_attack", 15], ["special_defense", 35], ["id", 1]]
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Completed 200 OK in 33ms (Views: 0.4ms | ActiveRecord: 15.8ms (4 queries, 0 cached) | GC: 0.7ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-11-29 18:10:44 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (5.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mGame Load (1.9ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" != ?[0m  [["id", 1]]
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?[0m  [["user_id", 1]]
+  Rendered games/index.html.erb within layouts/application (Duration: 336.4ms | GC: 0.4ms)
+  Rendered layout layouts/application.html.erb (Duration: 1727.6ms | GC: 0.4ms)
+Completed 200 OK in 2332ms (Views: 1726.2ms | ActiveRecord: 26.4ms (4 queries, 0 cached) | GC: 0.7ms)
+
+
+Started PATCH "/selections/update_archetype" for 127.0.0.1 at 2024-11-29 18:10:47 -0600
+Processing by SelectionsController#update_archetype as */*
+  Parameters: {"archetype"=>"Iron Guardian", "selection"=>{"archetype"=>"Iron Guardian"}}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mUser Exists? (2.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = ? AND "users"."id" != ? LIMIT ?[0m  [["username", "user"], ["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "user@gmail.com"], ["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Completed 200 OK in 15ms (Views: 0.3ms | ActiveRecord: 6.4ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/store" for 127.0.0.1 at 2024-11-29 18:10:50 -0600
+Processing by StoreController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering store/index.html.haml within layouts/application
+DEPRECATION WARNING: The asset "shopBackground.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__3469097656808898923_38600 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:97)
+DEPRECATION WARNING: The asset "avatar_1.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__3469097656808898923_38600 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:152)
+DEPRECATION WARNING: The asset "avatar_2.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__3469097656808898923_38600 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:158)
+  Rendered store/index.html.haml within layouts/application (Duration: 1754.0ms | GC: 22.9ms)
+  Rendered layout layouts/application.html.erb (Duration: 2608.1ms | GC: 37.2ms)
+Completed 200 OK in 2667ms (Views: 2626.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 37.2ms)
+
+
+Started GET "/assets/gem1-3f12e0b9bfbad9215b1a13ed7516328feb59fe1dd5adc08d3aebd0eabd5c190b.gif" for 127.0.0.1 at 2024-11-29 18:10:54 -0600
+Started GET "/assets/gem2-ff7353f660424a3921cc1b4235f6f2b507b7ab98c9ec946beb5e9dd9d15e4405.gif" for 127.0.0.1 at 2024-11-29 18:10:54 -0600
+Started GET "/assets/gem3-89e90fd7cf1d7317b14e5f0cf978f8a45af94c569cd05bed8a4434cab6760030.gif" for 127.0.0.1 at 2024-11-29 18:10:54 -0600
+Started GET "/avatar_1.jpg" for 127.0.0.1 at 2024-11-29 18:10:54 -0600
+Started GET "/avatar_2.jpg" for 127.0.0.1 at 2024-11-29 18:10:54 -0600
+Started GET "/assets/healthPotion-6c53e8957cd1e20b9d8fc21cd031b29f0c75174f2a2bc6bdc0373df33c523f89.gif" for 127.0.0.1 at 2024-11-29 18:10:54 -0600
+Started GET "/assets/shopBackground-fc87291358b212cd51a0e51f4e9e23ce4fbb3412966f6eb2f88839b2fc0db247.jfif" for 127.0.0.1 at 2024-11-29 18:10:54 -0600
+Started GET "/assets/acidPotion-84426b135777c90628c5096e63bb76730c3d664d52178655c41a1d0cadb849aa.gif" for 127.0.0.1 at 2024-11-29 18:10:54 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_1.jpg"):
+  
+Started GET "/assets/revive-eed76d4d148749885f5aa113222abe0c75769d67832d872632040f65e61a689f.gif" for 127.0.0.1 at 2024-11-29 18:10:55 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_2.jpg"):
+  
+Started GET "/assets/invisibilityPotion-ea00d114333a250781189baf2eabe59d08536ebb80cce213b8b1c94237ad5691.gif" for 127.0.0.1 at 2024-11-29 18:10:55 -0600
+Started GET "/assets/bowAndArrow-f7554e85b0046128bf1683911523ee2645d5b6636bc2b95e9ce5d7f91c86f4e2.gif" for 127.0.0.1 at 2024-11-29 18:10:55 -0600
+Started GET "/assets/grenade-bf7f3dcea7b96376353f08b193208c34559f57709b5c11e21ee167a13107d0a0.gif" for 127.0.0.1 at 2024-11-29 18:10:55 -0600
+Started GET "/assets/sword-f6acf58baa9e7a4f18f68ce1dc6874421b2d141c509dcd14036da7b4630f9fa2.gif" for 127.0.0.1 at 2024-11-29 18:10:55 -0600
+Started GET "/assets/dynamite-3c6231cd3f370be5f4bdd9b4fae9b09d0b28bf9c656c95ed1e3ae36c28e9bdd1.gif" for 127.0.0.1 at 2024-11-29 18:10:55 -0600
+Started GET "/assets/sniper-2dad6e5c72cc271446b1a1acef6df30b976696cb31524ff1ef883f47548e3d6d.gif" for 127.0.0.1 at 2024-11-29 18:10:56 -0600
+Started GET "/assets/portal-1af8826cc45ced7e9a0af627e8b65a0efe8a24480490064ca3274ad5d0f8458c.gif" for 127.0.0.1 at 2024-11-29 18:10:56 -0600
+Started GET "/assets/trap-db27a6dd730669a2a264d9dc6ce6705a2994b9bc22cbf25ba34a8cefce4d12b6.gif" for 127.0.0.1 at 2024-11-29 18:10:56 -0600
+Started GET "/assets/horse-0b025b7cbcd3abc0592a8daf323bb637cf4ea1ceec2248ecdf546f6f98b44d10.gif" for 127.0.0.1 at 2024-11-29 18:10:56 -0600
+Started GET "/assets/banana-e0c202ea0a39d2cffb08a43a4d77334f5bc46eee25608a70d74520569b4bb408.gif" for 127.0.0.1 at 2024-11-29 18:10:56 -0600
+Started GET "/store" for 127.0.0.1 at 2024-11-29 18:15:00 -0600
+Processing by StoreController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering store/index.html.haml within layouts/application
+DEPRECATION WARNING: The asset "avatar_1.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__3469097656808898923_57160 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:143)
+DEPRECATION WARNING: The asset "avatar_2.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__3469097656808898923_57160 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:149)
+DEPRECATION WARNING: The asset "ai_generated_avatar.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__3469097656808898923_57160 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:155)
+  Rendered store/index.html.haml within layouts/application (Duration: 980.0ms | GC: 96.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2543.9ms | GC: 143.0ms)
+Completed 200 OK in 2650ms (Views: 2604.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 143.0ms)
+
+
+Started GET "/avatar_1.jpg" for 127.0.0.1 at 2024-11-29 18:15:06 -0600
+Started GET "/ai_generated_avatar.jpg" for 127.0.0.1 at 2024-11-29 18:15:06 -0600
+Started GET "/avatar_2.jpg" for 127.0.0.1 at 2024-11-29 18:15:06 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_1.jpg"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/ai_generated_avatar.jpg"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_2.jpg"):
+  
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-29 18:15:11 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering ai_generated_skins/new.html.erb within layouts/application
+  Rendered ai_generated_skins/new.html.erb within layouts/application (Duration: 9.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1214.0ms | GC: 10.2ms)
+Completed 200 OK in 1243ms (Views: 1224.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 10.2ms)
+
+
+Started POST "/ai_generated_skins/generate" for 127.0.0.1 at 2024-11-29 18:15:18 -0600
+Processing by AiGeneratedSkinsController#generate as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"saRK1nEvVy939n6yyALZpBgsL_mgTHxcyjgmtWKc2-twnushUl8GXci7tRsScZry14MAC3WSuhDWitp1jU8Dog", "character_description"=>"Dragon"}
+  Rendering layout layouts/application.html.erb
+  Rendering ai_generated_skins/new.html.erb within layouts/application
+  Rendered ai_generated_skins/new.html.erb within layouts/application (Duration: 0.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1302.3ms | GC: 1.1ms)
+Completed 200 OK in 1649ms (Views: 1305.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.3ms)
+
+
+Started POST "/ai_generated_skins/generate" for 127.0.0.1 at 2024-11-29 18:16:23 -0600
+Processing by AiGeneratedSkinsController#generate as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"_8VCTiDQ3gzJGJOAJo8UwIfDGyxdZ1DNG4e8USlN36o-_-O5A6CPfnZVWCn8_FeWSGw03oi5loEHNUCRxp4H4w", "character_description"=>"Dragon"}
+  Rendering layout layouts/application.html.erb
+  Rendering ai_generated_skins/new.html.erb within layouts/application
+  Rendered ai_generated_skins/new.html.erb within layouts/application (Duration: 20.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1543.5ms | GC: 0.0ms)
+Completed 200 OK in 18475ms (Views: 1636.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 116.0ms)
+
+
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-29 18:21:19 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering ai_generated_skins/new.html.erb within layouts/application
+  Rendered ai_generated_skins/new.html.erb within layouts/application (Duration: 16.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1659.5ms | GC: 114.5ms)
+Completed 200 OK in 1764ms (Views: 1719.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 114.5ms)
+
+
+Started GET "/store" for 127.0.0.1 at 2024-11-29 18:21:26 -0600
+Processing by StoreController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering store/index.html.haml within layouts/application
+DEPRECATION WARNING: The asset "avatar_1.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__3469097656808898923_84180 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:143)
+DEPRECATION WARNING: The asset "avatar_2.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__3469097656808898923_84180 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:149)
+DEPRECATION WARNING: The asset "ai_generated_avatar.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__3469097656808898923_84180 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:155)
+  Rendered store/index.html.haml within layouts/application (Duration: 843.8ms | GC: 25.5ms)
+  Rendered layout layouts/application.html.erb (Duration: 2371.1ms | GC: 30.7ms)
+Completed 200 OK in 2426ms (Views: 2386.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 30.7ms)
+
+
+Started GET "/avatar_1.jpg" for 127.0.0.1 at 2024-11-29 18:21:29 -0600
+Started GET "/avatar_2.jpg" for 127.0.0.1 at 2024-11-29 18:21:29 -0600
+Started GET "/ai_generated_avatar.jpg" for 127.0.0.1 at 2024-11-29 18:21:29 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_1.jpg"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/ai_generated_avatar.jpg"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_2.jpg"):
+  
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-29 18:21:38 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering ai_generated_skins/new.html.erb within layouts/application
+  Rendered ai_generated_skins/new.html.erb within layouts/application (Duration: 0.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1592.6ms | GC: 4.8ms)
+Completed 200 OK in 1597ms (Views: 1595.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 4.8ms)
+
+
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-29 18:22:08 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering ai_generated_skins/new.html.erb within layouts/application
+  Rendered ai_generated_skins/new.html.erb within layouts/application (Duration: 0.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2410.8ms | GC: 0.9ms)
+Completed 200 OK in 2415ms (Views: 2413.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.9ms)
+
+
+Started GET "/assets/application.self-75a11da44c802486bc6f65640aa48a730f0f684c5c07a42ba3cd1735eb3fb070.css?body=1" for 127.0.0.1 at 2024-11-29 18:22:12 -0600
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-29 18:22:31 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering ai_generated_skins/new.html.erb within layouts/application
+  Rendered ai_generated_skins/new.html.erb within layouts/application (Duration: 0.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1709.7ms | GC: 3.6ms)
+Completed 200 OK in 1714ms (Views: 1712.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 4.1ms)
+
+
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-29 18:24:23 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering ai_generated_skins/new.html.erb within layouts/application
+  Rendered ai_generated_skins/new.html.erb within layouts/application (Duration: 17.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4233.5ms | GC: 7.3ms)
+Completed 200 OK in 4322ms (Views: 4293.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 7.3ms)
+
+
+Started GET "/assets/ai_generated_skins.self-f0953e91dd62f17064604c3af6c6da3d7732bbde502eda1130c8d9908b5cf4a3.css?body=1" for 127.0.0.1 at 2024-11-29 18:24:30 -0600
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-29 18:26:28 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering ai_generated_skins/new.html.erb within layouts/application
+  Rendered ai_generated_skins/new.html.erb within layouts/application (Duration: 0.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4405.3ms | GC: 79.6ms)
+Completed 200 OK in 4410ms (Views: 4407.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 79.9ms)
+
+
+Started GET "/assets/ai_generated_skins.self-92304d136b4700e6a0a2e8c8ae2974b4a57844b41dfcad7957ed2c7743d11b2c.css?body=1" for 127.0.0.1 at 2024-11-29 18:26:34 -0600
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-29 18:28:22 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering ai_generated_skins/new.html.erb within layouts/application
+  Rendered ai_generated_skins/new.html.erb within layouts/application (Duration: 2.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4415.3ms | GC: 10.0ms)
+Completed 200 OK in 4423ms (Views: 4419.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 10.0ms)
+
+
+Started GET "/assets/ai_generated_skins.self-52c6416170f3066419df2e9397ecf3bd281b8eb06163c427d4a8346b8e7a69ac.css?body=1" for 127.0.0.1 at 2024-11-29 18:28:28 -0600
+DEPRECATION WARNING: `to_time` will always preserve the receiver timezone rather than system local time in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/config/initializers/to_time_preserves_timezone.rb:10)
+Started GET "/" for 127.0.0.1 at 2024-11-29 18:33:30 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (25.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (18.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://localhost:3000/games
+Completed 302 Found in 993ms (ActiveRecord: 116.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-11-29 18:33:35 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (4.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mGame Load (1.7ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" != ?[0m  [["id", 1]]
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?[0m  [["user_id", 1]]
+  Rendered games/index.html.erb within layouts/application (Duration: 246.7ms | GC: 1.3ms)
+  Rendered layout layouts/application.html.erb (Duration: 29133.5ms | GC: 153.4ms)
+Completed 200 OK in 29675ms (Views: 29225.4ms | ActiveRecord: 34.4ms (4 queries, 0 cached) | GC: 171.7ms)
+
+
+Started GET "/store" for 127.0.0.1 at 2024-11-29 18:34:13 -0600
+Processing by StoreController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering store/index.html.haml within layouts/application
+DEPRECATION WARNING: The asset "avatar_1.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__4352078114781413301_30020 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:143)
+DEPRECATION WARNING: The asset "avatar_2.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__4352078114781413301_30020 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:149)
+DEPRECATION WARNING: The asset "ai_generated_avatar.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__4352078114781413301_30020 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:155)
+  Rendered store/index.html.haml within layouts/application (Duration: 847.3ms | GC: 12.3ms)
+  Rendered layout layouts/application.html.erb (Duration: 2148.7ms | GC: 13.8ms)
+Completed 200 OK in 2212ms (Views: 2167.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 13.8ms)
+
+
+Started GET "/avatar_1.jpg" for 127.0.0.1 at 2024-11-29 18:34:16 -0600
+Started GET "/avatar_2.jpg" for 127.0.0.1 at 2024-11-29 18:34:16 -0600
+Started GET "/ai_generated_avatar.jpg" for 127.0.0.1 at 2024-11-29 18:34:16 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_2.jpg"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_1.jpg"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/ai_generated_avatar.jpg"):
+  
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-29 18:34:21 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendering layout layouts/ai_generated_skins.html.erb
+  Rendering ai_generated_skins/new.html.erb within layouts/ai_generated_skins
+  Rendered ai_generated_skins/new.html.erb within layouts/ai_generated_skins (Duration: 13.6ms | GC: 0.0ms)
+  Rendered layout layouts/ai_generated_skins.html.erb (Duration: 6600.9ms | GC: 9.3ms)
+Completed 500 Internal Server Error in 6685ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 9.3ms)
+
+
+  
+ActionView::Template::Error (Asset was not declared to be precompiled in production.
+Add `Rails.application.config.assets.precompile += %w( ai_generated_skins.css )` to `config/initializers/assets.rb` and restart your server)
+Caused by: Sprockets::Rails::Helper::AssetNotPrecompiledError (Asset was not declared to be precompiled in production.
+Add `Rails.application.config.assets.precompile += %w( ai_generated_skins.css )` to `config/initializers/assets.rb` and restart your server)
+
+Information for: ActionView::Template::Error (Asset was not declared to be precompiled in production.
+Add `Rails.application.config.assets.precompile += %w( ai_generated_skins.css )` to `config/initializers/assets.rb` and restart your server):
+    4:   <title>AI Generated Skins</title>
+    5:   <%= csrf_meta_tags %>
+    6:   <%= csp_meta_tag %>
+    7:   <%= stylesheet_link_tag 'ai_generated_skins', media: 'all' %>
+    8: </head>
+    9: <body>
+   10: <%= yield %>
+  
+app/views/layouts/ai_generated_skins.html.erb:7
+
+Information for cause: Sprockets::Rails::Helper::AssetNotPrecompiledError (Asset was not declared to be precompiled in production.
+Add `Rails.application.config.assets.precompile += %w( ai_generated_skins.css )` to `config/initializers/assets.rb` and restart your server):
+  
+app/views/layouts/ai_generated_skins.html.erb:7
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-29 18:35:21 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+Completed 500 Internal Server Error in 52ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActionView::MissingTemplate (Missing template layouts/ai_generated_skins with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :haml]}.
+
+Searched in:
+  * "/mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views"
+  * "/home/shaunrichter547/.rbenv/versions/3.3.6/lib/ruby/gems/3.3.0/gems/actiontext-8.0.0/app/views"
+  * "/home/shaunrichter547/.rbenv/versions/3.3.6/lib/ruby/gems/3.3.0/gems/actionmailbox-8.0.0/app/views"
+):
+  
+actionview (8.0.0) lib/action_view/path_set.rb:42:in `find'
+actionview (8.0.0) lib/action_view/lookup_context.rb:131:in `find'
+actionview (8.0.0) lib/action_view/renderer/template_renderer.rb:102:in `resolve_layout'
+actionview (8.0.0) lib/action_view/renderer/template_renderer.rb:109:in `resolve_layout'
+actionview (8.0.0) lib/action_view/renderer/template_renderer.rb:89:in `find_layout'
+actionview (8.0.0) lib/action_view/renderer/template_renderer.rb:72:in `render_with_layout'
+actionview (8.0.0) lib/action_view/renderer/template_renderer.rb:59:in `render_template'
+actionview (8.0.0) lib/action_view/renderer/template_renderer.rb:11:in `render'
+actionview (8.0.0) lib/action_view/renderer/renderer.rb:58:in `render_template_to_object'
+actionview (8.0.0) lib/action_view/renderer/renderer.rb:31:in `render_to_object'
+actionview (8.0.0) lib/action_view/rendering.rb:136:in `block in _render_template'
+actionview (8.0.0) lib/action_view/base.rb:308:in `in_rendering_context'
+actionview (8.0.0) lib/action_view/rendering.rb:135:in `_render_template'
+actionpack (8.0.0) lib/action_controller/metal/streaming.rb:179:in `_render_template'
+actionview (8.0.0) lib/action_view/rendering.rb:122:in `render_to_body'
+actionpack (8.0.0) lib/action_controller/metal/rendering.rb:186:in `render_to_body'
+actionpack (8.0.0) lib/action_controller/metal/renderers.rb:140:in `render_to_body'
+actionpack (8.0.0) lib/abstract_controller/rendering.rb:28:in `render'
+actionpack (8.0.0) lib/action_controller/metal/rendering.rb:167:in `render'
+actionpack (8.0.0) lib/action_controller/metal/instrumentation.rb:31:in `block (2 levels) in render'
+activesupport (8.0.0) lib/active_support/benchmark.rb:17:in `realtime'
+actionpack (8.0.0) lib/action_controller/metal/instrumentation.rb:31:in `block in render'
+actionpack (8.0.0) lib/action_controller/metal/instrumentation.rb:100:in `cleanup_view_runtime'
+activerecord (8.0.0) lib/active_record/railties/controller_runtime.rb:46:in `cleanup_view_runtime'
+actionpack (8.0.0) lib/action_controller/metal/instrumentation.rb:30:in `render'
+actionpack (8.0.0) lib/action_controller/metal/implicit_render.rb:39:in `default_render'
+actionpack (8.0.0) lib/action_controller/metal/basic_implicit_render.rb:9:in `send_action'
+actionpack (8.0.0) lib/abstract_controller/base.rb:226:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/rendering.rb:193:in `process_action'
+actionpack (8.0.0) lib/abstract_controller/callbacks.rb:261:in `block in process_action'
+activesupport (8.0.0) lib/active_support/callbacks.rb:120:in `block in run_callbacks'
+actiontext (8.0.0) lib/action_text/rendering.rb:25:in `with_renderer'
+actiontext (8.0.0) lib/action_text/engine.rb:71:in `block (4 levels) in <class:Engine>'
+activesupport (8.0.0) lib/active_support/callbacks.rb:129:in `instance_exec'
+activesupport (8.0.0) lib/active_support/callbacks.rb:129:in `block in run_callbacks'
+activesupport (8.0.0) lib/active_support/callbacks.rb:140:in `run_callbacks'
+actionpack (8.0.0) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.0) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.0) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.0) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.0) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.0) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.0) lib/abstract_controller/base.rb:163:in `process'
+actionview (8.0.0) lib/action_view/rendering.rb:40:in `process'
+actionpack (8.0.0) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.0) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.0) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (8.0.0) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (8.0.0) lib/action_dispatch/http/content_security_policy.rb:35:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/cookies.rb:706:in `call'
+activerecord (8.0.0) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.0) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.0) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.0) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.0) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.0) lib/rails/engine.rb:535:in `call'
+rack (2.2.10) lib/rack/handler/webrick.rb:95:in `service'
+webrick (1.9.0) lib/webrick/httpserver.rb:140:in `service'
+webrick (1.9.0) lib/webrick/httpserver.rb:96:in `run'
+webrick (1.9.0) lib/webrick/server.rb:310:in `block in start_thread'
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-11-29 18:35:55 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering ai_generated_skins/new.html.erb within layouts/application
+  Rendered ai_generated_skins/new.html.erb within layouts/application (Duration: 8.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 912.9ms | GC: 0.0ms)
+Completed 200 OK in 961ms (Views: 941.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/ai_generated_skins/generate" for 127.0.0.1 at 2024-11-29 18:36:01 -0600
+Processing by AiGeneratedSkinsController#generate as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"2KY_i2LCxf3I3ZFejROh8h9AlRPGFCXXn04Z6UVlsrUZnJ58QbKUj3eQWvdXYOKk0O-64RPK45uD_OUpqrZq_A", "character_description"=>"Dragon"}
+  Rendering layout layouts/application.html.erb
+  Rendering ai_generated_skins/new.html.erb within layouts/application
+  Rendered ai_generated_skins/new.html.erb within layouts/application (Duration: 33.1ms | GC: 28.8ms)
+  Rendered layout layouts/application.html.erb (Duration: 1420.1ms | GC: 29.8ms)
+Completed 200 OK in 17555ms (Views: 1423.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 200.6ms)
+
+
+Started GET "/store" for 127.0.0.1 at 2024-11-29 18:36:32 -0600
+Processing by StoreController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering store/index.html.haml within layouts/application
+DEPRECATION WARNING: The asset "avatar_1.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__4352078114781413301_57260 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:143)
+DEPRECATION WARNING: The asset "avatar_2.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__4352078114781413301_57260 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:149)
+DEPRECATION WARNING: The asset "ai_generated_avatar.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__4352078114781413301_57260 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:155)
+  Rendered store/index.html.haml within layouts/application (Duration: 770.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2094.3ms | GC: 0.0ms)
+Completed 200 OK in 2147ms (Views: 2110.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/avatar_1.jpg" for 127.0.0.1 at 2024-11-29 18:36:35 -0600
+Started GET "/avatar_2.jpg" for 127.0.0.1 at 2024-11-29 18:36:35 -0600
+Started GET "/ai_generated_avatar.jpg" for 127.0.0.1 at 2024-11-29 18:36:35 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/ai_generated_avatar.jpg"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_1.jpg"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_2.jpg"):
+  

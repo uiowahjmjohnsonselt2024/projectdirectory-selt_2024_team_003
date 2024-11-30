@@ -1,0 +1,43 @@
+<div id="ai-generated-skins-page">
+  <!-- Back button -->
+  <div class="back-button-container">
+    <button onclick="location.href='/store'" class="back-button" aria-label="Back to Store">Back to Store</button>
+  </div>
+
+  <!-- Main content wrapper -->
+  <div class="content-wrapper">
+    <!-- Form on the left -->
+    <div class="form-container" id="form-container">
+      <h1>Generate AI Skin</h1>
+
+      <!-- Form to accept character description -->
+      <%= form_tag generate_ai_generated_skin_path, method: :post, id: "generate-form" do %>
+        <div>
+          <label for="character_description">Character Description:</label>
+          <input type="text" id="character_description" name="character_description" placeholder="Enter character description" required>
+        </div>
+        <div>
+          <button type="submit" aria-label="Generate AI Skin">Generate</button>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Loading animation -->
+    <div id="loading-container" style="display: none;" aria-hidden="true">
+      <div class="loading-spinner" aria-label="Loading"></div>
+      <p>Generating your AI skin... Please wait!</p>
+    </div>
+
+    <!-- Image or Error Message on the right -->
+    <div class="image-container">
+      <% if @error %>
+        <p class="error-message" aria-live="assertive">Unable To Generate Skin</p>
+      <% elsif @image_base64 %>
+        <h2>Generated AI Skin</h2>
+        <img src="data:image/png;base64,<%= @image_base64 %>" alt="Generated AI Skin" />
+      <% else %>
+        <p class="placeholder-message" aria-live="polite">Describe your character to see its AI-generated appearance here!</p>
+      <% end %>
+    </div>
+  </div>
+</div>

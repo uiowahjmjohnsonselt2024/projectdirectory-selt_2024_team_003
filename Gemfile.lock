@@ -184,6 +184,7 @@ GEM
       net-smtp
     marcel (1.0.4)
     matrix (0.4.2)
+    mini_magick (5.0.1)
     mini_mime (1.1.5)
     minitest (5.25.2)
     multi_test (1.1.0)
@@ -373,6 +374,7 @@ DEPENDENCIES
   ffi (~> 1.15)
   haml-rails
   jquery-rails
+  mini_magick
   pg (~> 1.5)
   rails (= 8.0.0)
   rails-ujs (~> 0.1.0)

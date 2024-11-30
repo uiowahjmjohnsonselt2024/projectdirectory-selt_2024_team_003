@@ -9,6 +9,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 
+
 gem 'haml-rails'
 
 gem 'jquery-rails'
@@ -22,12 +23,21 @@ gem 'rails-ujs', '~> 0.1.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'ffi', '~> 1.15' # Or the latest compatible version
 
+gem 'mini_magick'
+
+
 group :development, :test do
   gem 'sqlite3', '~> 2.1'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+  # gem 'webmock'
+  # gem 'capybara'
+  # gem 'selenium-webdriver'
+end
+
+group :development do
 end
 
 group :production do
