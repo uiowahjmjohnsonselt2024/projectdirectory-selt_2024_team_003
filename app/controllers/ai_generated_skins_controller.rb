@@ -4,7 +4,6 @@ class AiGeneratedSkinsController < ApplicationController
   require 'json'
   require 'mini_magick'
   require 'open-uri'
-
   def new
     # This action simply renders the form
   end
@@ -24,7 +23,7 @@ class AiGeneratedSkinsController < ApplicationController
     http.use_ssl = true
 
     request = Net::HTTP::Post.new(uri)
-    request['Authorization'] = "Bearer openAI_API_KEY"
+    request['Authorization'] = "Bearer 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"
     request['Content-Type'] = "application/json"
     request.body = {
       prompt: "#{character_description} in retro animated style, featuring vibrant colors like red, green, and yellow, " \

@@ -1,0 +1,169 @@
+/* General styling */
+body {
+  background-color: #000;
+  color: #f1f1f1;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#chat-container {
+  background-color: #222;
+  color: #f1f1f1;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 800px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#chat-container h2 {
+  font-size: 24px;
+  color: #ffcc00;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+#messages-container {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  flex-grow: 1;
+  margin-bottom: 20px;
+}
+
+.message {
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.message.sent {
+  background-color: #0056b3;
+  color: #fff;
+  align-self: flex-end;
+}
+
+.message.received {
+  background-color: #444;
+  color: #fff;
+  align-self: flex-start;
+}
+
+.read-receipt {
+  font-size: 12px;
+  color: #28a745;
+  margin-left: 5px;
+}
+
+#message-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+}
+
+#message-input {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #444;
+  color: #f1f1f1;
+  font-size: 16px;
+  border: 1px solid #555;
+  resize: none;
+  width: 80%; /* Make the input span the majority of the container width */
+}
+
+.send-message-button {
+  background-color: #28a745;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 20%; /* Small submit button */
+}
+
+.send-message-button:hover {
+  background-color: #218838;
+}
+
+.send-message-button:active {
+  background-color: #1e7e34;
+}
+
+.send-message-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.refresh-button {
+  background-color: #ffc107;
+  color: #000;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.refresh-button:hover {
+  background-color: #e0a800;
+}
+
+.refresh-button:active {
+  background-color: #c69500;
+}
+
+.refresh-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.back-to-games-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+}
+
+.back-to-games-button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+.back-to-games-button:active {
+  background-color: #004085;
+}
+
+.back-to-games-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}

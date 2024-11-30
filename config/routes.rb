@@ -3,14 +3,44 @@ Rails.application.routes.draw do
   resources :games do
     collection do
       post 'join', to: 'games#join'
+      post 'add_friend', to: 'games#add_friend'
+      delete 'remove_friend', to: 'games#remove_friend'
     end
   end
 
+  resources :interactions, param: :game_id do
+    post 'attack', on: :member
+  end
+
+  resources :selections, only: [:index]
+  patch 'selections/update_archetype', to: 'selections#update_archetype'
+
+
+  resources :pages do
+    post :move, on: :collection
+  end
+
+  resources :interactions, only: [] do
+    member do
+      post :magic_attack
+      post :magic_heal
+    end
+  end
+
+  get 'win_game', to: 'games#win', as: 'win_game'
+  delete 'end_game/:game_code', to: 'games#end', as: 'end_game'
   post 'login', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy', as: :logout
   post 'signup', to: 'registrations#create'
   get 'pages/grid'
   get 'grid', to: 'pages#grid'  # This defines the route for /grid
+  get 'store', to: 'store#index'
+  get 'chat_with_user', to: 'chats#show', as: 'chat_with_user'
+  post 'send_message', to: 'chats#create', as: 'send_message'
+  patch 'mark_as_read', to: 'chats#mark_as_read', as: 'mark_as_read'
+  get 'interaction', to: 'interactions#show'
+  post 'attack', to: 'interactions#attack'
+
   # Route to display the form (text box and button)
   get 'ai_generated_skins/new', to: 'ai_generated_skins#new', as: 'new_ai_generated_skin'
   # Route to handle the form submission and generate the image

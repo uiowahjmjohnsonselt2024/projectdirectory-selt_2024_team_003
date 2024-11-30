@@ -42,6 +42,8 @@
   }
 }
 
+
+
 .grid-container {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -59,7 +61,63 @@
   border: 1px solid #555;
   transition: transform 0.3s ease, background-color 0.3s ease;
   aspect-ratio: 1;
+  width: 100px;
+  height: 100px;
   position: relative;
+}
+
+progress {
+  width: 100%;
+  height: 20px; /* Adjust height for visibility */
+  border-radius: 5px; /* Rounded corners */
+  margin-bottom: 10px; /* Space between bar and text */
+}
+
+/* XP Progress Bar */
+#player-experience {
+  background-color: #444; /* Dark gray background */
+}
+
+#player-experience::-webkit-progress-bar {
+  background-color: #444; /* Dark background */
+}
+
+#player-experience::-webkit-progress-value {
+  background-color: #00b0b0; /* XP color (light blue or teal) */
+}
+
+#player-experience::-moz-progress-bar {
+  background-color: #00b0b0; /* XP color */
+}
+
+#player-health {
+  background-color: #444; /* Dark background */
+}
+
+#player-health::-webkit-progress-bar {
+  background-color: #444; /* Dark background */
+}
+
+#player-health::-webkit-progress-value {
+  background-color: var(--health-bar-color, #66cc66); /* Default green */
+}
+
+#player-health::-moz-progress-bar {
+  background-color: var(--health-bar-color, #66cc66); /* Default green */
+}
+
+/* XP Text Styling */
+#player-experience-text {
+  font-size: 14px;
+  font-weight: bold;
+  color: #00b0b0;
+}
+
+/* Health Text Styling */
+#player-health-text {
+  font-size: 14px;
+  font-weight: bold;
+  color: #66cc66;
 }
 
 .image-class {
@@ -70,6 +128,23 @@
 .grid-square:hover {
   background-color: #555;
   transform: scale(1.1);
+}
+
+.tooltip {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  z-index: 1000;
+  white-space: nowrap;
+}
+
+.tooltip .keyword {
+  color: gold; /* Example keyword color */
 }
 
 .right-column {

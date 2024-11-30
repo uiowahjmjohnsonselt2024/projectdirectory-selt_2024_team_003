@@ -11,7 +11,7 @@ class RegistrationsController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id  # Log the user in after registration
-      redirect_to root_path, notice: "Account created successfully."
+      redirect_to selections_path
     else
       flash.now[:alert] = "Invalid"
       render :new

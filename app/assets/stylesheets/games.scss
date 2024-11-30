@@ -132,4 +132,264 @@ body {
       }
     }
   }
+  #user-search-container {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-align: left;
+
+    label {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 100%;
+      margin-bottom: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0.3);
+      color: #fff;
+    }
+
+    .button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      display: block;
+      width: 100%;
+    }
+
+    .button:hover {
+      background-color: #0056b3;
+    }
+  }
+
+  #user-search-container,
+  #users-list-container,
+  #friends-list-container {
+    background-color: #222;
+    border: 2px solid #444; /* Outline for the container */
+    border-radius: 8px;
+    padding: 30px; /* Increased padding for a cleaner look */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    flex: 1;
+    margin: 0 20px 20px; /* Space between the containers */
+    color: #f1f1f1;
+
+    h3 {
+      font-size: 26px;
+      color: #ffcc00;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    label {
+      font-weight: bold;
+      color: #ffcc00;
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"] {
+      border: 1px solid #555;
+      padding: 12px;
+      width: 100%; /* Full width input */
+      border-radius: 5px;
+      background-color: #333;
+      color: #f1f1f1;
+      font-size: 16px; /* Larger font size */
+      transition: border-color 0.3s;
+      margin-bottom: 15px;
+    }
+
+    input[type="text"]:focus {
+      border-color: #ffcc00;
+    }
+
+    .button {
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      text-transform: uppercase;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      width: 100%; /* Full width buttons */
+    }
+
+    .button:hover {
+      background-color: #218838;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    ul li {
+      padding: 15px;
+      border-radius: 6px;
+      background-color: #333;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s, box-shadow 0.2s;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      strong {
+        font-weight: bold;
+        color: #ffcc00;
+      }
+
+      .add-friend-button {
+        background-color: #007bff;
+      }
+
+      .add-friend-button:hover {
+        background-color: #0056b3;
+      }
+    }
+    .remove-friend-button {
+      background-color: #dc3545; /* Red background for remove action */
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-transform: uppercase;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:hover {
+        background-color: #c82333; /* Darker red on hover */
+      }
+
+      &:active {
+        background-color: #a71d2a; /* Even darker red on click */
+      }
+    }
+
+    p {
+      text-align: center;
+      color: #f1f1f1;
+    }
+  }
+
+  .logout-button {
+    background-color: #f44336; /* Bright red for logout */
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+
+    &:hover {
+      background-color: #d32f2f; /* Darker red on hover */
+      transform: translateY(-2px); /* Slight lift effect */
+    }
+
+    &:active {
+      background-color: #b71c1c; /* Even darker red on click */
+      transform: translateY(0); /* Reset lift effect */
+    }
+  }
+
+  #user-info-container {
+    display: flex;
+    justify-content: space-between; /* Pushes elements to opposite ends */
+    align-items: center; /* Aligns items vertically */
+    padding: 20px; /* Adds some spacing around the container */
+    background-color: #1a1a1d; /* Match games menu background */
+    color: #f1f1f1;
+    border-bottom: 1px solid #444; /* Optional separator */
+    margin-bottom: 20px; /* Adds spacing below the user info */
+  }
+
+  .current-user {
+    font-size: 18px;
+    color: #ffcc00; /* Matches other highlighted text */
+    font-weight: bold;
+  }
+
+  .logout-button {
+    background-color: #f44336; /* Bright red for logout */
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+
+    &:hover {
+      background-color: #d32f2f; /* Darker red on hover */
+      transform: translateY(-2px); /* Slight lift effect */
+    }
+
+    &:active {
+      background-color: #b71c1c; /* Even darker red on click */
+      transform: translateY(0); /* Reset lift effect */
+    }
+  }
+
+  .shop-button {
+    background-color: #2f68d3; /* Bright red for logout */
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+
+    &:hover {
+      background-color: #2f68d3; /* Darker red on hover */
+      transform: translateY(-2px); /* Slight lift effect */
+    }
+
+    &:active {
+      background-color: #261cb7; /* Even darker red on click */
+      transform: translateY(0); /* Reset lift effect */
+    }
+  }
+
+  .current-user {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 70%; /* Adjust to fit your layout */
+  }
+
 }
