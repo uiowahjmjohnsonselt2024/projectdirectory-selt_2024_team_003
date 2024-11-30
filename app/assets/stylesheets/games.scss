@@ -30,6 +30,13 @@ body {
     font-weight: bold;
   }
 
+  .buttons-container {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 15px; /* Add space between buttons */
+    align-items: flex-start; /* Align buttons to the left */
+  }
+
   .form-container,
   .games-list-container {
     background-color: #222;
@@ -196,6 +203,38 @@ body {
       background-color: #261cb7; /* Even darker red on click */
       transform: translateY(0); /* Reset lift effect */
     }
+  }
+
+  .account-button {
+    background-color: #28a745;
+    &:hover {
+      background-color: #218838;
+      transform: translateY(-2px);
+    }
+    &:active {
+      background-color: #1e7e34;
+      transform: translateY(0);
+    }
+  }
+
+  .account-button {
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+
+  /* Ensuring buttons container aligns correctly */
+  .buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
   }
 
   .current-user {

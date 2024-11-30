@@ -1,16 +1,18 @@
-<div id="games-menu">
+<div id="account-menu">
   <span class="current-user">
     Current User: <%= current_user.username %>
   </span>
-  <%= link_to "Logout", logout_path, method: :get, class: "logout-button" %>
-  <%= link_to "Menu", games_path, class: "menu-button" %>
+  <div class="account-buttons">
+    <%= link_to "Logout", logout_path, method: :get, class: "account-logout-button" %>
+    <%= link_to "Menu", games_path, class: "account-menu-button" %>
+  </div>
 
-  <div class="games-sections">
-    <!-- Stats Section -->
+  <div class="account-sections">
+
     <div class="user-stats-container">
       <img src="<%= asset_path(@image) %>" width="100" height="100">
       <% @stats.each do |stat| %>
-        <div class="stat">
+        <div class="account-stats">
           <span class="stat-name"><%= stat[:name] %>:</span>
           <span class="stat-value"><%= stat[:value] %></span>
         </div>
