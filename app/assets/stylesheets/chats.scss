@@ -137,7 +137,7 @@ body {
   cursor: not-allowed;
 }
 
-.back-to-games-button {
+.back-to-account-button {
   position: absolute;
   top: 20px;
   left: 20px;
@@ -154,16 +154,16 @@ body {
   font-size: 14px;
 }
 
-.back-to-games-button:hover {
+.back-to-account-button:hover {
   background-color: #0056b3;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
 
-.back-to-games-button:active {
+.back-to-account-button:active {
   background-color: #004085;
 }
 
-.back-to-games-button:disabled {
+.back-to-account-button:disabled {
   background-color: #6c757d;
   cursor: not-allowed;
 }
