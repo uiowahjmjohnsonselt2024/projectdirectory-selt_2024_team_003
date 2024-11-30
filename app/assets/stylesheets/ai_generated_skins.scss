@@ -9,10 +9,9 @@
     min-height: 100vh; /* Full-page height */
     box-sizing: border-box;
 
-    /* Left and Right Column Styling */
-    .form-container {
+    .ai-form-container {
         flex: 1; /* Take 50% of the width */
-        max-width: 45%; /* Prevent it from growing too wide */
+        max-width: 100%; /* Prevent it from growing too wide */
         background-color: #ffffff; /* White background for the form */
         padding: 2rem;
         border: 2px solid #e5e7eb; /* Light grey border */
@@ -74,7 +73,7 @@
 
     .image-container {
         flex: 1; /* Take 50% of the width */
-        max-width: 45%; /* Prevent it from growing too wide */
+        max-width: 100%; /* Prevent it from growing too wide */
         background-color: #ffffff; /* White background for the image box */
         padding: 2rem;
         border: 2px solid #e5e7eb; /* Light grey border */
