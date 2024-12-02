@@ -4,6 +4,24 @@ class InteractionsController < ApplicationController
     @game_user = @game.game_users.find_by(user: current_user)
     @enemy = @game.enemies.find_by(x_position: @game_user.x_position, y_position: @game_user.y_position)
     @player = current_user
+    @user_moves = current_user.user_moves
+    puts current_user.username
+    puts "|||||||||||||||||"
+    puts current_user.inspect
+  end
+
+  def use_move
+    @game = Game.find_by(code: params[:game_id])
+    @game_user = @game.game_users.find_by(user: current_user)
+    @enemy = @game.enemies.find_by(x_position: @game_user.x_position, y_position: @game_user.y_position)
+    @move = current_user.moves.find(params[:move_id])
+
+    if @game_user.mana >= @move.mana_cost
+      @move.execute(user: current_user, target: @enemy, game_user: @game_user)
+      render json: { success: true, message: "#{@move.name} was used!" }
+    else
+      render json: { success: false, message: "Not enough mana to use #{@move.name}!" }
+    end
   end
 
   def attack

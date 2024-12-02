@@ -13,12 +13,38 @@ class User < ActiveRecord::Base
   has_many :inverse_friends, through: :inverse_friendships, source: :user
   has_many :sent_messages, class_name: "Message", foreign_key: "user_id"
   has_many :received_messages, class_name: "Message", foreign_key: "recipient_id"
+  has_many :user_moves, dependent: :destroy
+  has_many :moves, through: :user_moves
 
   # Validations
   validates :health, :attack, :defense, :iq, presence: true, numericality: { only_integer: true }
   validates :username, presence: true, uniqueness: true, length: { minimum: 3, maximum: 25 }
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, length: { minimum: 6 }, if: -> { new_record? || !password.nil? }
+
+  after_create :assign_default_moves
+
+  def assign_default_moves
+    Move.where(name: ["Basic Attack", "Heal", "Power Strike", "Team Heal"]).each do |move|
+      puts move.name
+      self.moves << move
+    end
+  end
+
+  def add_move(move)
+    if moves.count < 4
+      moves << move
+    else
+      raise "You already have 4 moves! Overwrite one to learn a new move."
+    end
+  end
+
+  def replace_move(old_move, new_move)
+    transaction do
+      moves.destroy(old_move)
+      moves << new_move
+    end
+  end
 
   def set_archetype_stats(archetype)
     case archetype

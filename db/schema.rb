@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_29_042648) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_02_011958) do
   create_table "enemies", force: :cascade do |t|
     t.string "name"
     t.integer "health", default: 300
@@ -55,8 +55,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_29_042648) do
   create_table "games", force: :cascade do |t|
     t.string "name"
     t.string "code"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "messages", force: :cascade do |t|
@@ -67,6 +67,27 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_29_042648) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "moves", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "mana_cost"
+    t.integer "health_cost"
+    t.integer "damage"
+    t.string "effect_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_moves", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "move_id"
+    t.integer "usage_count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["move_id"], name: "index_user_moves_on_move_id"
+    t.index ["user_id"], name: "index_user_moves_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -86,6 +107,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_29_042648) do
   end
 
   add_foreign_key "enemies", "games"
-  add_foreign_key "friendships", "users"
   add_foreign_key "messages", "users"
+  add_foreign_key "user_moves", "moves"
+  add_foreign_key "user_moves", "users"
 end

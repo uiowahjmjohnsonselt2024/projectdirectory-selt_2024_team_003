@@ -25,6 +25,17 @@
   <button id="attack-button" data-game-id="<%= @game.code %>">Attack</button>
   <button id="magic-attack-button" data-game-id="<%= @game.code %>">Magic Attack</button>
   <button id="magic-heal-button" data-game-id="<%= @game.code %>">Magic Heal</button>
+  <div class="move-grid">
+    <% @user_moves.each do |user_move| %>
+      <button
+          class="move-button"
+          data-move-id="<%= user_move.move.id %>"
+          data-game-id="<%= @game.code %>"
+      >
+        <%= user_move.move.name %>
+      </button>
+    <% end %>
+  </div>
 
   <div class="interaction-footer">
     <%= link_to 'Return to Grid', grid_path, class: 'back-button' %>
@@ -70,6 +81,59 @@
                 magicHealButton.disabled = false;
             }
         }
+
+        function useMove(moveId, gameId) {
+            fetch(`/interactions/${gameId}/use_move`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+                },
+                body: JSON.stringify({ move_id: moveId, game_id: gameId })
+            })
+              .then(response => response.json())
+              .then(data => {
+                  if (data.success) {
+                      // Update game state with data from server
+                      playerManaDisplay.value = data.player_mana;
+                      playerHealthDisplay.value = data.player_health;
+                      enemyHealthDisplay.value = data.enemy_health;
+
+                      document.getElementById('player-mana-text').textContent = `${data.player_mana} / ${data.max_player_mana}`;
+                      document.getElementById('player-health-text').textContent = `${data.player_health} / ${data.max_player_health}`;
+                      enemyHealthText.textContent = data.enemy_health;
+
+                      attackMessage.textContent = data.message;
+
+                      // Check if the game is won or lost
+                      if (data.win) {
+                          setTimeout(() => {
+                              window.location.href = `/win_game?game_id=${gameId}`;
+                          }, 2000);
+                      } else if (data.player_defeated) {
+                          attackMessage.textContent += " You have been defeated!";
+                          setTimeout(() => {
+                              window.location.href = "/grid";
+                          }, 4000);
+                      }
+                  } else {
+                      // Display error message
+                      attackMessage.textContent = data.message;
+                  }
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+                  attackMessage.textContent = "An error occurred. Please try again.";
+              });
+        }
+
+        document.querySelectorAll('.move-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const moveId = button.getAttribute('data-move-id');
+                const gameId = button.getAttribute('data-game-id');
+                useMove(moveId, gameId);
+            });
+        });
 
         attackButton.addEventListener('click', () => {
             const gameId = attackButton.getAttribute('data-game-id');
@@ -129,25 +193,6 @@
                   } else {
                       attackMessage.textContent = data.message
                   }
-              });
-        });
-
-        attackButton.addEventListener('click', () => {
-            const gameId = attackButton.getAttribute('data-game-id');
-            fetch(`/interactions/${gameId}/attack`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
-                },
-                body: JSON.stringify({ game_id: gameId })
-            })
-              .then(response => response.json())
-              .then(data => {
-                  game_logic(data)
-              })
-              .catch(error => {
-                  console.error('Error:', error);
               });
         });
 
