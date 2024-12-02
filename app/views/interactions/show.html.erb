@@ -171,6 +171,8 @@
 
             if (data.message === "You win!" || data.player_defeated || data.enemy_health <= 0) {
                 attackButton.disabled = true;
+                magicAttackButton.disabled = true;
+                magicHealButton.disabled = true;
             }
 
             if (data.player_defeated) {
@@ -178,7 +180,7 @@
                 playerHealthText.textContent = `0 / ${data.max_player_health}`;
                 setTimeout(() => {
                     window.location.href = "/grid";
-                }, 5000);
+                }, 4000);
             } else {
                 playerHealthDisplay.value = data.player_health;
                 playerHealthText.textContent = `${data.player_health} / ${data.max_player_health}`;
@@ -188,7 +190,6 @@
         const initialEnemyHealth = parseInt(enemyHealthText.textContent, 10);
         const initialPlayerHealth = parseInt(playerHealthText.textContent, 10);
         disableButtonIfNeeded(initialPlayerHealth, initialEnemyHealth);
-        checkIfEnemyDefeated(initialEnemyHealth);
         updateHealthBarColor(playerHealthDisplay, initialPlayerHealth, parseInt(playerHealthDisplay.getAttribute('max')));
     });
 </script>
