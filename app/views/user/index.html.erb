@@ -13,13 +13,12 @@
       <img src="<%= asset_path(@image) %>" width="100" height="100">
       <% @stats.each do |stat| %>
         <div class="account-stats">
-          <span class="stat-name"><%= stat[:name] %>:</span>
-          <span class="stat-value"><%= stat[:value] %></span>
+          <span class="account-stats-name"><%= stat[:name] %>:</span>
+          <span class="account-stats-value"><%= stat[:value] %></span>
         </div>
       <% end %>
     </div>
 
-    <!-- User Search Section -->
     <div id="user-search-container">
       <h3>Search for Users</h3>
       <%= form_tag account_path, method: :get, class: "search-form" do %>
@@ -51,7 +50,6 @@
       </div>
     </div>
 
-    <!-- Friends List Section -->
     <div id="friends-list-container">
       <h3>Your Friends</h3>
       <% if current_user.friends.present? %>
