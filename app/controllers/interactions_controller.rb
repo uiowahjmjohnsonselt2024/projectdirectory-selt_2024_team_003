@@ -32,6 +32,7 @@ class InteractionsController < ApplicationController
       @player.add_achievement("First Blood: The thrill of victory, the first taste of triumph.")
 
       if @enemy.x_position == 5 && @enemy.y_position == 5
+        @player.add_achievement("The Final Boss: Defeat the final boss and claim victory over the game.")
         render json: { success: true, win: true, message: message } and return
       end
     else
