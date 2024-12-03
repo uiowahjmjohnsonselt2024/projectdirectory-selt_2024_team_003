@@ -89,6 +89,8 @@ class User < ActiveRecord::Base
     save!
 
     game_users.each { |game_user| game_user.update_health_and_mana }
+
+    check_milestone_achievements
   end
 
   
@@ -102,6 +104,21 @@ class User < ActiveRecord::Base
 
   def initialize_achievements
     self.achievements ||= []
+  end
+
+  def check_milestone_achievements
+    milestones = {
+      5 => 'Level 5: Novice Hero',
+      10 => 'Level 10: Experienced Warrior',
+      25 => 'Level 25: Master of the Grid',
+      50 => 'Level 50: Legend of the Game',
+      100 => 'Level 100: Immortal',
+    }
+
+    if milestones.key?(level)
+      achievement = milestones[level]
+      add_achievement(achievement)
+    end
   end
 end
 
