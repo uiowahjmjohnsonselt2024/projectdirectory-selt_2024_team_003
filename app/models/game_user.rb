@@ -9,7 +9,12 @@ class GameUser < ActiveRecord::Base
 
   def move_to(new_x, new_y)
     if (new_x - x_position).abs <= 1 && (new_y - y_position).abs <= 1
-      update(x_position: new_x, y_position: new_y)
+      left_starting_position = (x_position == 0 && y_position == 0) && (new_x != 0 || new_y != 0)
+
+      if update(x_position: new_x, y_position: new_y)
+        user.add_achievement('Explorer: The first step is always the bravest. Welcome to the unknown.') if left_starting_position
+        true
+      end
     else
       false
     end
@@ -41,5 +46,4 @@ class GameUser < ActiveRecord::Base
       false
     end
   end
-
 end

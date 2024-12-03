@@ -2,6 +2,8 @@
 
 # app/models/user.rb
 class User < ActiveRecord::Base
+  before_save :initialize_achievements
+
   # Adds methods to set and authenticate against a BCrypt password.
   # Requires `password_digest` attribute to be present in the database.
   has_secure_password
@@ -87,6 +89,19 @@ class User < ActiveRecord::Base
     save!
 
     game_users.each { |game_user| game_user.update_health_and_mana }
+  end
+
+  
+  def add_achievement(achievement)
+    self.achievements ||= []
+    unless achievements.include?(achievement)
+      achievements << achievement
+      save!
+    end
+  end
+
+  def initialize_achievements
+    self.achievements ||= []
   end
 end
 

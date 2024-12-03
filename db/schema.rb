@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_29_042648) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_03_202119) do
   create_table "enemies", force: :cascade do |t|
     t.string "name"
     t.integer "health", default: 300
@@ -55,8 +55,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_29_042648) do
   create_table "games", force: :cascade do |t|
     t.string "name"
     t.string "code"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "messages", force: :cascade do |t|
@@ -83,9 +83,9 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_29_042648) do
     t.integer "mana"
     t.integer "special_attack"
     t.integer "special_defense"
+    t.json "achievements"
   end
 
   add_foreign_key "enemies", "games"
-  add_foreign_key "friendships", "users"
   add_foreign_key "messages", "users"
 end

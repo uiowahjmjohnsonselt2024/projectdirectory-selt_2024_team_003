@@ -28,6 +28,9 @@ class InteractionsController < ApplicationController
       @player.update(experience: @player.experience + experience_gain)
       level_up_if_needed(@player)
       message += " You defeated the enemy and gained #{experience_gain} XP!"
+
+      @player.add_achievement("First Blood: The thrill of victory, the first taste of triumph.")
+
       if @enemy.x_position == 5 && @enemy.y_position == 5
         render json: { success: true, win: true, message: message } and return
       end

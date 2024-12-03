@@ -29,6 +29,8 @@ class UserController < ApplicationController
     else
       @users = User.where.not(id: current_user.id)
     end
+
+    @achievements = current_user.achievements || []
   end
 
   def add_friend
