@@ -798,3 +798,171 @@ ActionController::RoutingError (No route matches [GET] "/avatar_1.jpg"):
   
 ActionController::RoutingError (No route matches [GET] "/avatar_2.jpg"):
   
+DEPRECATION WARNING: `to_time` will always preserve the receiver timezone rather than system local time in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /mnt/c/Users/nickh/Desktop/Homework/SCHOOL/SELT/SELT_REPOS/projectdirectory-selt_2024_team_003/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /mnt/c/Users/nickh/Desktop/Homework/SCHOOL/SELT/SELT_REPOS/projectdirectory-selt_2024_team_003/config/initializers/to_time_preserves_timezone.rb:10)
+Started GET "/store" for 127.0.0.1 at 2024-12-06 11:48:36 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (32.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by StoreController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering store/index.html.haml within layouts/application
+DEPRECATION WARNING: The asset "shopBackground.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__3705172237865704451_28700 at /mnt/c/Users/nickh/Desktop/Homework/SCHOOL/SELT/SELT_REPOS/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:97)
+DEPRECATION WARNING: The asset "avatar_1.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__3705172237865704451_28700 at /mnt/c/Users/nickh/Desktop/Homework/SCHOOL/SELT/SELT_REPOS/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:152)
+DEPRECATION WARNING: The asset "avatar_2.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__3705172237865704451_28700 at /mnt/c/Users/nickh/Desktop/Homework/SCHOOL/SELT/SELT_REPOS/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:158)
+  Rendered store/index.html.haml within layouts/application (Duration: 24535.5ms | GC: 195.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 26399.5ms | GC: 237.5ms)
+Completed 200 OK in 27020ms (Views: 26592.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 239.1ms)
+
+
+Started GET "/assets/interactions.self-5b779763b151c6bd694312d26a74110ec942f74a295793fb60d5609b99622f12.css?body=1" for 127.0.0.1 at 2024-12-06 11:49:06 -0600
+Started GET "/avatar_1.jpg" for 127.0.0.1 at 2024-12-06 11:49:06 -0600
+Started GET "/assets/gem3-89e90fd7cf1d7317b14e5f0cf978f8a45af94c569cd05bed8a4434cab6760030.gif" for 127.0.0.1 at 2024-12-06 11:49:06 -0600
+Started GET "/avatar_2.jpg" for 127.0.0.1 at 2024-12-06 11:49:06 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_1.jpg"):
+  
+Started GET "/assets/acidPotion-84426b135777c90628c5096e63bb76730c3d664d52178655c41a1d0cadb849aa.gif" for 127.0.0.1 at 2024-12-06 11:49:07 -0600
+Started GET "/assets/revive-eed76d4d148749885f5aa113222abe0c75769d67832d872632040f65e61a689f.gif" for 127.0.0.1 at 2024-12-06 11:49:07 -0600
+Started GET "/assets/invisibilityPotion-ea00d114333a250781189baf2eabe59d08536ebb80cce213b8b1c94237ad5691.gif" for 127.0.0.1 at 2024-12-06 11:49:10 -0600
+Started GET "/assets/grenade-bf7f3dcea7b96376353f08b193208c34559f57709b5c11e21ee167a13107d0a0.gif" for 127.0.0.1 at 2024-12-06 11:49:10 -0600
+Started GET "/assets/sword-f6acf58baa9e7a4f18f68ce1dc6874421b2d141c509dcd14036da7b4630f9fa2.gif" for 127.0.0.1 at 2024-12-06 11:49:10 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_2.jpg"):
+  
+Started GET "/assets/dynamite-3c6231cd3f370be5f4bdd9b4fae9b09d0b28bf9c656c95ed1e3ae36c28e9bdd1.gif" for 127.0.0.1 at 2024-12-06 11:49:15 -0600
+Started GET "/assets/sniper-2dad6e5c72cc271446b1a1acef6df30b976696cb31524ff1ef883f47548e3d6d.gif" for 127.0.0.1 at 2024-12-06 11:49:15 -0600
+Started GET "/assets/trap-db27a6dd730669a2a264d9dc6ce6705a2994b9bc22cbf25ba34a8cefce4d12b6.gif" for 127.0.0.1 at 2024-12-06 11:49:15 -0600
+Started GET "/assets/banana-e0c202ea0a39d2cffb08a43a4d77334f5bc46eee25608a70d74520569b4bb408.gif" for 127.0.0.1 at 2024-12-06 11:49:15 -0600
+Started GET "/assets/horse-0b025b7cbcd3abc0592a8daf323bb637cf4ea1ceec2248ecdf546f6f98b44d10.gif" for 127.0.0.1 at 2024-12-06 11:49:15 -0600
+Started GET "/store" for 127.0.0.1 at 2024-12-06 11:50:20 -0600
+Processing by StoreController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering store/index.html.haml within layouts/application
+DEPRECATION WARNING: The asset "shopBackground.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__3705172237865704451_69100 at /mnt/c/Users/nickh/Desktop/Homework/SCHOOL/SELT/SELT_REPOS/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:97)
+DEPRECATION WARNING: The asset "avatar_1.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__3705172237865704451_69100 at /mnt/c/Users/nickh/Desktop/Homework/SCHOOL/SELT/SELT_REPOS/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:150)
+DEPRECATION WARNING: The asset "avatar_2.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__3705172237865704451_69100 at /mnt/c/Users/nickh/Desktop/Homework/SCHOOL/SELT/SELT_REPOS/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:156)
+DEPRECATION WARNING: The asset "ai_generated_avatar.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__3705172237865704451_69100 at /mnt/c/Users/nickh/Desktop/Homework/SCHOOL/SELT/SELT_REPOS/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:162)
+  Rendered store/index.html.haml within layouts/application (Duration: 1737.5ms | GC: 82.5ms)
+  Rendered layout layouts/application.html.erb (Duration: 2633.8ms | GC: 83.3ms)
+Completed 200 OK in 2720ms (Views: 2684.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 83.3ms)
+
+
+Started GET "/avatar_1.jpg" for 127.0.0.1 at 2024-12-06 11:50:26 -0600
+Started GET "/avatar_2.jpg" for 127.0.0.1 at 2024-12-06 11:50:26 -0600
+Started GET "/ai_generated_avatar.jpg" for 127.0.0.1 at 2024-12-06 11:50:26 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_2.jpg"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_1.jpg"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/ai_generated_avatar.jpg"):
+  
+Started GET "/grid" for 127.0.0.1 at 2024-12-06 11:51:38 -0600
+Processing by PagesController#grid as HTML
+  [1m[36mGame Load (7.2ms)[0m  [1m[34mSELECT "games".* FROM "games" WHERE "games"."code" = ? LIMIT ?[0m  [["code", "NJFE"], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mGameUser Load (0.7ms)[0m  [1m[34mSELECT "game_users".* FROM "game_users" WHERE "game_users"."user_id" = ? AND "game_users"."game_id" = ? LIMIT ?[0m  [["user_id", 2], ["game_id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE Game Load (0.0ms)[0m  [1m[34mSELECT "games".* FROM "games" WHERE "games"."code" = ? LIMIT ?[0m  [["code", "NJFE"], ["LIMIT", 1]]
+  [1m[36mGameUser Load (1.0ms)[0m  [1m[34mSELECT "game_users".* FROM "game_users" WHERE "game_users"."game_id" = ?[0m  [["game_id", 4]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Game Load (0.0ms)[0m  [1m[34mSELECT "games".* FROM "games" WHERE "games"."code" = ? LIMIT ?[0m  [["code", "NJFE"], ["LIMIT", 1]]
+  [1m[36mCACHE Game Load (0.0ms)[0m  [1m[34mSELECT "games".* FROM "games" WHERE "games"."code" = ? LIMIT ?[0m  [["code", "NJFE"], ["LIMIT", 1]]
+  [1m[36mCACHE GameUser Load (0.0ms)[0m  [1m[34mSELECT "game_users".* FROM "game_users" WHERE "game_users"."user_id" = ? AND "game_users"."game_id" = ? LIMIT ?[0m  [["user_id", 2], ["game_id", 4], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering pages/grid.html.erb within layouts/application
+  Rendered pages/grid.html.erb within layouts/application (Duration: 1238.1ms | GC: 9.7ms)
+  Rendered layout layouts/application.html.erb (Duration: 2434.6ms | GC: 93.4ms)
+Completed 200 OK in 3055ms (Views: 2439.7ms | ActiveRecord: 67.4ms (9 queries, 5 cached) | GC: 101.4ms)
+
+
+Started POST "/pages/move" for 127.0.0.1 at 2024-12-06 11:51:48 -0600
+Processing by PagesController#move as */*
+  Parameters: {"x_position"=>"1", "y_position"=>"1", "page"=>{"x_position"=>"1", "y_position"=>"1"}}
+  [1m[36mGame Load (0.8ms)[0m  [1m[34mSELECT "games".* FROM "games" WHERE "games"."code" = ? LIMIT ?[0m  [["code", "NJFE"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mGameUser Load (0.8ms)[0m  [1m[34mSELECT "game_users".* FROM "game_users" WHERE "game_users"."user_id" = ? AND "game_users"."game_id" = ? LIMIT ?[0m  [["user_id", 2], ["game_id", 4], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mGameUser Update (1.4ms)[0m  [1m[33mUPDATE "game_users" SET "x_position" = ? WHERE "game_users"."id" = ?[0m  [["x_position", 1], ["id", 2]]
+  [1m[36mTRANSACTION (6.6ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 11.3ms (4 queries, 0 cached) | GC: 0.4ms)
+
+
+Started GET "/interaction?game_id=NJFE&x=1&y=1" for 127.0.0.1 at 2024-12-06 11:51:49 -0600
+Processing by InteractionsController#show as HTML
+  Parameters: {"game_id"=>"NJFE", "x"=>"1", "y"=>"1"}
+  [1m[36mGame Load (7.3ms)[0m  [1m[34mSELECT "games".* FROM "games" WHERE "games"."code" = ? LIMIT ?[0m  [["code", "NJFE"], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mGameUser Load (1.4ms)[0m  [1m[34mSELECT "game_users".* FROM "game_users" WHERE "game_users"."game_id" = ? AND "game_users"."user_id" = ? LIMIT ?[0m  [["game_id", 4], ["user_id", 2], ["LIMIT", 1]]
+  [1m[36mEnemy Load (2.8ms)[0m  [1m[34mSELECT "enemies".* FROM "enemies" WHERE "enemies"."game_id" = ? AND "enemies"."x_position" = ? AND "enemies"."y_position" = ? LIMIT ?[0m  [["game_id", 4], ["x_position", 1], ["y_position", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering interactions/show.html.erb within layouts/application
+  Rendered interactions/show.html.erb within layouts/application (Duration: 11.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 621.7ms | GC: 0.4ms)
+Completed 200 OK in 768ms (Views: 632.5ms | ActiveRecord: 18.2ms (4 queries, 0 cached) | GC: 1.5ms)
+
+
+Started GET "/grid" for 127.0.0.1 at 2024-12-06 11:51:52 -0600
+Processing by PagesController#grid as HTML
+  [1m[36mGame Load (2.2ms)[0m  [1m[34mSELECT "games".* FROM "games" WHERE "games"."code" = ? LIMIT ?[0m  [["code", "NJFE"], ["LIMIT", 1]]
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mGameUser Load (2.0ms)[0m  [1m[34mSELECT "game_users".* FROM "game_users" WHERE "game_users"."user_id" = ? AND "game_users"."game_id" = ? LIMIT ?[0m  [["user_id", 2], ["game_id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE Game Load (0.1ms)[0m  [1m[34mSELECT "games".* FROM "games" WHERE "games"."code" = ? LIMIT ?[0m  [["code", "NJFE"], ["LIMIT", 1]]
+  [1m[36mGameUser Load (1.7ms)[0m  [1m[34mSELECT "game_users".* FROM "game_users" WHERE "game_users"."game_id" = ?[0m  [["game_id", 4]]
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Game Load (0.1ms)[0m  [1m[34mSELECT "games".* FROM "games" WHERE "games"."code" = ? LIMIT ?[0m  [["code", "NJFE"], ["LIMIT", 1]]
+  [1m[36mCACHE Game Load (0.1ms)[0m  [1m[34mSELECT "games".* FROM "games" WHERE "games"."code" = ? LIMIT ?[0m  [["code", "NJFE"], ["LIMIT", 1]]
+  [1m[36mCACHE GameUser Load (0.1ms)[0m  [1m[34mSELECT "game_users".* FROM "game_users" WHERE "game_users"."user_id" = ? AND "game_users"."game_id" = ? LIMIT ?[0m  [["user_id", 2], ["game_id", 4], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering pages/grid.html.erb within layouts/application
+  Rendered pages/grid.html.erb within layouts/application (Duration: 1795.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2882.3ms | GC: 0.0ms)
+Completed 200 OK in 2924ms (Views: 2886.1ms | ActiveRecord: 8.0ms (9 queries, 5 cached) | GC: 0.0ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-12-06 11:52:00 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mGame Load (1.2ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 2]]
+  Rendered games/index.html.erb within layouts/application (Duration: 64.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1234.0ms | GC: 0.0ms)
+Completed 200 OK in 1324ms (Views: 1248.9ms | ActiveRecord: 2.0ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
