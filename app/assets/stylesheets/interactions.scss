@@ -1,40 +1,65 @@
-/* Dark mode theme */
+/* Overall dark mode styling */
 body {
   background-color: #121212;
   color: #e0e0e0;
-  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  font-family: 'Arial', sans-serif;
 }
 
 .interaction-page {
-  background-color: #1e1e1e;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
   width: 100%;
-}
-
-.interaction-header h1 {
-  margin: 0;
-  font-size: 24px;
+  background-color: #1e1e1e;
   color: #ffffff;
 }
 
-.interaction-header .position {
-  font-size: 18px;
-  color: #b0b0b0;
-  margin: 10px 0;
+/* Battle screen with background image */
+.battle-screen {
+  flex: 1;
+  background-image: url('test.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+/* Enemy and player sections side-by-side layout */
+.enemy-section,
+.player-section {
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(30, 30, 30, 0.8);
+  padding: 20px;
+  border-radius: 12px;
+  width: 45%; /* Expand the width of the sections */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.enemy-avatar,
+.player-avatar {
+  width: 40%;
+  margin: 0 20px;
+}
+
+.enemy-info,
+.player-info {
+  flex: 1;
+}
+
+/* Action buttons and return link */
+.action-footer {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #222;
 }
 
 .back-button {
-  display: inline-block;
   background-color: #f44336;
   color: #ffffff;
   padding: 10px 20px;
@@ -42,7 +67,6 @@ body {
   font-weight: bold;
   text-decoration: none;
   border-radius: 4px;
-  margin-top: 20px;
   transition: background-color 0.3s ease;
 }
 
@@ -50,45 +74,62 @@ body {
   background-color: #d32f2f;
 }
 
-/* Add a subtle hover effect for all buttons */
-button,
-.back-button {
-  cursor: pointer;
-  transition: transform 0.2s ease;
+/* Divider between return and action buttons */
+.divider {
+  height: 50px;
+  width: 2px;
+  background-color: #555;
+  margin: 0 20px;
 }
 
-button:hover,
-.back-button:hover {
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  background-color: #76c7c0;
+  color: #121212;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #5aaea0;
   transform: translateY(-2px);
 }
 
-.interaction-footer {
-  margin-top: 20px;
+button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
 }
 
+/* Progress bars */
 progress {
   width: 100%;
   height: 20px;
-  appearance: none; /* Remove default styles on progress bars */
-  background-color: #333; /* Background of the bar */
-  border-radius: 5px; /* Optional rounded corners */
+  appearance: none;
+  background-color: #333;
+  border-radius: 5px;
   overflow: hidden;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Optional subtle shadow */
 }
 
 progress::-webkit-progress-bar {
-  background-color: #444; /* Background color of the progress bar */
+  background-color: #444;
 }
 
 progress::-webkit-progress-value {
-  background-color: #76c7c0; /* Color for the progress value */
-  transition: background-color 0.3s ease; /* Optional smooth background color change */
+  background-color: #76c7c0;
+  transition: background-color 0.3s ease;
 }
 
 #player-health::-webkit-progress-value {
-  background-color: var(--health-bar-color, #66cc66); /* Default green */
+  background-color: var(--health-bar-color, #66cc66);
 }
 
 #player-health::-moz-progress-bar {
-  background-color: var(--health-bar-color, #66cc66); /* Default green */
+  background-color: var(--health-bar-color, #66cc66);
 }

@@ -1,34 +1,47 @@
 <div class="interaction-page">
-  <h1>Interaction with Enemy</h1>
-  <p>Your position: (<%= @game_user.x_position %>, <%= @game_user.y_position %>)</p>
+  <div class="battle-screen">
+    <!-- Player section -->
+    <div class="player-section">
+      <img src="<%= asset_path(@image) %>" alt="Player Avatar" class="player-avatar">
+      <div class="player-info">
+        <h3>Your Stats</h3>
+        <p>Your position: (<%= @game_user.x_position %>, <%= @game_user.y_position %>)</p>
+        <progress id="player-health" value="<%= @game_user.health %>" max="<%= @player.health %>"></progress>
+        <p>Health: <span id="player-health-text"><%= @game_user.health %> / <%= @player.health %></span></p>
+        <progress id="player-mana" value="<%= @game_user.mana %>" max="<%= @player.mana %>"></progress>
+        <p>Mana: <span id="player-mana-text"><%= @game_user.mana %> / <%= @player.mana %></span></p>
+      </div>
+      <!-- Action buttons and return link -->
+      <div class="action-footer">
+        <%= link_to 'Return to Grid', grid_path, class: 'back-button' %>
+        <div class="divider"></div>
+        <div class="action-buttons">
+          <button id="attack-button" data-game-id="<%= @game.code %>">Attack</button>
+          <button id="magic-attack-button" data-game-id="<%= @game.code %>">Magic Attack</button>
+          <button id="magic-heal-button" data-game-id="<%= @game.code %>">Magic Heal</button>
+        </div>
+      </div>
+    </div>
 
-  <div class="player-info">
-    <h3>Your Health</h3>
-    <progress id="player-health" value="<%= @game_user.health %>" max="<%= @player.health %>"></progress>
-    <p>Health: <span id="player-health-text"><%= @game_user.health %> / <%= @player.health %></span></p>
-    <h3>Your Mana</h3>
-    <progress id="player-mana" value="<%= @game_user.mana %>" max="<%= @player.mana %>"></progress>
-    <p>Mana: <span id="player-mana-text"><%= @game_user.mana %> / <%= @player.mana %></span></p>
+    <!-- Enemy section -->
+    <div class="enemy-section">
+      <img src="<%= asset_path('skeleton.png') %>" alt="Enemy Avatar" class="enemy-avatar">
+      <div class="enemy-info">
+        <h3><%= @enemy.name %></h3>
+        <p>Level: <%= @enemy.level %></p>
+        <progress id="enemy-health" value="<%= @enemy.health %>" max="<%= @enemy.max_health %>"></progress>
+        <p>Health: <span id="enemy-health-text"><%= @enemy.health %></span></p>
+        <p>Attack: <%= @enemy.attack %></p>
+        <p>Defense: <%= @enemy.defense %></p>
+        <p>IQ: <%= @enemy.iq %></p>
+        <p id="attack-message"></p>
+      </div>
+    </div>
+
+
   </div>
 
-  <div class="enemy-info">
-    <h3><%= @enemy.name %></h3>
-    <p>Level: <%= @enemy.level %></p>
-    <progress id="enemy-health" value="<%= @enemy.health %>" max="<%= @enemy.max_health %>"></progress>
-    <p>Health: <span id="enemy-health-text"><%= @enemy.health %></span></p>
-    <p>Attack: <%= @enemy.attack %></p>
-    <p>Defense: <%= @enemy.defense %></p>
-    <p>IQ: <%= @enemy.iq %></p>
-    <p id="attack-message"></p>
-  </div>
 
-  <button id="attack-button" data-game-id="<%= @game.code %>">Attack</button>
-  <button id="magic-attack-button" data-game-id="<%= @game.code %>">Magic Attack</button>
-  <button id="magic-heal-button" data-game-id="<%= @game.code %>">Magic Heal</button>
-
-  <div class="interaction-footer">
-    <%= link_to 'Return to Grid', grid_path, class: 'back-button' %>
-  </div>
 </div>
 
 <script>
