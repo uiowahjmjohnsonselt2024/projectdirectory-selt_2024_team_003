@@ -325,6 +325,8 @@ GEM
       sprockets-rails
       tilt
     securerandom (0.3.2)
+    shoulda-matchers (6.4.0)
+      activesupport (>= 5.2.0)
     sprockets (3.7.5)
       base64
       concurrent-ruby (~> 1.0)
@@ -408,6 +410,7 @@ DEPENDENCIES
   rails_12factor
   rspec-rails
   sass-rails (~> 5.0)
+  shoulda-matchers
   sqlite3 (~> 2.1)
   terser
   turbolinks (~> 5)

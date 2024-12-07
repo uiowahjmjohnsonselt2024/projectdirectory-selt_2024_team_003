@@ -8,13 +8,18 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 require 'webmock/rspec'
 
-# Add additional requires below this line. Rails is not loaded until this point!
+# Add Shoulda Matchers configuration
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
 
 # Requires supporting ruby files with custom matchers and macros, etc., in spec/support/ and its subdirectories.
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
-# If you are not using ActiveRecord, you can remove these lines.
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
@@ -32,7 +37,7 @@ RSpec.configure do |config|
   # Set up fixtures path
   config.fixture_paths = ["#{::Rails.root}/spec/fixtures"]
 
-  # Use transactional fixtures for ActiveRecord
+  # Use transactional fixtures
   config.use_transactional_fixtures = true
 
   # Automatically infer spec types from file locations
