@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :inverse_friends, through: :inverse_friendships, source: :user
   has_many :sent_messages, class_name: "Message", foreign_key: "user_id"
   has_many :received_messages, class_name: "Message", foreign_key: "recipient_id"
+  has_many :skins, dependent: :destroy
 
   # Validations
   validates :health, :attack, :defense, :iq, presence: true, numericality: { only_integer: true }

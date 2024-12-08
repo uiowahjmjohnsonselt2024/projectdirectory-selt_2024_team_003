@@ -1,9 +1,11 @@
-#NOTE: http://localhost:3000/ai_generated_skins/new is route
 class AiGeneratedSkinsController < ApplicationController
   require 'net/http'
   require 'json'
   require 'mini_magick'
   require 'open-uri'
+
+  before_action :check_skin_limit, only: [:generate]
+
   def new
     # This action simply renders the form
   end
@@ -23,7 +25,7 @@ class AiGeneratedSkinsController < ApplicationController
     http.use_ssl = true
 
     request = Net::HTTP::Post.new(uri)
-    request['Authorization'] = "Bearer #{ENV['OPENAI_API_KEY']}"
+    request['Authorization'] = "Bearer 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"
     request['Content-Type'] = "application/json"
     request.body = {
       prompt: "#{character_description} in retro animated style, featuring vibrant colors like red, green, and yellow, " \
@@ -57,6 +59,14 @@ class AiGeneratedSkinsController < ApplicationController
   end
 
   private
+
+  # Check if the user has reached the 3-skin limit
+  def check_skin_limit
+    if current_user.skins.count >= 3
+      flash[:notice] = "You already have 3 skins in your inventory. Please delete one before creating a new one."
+      redirect_to inventory_index_path
+    end
+  end
 
   # Fetch and process the image entirely in memory
   def process_image(image_url)

@@ -1,0 +1,24 @@
+<div class="inventory-page-container">
+  <%= link_to "Back to Profile", account_path, class: "back-button" %>
+
+  <h1>Your Inventory</h1>
+
+  <div class="skins-container">
+    <% @skins.each do |skin| %>
+      <div class="skin-item <%= 'current-skin' if skin.current %>">
+        <% if skin.image.attached? %>
+          <%= image_tag skin.image, class: "skin-image", alt: "Skin" %>
+        <% else %>
+          <p class="no-image-placeholder">No image available</p>
+        <% end %>
+        <div class="skin-info">
+          <% if skin.current %>
+            <span class="current-badge">Current Skin</span>
+          <% else %>
+            <%= button_to "Set as Current", set_current_inventory_path(skin), method: :patch, class: "set-current-button" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

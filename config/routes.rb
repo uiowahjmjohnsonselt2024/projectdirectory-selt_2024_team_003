@@ -47,6 +47,17 @@ Rails.application.routes.draw do
   # Route to handle the form submission and generate the image
   post 'ai_generated_skins/generate', to: 'ai_generated_skins#generate', as: 'generate_ai_generated_skin'
 
+  resources :inventory, only: [:index, :create] do
+    collection do
+      post :add, to: 'inventory#add' # Route for adding a new skin
+    end
+
+    member do
+      patch :set_current, to: 'inventory#set_current' # Route for setting a current skin
+    end
+  end
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
