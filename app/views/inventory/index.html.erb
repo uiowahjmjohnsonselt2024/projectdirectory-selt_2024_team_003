@@ -16,6 +16,7 @@
             <span class="current-badge">Current Skin</span>
           <% else %>
             <%= button_to "Set as Current", set_current_inventory_path(skin), method: :patch, class: "set-current-button" %>
+            <%= button_to "Remove", inventory_path(skin), method: :delete, data: { confirm: "Are you sure you want to remove this skin?" }, class: "remove-skin-button" %>
           <% end %>
         </div>
       </div>

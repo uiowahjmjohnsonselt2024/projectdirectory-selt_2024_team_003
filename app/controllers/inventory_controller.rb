@@ -41,7 +41,18 @@ class InventoryController < ApplicationController
 
     redirect_to inventory_index_path
   rescue ActiveRecord::RecordNotFound
-    # Handle invalid skin ID
-    redirect_to inventory_index_path, alert: "Skin not found."
+    redirect_to inventory_index_path
+  end
+
+  # Action to delete a skin
+  def destroy
+    skin = current_user.skins.find(params[:id]) # Ensure the skin belongs to the logged-in user
+    if skin.destroy
+      redirect_to inventory_index_path
+    else
+      redirect_to inventory_index_path
+    end
+  rescue ActiveRecord::RecordNotFound
+    redirect_to inventory_index_path
   end
 end

@@ -47,15 +47,17 @@ Rails.application.routes.draw do
   # Route to handle the form submission and generate the image
   post 'ai_generated_skins/generate', to: 'ai_generated_skins#generate', as: 'generate_ai_generated_skin'
 
-  resources :inventory, only: [:index, :create] do
+  resources :inventory, only: [:index, :create, :destroy] do
     collection do
       post :add, to: 'inventory#add' # Route for adding a new skin
     end
 
     member do
       patch :set_current, to: 'inventory#set_current' # Route for setting a current skin
+      delete :destroy, to: 'inventory#destroy' # Route for removing a skin
     end
   end
+
 
 
 
