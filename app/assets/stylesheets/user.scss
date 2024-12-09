@@ -453,3 +453,33 @@ ul li:hover {
 #friends-list-container .chat-button:active {
   background-color: #1e7e34; /* Even darker green on click */
 }
+
+
+.account-inventory-button {
+  background-color: #ffc107; /* Yellow for the inventory button */
+  color: #1a1a1d; /* Dark text color for contrast */
+  border: none;
+  padding: 14px 20px; /* Padding for height and width */
+  border-radius: 8px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 16px; /* Adequate font size */
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+  width: auto; /* Allow button to size dynamically based on text */
+  min-width: 120px; /* Set a minimum width to ensure readability */
+  text-decoration: none;
+  white-space: nowrap; /* Prevent text from wrapping */
+  box-sizing: border-box;
+}
+
+.account-inventory-button:hover {
+  background-color: #e0a800; /* Darker yellow on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.account-inventory-button:active {
+  background-color: #c69500; /* Even darker yellow on click */
+}
+

@@ -33,7 +33,10 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
-  # gem 'webmock'
+  gem 'webmock'
+  gem 'devise'
+  gem 'rails-controller-testing'
+  gem 'shoulda-matchers'
   # gem 'capybara'
   # gem 'selenium-webdriver'
 end

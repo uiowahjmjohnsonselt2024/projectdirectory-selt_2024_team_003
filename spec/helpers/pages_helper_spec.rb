@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
+# Specs in this files have access to a helper object that includes
 # the PagesHelper. For example:
 #
 # describe PagesHelper do
