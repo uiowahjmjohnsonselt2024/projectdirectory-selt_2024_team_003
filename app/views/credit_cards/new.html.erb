@@ -1,0 +1,27 @@
+<!-- app/views/credit_cards/new.html.erb -->
+<h1>Add Credit Card</h1>
+
+<% if @credit_card.errors.any? %>
+  <div class="error">
+    <p><%= @credit_card.errors.full_messages.first %></p>
+  </div>
+<% end %>
+
+<%= form_with model: @credit_card, url: credit_card_path, method: :post, local: true do |form| %>
+  <div>
+    <%= form.label :card_number, "Card Number" %>
+    <%= form.text_field :card_number, maxlength: 16, placeholder: "Enter 16-digit card number", class: 'credit-card-input' %>
+  </div>
+  <div>
+    <%= form.label :expiration_month, "Expiration Month" %>
+    <%= form.number_field :expiration_month, in: 1..12 %>
+  </div>
+  <div>
+    <%= form.label :expiration_year, "Expiration Year" %>
+    <%= form.number_field :expiration_year, min: Date.today.year %>
+  </div>
+  <%= form.submit "Save Card" %>
+<% end %>
+
+<%= link_to "Back", games_path %>
+

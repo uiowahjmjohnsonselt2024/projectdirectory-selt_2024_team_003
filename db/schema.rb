@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_03_202119) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_09_192445) do
+  create_table "credit_cards", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "last4"
+    t.integer "expiration_month"
+    t.integer "expiration_year"
+    t.string "card_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_credit_cards_on_user_id"
+  end
+
   create_table "enemies", force: :cascade do |t|
     t.string "name"
     t.integer "health", default: 300
@@ -86,6 +97,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_202119) do
     t.json "achievements"
   end
 
+  add_foreign_key "credit_cards", "users"
   add_foreign_key "enemies", "games"
   add_foreign_key "messages", "users"
 end

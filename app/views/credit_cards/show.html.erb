@@ -1,0 +1,10 @@
+<!-- app/views/credit_cards/show.html.erb -->
+<h1>Your Credit Card</h1>
+<div id="credit-card-info">
+    <p>Card Type: <%= @credit_card.card_type %></p>
+    <p>Card Number: **** **** **** <%= @credit_card.last4 %></p>
+    <p>Expiration Date: <%= @credit_card.expiration_month %>/<%= @credit_card.expiration_year %></p>
+</div>
+<%= link_to 'Edit Card', edit_credit_card_path %>
+<%= link_to "Back", games_path %>
+

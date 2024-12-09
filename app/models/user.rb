@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :inverse_friends, through: :inverse_friendships, source: :user
   has_many :sent_messages, class_name: "Message", foreign_key: "user_id"
   has_many :received_messages, class_name: "Message", foreign_key: "recipient_id"
+  has_one :credit_card, dependent: :destroy
 
   # Validations
   validates :health, :attack, :defense, :iq, presence: true, numericality: { only_integer: true }
@@ -119,6 +120,11 @@ class User < ActiveRecord::Base
       achievement = milestones[level]
       add_achievement(achievement)
     end
+  end
+
+  # Returns true if the user has a credit card, false otherwise.
+  def has_credit_card?
+    credit_card.present?
   end
 end
 
