@@ -158,7 +158,7 @@
 
     .header
       .shards
-        Shards: 1000
+        Shards: #{current_user.shards}
         %img{ src: asset_path("gem1.gif"), alt: "Shards Icon" }
       .tabs
         %button{ class: "active", onclick: "showCategory('shards')" } Shards
@@ -180,103 +180,193 @@
           %option{ value: "INR" } INR
           %option{ value: "CNY" } CNY
           %option{ value: "BRL" } BRL
-      .item-list{ id: "shards-list" }
-        .item
-          %img{ src: asset_path("gem1.gif"), alt: "Shard Item 1" }
-          %h3 5 Shards
-          %p{ class: "price", "data-usd": "3.75" } Price: $3.75
-          %p.description A small shard pack, perfect for minor upgrades.
-          %button Purchase
+.item-list{ id: "shards-list" }
+  .item
+    %img{ src: asset_path("gem1.gif"), alt: "Shard Item 1" }
+    %h3 5 Shards
+    %p{ class: "price", "data-usd": "3.75" } Price: $3.75
+    %p.description A small shard pack, perfect for minor upgrades.
+    %button{ class: "purchase-shard" } Purchase
 
-        .item
-          %img{ src: asset_path("gem2.gif"), alt: "Shard Item 2" }
-          %h3 20 Shards
-          %p{ class: "price", "data-usd": "15.00" } Price: $15.00
-          %p.description A medium-sized shard pack, ideal for moderate upgrades.
-          %button Purchase
+  .item
+    %img{ src: asset_path("gem2.gif"), alt: "Shard Item 2" }
+    %h3 20 Shards
+    %p{ class: "price", "data-usd": "15.00" } Price: $15.00
+    %p.description A medium-sized shard pack, ideal for moderate upgrades.
+    %button{ class: "purchase-shard" } Purchase
 
-        .item
-          %img{ src: asset_path("gem3.gif"), alt: "Shard Item 3" }
-          %h3 100 Shards
-          %p{ class: "price", "data-usd": "75.00" } Price: $75.00
-          %p.description A large shard pack, perfect for powerful upgrades.
-          %button Purchase
-        .item
-          %img{ src: asset_path("money.gif"), alt: "Shard Item 4" }
-          %h3
-            %input{ type: "number", id: "custom-shards-input", min: "1", value: "5000", onchange: "updateCustomPrice()" }
-            Shards
-          %p{ id: "custom-price", "data-usd": "0.003", "data-eur": "0.0027", "data-gbp": "0.0024" } Price: $15.00
-          %p.description Enter a custom amount and choose denomination.
-          %button Purchase
+  .item
+    %img{ src: asset_path("gem3.gif"), alt: "Shard Item 3" }
+    %h3 100 Shards
+    %p{ class: "price", "data-usd": "75.00" } Price: $75.00
+    %p.description A large shard pack, perfect for powerful upgrades.
+    %button{ class: "purchase-shard" } Purchase
 
-      .item-list{ id: "avatars-list", style: "display:none" }
-        .item
-          %img{ src: asset_path("openailogo.gif"), alt: "AI Generated Avatar" }
-          %h3 AI Generated Avatar
-          %p Price: 10 Shards
-          %p.description Create a unique avatar using AI technology.
-          %button{ onclick: "location.href='/ai_generated_skins/new'" } Create Avatar
+  .item
+    %img{ src: asset_path("money.gif"), alt: "Shard Item 4" }
+    %h3
+      %input{ type: "number", id: "custom-shards-input", min: "1", value: "5000", onchange: "updateCustomPrice()" }
+      Shards
+    %p{ id: "custom-price", "data-usd": "0.003", "data-eur": "0.0027", "data-gbp": "0.0024" } Price: $15.00
+    %p.description Enter a custom amount and choose denomination.
+    %button{ class: "purchase-shard" } Purchase
 
-      .item-list{ id: "consumables-list", style: "display:none" }
-        .item
-          %img{ src: asset_path("healthPotion.gif"), alt: "Potion 1" }
-          %h3 Health Potion
-          %p Price: 100 Shards
-          %p.description Restores health over time.
-          %button Purchase
-        .item
-          %img{ src: asset_path("acidPotion.gif"), alt: "Potion 2" }
-          %h3 Acid Potion
-          %p Price: 150 Shards
-          %p.description Deals damage to enemies upon contact.
-          %button Purchase
-        .item
-          %img{ src: asset_path("revive.gif"), alt: "Potion 2" }
-          %h3 Revive
-          %p Price: 150 Shards
-          %p.description Revives a fallen ally.
-          %button Purchase
-        .item
-          %img{ src: asset_path("invisibilityPotion.gif"), alt: "Potion 3" }
-          %h3 Invisibility Potion
-          %p Price: 150 Shards
-          %p.description Grants temporary invisibility.
-          %button Purchase
+.item-list{ id: "avatars-list", style: "display:none" }
+  .item
+    %img{ src: asset_path("openailogo.gif"), alt: "AI Generated Avatar" }
+    %h3 AI Generated Avatar
+    %p Price: 10 Shards
+    %p.description Create a unique avatar using AI technology.
+    %button{ class: "purchase-item" } Create Avatar
 
-      .item-list{ id: "weapons-list", style: "display:none" }
-        .item
-          %img{ src: asset_path("sword.gif"), alt: "Utility Item 1" }
-          %h3 Sword
-          %p Price: 250 Shards
-          %p.description A close combat weapon with high damage.
-          %button Purchase
-        .item
-          %img{ src: asset_path("flameSword.gif"), alt: "Utility Item 1" }
-          %h3 Flame Sword
-          %p Price: 250 Shards
-          %p.description A flaming close combat weapon.
-          %button Purchase
-        .item
-          %img{ src: asset_path("bowAndArrow.gif"), alt: "Utility Item 1" }
-          %h3 Bow and Arrow
-          %p Price: 250 Shards
-          %p.description A ranged weapon for quick attacks.
-          %button Purchase
-        .item
-          %img{ src: asset_path("shotgun.gif"), alt: "Utility Item 1" }
-          %h3 Shotgun
-          %p Price: 250 Shards
-          %p.description A close combat weapon with high damage.
-          %button Purchase
-        .item
-          %img{ src: asset_path("sniper.gif"), alt: "Utility Item 2" }
-          %h3 Sniper
-          %p Price: 400 Shards
-          %p.description A long-range weapon for precise shots.
-          %button Purchase
+.item-list{ id: "consumables-list", style: "display:none" }
+  .item
+    %img{ src: asset_path("healthPotion.gif"), alt: "Potion 1" }
+    %h3 Health Potion
+    %p Price: 100 Shards
+    %p.description Restores health over time.
+    %button{ class: "purchase-item" } Purchase
+
+  .item
+    %img{ src: asset_path("acidPotion.gif"), alt: "Potion 2" }
+    %h3 Acid Potion
+    %p Price: 150 Shards
+    %p.description Deals damage to enemies upon contact.
+    %button{ class: "purchase-item" } Purchase
+
+  .item
+    %img{ src: asset_path("revive.gif"), alt: "Potion 2" }
+    %h3 Revive
+    %p Price: 150 Shards
+    %p.description Revives a fallen ally.
+    %button{ class: "purchase-item" } Purchase
+
+  .item
+    %img{ src: asset_path("invisibilityPotion.gif"), alt: "Potion 3" }
+    %h3 Invisibility Potion
+    %p Price: 150 Shards
+    %p.description Grants temporary invisibility.
+    %button{ class: "purchase-item" } Purchase
+
+.item-list{ id: "weapons-list", style: "display:none" }
+  .item
+    %img{ src: asset_path("sword.gif"), alt: "Utility Item 1" }
+    %h3 Sword
+    %p Price: 250 Shards
+    %p.description A close combat weapon with high damage.
+    %button{ class: "purchase-item" } Purchase
+
+  .item
+    %img{ src: asset_path("flameSword.gif"), alt: "Utility Item 1" }
+    %h3 Flame Sword
+    %p Price: 250 Shards
+    %p.description A flaming close combat weapon.
+    %button{ class: "purchase-item" } Purchase
+
+  .item
+    %img{ src: asset_path("bowAndArrow.gif"), alt: "Utility Item 1" }
+    %h3 Bow and Arrow
+    %p Price: 250 Shards
+    %p.description A ranged weapon for quick attacks.
+    %button{ class: "purchase-item" } Purchase
+
+  .item
+    %img{ src: asset_path("shotgun.gif"), alt: "Utility Item 1" }
+    %h3 Shotgun
+    %p Price: 250 Shards
+    %p.description A close combat weapon with high damage.
+    %button{ class: "purchase-item" } Purchase
+
+  .item
+    %img{ src: asset_path("sniper.gif"), alt: "Utility Item 2" }
+    %h3 Sniper
+    %p Price: 400 Shards
+    %p.description A long-range weapon for precise shots.
+    %button{ class: "purchase-item" } Purchase
 
     :javascript
+      // Function to show popups
+      function showPopup(message, isSuccess = true) {
+        const popup = document.createElement('div');
+        popup.className = isSuccess ? 'popup success' : 'popup error';
+        popup.innerText = message;
+        document.body.appendChild(popup);
+
+        setTimeout(() => popup.remove(), 3000); // Remove popup after 3 seconds
+      }
+
+      // Logic for purchasing shards (preserved from the original code)
+      document.querySelectorAll('.purchase-shard').forEach(button => {
+        button.addEventListener('click', async () => {
+          const item = button.closest('.item'); // Locate the parent .item
+          let shardCount;
+
+          // Check if the item is a shard purchase item (custom shards input or predefined price)
+          if (item.querySelector('#custom-shards-input')) {
+            const inputElement = item.querySelector('#custom-shards-input');
+            shardCount = parseInt(inputElement.value);
+          } else {
+            const shardCountElement = item.querySelector('h3');
+            shardCount = parseInt(shardCountElement.innerText.match(/\d+/)[0]);
+          }
+
+          console.log('Shard count:', shardCount); // Debug log
+
+          // Send POST request to purchase shards
+          const response = await fetch('/store/purchase_shards', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({ shard_count: shardCount })
+          });
+
+          const result = await response.json();
+          console.log('Server response:', result); // Debug log
+
+          if (result.success) {
+            showPopup(`Successfully purchased ${shardCount} shards!`, true);
+            document.querySelector('.shards').innerText = `Shards: ${result.shards}`;
+          } else {
+            showPopup(result.message, false);
+          }
+        });
+      });
+
+      // Logic for purchasing items (avatars, consumables, and weapons)
+      document.querySelectorAll('.purchase-item').forEach((button) => {
+        button.addEventListener('click', async function (e) {
+          const item = e.target.closest('.item');
+          const itemPrice = parseInt(item.querySelector('p').textContent.match(/\d+/)[0]); // Extract price
+          const itemType = item.querySelector('h3').textContent.trim(); // Extract item type
+
+          // Send request to backend to check if the user has enough shards for the item purchase
+          const response = await fetch('/store/purchase_item', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({
+              itemType: itemType,
+              itemPrice: itemPrice
+            }),
+          });
+
+          const result = await response.json();
+          console.log('Item purchase response:', result); // Debug log
+
+          if (result.success) {
+            showPopup(`${itemType} purchased successfully!`, true);
+            document.querySelector('.shards').innerText = `Shards: ${result.shards}`;
+          } else {
+            showPopup(`Insufficient funds for ${itemType}.`, false);
+          }
+        });
+      });
+
+
       function showCategory(category) {
         document.querySelectorAll('.item-list').forEach(list => {
           list.style.display = 'none';

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_08_214700) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_10_014455) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -119,6 +119,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_08_214700) do
     t.integer "mana"
     t.integer "special_attack"
     t.integer "special_defense"
+    t.integer "shards", default: 0, null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
