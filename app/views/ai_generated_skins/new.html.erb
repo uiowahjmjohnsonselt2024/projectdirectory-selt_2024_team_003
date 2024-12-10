@@ -1,11 +1,7 @@
 <div id="ai-generated-skins-page">
   <!-- Back Button -->
   <div class="back-button-container">
-    <button onclick="location.href='<%= new_ai_generated_skin_path %>'"
-            class="back-button"
-            aria-label="Back to Store">
-      Back to Store
-    </button>
+    <%= link_to "Back to Store", store_path, class: "back-button", aria: { label: "Back to Store" } %>
   </div>
 
   <div class="ai-content-wrapper">

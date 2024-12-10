@@ -966,3 +966,843 @@ Processing by GamesController#index as HTML
 Completed 200 OK in 1324ms (Views: 1248.9ms | ActiveRecord: 2.0ms (2 queries, 0 cached) | GC: 0.0ms)
 
 
+DEPRECATION WARNING: `to_time` will always preserve the receiver timezone rather than system local time in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/config/initializers/to_time_preserves_timezone.rb:10)
+DEPRECATION WARNING: `to_time` will always preserve the receiver timezone rather than system local time in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/config/initializers/to_time_preserves_timezone.rb:10)
+DEPRECATION WARNING: `to_time` will always preserve the receiver timezone rather than system local time in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/config/initializers/to_time_preserves_timezone.rb:10)
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_attachments"[0m
+  [1m[35m (6.5ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "record_type" varchar NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" datetime(6) NOT NULL)[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id")[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_blobs"[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "key" varchar NOT NULL, "filename" varchar NOT NULL, "content_type" varchar, "metadata" text, "service_name" varchar NOT NULL, "byte_size" bigint NOT NULL, "checksum" varchar, "created_at" datetime(6) NOT NULL)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_blobs_on_key" ON "active_storage_blobs" ("key")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_variant_records"[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "blob_id" bigint NOT NULL, "variation_digest" varchar NOT NULL)[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "enemies"[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "enemies" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "health" integer DEFAULT 300, "attack" integer DEFAULT 20, "defense" integer DEFAULT 10, "iq" integer DEFAULT 5, "game_id" integer, "x_position" integer, "y_position" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "max_health" integer DEFAULT 300, "level" integer DEFAULT 0, "special_attack" integer, "special_defense" integer, "mana" integer, "max_mana" integer)[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE INDEX "index_enemies_on_game_id" ON "enemies" ("game_id")[0m
+  [1m[35m (2.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "friendships"[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "friendships" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "friend_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE INDEX "index_friendships_on_friend_id" ON "friendships" ("friend_id")[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE INDEX "index_friendships_on_user_id" ON "friendships" ("user_id")[0m
+  [1m[35m (3.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "game_users"[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "game_users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "game_id" integer, "x_position" integer DEFAULT 0, "y_position" integer DEFAULT 0, "health" integer DEFAULT 100, "level" integer DEFAULT 1, "mana" integer)[0m
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE INDEX "index_game_users_on_game_id" ON "game_users" ("game_id")[0m
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE INDEX "index_game_users_on_user_id" ON "game_users" ("user_id")[0m
+  [1m[35m (2.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "games"[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "games" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "code" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (2.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "messages"[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "content" text, "user_id" integer NOT NULL, "recipient_id" integer NOT NULL, "read" boolean DEFAULT 0, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (5.4ms)[0m  [1m[35mCREATE INDEX "index_messages_on_user_id" ON "messages" ("user_id")[0m
+  [1m[35m (3.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "skins"[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "skins" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "current" boolean)[0m
+  [1m[35m (8.3ms)[0m  [1m[35mCREATE INDEX "index_skins_on_user_id" ON "skins" ("user_id")[0m
+  [1m[35m (3.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar, "email" varchar, "password_digest" varchar, "health" integer DEFAULT 100, "attack" integer DEFAULT 10, "defense" integer DEFAULT 5, "iq" integer DEFAULT 1, "archetype" varchar, "level" integer DEFAULT 1, "experience" integer DEFAULT 0, "mana" integer, "special_attack" integer, "special_defense" integer)[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35mSQL (1.7ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aactive_storage_attachments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "record_type" varchar NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_aactive_storage_attachments_uniqueness" ON "aactive_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_aactive_storage_attachments_on_blob_id" ON "aactive_storage_attachments" ("blob_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "aactive_storage_attachments" ("id","name","record_type","record_id","blob_id","created_at")
+                     SELECT "id","name","record_type","record_id","blob_id","created_at" FROM "active_storage_attachments"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "active_storage_attachments"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "record_type" varchar NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("id","name","record_type","record_id","blob_id","created_at")
+                     SELECT "id","name","record_type","record_id","blob_id","created_at" FROM "aactive_storage_attachments"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aactive_storage_attachments"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (3.2ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aactive_storage_variant_records" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "blob_id" bigint NOT NULL, "variation_digest" varchar NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_aactive_storage_variant_records_uniqueness" ON "aactive_storage_variant_records" ("blob_id", "variation_digest")[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "aactive_storage_variant_records" ("id","blob_id","variation_digest")
+                     SELECT "id","blob_id","variation_digest" FROM "active_storage_variant_records"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "active_storage_variant_records"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "blob_id" bigint NOT NULL, "variation_digest" varchar NOT NULL, CONSTRAINT "fk_rails_993965df05"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest")[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "active_storage_variant_records" ("id","blob_id","variation_digest")
+                     SELECT "id","blob_id","variation_digest" FROM "aactive_storage_variant_records"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aactive_storage_variant_records"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aenemies" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "health" integer DEFAULT 300, "attack" integer DEFAULT 20, "defense" integer DEFAULT 10, "iq" integer DEFAULT 5, "game_id" integer, "x_position" integer, "y_position" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "max_health" integer DEFAULT 300, "level" integer DEFAULT 0, "special_attack" integer, "special_defense" integer, "mana" integer, "max_mana" integer)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_aenemies_on_game_id" ON "aenemies" ("game_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "aenemies" ("id","name","health","attack","defense","iq","game_id","x_position","y_position","created_at","updated_at","max_health","level","special_attack","special_defense","mana","max_mana")
+                     SELECT "id","name","health","attack","defense","iq","game_id","x_position","y_position","created_at","updated_at","max_health","level","special_attack","special_defense","mana","max_mana" FROM "enemies"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "enemies"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "enemies" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "health" integer DEFAULT 300, "attack" integer DEFAULT 20, "defense" integer DEFAULT 10, "iq" integer DEFAULT 5, "game_id" integer, "x_position" integer, "y_position" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "max_health" integer DEFAULT 300, "level" integer DEFAULT 0, "special_attack" integer, "special_defense" integer, "mana" integer, "max_mana" integer, CONSTRAINT "fk_rails_a9efd1752c"
+FOREIGN KEY ("game_id")
+  REFERENCES "games" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_enemies_on_game_id" ON "enemies" ("game_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "enemies" ("id","name","health","attack","defense","iq","game_id","x_position","y_position","created_at","updated_at","max_health","level","special_attack","special_defense","mana","max_mana")
+                     SELECT "id","name","health","attack","defense","iq","game_id","x_position","y_position","created_at","updated_at","max_health","level","special_attack","special_defense","mana","max_mana" FROM "aenemies"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "aenemies"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "afriendships" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "friend_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_afriendships_on_user_id" ON "afriendships" ("user_id")[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE INDEX "tindex_afriendships_on_friend_id" ON "afriendships" ("friend_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "afriendships" ("id","user_id","friend_id","created_at","updated_at")
+                     SELECT "id","user_id","friend_id","created_at","updated_at" FROM "friendships"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "friendships"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "friendships" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "friend_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_e3733b59b7"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_friendships_on_friend_id" ON "friendships" ("friend_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_friendships_on_user_id" ON "friendships" ("user_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "friendships" ("id","user_id","friend_id","created_at","updated_at")
+                     SELECT "id","user_id","friend_id","created_at","updated_at" FROM "afriendships"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "afriendships"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "afriendships" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "friend_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_afriendships_on_user_id" ON "afriendships" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_afriendships_on_friend_id" ON "afriendships" ("friend_id")[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "afriendships" ("id","user_id","friend_id","created_at","updated_at")
+                     SELECT "id","user_id","friend_id","created_at","updated_at" FROM "friendships"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "friendships"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "friendships" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "friend_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_e3733b59b7"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_d78dc9c7fd"
+FOREIGN KEY ("friend_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_friendships_on_friend_id" ON "friendships" ("friend_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_friendships_on_user_id" ON "friendships" ("user_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "friendships" ("id","user_id","friend_id","created_at","updated_at")
+                     SELECT "id","user_id","friend_id","created_at","updated_at" FROM "afriendships"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "afriendships"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "agame_users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "game_id" integer, "x_position" integer DEFAULT 0, "y_position" integer DEFAULT 0, "health" integer DEFAULT 100, "level" integer DEFAULT 1, "mana" integer)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_agame_users_on_user_id" ON "agame_users" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_agame_users_on_game_id" ON "agame_users" ("game_id")[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "agame_users" ("id","user_id","game_id","x_position","y_position","health","level","mana")
+                     SELECT "id","user_id","game_id","x_position","y_position","health","level","mana" FROM "game_users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "game_users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "game_users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "game_id" integer, "x_position" integer DEFAULT 0, "y_position" integer DEFAULT 0, "health" integer DEFAULT 100, "level" integer DEFAULT 1, "mana" integer, CONSTRAINT "fk_rails_e6cf04db31"
+FOREIGN KEY ("game_id")
+  REFERENCES "games" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_game_users_on_game_id" ON "game_users" ("game_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_game_users_on_user_id" ON "game_users" ("user_id")[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "game_users" ("id","user_id","game_id","x_position","y_position","health","level","mana")
+                     SELECT "id","user_id","game_id","x_position","y_position","health","level","mana" FROM "agame_users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "agame_users"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "agame_users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "game_id" integer, "x_position" integer DEFAULT 0, "y_position" integer DEFAULT 0, "health" integer DEFAULT 100, "level" integer DEFAULT 1, "mana" integer)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_agame_users_on_user_id" ON "agame_users" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_agame_users_on_game_id" ON "agame_users" ("game_id")[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "agame_users" ("id","user_id","game_id","x_position","y_position","health","level","mana")
+                     SELECT "id","user_id","game_id","x_position","y_position","health","level","mana" FROM "game_users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "game_users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "game_users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "game_id" integer, "x_position" integer DEFAULT 0, "y_position" integer DEFAULT 0, "health" integer DEFAULT 100, "level" integer DEFAULT 1, "mana" integer, CONSTRAINT "fk_rails_e6cf04db31"
+FOREIGN KEY ("game_id")
+  REFERENCES "games" ("id")
+, CONSTRAINT "fk_rails_2a73dba9dd"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_game_users_on_game_id" ON "game_users" ("game_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_game_users_on_user_id" ON "game_users" ("user_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "game_users" ("id","user_id","game_id","x_position","y_position","health","level","mana")
+                     SELECT "id","user_id","game_id","x_position","y_position","health","level","mana" FROM "agame_users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "agame_users"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "amessages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "content" text, "user_id" integer NOT NULL, "recipient_id" integer NOT NULL, "read" boolean DEFAULT 0, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_amessages_on_user_id" ON "amessages" ("user_id")[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "amessages" ("id","content","user_id","recipient_id","read","created_at","updated_at")
+                     SELECT "id","content","user_id","recipient_id","read","created_at","updated_at" FROM "messages"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "messages"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "content" text, "user_id" integer NOT NULL, "recipient_id" integer NOT NULL, "read" boolean DEFAULT 0, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_273a25a7a6"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_messages_on_user_id" ON "messages" ("user_id")[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "messages" ("id","content","user_id","recipient_id","read","created_at","updated_at")
+                     SELECT "id","content","user_id","recipient_id","read","created_at","updated_at" FROM "amessages"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "amessages"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "askins" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "current" boolean)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_askins_on_user_id" ON "askins" ("user_id")[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "askins" ("id","user_id","created_at","updated_at","current")
+                     SELECT "id","user_id","created_at","updated_at","current" FROM "skins"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "skins"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "skins" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "current" boolean, CONSTRAINT "fk_rails_6293d5d6ec"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_skins_on_user_id" ON "skins" ("user_id")[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "skins" ("id","user_id","created_at","updated_at","current")
+                     SELECT "id","user_id","created_at","updated_at","current" FROM "askins"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "askins"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20241208214700)[0m
+  [1m[35m (3.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20241205230322),
+(20241129042648),
+(20241129031001),
+(20241129030957),
+(20241128044702),
+(20241128040845),
+(20241128035348),
+(20241128035336),
+(20241127231848),
+(20241127225514),
+(20241127215327),
+(20241127183323),
+(20241127183030),
+(20241127034623),
+(20241126234149),
+(20241126011027),
+(20241117193936),
+(20241115003605),
+(20241114165743),
+(20241111204228);[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (1.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-12-09 23:35:03.436446', '2024-12-09 23:35:03.436449') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (1.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '7b6ba3066d8082777f08a3298c855c78f615a83f', '2024-12-09 23:35:03.442273', '2024-12-09 23:35:03.442276') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: `to_time` will always preserve the receiver timezone rather than system local time in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/config/environment.rb:5)
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/config/initializers/to_time_preserves_timezone.rb:10)
+Started GET "/" for 127.0.0.1 at 2024-12-09 17:38:23 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (19.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.haml within layouts/application
+  Rendered home/index.html.haml within layouts/application (Duration: 40339.6ms | GC: 181.6ms)
+  Rendered layout layouts/application.html.erb (Duration: 41818.1ms | GC: 181.7ms)
+Completed 200 OK in 42095ms (Views: 41900.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 181.7ms)
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-12-09 17:41:42 -0600
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-12-09 17:41:44 -0600
+Started GET "/create" for 127.0.0.1 at 2024-12-09 17:41:45 -0600
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.html.erb within layouts/application
+  Rendered registrations/new.html.erb within layouts/application (Duration: 162.3ms | GC: 0.0ms)
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-12-09 17:41:47 -0600
+  Rendered layout layouts/application.html.erb (Duration: 893.2ms | GC: 103.1ms)
+Completed 200 OK in 1188ms (Views: 899.6ms | ActiveRecord: 70.9ms (0 queries, 0 cached) | GC: 103.1ms)
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-12-09 17:41:48 -0600
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-12-09 17:41:50 -0600
+Started POST "/signup" for 127.0.0.1 at 2024-12-09 17:42:00 -0600
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"GgsMlgZGAr90nWLKYl74AOp7yQB8JnHeedMqrjyZUEvB1uaVXpuQJRfa814WNXVxzjUAe8rNOH2ZM5x6Pwm_nA", "user"=>{"username"=>"user", "email"=>"user@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign Up"}
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mUser Exists? (8.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "user"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "user@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (2.9ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?) RETURNING "id"[0m  [["username", "user"], ["email", "user@gmail.com"], ["password_digest", "[FILTERED]"]]
+  [1m[36mTRANSACTION (12.4ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Redirected to http://localhost:3000/selections
+Completed 302 Found in 703ms (ActiveRecord: 26.0ms (3 queries, 0 cached) | GC: 23.7ms)
+
+
+Started GET "/selections" for 127.0.0.1 at 2024-12-09 17:42:02 -0600
+Processing by SelectionsController#index as HTML
+  [1m[36mUser Load (9.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering selections/index.html.erb within layouts/application
+  Rendered selections/index.html.erb within layouts/application (Duration: 325.5ms | GC: 14.7ms)
+  Rendered layout layouts/application.html.erb (Duration: 1543.7ms | GC: 21.7ms)
+Completed 200 OK in 1599ms (Views: 1555.9ms | ActiveRecord: 9.6ms (1 query, 0 cached) | GC: 29.7ms)
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-12-09 17:42:04 -0600
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-12-09 17:42:06 -0600
+Started PATCH "/selections/update_archetype" for 127.0.0.1 at 2024-12-09 17:42:15 -0600
+Processing by SelectionsController#update_archetype as */*
+  Parameters: {"archetype"=>"Iron Guardian", "selection"=>{"archetype"=>"Iron Guardian"}}
+  [1m[36mUser Load (4.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = ? AND "users"."id" != ? LIMIT ?[0m  [["username", "user"], ["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "user@gmail.com"], ["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Update (0.1ms)[0m  [1m[33mUPDATE "users" SET "health" = ?, "defense" = ?, "archetype" = ?, "mana" = ?, "special_attack" = ?, "special_defense" = ? WHERE "users"."id" = ?[0m  [["health", 200], ["defense", 30], ["archetype", "Iron Guardian"], ["mana", 50], ["special_attack", 15], ["special_defense", 35], ["id", 1]]
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mSkin Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM "skins" WHERE "skins"."user_id" = ? AND "skins"."current" = ? AND "skins"."id" IS NOT NULL LIMIT ?[0m  [["user_id", 1], ["current", 1], ["LIMIT", 1]]
+  [1m[36mSkin Create (0.3ms)[0m  [1m[32mINSERT INTO "skins" ("user_id", "created_at", "updated_at", "current") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["user_id", 1], ["created_at", "2024-12-09 23:42:16.788159"], ["updated_at", "2024-12-09 23:42:16.788159"], ["current", 1]]
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "Skin"], ["name", "image"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Create (0.4ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["key", "pzlyr0jrswpwwmjhbn89q5tmf36x"], ["filename", "iron_guardian.png"], ["content_type", "image/png"], ["metadata", "{\"identified\":true}"], ["service_name", "local"], ["byte_size", 301377], ["checksum", "96SH5tojF1KF/Um3NScTew=="], ["created_at", "2024-12-09 23:42:16.794941"]]
+  [1m[36mActiveStorage::Attachment Create (0.3ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "image"], ["record_type", "Skin"], ["record_id", 1], ["blob_id", 1], ["created_at", "2024-12-09 23:42:16.797998"]]
+  [1m[36mSkin Update (0.2ms)[0m  [1m[33mUPDATE "skins" SET "updated_at" = ? WHERE "skins"."id" = ?[0m  [["updated_at", "2024-12-09 23:42:16.800573"], ["id", 1]]
+  [1m[36mTRANSACTION (11.4ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+[36m  Disk Storage (97.3ms) [0m[32mUploaded file to key: pzlyr0jrswpwwmjhbn89q5tmf36x (checksum: 96SH5tojF1KF/Um3NScTew==)[0m
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: b9f57dd1-b4fb-49e1-a775-1e849bfa2db2) to Async(default) with arguments: #<GlobalID:0x00007feab05c3300 @uri=#<URI::GID gid://shards-of-the-grid/ActiveStorage::Blob/1>>
+Completed 200 OK in 1299ms (Views: 0.3ms | ActiveRecord: 38.1ms (10 queries, 0 cached) | GC: 1.2ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-12-09 17:42:17 -0600
+[ActiveJob] [ActiveStorage::AnalyzeJob] [b9f57dd1-b4fb-49e1-a775-1e849bfa2db2]   [1m[36mActiveStorage::Blob Load (6.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [b9f57dd1-b4fb-49e1-a775-1e849bfa2db2] Performing ActiveStorage::AnalyzeJob (Job ID: b9f57dd1-b4fb-49e1-a775-1e849bfa2db2) from Async(default) enqueued at 2024-12-09T23:42:17.340868138Z with arguments: #<GlobalID:0x00007feab0728998 @uri=#<URI::GID gid://shards-of-the-grid/ActiveStorage::Blob/1>>
+[ActiveJob] [ActiveStorage::AnalyzeJob] [b9f57dd1-b4fb-49e1-a775-1e849bfa2db2] [36m  Disk Storage (17.4ms) [0m[34mDownloaded file from key: pzlyr0jrswpwwmjhbn89q5tmf36x[0m
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mGame Load (0.7ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 1]]
+  Rendered games/index.html.erb within layouts/application (Duration: 50.2ms | GC: 0.0ms)
+[ActiveJob] [ActiveStorage::AnalyzeJob] [b9f57dd1-b4fb-49e1-a775-1e849bfa2db2]   [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [b9f57dd1-b4fb-49e1-a775-1e849bfa2db2]   [1m[36mActiveStorage::Blob Update (1.6ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = ? WHERE "active_storage_blobs"."id" = ?[0m  [["metadata", "{\"identified\":true,\"width\":500,\"height\":500,\"analyzed\":true}"], ["id", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [b9f57dd1-b4fb-49e1-a775-1e849bfa2db2]   [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = ?[0m  [["blob_id", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [b9f57dd1-b4fb-49e1-a775-1e849bfa2db2]   [1m[36mSkin Load (0.2ms)[0m  [1m[34mSELECT "skins".* FROM "skins" WHERE "skins"."id" = ?[0m  [["id", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [b9f57dd1-b4fb-49e1-a775-1e849bfa2db2]   [1m[36mSkin Update (0.2ms)[0m  [1m[33mUPDATE "skins" SET "updated_at" = ? WHERE "skins"."id" = ?[0m  [["updated_at", "2024-12-09 23:42:18.398422"], ["id", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [b9f57dd1-b4fb-49e1-a775-1e849bfa2db2]   [1m[36mTRANSACTION (2.3ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [b9f57dd1-b4fb-49e1-a775-1e849bfa2db2] Performed ActiveStorage::AnalyzeJob (Job ID: b9f57dd1-b4fb-49e1-a775-1e849bfa2db2) from Async(default) in 544.53ms
+  Rendered layout layouts/application.html.erb (Duration: 1046.1ms | GC: 0.0ms)
+Completed 200 OK in 1164ms (Views: 1047.2ms | ActiveRecord: 9.1ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/account" for 127.0.0.1 at 2024-12-09 17:42:24 -0600
+Processing by UserController#index as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering user/index.html.erb within layouts/application
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" != ?[0m  [["id", 1]]
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?[0m  [["user_id", 1]]
+  Rendered user/index.html.erb within layouts/application (Duration: 53.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 473.1ms | GC: 12.0ms)
+Completed 200 OK in 493ms (Views: 475.0ms | ActiveRecord: 5.3ms (3 queries, 0 cached) | GC: 12.0ms)
+
+
+Started GET "/inventory" for 127.0.0.1 at 2024-12-09 17:42:26 -0600
+Processing by InventoryController#index as HTML
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering inventory/index.html.erb within layouts/application
+  [1m[36mSkin Load (1.8ms)[0m  [1m[34mSELECT "skins".* FROM "skins" WHERE "skins"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mActiveStorage::Attachment Load (1.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "Skin"], ["name", "image"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (1.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered inventory/index.html.erb within layouts/application (Duration: 26.1ms | GC: 0.4ms)
+  Rendered layout layouts/application.html.erb (Duration: 1219.2ms | GC: 4.6ms)
+Completed 200 OK in 1261ms (Views: 1228.6ms | ActiveRecord: 5.3ms (4 queries, 0 cached) | GC: 4.6ms)
+
+
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--bd347aabb9524481422f787211cf92be424f760b/iron_guardian.png" for 127.0.0.1 at 2024-12-09 17:42:28 -0600
+Processing by ActiveStorage::Blobs::RedirectController#show as PNG
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--bd347aabb9524481422f787211cf92be424f760b", "filename"=>"iron_guardian"}
+  [1m[36mActiveStorage::Blob Load (0.7ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[36m  Disk Storage (1.0ms) [0m[34mGenerated URL for file at key: pzlyr0jrswpwwmjhbn89q5tmf36x (http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjSHBzZVhJd2FuSnpkM0IzZDIxcWFHSnVPRGx4TlhSdFpqTTJlQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpVFdsdWJHbHVaVHNnWm1sc1pXNWhiV1U5SW1seWIyNWZaM1ZoY21ScFlXNHVjRzVuSWpzZ1ptbHNaVzVoYldVcVBWVlVSaTA0SnlkcGNtOXVYMmQxWVhKa2FXRnVMbkJ1WndZN0JsUTZFV052Ym5SbGJuUmZkSGx3WlVraURtbHRZV2RsTDNCdVp3WTdCbFE2RVhObGNuWnBZMlZmYm1GdFpUb0tiRzlqWVd3PSIsImV4cCI6IjIwMjQtMTItMDlUMjM6NDc6MjkuMzAyWiIsInB1ciI6ImJsb2Jfa2V5In19--66bda7d26bf41b44a67c8245bfb6675d83e2e3dc/iron_guardian.png)[0m
+Redirected to http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjSHBzZVhJd2FuSnpkM0IzZDIxcWFHSnVPRGx4TlhSdFpqTTJlQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpVFdsdWJHbHVaVHNnWm1sc1pXNWhiV1U5SW1seWIyNWZaM1ZoY21ScFlXNHVjRzVuSWpzZ1ptbHNaVzVoYldVcVBWVlVSaTA0SnlkcGNtOXVYMmQxWVhKa2FXRnVMbkJ1WndZN0JsUTZFV052Ym5SbGJuUmZkSGx3WlVraURtbHRZV2RsTDNCdVp3WTdCbFE2RVhObGNuWnBZMlZmYm1GdFpUb0tiRzlqWVd3PSIsImV4cCI6IjIwMjQtMTItMDlUMjM6NDc6MjkuMzAyWiIsInB1ciI6ImJsb2Jfa2V5In19--66bda7d26bf41b44a67c8245bfb6675d83e2e3dc/iron_guardian.png
+Completed 302 Found in 7ms (ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjSHBzZVhJd2FuSnpkM0IzZDIxcWFHSnVPRGx4TlhSdFpqTTJlQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpVFdsdWJHbHVaVHNnWm1sc1pXNWhiV1U5SW1seWIyNWZaM1ZoY21ScFlXNHVjRzVuSWpzZ1ptbHNaVzVoYldVcVBWVlVSaTA0SnlkcGNtOXVYMmQxWVhKa2FXRnVMbkJ1WndZN0JsUTZFV052Ym5SbGJuUmZkSGx3WlVraURtbHRZV2RsTDNCdVp3WTdCbFE2RVhObGNuWnBZMlZmYm1GdFpUb0tiRzlqWVd3PSIsImV4cCI6IjIwMjQtMTItMDlUMjM6NDc6MjkuMzAyWiIsInB1ciI6ImJsb2Jfa2V5In19--66bda7d26bf41b44a67c8245bfb6675d83e2e3dc/iron_guardian.png" for 127.0.0.1 at 2024-12-09 17:42:29 -0600
+Processing by ActiveStorage::DiskController#show as PNG
+  Parameters: {"encoded_key"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjSHBzZVhJd2FuSnpkM0IzZDIxcWFHSnVPRGx4TlhSdFpqTTJlQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpVFdsdWJHbHVaVHNnWm1sc1pXNWhiV1U5SW1seWIyNWZaM1ZoY21ScFlXNHVjRzVuSWpzZ1ptbHNaVzVoYldVcVBWVlVSaTA0SnlkcGNtOXVYMmQxWVhKa2FXRnVMbkJ1WndZN0JsUTZFV052Ym5SbGJuUmZkSGx3WlVraURtbHRZV2RsTDNCdVp3WTdCbFE2RVhObGNuWnBZMlZmYm1GdFpUb0tiRzlqWVd3PSIsImV4cCI6IjIwMjQtMTItMDlUMjM6NDc6MjkuMzAyWiIsInB1ciI6ImJsb2Jfa2V5In19--66bda7d26bf41b44a67c8245bfb6675d83e2e3dc", "filename"=>"iron_guardian"}
+Completed 200 OK in 7ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/account" for 127.0.0.1 at 2024-12-09 17:42:32 -0600
+Processing by UserController#index as HTML
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering user/index.html.erb within layouts/application
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" != ?[0m  [["id", 1]]
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?[0m  [["user_id", 1]]
+  Rendered user/index.html.erb within layouts/application (Duration: 96.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1321.5ms | GC: 0.0ms)
+Completed 200 OK in 1332ms (Views: 1322.1ms | ActiveRecord: 4.4ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-12-09 17:42:35 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mGame Load (1.2ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 1]]
+  Rendered games/index.html.erb within layouts/application (Duration: 4.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1161.1ms | GC: 21.3ms)
+Completed 200 OK in 1168ms (Views: 1162.1ms | ActiveRecord: 2.9ms (2 queries, 0 cached) | GC: 21.3ms)
+
+
+Started GET "/store" for 127.0.0.1 at 2024-12-09 17:42:39 -0600
+Processing by StoreController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering store/index.html.haml within layouts/application
+DEPRECATION WARNING: The asset "shopBackground.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__675906494821991040_39160 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:97)
+DEPRECATION WARNING: The asset "avatar_1.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__675906494821991040_39160 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:150)
+DEPRECATION WARNING: The asset "avatar_2.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__675906494821991040_39160 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:156)
+DEPRECATION WARNING: The asset "ai_generated_avatar.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__675906494821991040_39160 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:162)
+  Rendered store/index.html.haml within layouts/application (Duration: 682.3ms | GC: 3.1ms)
+  Rendered layout layouts/application.html.erb (Duration: 1447.9ms | GC: 3.1ms)
+Completed 200 OK in 1492ms (Views: 1461.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 3.1ms)
+
+
+Started GET "/assets/gem3-89e90fd7cf1d7317b14e5f0cf978f8a45af94c569cd05bed8a4434cab6760030.gif" for 127.0.0.1 at 2024-12-09 17:42:41 -0600
+Started GET "/avatar_1.jpg" for 127.0.0.1 at 2024-12-09 17:42:41 -0600
+Started GET "/avatar_2.jpg" for 127.0.0.1 at 2024-12-09 17:42:41 -0600
+Started GET "/ai_generated_avatar.jpg" for 127.0.0.1 at 2024-12-09 17:42:41 -0600
+Started GET "/assets/acidPotion-84426b135777c90628c5096e63bb76730c3d664d52178655c41a1d0cadb849aa.gif" for 127.0.0.1 at 2024-12-09 17:42:41 -0600
+Started GET "/assets/revive-eed76d4d148749885f5aa113222abe0c75769d67832d872632040f65e61a689f.gif" for 127.0.0.1 at 2024-12-09 17:42:41 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_1.jpg"):
+  
+Started GET "/assets/invisibilityPotion-ea00d114333a250781189baf2eabe59d08536ebb80cce213b8b1c94237ad5691.gif" for 127.0.0.1 at 2024-12-09 17:42:41 -0600
+Started GET "/assets/grenade-bf7f3dcea7b96376353f08b193208c34559f57709b5c11e21ee167a13107d0a0.gif" for 127.0.0.1 at 2024-12-09 17:42:42 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/ai_generated_avatar.jpg"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_2.jpg"):
+  
+Started GET "/assets/sword-f6acf58baa9e7a4f18f68ce1dc6874421b2d141c509dcd14036da7b4630f9fa2.gif" for 127.0.0.1 at 2024-12-09 17:42:42 -0600
+Started GET "/assets/dynamite-3c6231cd3f370be5f4bdd9b4fae9b09d0b28bf9c656c95ed1e3ae36c28e9bdd1.gif" for 127.0.0.1 at 2024-12-09 17:42:42 -0600
+Started GET "/assets/sniper-2dad6e5c72cc271446b1a1acef6df30b976696cb31524ff1ef883f47548e3d6d.gif" for 127.0.0.1 at 2024-12-09 17:42:42 -0600
+Started GET "/assets/trap-db27a6dd730669a2a264d9dc6ce6705a2994b9bc22cbf25ba34a8cefce4d12b6.gif" for 127.0.0.1 at 2024-12-09 17:42:42 -0600
+Started GET "/assets/horse-0b025b7cbcd3abc0592a8daf323bb637cf4ea1ceec2248ecdf546f6f98b44d10.gif" for 127.0.0.1 at 2024-12-09 17:42:43 -0600
+Started GET "/assets/banana-e0c202ea0a39d2cffb08a43a4d77334f5bc46eee25608a70d74520569b4bb408.gif" for 127.0.0.1 at 2024-12-09 17:42:43 -0600
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-12-09 17:43:59 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering ai_generated_skins/new.html.erb within layouts/application
+  Rendered ai_generated_skins/new.html.erb within layouts/application (Duration: 14.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1243.5ms | GC: 0.0ms)
+Completed 200 OK in 1297ms (Views: 1261.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-12-09 17:44:02 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering ai_generated_skins/new.html.erb within layouts/application
+  Rendered ai_generated_skins/new.html.erb within layouts/application (Duration: 0.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1140.1ms | GC: 8.9ms)
+Completed 200 OK in 1143ms (Views: 1142.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 8.9ms)
+
+
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-12-09 17:44:07 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering ai_generated_skins/new.html.erb within layouts/application
+  Rendered ai_generated_skins/new.html.erb within layouts/application (Duration: 0.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 454.3ms | GC: 3.1ms)
+Completed 200 OK in 457ms (Views: 455.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 3.1ms)
+
+
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-12-09 17:48:23 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering ai_generated_skins/new.html.erb within layouts/application
+  Rendered ai_generated_skins/new.html.erb within layouts/application (Duration: 0.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 267.4ms | GC: 1.2ms)
+Completed 200 OK in 269ms (Views: 268.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.2ms)
+
+
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-12-09 17:53:55 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering ai_generated_skins/new.html.erb within layouts/application
+  Rendered ai_generated_skins/new.html.erb within layouts/application (Duration: 5.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 288.0ms | GC: 2.5ms)
+Completed 200 OK in 307ms (Views: 297.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 2.5ms)
+
+
+Started GET "/store" for 127.0.0.1 at 2024-12-09 17:55:06 -0600
+Processing by StoreController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering store/index.html.haml within layouts/application
+DEPRECATION WARNING: The asset "shopBackground.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__675906494821991040_59080 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:97)
+DEPRECATION WARNING: The asset "avatar_1.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__675906494821991040_59080 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:150)
+DEPRECATION WARNING: The asset "avatar_2.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__675906494821991040_59080 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:156)
+DEPRECATION WARNING: The asset "ai_generated_avatar.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__675906494821991040_59080 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:162)
+  Rendered store/index.html.haml within layouts/application (Duration: 393.5ms | GC: 6.3ms)
+  Rendered layout layouts/application.html.erb (Duration: 663.6ms | GC: 8.2ms)
+Completed 200 OK in 679ms (Views: 667.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 8.2ms)
+
+
+Started GET "/avatar_1.jpg" for 127.0.0.1 at 2024-12-09 17:55:07 -0600
+Started GET "/avatar_2.jpg" for 127.0.0.1 at 2024-12-09 17:55:07 -0600
+Started GET "/ai_generated_avatar.jpg" for 127.0.0.1 at 2024-12-09 17:55:07 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_1.jpg"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_2.jpg"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/ai_generated_avatar.jpg"):
+  
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-12-09 17:55:11 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering ai_generated_skins/new.html.erb within layouts/application
+  Rendered ai_generated_skins/new.html.erb within layouts/application (Duration: 0.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 238.7ms | GC: 1.3ms)
+Completed 200 OK in 241ms (Views: 239.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 2.1ms)
+
+
+Started POST "/ai_generated_skins/generate" for 127.0.0.1 at 2024-12-09 17:55:16 -0600
+Processing by AiGeneratedSkinsController#generate as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Tetiedtv7Ony24alzM8ARPGKzL2XCC_1NqKF8vRUHPKWNoh6g7J-c5GcFzG4pI011cQFxiHjZlbWQjMm98TzJQ", "character_description"=>"Dragon"}
+  [1m[36mUser Load (70.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mSkin Count (1.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "skins" WHERE "skins"."user_id" = ?[0m  [["user_id", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering ai_generated_skins/new.html.erb within layouts/application
+  Rendered ai_generated_skins/new.html.erb within layouts/application (Duration: 0.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 301.6ms | GC: 1.7ms)
+Completed 200 OK in 744ms (Views: 303.7ms | ActiveRecord: 72.5ms (2 queries, 0 cached) | GC: 1.8ms)
+
+
+Started GET "/store" for 127.0.0.1 at 2024-12-09 17:56:07 -0600
+Processing by StoreController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering store/index.html.haml within layouts/application
+DEPRECATION WARNING: The asset "shopBackground.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__675906494821991040_59080 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:97)
+DEPRECATION WARNING: The asset "avatar_1.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__675906494821991040_59080 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:150)
+DEPRECATION WARNING: The asset "avatar_2.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__675906494821991040_59080 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:156)
+DEPRECATION WARNING: The asset "ai_generated_avatar.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__675906494821991040_59080 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:162)
+  Rendered store/index.html.haml within layouts/application (Duration: 287.3ms | GC: 7.8ms)
+  Rendered layout layouts/application.html.erb (Duration: 523.2ms | GC: 8.6ms)
+Completed 200 OK in 525ms (Views: 524.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 8.6ms)
+
+
+Started GET "/avatar_1.jpg" for 127.0.0.1 at 2024-12-09 17:56:08 -0600
+Started GET "/avatar_2.jpg" for 127.0.0.1 at 2024-12-09 17:56:08 -0600
+Started GET "/ai_generated_avatar.jpg" for 127.0.0.1 at 2024-12-09 17:56:08 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_2.jpg"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_1.jpg"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/ai_generated_avatar.jpg"):
+  
+Started GET "/games" for 127.0.0.1 at 2024-12-09 17:56:35 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mGame Load (2.1ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 1]]
+  Rendered games/index.html.erb within layouts/application (Duration: 18.0ms | GC: 0.1ms)
+  Rendered layout layouts/application.html.erb (Duration: 294.8ms | GC: 2.7ms)
+Completed 200 OK in 334ms (Views: 297.9ms | ActiveRecord: 3.3ms (2 queries, 0 cached) | GC: 3.7ms)
+
+
+Started GET "/account" for 127.0.0.1 at 2024-12-09 17:56:38 -0600
+Processing by UserController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering user/index.html.erb within layouts/application
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" != ?[0m  [["id", 1]]
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?[0m  [["user_id", 1]]
+  Rendered user/index.html.erb within layouts/application (Duration: 37.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 321.6ms | GC: 17.1ms)
+Completed 200 OK in 335ms (Views: 323.4ms | ActiveRecord: 2.3ms (3 queries, 0 cached) | GC: 17.4ms)
+
+
+Started GET "/store" for 127.0.0.1 at 2024-12-09 17:56:43 -0600
+Processing by StoreController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering store/index.html.haml within layouts/application
+DEPRECATION WARNING: The asset "shopBackground.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__675906494821991040_59080 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:97)
+DEPRECATION WARNING: The asset "avatar_1.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__675906494821991040_59080 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:150)
+DEPRECATION WARNING: The asset "avatar_2.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__675906494821991040_59080 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:156)
+DEPRECATION WARNING: The asset "ai_generated_avatar.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__675906494821991040_59080 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:162)
+  Rendered store/index.html.haml within layouts/application (Duration: 282.0ms | GC: 1.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 527.9ms | GC: 1.9ms)
+Completed 200 OK in 530ms (Views: 529.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.9ms)
+
+
+Started GET "/avatar_1.jpg" for 127.0.0.1 at 2024-12-09 17:56:44 -0600
+Started GET "/avatar_2.jpg" for 127.0.0.1 at 2024-12-09 17:56:44 -0600
+Started GET "/ai_generated_avatar.jpg" for 127.0.0.1 at 2024-12-09 17:56:44 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_1.jpg"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/ai_generated_avatar.jpg"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_2.jpg"):
+  
+Started GET "/ai_generated_skins/new" for 127.0.0.1 at 2024-12-09 17:56:49 -0600
+Processing by AiGeneratedSkinsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering ai_generated_skins/new.html.erb within layouts/application
+  Rendered ai_generated_skins/new.html.erb within layouts/application (Duration: 0.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 199.1ms | GC: 5.6ms)
+Completed 200 OK in 201ms (Views: 200.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 5.6ms)
+
+
+Started POST "/ai_generated_skins/generate" for 127.0.0.1 at 2024-12-09 17:56:55 -0600
+Processing by AiGeneratedSkinsController#generate as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"VsX8zScdnlltBMJaVCJYW-eaISAaCJlL0C-WDWJ1UkmNGBbOf8AMww5DU84gSdUqw9ToW6zj0OgwzyDZYeW9ng", "character_description"=>"Dragon"}
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mSkin Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "skins" WHERE "skins"."user_id" = ?[0m  [["user_id", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering ai_generated_skins/new.html.erb within layouts/application
+  Rendered ai_generated_skins/new.html.erb within layouts/application (Duration: 0.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 204.7ms | GC: 1.2ms)
+Completed 200 OK in 481ms (Views: 205.8ms | ActiveRecord: 3.0ms (2 queries, 0 cached) | GC: 1.2ms)
+
+
+Started GET "/store" for 127.0.0.1 at 2024-12-09 17:56:59 -0600
+Processing by StoreController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering store/index.html.haml within layouts/application
+DEPRECATION WARNING: The asset "shopBackground.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__675906494821991040_59080 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:97)
+DEPRECATION WARNING: The asset "avatar_1.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__675906494821991040_59080 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:150)
+DEPRECATION WARNING: The asset "avatar_2.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__675906494821991040_59080 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:156)
+DEPRECATION WARNING: The asset "ai_generated_avatar.jpg" is not present in the asset pipeline.
+Falling back to an asset that may be in the public folder.
+This behavior is deprecated and will be removed.
+To bypass the asset pipeline and preserve this behavior,
+use the `skip_pipeline: true` option.
+ (called from _app_views_store_index_html_haml__675906494821991040_59080 at /mnt/c/College/Fall 2024/Software Engineering Languages and Tools/projectdirectory-selt_2024_team_003/app/views/store/index.html.haml:162)
+  Rendered store/index.html.haml within layouts/application (Duration: 297.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 538.2ms | GC: 6.4ms)
+Completed 200 OK in 541ms (Views: 539.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 7.4ms)
+
+
+Started GET "/avatar_1.jpg" for 127.0.0.1 at 2024-12-09 17:56:59 -0600
+Started GET "/ai_generated_avatar.jpg" for 127.0.0.1 at 2024-12-09 17:56:59 -0600
+Started GET "/avatar_2.jpg" for 127.0.0.1 at 2024-12-09 17:56:59 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_2.jpg"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/ai_generated_avatar.jpg"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/avatar_1.jpg"):
+  
+Started GET "/games" for 127.0.0.1 at 2024-12-09 17:57:01 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mGame Load (1.4ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 1]]
+  Rendered games/index.html.erb within layouts/application (Duration: 5.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 261.5ms | GC: 1.0ms)
+Completed 200 OK in 265ms (Views: 261.0ms | ActiveRecord: 2.1ms (2 queries, 0 cached) | GC: 1.0ms)
+
+
+Started GET "/account" for 127.0.0.1 at 2024-12-09 17:57:04 -0600
+Processing by UserController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering user/index.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" != ?[0m  [["id", 1]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?[0m  [["user_id", 1]]
+  Rendered user/index.html.erb within layouts/application (Duration: 21.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 296.6ms | GC: 3.2ms)
+Completed 200 OK in 300ms (Views: 296.4ms | ActiveRecord: 1.8ms (3 queries, 0 cached) | GC: 3.2ms)
+
+
+Started GET "/inventory" for 127.0.0.1 at 2024-12-09 17:57:06 -0600
+Processing by InventoryController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering inventory/index.html.erb within layouts/application
+  [1m[36mSkin Load (0.8ms)[0m  [1m[34mSELECT "skins".* FROM "skins" WHERE "skins"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mActiveStorage::Attachment Load (6.6ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "Skin"], ["name", "image"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (2.0ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered inventory/index.html.erb within layouts/application (Duration: 33.5ms | GC: 1.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 321.7ms | GC: 1.4ms)
+Completed 200 OK in 337ms (Views: 316.9ms | ActiveRecord: 10.1ms (4 queries, 0 cached) | GC: 1.4ms)
+
+
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--bd347aabb9524481422f787211cf92be424f760b/iron_guardian.png" for 127.0.0.1 at 2024-12-09 17:57:06 -0600
+Processing by ActiveStorage::Blobs::RedirectController#show as PNG
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--bd347aabb9524481422f787211cf92be424f760b", "filename"=>"iron_guardian"}
+  [1m[36mActiveStorage::Blob Load (0.8ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[36m  Disk Storage (1.4ms) [0m[34mGenerated URL for file at key: pzlyr0jrswpwwmjhbn89q5tmf36x (http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjSHBzZVhJd2FuSnpkM0IzZDIxcWFHSnVPRGx4TlhSdFpqTTJlQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpVFdsdWJHbHVaVHNnWm1sc1pXNWhiV1U5SW1seWIyNWZaM1ZoY21ScFlXNHVjRzVuSWpzZ1ptbHNaVzVoYldVcVBWVlVSaTA0SnlkcGNtOXVYMmQxWVhKa2FXRnVMbkJ1WndZN0JsUTZFV052Ym5SbGJuUmZkSGx3WlVraURtbHRZV2RsTDNCdVp3WTdCbFE2RVhObGNuWnBZMlZmYm1GdFpUb0tiRzlqWVd3PSIsImV4cCI6IjIwMjQtMTItMTBUMDA6MDI6MDcuMDgwWiIsInB1ciI6ImJsb2Jfa2V5In19--57938709364ff6f28687ef9ad7b9b57b2c421ddd/iron_guardian.png)[0m
+Redirected to http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjSHBzZVhJd2FuSnpkM0IzZDIxcWFHSnVPRGx4TlhSdFpqTTJlQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpVFdsdWJHbHVaVHNnWm1sc1pXNWhiV1U5SW1seWIyNWZaM1ZoY21ScFlXNHVjRzVuSWpzZ1ptbHNaVzVoYldVcVBWVlVSaTA0SnlkcGNtOXVYMmQxWVhKa2FXRnVMbkJ1WndZN0JsUTZFV052Ym5SbGJuUmZkSGx3WlVraURtbHRZV2RsTDNCdVp3WTdCbFE2RVhObGNuWnBZMlZmYm1GdFpUb0tiRzlqWVd3PSIsImV4cCI6IjIwMjQtMTItMTBUMDA6MDI6MDcuMDgwWiIsInB1ciI6ImJsb2Jfa2V5In19--57938709364ff6f28687ef9ad7b9b57b2c421ddd/iron_guardian.png
+Completed 302 Found in 7ms (ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjSHBzZVhJd2FuSnpkM0IzZDIxcWFHSnVPRGx4TlhSdFpqTTJlQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpVFdsdWJHbHVaVHNnWm1sc1pXNWhiV1U5SW1seWIyNWZaM1ZoY21ScFlXNHVjRzVuSWpzZ1ptbHNaVzVoYldVcVBWVlVSaTA0SnlkcGNtOXVYMmQxWVhKa2FXRnVMbkJ1WndZN0JsUTZFV052Ym5SbGJuUmZkSGx3WlVraURtbHRZV2RsTDNCdVp3WTdCbFE2RVhObGNuWnBZMlZmYm1GdFpUb0tiRzlqWVd3PSIsImV4cCI6IjIwMjQtMTItMTBUMDA6MDI6MDcuMDgwWiIsInB1ciI6ImJsb2Jfa2V5In19--57938709364ff6f28687ef9ad7b9b57b2c421ddd/iron_guardian.png" for 127.0.0.1 at 2024-12-09 17:57:07 -0600
+Processing by ActiveStorage::DiskController#show as PNG
+  Parameters: {"encoded_key"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjSHBzZVhJd2FuSnpkM0IzZDIxcWFHSnVPRGx4TlhSdFpqTTJlQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpVFdsdWJHbHVaVHNnWm1sc1pXNWhiV1U5SW1seWIyNWZaM1ZoY21ScFlXNHVjRzVuSWpzZ1ptbHNaVzVoYldVcVBWVlVSaTA0SnlkcGNtOXVYMmQxWVhKa2FXRnVMbkJ1WndZN0JsUTZFV052Ym5SbGJuUmZkSGx3WlVraURtbHRZV2RsTDNCdVp3WTdCbFE2RVhObGNuWnBZMlZmYm1GdFpUb0tiRzlqWVd3PSIsImV4cCI6IjIwMjQtMTItMTBUMDA6MDI6MDcuMDgwWiIsInB1ciI6ImJsb2Jfa2V5In19--57938709364ff6f28687ef9ad7b9b57b2c421ddd", "filename"=>"iron_guardian"}
+Completed 200 OK in 4ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/account" for 127.0.0.1 at 2024-12-09 17:57:24 -0600
+Processing by UserController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering user/index.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" != ?[0m  [["id", 1]]
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = ?[0m  [["user_id", 1]]
+  Rendered user/index.html.erb within layouts/application (Duration: 19.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 289.8ms | GC: 5.7ms)
+Completed 200 OK in 293ms (Views: 289.7ms | ActiveRecord: 1.8ms (3 queries, 0 cached) | GC: 5.7ms)
+
+
