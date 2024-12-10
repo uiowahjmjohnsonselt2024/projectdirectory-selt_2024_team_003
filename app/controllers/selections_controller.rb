@@ -13,13 +13,15 @@ class SelectionsController < ApplicationController
 
     # Add the initial skin to the user's inventory
     skin_image_path = select_skin_image(archetype)
-    skin = current_user.skins.build
+    skin = current_user.skins.build(
+      archetype: archetype, # Save the archetype
+      current: true         # Mark as current skin
+    )
     skin.image.attach(
       io: File.open(Rails.root.join("app/assets/images/#{skin_image_path}")),
       filename: "#{archetype.downcase.gsub(' ', '_')}.png",
       content_type: "image/png"
     )
-    skin.current = true # Mark as current skin
 
     if skin.save
       render json: { success: true }

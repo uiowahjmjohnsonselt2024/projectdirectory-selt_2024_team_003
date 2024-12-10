@@ -8,6 +8,9 @@ class Skin < ActiveRecord::Base
   # Validate the presence of an image
   validate :image_presence
 
+  # Validate the presence of an archetype
+  validates :archetype, presence: true, inclusion: { in: %w[Wizard Titan Knight], message: "%{value} is not a valid archetype" }
+
   # Scope to get the current skin
   scope :current, -> { where(current: true).first }
 

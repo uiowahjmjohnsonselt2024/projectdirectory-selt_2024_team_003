@@ -4,12 +4,14 @@ class InventoryController < ApplicationController
   # Action to add a new skin to the inventory
   def add
     image_data = params[:image_data]
+    archetype = params[:archetype]
 
     begin
       decoded_image = Base64.decode64(image_data)
       raise ArgumentError if decoded_image.blank? || !decoded_image.valid_encoding?
 
-      skin = current_user.skins.build
+      # Create a new skin with archetype and attach the image
+      skin = current_user.skins.build(archetype: archetype)
       skin.image.attach(
         io: StringIO.new(decoded_image),
         filename: "generated_skin_#{Time.now.to_i}.png",
@@ -17,15 +19,15 @@ class InventoryController < ApplicationController
       )
 
       if skin.save
-        redirect_to store_path
+        redirect_to inventory_index_path
       else
         redirect_to store_path
       end
     rescue ArgumentError
-      # Handle invalid Base64 data
-      redirect_to store_path, alert: "Invalid image data."
+      redirect_to store_path
     end
   end
+
 
   # Action to list all skins in the user's inventory
   def index

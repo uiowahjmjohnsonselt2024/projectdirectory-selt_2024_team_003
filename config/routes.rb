@@ -53,7 +53,6 @@ Rails.application.routes.draw do
     collection do
       post :add, to: 'inventory#add' # Route for adding a new skin
     end
-
     member do
       patch :set_current, to: 'inventory#set_current' # Route for setting a current skin
       delete :destroy, to: 'inventory#destroy' # Route for removing a skin

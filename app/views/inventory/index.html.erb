@@ -10,39 +10,25 @@
     <%= link_to "Weapons", inventory_index_path(tab: "weapons"), class: "tab-link #{params[:tab] == 'weapons' ? 'active' : ''}" %>
   </div>
 
-  <!-- Tabs Content -->
-  <div class="tabs-content">
-    <% case params[:tab] %>
-    <% when "avatars", nil %>
-      <!-- Avatars Tab Content -->
-      <div class="skins-container">
-        <% @skins.each do |skin| %>
-          <div class="skin-item <%= 'current-skin' if skin.current %>">
-            <% if skin.image.attached? %>
-              <%= image_tag skin.image, class: "skin-image", alt: "Skin" %>
-            <% else %>
-              <p class="no-image-placeholder">No image available</p>
-            <% end %>
-            <div class="skin-info">
-              <% if skin.current %>
-                <span class="current-badge">Current Skin</span>
-              <% else %>
-                <%= button_to "Set as Current", set_current_inventory_path(skin), method: :patch, class: "set-current-button" %>
-                <%= button_to "Remove", inventory_path(skin), method: :delete, data: { confirm: "Are you sure you want to remove this skin?" }, class: "remove-skin-button" %>
-              <% end %>
-            </div>
-          </div>
+  <!-- Skins Content -->
+  <div class="skins-container">
+    <% @skins.each do |skin| %>
+      <div class="skin-item <%= 'current-skin' if skin.current %>">
+        <p class="archetype-display">Archetype: <%= skin.archetype %></p>
+        <% if skin.image.attached? %>
+          <%= image_tag skin.image, class: "skin-image", alt: "Skin" %>
+        <% else %>
+          <p class="no-image-placeholder">No image available</p>
         <% end %>
-      </div>
-    <% when "consumables" %>
-      <!-- Consumables Tab Content -->
-      <div class="placeholder-message">
-        <p>No consumables available yet.</p>
-      </div>
-    <% when "weapons" %>
-      <!-- Weapons Tab Content -->
-      <div class="placeholder-message">
-        <p>No weapons available yet.</p>
+
+        <div class="skin-info">
+          <% if skin.current %>
+            <span class="current-badge">Current Skin</span>
+          <% else %>
+            <%= button_to "Set as Current", set_current_inventory_path(skin), method: :patch, class: "set-current-button" %>
+            <%= button_to "Remove", inventory_path(skin), method: :delete, data: { confirm: "Are you sure you want to remove this skin?" }, class: "remove-skin-button" %>
+          <% end %>
+        </div>
       </div>
     <% end %>
   </div>

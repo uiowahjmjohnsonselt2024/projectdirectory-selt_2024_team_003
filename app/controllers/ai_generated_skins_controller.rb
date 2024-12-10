@@ -12,9 +12,10 @@ class AiGeneratedSkinsController < ApplicationController
 
   def generate
     character_description = params[:character_description]
+    archetype = params[:archetype]
 
-    # Validate character_description
-    if character_description.blank?
+    # Validate character_description and archetype
+    if character_description.blank? || archetype.blank?
       @error = true
       render :new and return
     end
@@ -25,7 +26,7 @@ class AiGeneratedSkinsController < ApplicationController
     http.use_ssl = true
 
     request = Net::HTTP::Post.new(uri)
-    request['Authorization'] = "Bearer sk-"
+    request['Authorization'] = "Bearer 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"
     request['Content-Type'] = "application/json"
     request.body = {
       prompt: "#{character_description} in retro animated style, featuring vibrant colors like red, green, and yellow, " \

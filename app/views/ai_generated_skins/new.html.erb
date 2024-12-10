@@ -18,8 +18,19 @@
                  placeholder="Enter character description"
                  required>
         </div>
+
         <div>
-          <button type="submit" aria-label="Generate AI Skin">Generate</button>
+          <label for="archetype">Select Archetype:</label>
+          <select id="archetype" name="archetype" required>
+            <option value="" disabled selected>Select an archetype</option>
+            <option value="Wizard">Wizard</option>
+            <option value="Titan">Titan</option>
+            <option value="Knight">Knight</option>
+          </select>
+        </div>
+
+        <div>
+          <button type="submit" aria-label="Generate AI Skin" disabled id="generate-button">Generate</button>
         </div>
       <% end %>
     </div>
@@ -37,12 +48,14 @@
 
         <!-- Add to Inventory Button -->
         <div class="add-to-inventory-container">
-          <%= button_to "Add To Inventory", add_inventory_index_path,
+          <%= button_to "Add To Inventory",
+                        add_inventory_index_path,
                         method: :post,
                         class: "add-to-inventory-button",
-                        params: { image_data: @image_base64 },
+                        params: { image_data: @image_base64, archetype: params[:archetype] },
                         data: { turbo: false } %>
         </div>
+
       <% else %>
         <!-- Placeholder Message -->
         <p class="placeholder-message" aria-live="polite">
@@ -52,3 +65,18 @@
     </div>
   </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const descriptionInput = document.getElementById('character_description');
+        const archetypeSelect = document.getElementById('archetype');
+        const generateButton = document.getElementById('generate-button');
+
+        const updateButtonState = () => {
+            generateButton.disabled = !(descriptionInput.value.trim() && archetypeSelect.value);
+        };
+
+        descriptionInput.addEventListener('input', updateButtonState);
+        archetypeSelect.addEventListener('change', updateButtonState);
+    });
+</script>

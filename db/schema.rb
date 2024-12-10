@@ -102,6 +102,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_014455) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "current"
+    t.string "archetype"
     t.index ["user_id"], name: "index_skins_on_user_id"
   end
 
