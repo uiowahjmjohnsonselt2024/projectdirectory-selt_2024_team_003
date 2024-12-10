@@ -3,11 +3,11 @@ class UserController < ApplicationController
 
   def index
     case current_user.archetype
-    when 'Arcane Strategist'
+    when 'Wizard'
       @image = 'attack.png'
-    when 'Iron Guardian'
+    when 'Titan'
       @image = 'defense.png'
-    when 'Omni Knight'
+    when 'Knight'
       @image = 'balanced.png'
     else
       @image = 'balanced.png'

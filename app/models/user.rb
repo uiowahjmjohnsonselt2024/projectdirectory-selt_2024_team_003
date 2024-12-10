@@ -23,8 +23,8 @@ class User < ActiveRecord::Base
 
   def set_archetype_stats(archetype)
     case archetype
-    when 'Arcane Strategist'
-      self.archetype = 'Arcane Strategist'
+    when 'Wizard'
+      self.archetype = 'Wizard'
       self.attack = 30
       self.iq = 10
       self.defense = 5
@@ -32,8 +32,8 @@ class User < ActiveRecord::Base
       self.special_attack = 40
       self.special_defense = 20
       self.mana = 100
-    when 'Iron Guardian'
-      self.archetype = 'Iron Guardian'
+    when 'Titan'
+      self.archetype = 'Titan'
       self.attack = 10
       self.iq = 1
       self.defense = 30
@@ -41,8 +41,8 @@ class User < ActiveRecord::Base
       self.special_attack = 15
       self.special_defense = 35
       self.mana = 50
-    when 'Omni Knight'
-      self.archetype = 'Omni Knight'
+    when 'Knight'
+      self.archetype = 'Knight'
       self.attack = 20
       self.iq = 5
       self.defense = 20
@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
       self.special_defense = 25
       self.mana = 75
     else
-      self.archetype = 'Omni Knight' # just go to balanced build if not gone through
+      self.archetype = 'Knight' # just go to balanced build if not gone through
       self.attack = 20
       self.iq = 5
       self.defense = 20
@@ -67,11 +67,11 @@ class User < ActiveRecord::Base
     self.experience -= self.level * 100
     self.level += 1
     stat_increase = case archetype
-                    when 'Arcane Strategist'
+                    when 'Wizard'
                       { health: 20, attack: 10, defense: 5, iq: 3, mana: 20, special_attack: 10, special_defense: 5 }
-                    when 'Iron Guardian'
+                    when 'Titan'
                       { health: 30, attack: 5, defense: 10, iq: 1, mana: 10, special_attack: 5, special_defense: 10 }
-                    when 'Omni Knight'
+                    when 'Knight'
                       { health: 25, attack: 7, defense: 7, iq: 2, mana: 15, special_attack: 7, special_defense: 7 }
                     else
                       { health: 25, attack: 7, defense: 7, iq: 2, mana: 15, special_attack: 4, special_defense: 4 }

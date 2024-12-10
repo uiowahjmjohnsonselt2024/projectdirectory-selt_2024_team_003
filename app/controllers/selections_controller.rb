@@ -35,11 +35,11 @@ class SelectionsController < ApplicationController
   # Map archetypes to skin image file paths
   def select_skin_image(archetype)
     case archetype
-    when "Arcane Strategist"
+    when "Wizard"
       "attack.png"
-    when "Iron Guardian"
+    when "Titan"
       "defense.png"
-    when "Omni Knight"
+    when "Knight"
       "balanced.png"
     else
       raise "Invalid archetype selected"
