@@ -124,3 +124,40 @@
 .remove-skin-button:active {
   background-color: #b71c1c; /* Even darker red on click */
 }
+
+.tabs-navigation {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab-link {
+  padding: 10px 20px;
+  margin: 0 10px;
+  text-decoration: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.tab-link.active {
+  background-color: #0056b3;
+}
+
+.tab-link:hover {
+  background-color: #004494;
+}
+
+.tabs-content {
+  margin-top: 20px;
+}
+
+.placeholder-message {
+  text-align: center;
+  font-size: 1.2em;
+  color: #555;
+}
+
