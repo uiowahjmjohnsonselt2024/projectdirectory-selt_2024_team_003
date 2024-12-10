@@ -9,5 +9,6 @@ FactoryBot.define do
     iq { 1 }
     level { 1 }
     experience { 0 }
+    shards { 100 }
   end
 end
