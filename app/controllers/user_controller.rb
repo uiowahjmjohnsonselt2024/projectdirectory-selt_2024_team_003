@@ -1,27 +1,28 @@
 # frozen_string_literal: true
-class UserController < ApplicationController
 
+class UserController < ApplicationController
+  before_action :authenticate_user!
+
+  # Displays the user's profile, including their current skin stats and friend list
   def index
-    case current_user.archetype
-    when 'Wizard'
-      @image = 'attack.png'
-    when 'Titan'
-      @image = 'defense.png'
-    when 'Knight'
-      @image = 'balanced.png'
-    else
-      @image = 'balanced.png'
-    end
+    @image = case current_user.current_skin.archetype
+             when 'Attacker' then 'attack.png'
+             when 'Defender' then 'defense.png'
+             when 'Healer' then 'balanced.png'
+             else 'balanced.png'
+             end
 
     @stats = [
-      { name: "Archetype", value: current_user.archetype },
-      { name: "Max Health", value: current_user.health },
-      { name: "Max Mana", value: current_user.mana },
-      { name: "Attack", value: current_user.attack },
-      { name: "Special Attack", value: current_user.special_attack },
-      { name: "Defense", value: current_user.defense },
-      { name: "Special Defense", value: current_user.special_defense },
-      { name: "IQ", value: current_user.iq }
+      { name: "Archetype", value: current_user.current_skin.archetype },
+      { name: "Max Health", value: current_user.current_skin.health },
+      { name: "Max Mana", value: current_user.current_skin.mana },
+      { name: "Attack", value: current_user.current_skin.attack },
+      { name: "Special Attack", value: current_user.current_skin.special_attack },
+      { name: "Defense", value: current_user.current_skin.defense },
+      { name: "Special Defense", value: current_user.current_skin.special_defense },
+      { name: "IQ", value: current_user.current_skin.iq },
+      { name: "Level", value: current_user.current_skin.level },
+      { name: "Experience", value: current_user.current_skin.experience }
     ]
 
     if params[:search].present?
@@ -31,6 +32,7 @@ class UserController < ApplicationController
     end
   end
 
+  # Adds a user to the current user's friend list
   def add_friend
     friend = User.find(params[:friend_id])
 
@@ -57,4 +59,5 @@ class UserController < ApplicationController
 
     redirect_to account_path
   end
+
 end

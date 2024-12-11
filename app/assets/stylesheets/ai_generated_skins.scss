@@ -68,6 +68,15 @@
             &:hover {
                 background-color: #2563eb; /* Darker blue on hover */
             }
+
+            &:disabled {
+                background-color: #9ca3af; /* Grey for disabled state */
+                cursor: not-allowed; /* No pointer on hover */
+            }
+
+            &:disabled:hover {
+                background-color: #9ca3af; /* Ensure hover does not change the color */
+            }
         }
     }
 
@@ -171,7 +180,9 @@
 }
 
 #ai-generated-skins-page button:disabled {
-    background-color: #9ca3af; /* Disabled grey */
-    cursor: not-allowed;
+    background-color: #9ca3af; /* Greyed-out background for disabled state */
+    cursor: not-allowed; /* Prevent pointer change */
+    &:hover {
+        background-color: #9ca3af; /* Ensure hover effect does not change appearance */
+    }
 }
-

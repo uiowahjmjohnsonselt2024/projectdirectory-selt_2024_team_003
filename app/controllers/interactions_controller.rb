@@ -3,14 +3,14 @@ class InteractionsController < ApplicationController
     @game = Game.find_by(code: params[:game_id])
     @game_user = @game.game_users.find_by(user: current_user)
     @enemy = @game.enemies.find_by(x_position: @game_user.x_position, y_position: @game_user.y_position)
-    @player = current_user
+    @player = current_user.current_skin # Use current_skin for player stats
   end
 
   def attack
     @game = Game.find_by(code: params[:game_id])
     @game_user = @game.game_users.find_by(user: current_user)
     @enemy = @game.enemies.find_by(x_position: @game_user.x_position, y_position: @game_user.y_position)
-    @player = current_user
+    @player = current_user.current_skin # Use current_skin for player stats
     @game_id = params[:game_id]
 
     player_damage, player_critical = calculate_attack_damage(@player, @enemy)
@@ -65,7 +65,7 @@ class InteractionsController < ApplicationController
     @game = Game.find_by(code: params[:game_id])
     @game_user = @game.game_users.find_by(user: current_user)
     @enemy = @game.enemies.find_by(x_position: @game_user.x_position, y_position: @game_user.y_position)
-    @player = current_user
+    @player = current_user.current_skin # Use current_skin for player stats
     @game_id = params[:game_id]
 
     if @game_user.use_mana(20)
@@ -113,9 +113,9 @@ class InteractionsController < ApplicationController
         enemy_max_health: @enemy.max_health,
         player_health: @game_user.health,
         max_player_health: @player.health,
-        player_defeated: player_defeated,
         player_mana: @game_user.mana,
         max_mana: @player.mana,
+        player_defeated: player_defeated
       }
     else
       render json: { success: false, message: "Not enough mana!" }
@@ -126,13 +126,13 @@ class InteractionsController < ApplicationController
     @game = Game.find_by(code: params[:game_id])
     @game_user = @game.game_users.find_by(user: current_user)
     @enemy = @game.enemies.find_by(x_position: @game_user.x_position, y_position: @game_user.y_position)
-    @player = current_user
+    @player = current_user.current_skin # Use current_skin for player stats
     @game_id = params[:game_id]
     message = ""
 
     if @game_user.use_mana(20)
-      healing = (@game_user.user.special_attack * 0.5).to_i
-      @game_user.update(health: [@game_user.health + healing, @game_user.user.health].min)
+      healing = (@player.special_attack * 0.5).to_i
+      @game_user.update(health: [@game_user.health + healing, @player.health].min)
       message += "Magic Heal restored #{healing} health!"
       enemy_damage, enemy_critical = calculate_attack_damage(@enemy, @player)
       @game_user.update(health: @game_user.health - enemy_damage)

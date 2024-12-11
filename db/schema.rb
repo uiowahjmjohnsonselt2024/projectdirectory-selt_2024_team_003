@@ -103,6 +103,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_014455) do
     t.datetime "updated_at", null: false
     t.boolean "current"
     t.string "archetype"
+    t.integer "attack"
+    t.integer "defense"
+    t.integer "iq"
+    t.integer "mana"
+    t.integer "special_attack"
+    t.integer "special_defense"
+    t.integer "health"
+    t.integer "level"
+    t.integer "experience"
     t.index ["user_id"], name: "index_skins_on_user_id"
   end
 

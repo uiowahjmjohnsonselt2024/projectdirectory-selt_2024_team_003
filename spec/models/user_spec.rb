@@ -36,24 +36,24 @@ RSpec.describe User, type: :model do
     describe '#set_archetype_stats' do
       let(:user) { create(:user) }
 
-      it 'sets stats for Wizard' do
-        user.set_archetype_stats('Wizard')
+      it 'sets stats for Attacker' do
+        user.set_archetype_stats('Attacker')
         expect(user.attack).to eq(30)
         expect(user.iq).to eq(10)
         expect(user.defense).to eq(5)
         expect(user.health).to eq(100)
       end
 
-      it 'sets stats for Titan' do
-        user.set_archetype_stats('Titan')
+      it 'sets stats for Defender' do
+        user.set_archetype_stats('Defender')
         expect(user.attack).to eq(10)
         expect(user.iq).to eq(1)
         expect(user.defense).to eq(30)
         expect(user.health).to eq(200)
       end
 
-      it 'sets stats for Knight' do
-        user.set_archetype_stats('Knight')
+      it 'sets stats for Healer' do
+        user.set_archetype_stats('Healer')
         expect(user.attack).to eq(20)
         expect(user.iq).to eq(5)
         expect(user.defense).to eq(20)
@@ -62,16 +62,16 @@ RSpec.describe User, type: :model do
     end
 
     describe '#level_up' do
-      let(:user) { create(:user, level: 1, experience: 100, health: 100, attack: 10, defense: 5, iq: 1, archetype: 'Wizard') }
+      let(:user) { create(:user, level: 1, experience: 100, health: 100, attack: 10, defense: 5, iq: 1, archetype: 'Attacker') }
 
       it 'levels up and increases stats based on archetype' do
         user.level_up
 
         expect(user.level).to eq(2)
-        expect(user.health).to eq(120) # +20 for Wizard
-        expect(user.attack).to eq(20) # +10 for Wizard
-        expect(user.defense).to eq(10) # +5 for Wizard
-        expect(user.iq).to eq(4) # +3 for Wizard
+        expect(user.health).to eq(120) # +20 for Attacker
+        expect(user.attack).to eq(20) # +10 for Attacker
+        expect(user.defense).to eq(10) # +5 for Attacker
+        expect(user.iq).to eq(4) # +3 for Attacker
         expect(user.experience).to eq(0) # Reset experience after leveling up
       end
     end

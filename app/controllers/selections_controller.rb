@@ -8,9 +8,6 @@ class SelectionsController < ApplicationController
   def update_archetype
     archetype = params[:archetype]
 
-    # Set the user's archetype stats
-    current_user.set_archetype_stats(archetype)
-
     # Add the initial skin to the user's inventory
     skin_image_path = select_skin_image(archetype)
     skin = current_user.skins.build(
@@ -37,11 +34,11 @@ class SelectionsController < ApplicationController
   # Map archetypes to skin image file paths
   def select_skin_image(archetype)
     case archetype
-    when "Wizard"
+    when "Attacker"
       "attack.png"
-    when "Titan"
+    when "Defender"
       "defense.png"
-    when "Knight"
+    when "Healer"
       "balanced.png"
     else
       raise "Invalid archetype selected"
