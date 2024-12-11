@@ -75,5 +75,12 @@ RSpec.describe User, type: :model do
         expect(user.experience).to eq(0) # Reset experience after leveling up
       end
     end
+
+    describe "#shards" do
+      it "validates that shards cannot be negative" do
+        user = build(:user, shards: -10)
+        expect(user).not_to be_valid
+      end
+    end
   end
 end

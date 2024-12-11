@@ -41,6 +41,8 @@ Rails.application.routes.draw do
   patch 'mark_as_read', to: 'chats#mark_as_read', as: 'mark_as_read'
   get 'interaction', to: 'interactions#show'
   post 'attack', to: 'interactions#attack'
+  post 'store/purchase_shards', to: 'store#purchase_shards'
+  post 'store/purchase_item', to: 'store#purchase_item'
 
   # Route to display the form (text box and button)
   get 'ai_generated_skins/new', to: 'ai_generated_skins#new', as: 'new_ai_generated_skin'
