@@ -1,10 +1,84 @@
 <!-- app/views/credit_cards/show.html.erb -->
-<h1>Your Credit Card</h1>
-<div id="credit-card-info">
-    <p>Card Type: <%= @credit_card.card_type %></p>
-    <p>Card Number: **** **** **** <%= @credit_card.last4 %></p>
-    <p>Expiration Date: <%= @credit_card.expiration_month %>/<%= @credit_card.expiration_year %></p>
-</div>
-<%= link_to 'Edit Card', edit_credit_card_path %>
-<%= link_to "Back", games_path %>
 
+<style>
+    /* General styling for the page title */
+    .page-title {
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    }
+
+    /* Styling for the credit card container */
+    .card-container {
+    max-width: 400px;
+    margin: 0 auto 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    }
+
+    .card-container p {
+    font-size: 16px;
+    color: #555;
+    margin: 10px 0;
+    }
+
+    .card-container p strong {
+    color: #333;
+    }
+    
+    /* Styling for buttons */
+    .button-link {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+
+    .edit-card {
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+    }
+
+    .edit-card:hover {
+    background-color: #0056b3;
+    }
+
+    .back-button {
+    background-color: #fff;
+    color: #007bff;
+    border: 1px solid #007bff;
+    }
+
+    .back-button:hover {
+    background-color: #f1f1f1;
+    }
+
+    .button-container {
+        display: flex; /* Use Flexbox for alignment */
+        justify-content: center; /* Align items horizontally */
+        align-items: center; /* Align items vertically */
+        gap: 10px; /* Space between buttons */
+    }
+</style>
+
+<div>
+    <h1 class="page-title">Your Credit Card</h1>
+    <div id="credit-card-info" class="card-container">
+    <p><strong>Card Type:</strong> <%= @credit_card.card_type %></p>
+    <p><strong>Card Number:</strong> **** **** **** <%= @credit_card.last4 %></p>
+    <p><strong>Expiration Date:</strong> <%= @credit_card.expiration_month %>/<%= @credit_card.expiration_year %></p>
+    </div>
+    <div class="button-container">
+        <%= link_to 'Edit Card', edit_credit_card_path, class: "button-link edit-card" %>
+        <%= link_to "Back", games_path, class: "button-link back-button" %>
+    </div>
+</div>
