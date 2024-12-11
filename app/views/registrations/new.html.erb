@@ -46,6 +46,12 @@
         </div>
       <% end %>
 
+      <% if @user.errors[:password_confirmation].any? %>
+        <div class="alert alert-danger">
+          <%= @user.errors[:password_confirmation].join(", ") %>
+        </div>
+      <% end %>
+
       <%= f.submit "Sign Up", class: 'btn btn-primary' %>
     <% end %>
 

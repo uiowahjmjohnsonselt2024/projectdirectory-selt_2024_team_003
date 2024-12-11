@@ -16,16 +16,11 @@
             <%= f.password_field :password, class: 'form-control', placeholder: "Enter your password" %>
           </div>
 
-          <div class="form-group">
-            <%= f.label :password_confirmation %>
-            <%= f.password_field :password_confirmation, class: 'form-control', placeholder: "Confirm your password" %>
-          </div>
-
           <%= f.submit "Reset Password", class: 'btn btn-primary' %>
 
         <% end %>
       <% end %>
-
+    
     <% if flash[:reseterr].present? %>
       <div class="alert alert-danger">
         <%= flash[:reseterr] %>

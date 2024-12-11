@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
 
   # Check if the reset password token is valid
   def reset_password_token_valid?(token)
-    self.reset_password_token == token
+    self.reset_password_token == token && self.reset_password_sent_at >= Time.now.utc - 1.hour
   end
 end
 
