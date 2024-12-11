@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
@@ -7,9 +9,9 @@ RSpec.describe User, type: :model do
 
     context 'adding a friend' do
       it 'adds a friend successfully' do
-        expect {
+        expect do
           user.friendships.create(friend: friend)
-        }.to change { user.friends.count }.by(1)
+        end.to change { user.friends.count }.by(1)
       end
 
       it 'does not allow duplicate friendships' do
@@ -27,9 +29,9 @@ RSpec.describe User, type: :model do
       end
 
       it 'removes a friend successfully' do
-        expect {
+        expect do
           user.friendships.find_by(friend: friend).destroy
-        }.to change { user.friends.count }.by(-1)
+        end.to change { user.friends.count }.by(-1)
       end
     end
 
@@ -62,7 +64,10 @@ RSpec.describe User, type: :model do
     end
 
     describe '#level_up' do
-      let(:user) { create(:user, level: 1, experience: 100, health: 100, attack: 10, defense: 5, iq: 1, archetype: 'Arcane Strategist') }
+      let(:user) do
+        create(:user, level: 1, experience: 100, health: 100, attack: 10, defense: 5, iq: 1,
+                      archetype: 'Arcane Strategist')
+      end
 
       it 'levels up and increases stats based on archetype' do
         user.level_up
@@ -76,8 +81,8 @@ RSpec.describe User, type: :model do
       end
     end
 
-    describe "#shards" do
-      it "validates that shards cannot be negative" do
+    describe '#shards' do
+      it 'validates that shards cannot be negative' do
         user = build(:user, shards: -10)
         expect(user).not_to be_valid
       end

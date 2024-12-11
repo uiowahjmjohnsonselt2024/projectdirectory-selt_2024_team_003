@@ -13,7 +13,7 @@ class InventoryController < ApplicationController
       skin.image.attach(
         io: StringIO.new(decoded_image),
         filename: "generated_skin_#{Time.now.to_i}.png",
-        content_type: "image/png"
+        content_type: 'image/png'
       )
 
       if skin.save
@@ -23,7 +23,7 @@ class InventoryController < ApplicationController
       end
     rescue ArgumentError
       # Handle invalid Base64 data
-      redirect_to store_path, alert: "Invalid image data."
+      redirect_to store_path, alert: 'Invalid image data.'
     end
   end
 

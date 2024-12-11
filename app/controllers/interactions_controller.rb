@@ -46,7 +46,7 @@ class InteractionsController < ApplicationController
     if @game_user.health <= 0
       @game_user.update(health: @player.health)
       @game_user.update(x_position: 0, y_position: 0)
-      message += " You have been defeated and sent back to the starting position!"
+      message += ' You have been defeated and sent back to the starting position!'
       player_defeated = true
     end
 
@@ -102,7 +102,7 @@ class InteractionsController < ApplicationController
       if @game_user.health <= 0
         @game_user.update(health: @player.health)
         @game_user.update(x_position: 0, y_position: 0)
-        message += " You have been defeated and sent back to the starting position!"
+        message += ' You have been defeated and sent back to the starting position!'
         player_defeated = true
       end
 
@@ -115,10 +115,10 @@ class InteractionsController < ApplicationController
         max_player_health: @player.health,
         player_defeated: player_defeated,
         player_mana: @game_user.mana,
-        max_mana: @player.mana,
+        max_mana: @player.mana
       }
     else
-      render json: { success: false, message: "Not enough mana!" }
+      render json: { success: false, message: 'Not enough mana!' }
     end
   end
 
@@ -128,7 +128,7 @@ class InteractionsController < ApplicationController
     @enemy = @game.enemies.find_by(x_position: @game_user.x_position, y_position: @game_user.y_position)
     @player = current_user
     @game_id = params[:game_id]
-    message = ""
+    message = ''
 
     if @game_user.use_mana(20)
       healing = (@game_user.user.special_attack * 0.5).to_i
@@ -147,7 +147,7 @@ class InteractionsController < ApplicationController
       if @game_user.health <= 0
         @game_user.update(health: @player.health)
         @game_user.update(x_position: 0, y_position: 0)
-        message += " You have been defeated and sent back to the starting position!"
+        message += ' You have been defeated and sent back to the starting position!'
         player_defeated = true
       end
 
@@ -163,7 +163,7 @@ class InteractionsController < ApplicationController
         player_defeated: player_defeated
       }
     else
-      render json: { success: false, message: "Not enough mana!" }
+      render json: { success: false, message: 'Not enough mana!' }
     end
   end
 
@@ -183,8 +183,8 @@ class InteractionsController < ApplicationController
 
   def level_up_if_needed(player)
     xp_threshold = player.level * 100
-    if player.experience >= xp_threshold
-      player.level_up
-    end
+    return unless player.experience >= xp_threshold
+
+    player.level_up
   end
 end
