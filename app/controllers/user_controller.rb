@@ -1,34 +1,34 @@
 # frozen_string_literal: true
-class UserController < ApplicationController
 
+class UserController < ApplicationController
   def index
-    case current_user.archetype
-    when 'Arcane Strategist'
-      @image = 'attack.png'
-    when 'Iron Guardian'
-      @image = 'defense.png'
-    when 'Omni Knight'
-      @image = 'balanced.png'
-    else
-      @image = 'balanced.png'
-    end
+    @image = case current_user.archetype
+             when 'Arcane Strategist'
+               'attack.png'
+             when 'Iron Guardian'
+               'defense.png'
+             when 'Omni Knight'
+               'balanced.png'
+             else
+               'balanced.png'
+             end
 
     @stats = [
-      { name: "Archetype", value: current_user.archetype },
-      { name: "Max Health", value: current_user.health },
-      { name: "Max Mana", value: current_user.mana },
-      { name: "Attack", value: current_user.attack },
-      { name: "Special Attack", value: current_user.special_attack },
-      { name: "Defense", value: current_user.defense },
-      { name: "Special Defense", value: current_user.special_defense },
-      { name: "IQ", value: current_user.iq }
+      { name: 'Archetype', value: current_user.archetype },
+      { name: 'Max Health', value: current_user.health },
+      { name: 'Max Mana', value: current_user.mana },
+      { name: 'Attack', value: current_user.attack },
+      { name: 'Special Attack', value: current_user.special_attack },
+      { name: 'Defense', value: current_user.defense },
+      { name: 'Special Defense', value: current_user.special_defense },
+      { name: 'IQ', value: current_user.iq }
     ]
 
-    if params[:search].present?
-      @users = User.where("username LIKE ?", "%#{params[:search]}%").where.not(id: current_user.id)
-    else
-      @users = User.where.not(id: current_user.id)
-    end
+    @users = if params[:search].present?
+               User.where('username LIKE ?', "%#{params[:search]}%").where.not(id: current_user.id)
+             else
+               User.where.not(id: current_user.id)
+             end
   end
 
   def add_friend
