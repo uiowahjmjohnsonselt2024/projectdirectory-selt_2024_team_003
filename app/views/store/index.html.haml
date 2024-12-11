@@ -360,6 +360,10 @@
           if (result.success) {
             showPopup(`${itemType} purchased successfully!`, true);
             document.querySelector('.shards').innerText = `Shards: ${result.shards}`;
+
+            if (itemType === "AI Generated Avatar") {
+              window.location.href = "/ai_generated_skins/new";
+            }
           } else {
             showPopup(`Insufficient funds for ${itemType}.`, false);
           }
