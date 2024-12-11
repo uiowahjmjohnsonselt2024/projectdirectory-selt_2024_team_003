@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :interactions, param: :game_id do
     post 'attack', on: :member
+    post 'use_move', on: :member
   end
 
   resources :selections, only: [:index]

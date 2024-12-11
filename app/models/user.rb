@@ -22,33 +22,13 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, length: { minimum: 6 }, if: -> { new_record? || !password.nil? }
 
-  after_create :assign_default_moves
-
-  def assign_default_moves
-    Move.where(name: ["Basic Attack", "Heal", "Power Strike", "Team Heal"]).each do |move|
-      puts move.name
-      self.moves << move
-    end
-  end
-
-  def add_move(move)
-    if moves.count < 4
-      moves << move
-    else
-      raise "You already have 4 moves! Overwrite one to learn a new move."
-    end
-  end
-
-  def replace_move(old_move, new_move)
-    transaction do
-      moves.destroy(old_move)
-      moves << new_move
-    end
-  end
-
   def set_archetype_stats(archetype)
     case archetype
     when 'Arcane Strategist'
+      Move.where(name: ["Basic Attack", "Coin Flip"]).each do |move|
+        puts move.name
+        self.moves << move
+      end
       self.archetype = 'Arcane Strategist'
       self.attack = 30
       self.iq = 10
@@ -59,6 +39,10 @@ class User < ActiveRecord::Base
       self.mana = 100
     when 'Iron Guardian'
       self.archetype = 'Iron Guardian'
+      Move.where(name: ["Basic Attack", "Power Strike"]).each do |move|
+        puts move.name
+        self.moves << move
+      end
       self.attack = 10
       self.iq = 1
       self.defense = 30
@@ -68,6 +52,10 @@ class User < ActiveRecord::Base
       self.mana = 50
     when 'Omni Knight'
       self.archetype = 'Omni Knight'
+      Move.where(name: ["Basic Attack", "Heal"]).each do |move|
+        puts move.name
+        self.moves << move
+      end
       self.attack = 20
       self.iq = 5
       self.defense = 20
@@ -77,6 +65,10 @@ class User < ActiveRecord::Base
       self.mana = 75
     else
       self.archetype = 'Omni Knight' # just go to balanced build if not gone through
+      Move.where(name: ["Basic Attack", "Heal"]).each do |move|
+        puts move.name
+        self.moves << move
+      end
       self.attack = 20
       self.iq = 5
       self.defense = 20

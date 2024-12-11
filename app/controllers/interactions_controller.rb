@@ -5,20 +5,58 @@ class InteractionsController < ApplicationController
     @enemy = @game.enemies.find_by(x_position: @game_user.x_position, y_position: @game_user.y_position)
     @player = current_user
     @user_moves = current_user.user_moves
-    puts current_user.username
-    puts "|||||||||||||||||"
-    puts current_user.inspect
   end
 
   def use_move
+    message = ""
     @game = Game.find_by(code: params[:game_id])
     @game_user = @game.game_users.find_by(user: current_user)
     @enemy = @game.enemies.find_by(x_position: @game_user.x_position, y_position: @game_user.y_position)
     @move = current_user.moves.find(params[:move_id])
+    @player = current_user
 
     if @game_user.mana >= @move.mana_cost
       @move.execute(user: current_user, target: @enemy, game_user: @game_user)
-      render json: { success: true, message: "#{@move.name} was used!" }
+      player_defeated = false
+      if @game_user.health <= 0
+        @game_user.update(health: @player.health)
+        @game_user.update(x_position: 0, y_position: 0)
+        player_defeated = true
+      end
+
+      if @enemy.health <= 0
+        @enemy.update(health: 0)
+        experience_gain = @enemy.level * 50
+        @player.update(experience: @player.experience + experience_gain)
+        level_up_if_needed(@player)
+        message += " You defeated the enemy and gained #{experience_gain} XP!"
+        if @enemy.x_position == 5 && @enemy.y_position == 5
+          render json: { success: true, win: true, message: message } and return
+        end
+      else
+        enemy_damage, enemy_critical = calculate_attack_damage(@enemy, @player)
+        @game_user.update(health: @game_user.health - enemy_damage)
+
+        message += if enemy_critical
+                     " Critical Hit! The enemy dealt #{enemy_damage} damage to you!"
+                   else
+                     " The enemy attacked you and dealt #{enemy_damage} damage."
+                   end
+      end
+      puts "|||||||||||||||||||||||||||||||||||"
+      puts @player.mana
+      puts @enemy.health
+      render json: {
+        success: true,
+        message: "#{@move.name} was used!",
+        enemy_health: @enemy.health,
+        enemy_max_health: @enemy.max_health,
+        player_health: @game_user.health,
+        max_player_health: @player.health,
+        player_defeated: player_defeated,
+        player_mana: @game_user.mana,
+        max_mana: @player.mana,
+      }
     else
       render json: { success: false, message: "Not enough mana to use #{@move.name}!" }
     end
