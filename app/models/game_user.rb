@@ -40,7 +40,7 @@ class GameUser < ActiveRecord::Base
 
   def take_damage(damage)
     self.health -= damage
-    self.save
+    save
   end
 
   def use_mana(amount)

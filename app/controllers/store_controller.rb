@@ -13,12 +13,13 @@ class StoreController < ApplicationController
 
       current_user.shards += shard_count
       if current_user.save
-        render json: { success: true, message: "#{shard_count} shards purchased successfully!", shards: current_user.shards }
+        render json: { success: true, message: "#{shard_count} shards purchased successfully!",
+                       shards: current_user.shards }
       else
-        render json: { success: false, message: "Failed to update shards." }, status: :unprocessable_entity
+        render json: { success: false, message: 'Failed to update shards.' }, status: :unprocessable_entity
       end
     else
-      render json: { success: false, message: "Payment method not setup." }, status: :payment_required
+      render json: { success: false, message: 'Payment method not setup.' }, status: :payment_required
     end
   end
 
@@ -48,7 +49,7 @@ class StoreController < ApplicationController
         # If everything went well
         render json: { success: true, message: "#{item_type} purchased successfully!", shards: current_user.shards }
       else
-        render json: { success: false, message: "Failed to update shards." }, status: :unprocessable_entity
+        render json: { success: false, message: 'Failed to update shards.' }, status: :unprocessable_entity
       end
     else
       # Insufficient funds

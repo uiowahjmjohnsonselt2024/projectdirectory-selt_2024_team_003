@@ -17,7 +17,7 @@ class SelectionsController < ApplicationController
     skin.image.attach(
       io: File.open(Rails.root.join("app/assets/images/#{skin_image_path}")),
       filename: "#{archetype.downcase.gsub(' ', '_')}.png",
-      content_type: "image/png"
+      content_type: 'image/png'
     )
 
     if skin.save
@@ -25,7 +25,7 @@ class SelectionsController < ApplicationController
     else
       render json: { success: false, error: "Failed to save skin: #{skin.errors.full_messages.join(', ')}" }
     end
-  rescue => e
+  rescue StandardError => e
     render json: { success: false, error: e.message }
   end
 
@@ -34,14 +34,14 @@ class SelectionsController < ApplicationController
   # Map archetypes to skin image file paths
   def select_skin_image(archetype)
     case archetype
-    when "Attacker"
-      "attack.png"
-    when "Defender"
-      "defense.png"
-    when "Healer"
-      "balanced.png"
+    when 'Arcane Strategist'
+      'attack.png'
+    when 'Iron Guardian'
+      'defense.png'
+    when 'Omni Knight'
+      'balanced.png'
     else
-      raise "Invalid archetype selected"
+      raise 'Invalid archetype selected'
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Friendship, type: :model do
@@ -13,7 +15,7 @@ RSpec.describe Friendship, type: :model do
       duplicate_friendship = build(:friendship, user: user, friend: friend)
 
       expect(duplicate_friendship).not_to be_valid
-      expect(duplicate_friendship.errors[:user_id]).to include("You are already friends with this user.")
+      expect(duplicate_friendship.errors[:user_id]).to include('You are already friends with this user.')
     end
   end
 end

@@ -15,7 +15,7 @@ class InventoryController < ApplicationController
       skin.image.attach(
         io: StringIO.new(decoded_image),
         filename: "generated_skin_#{Time.now.to_i}.png",
-        content_type: "image/png"
+        content_type: 'image/png'
       )
 
       if skin.save
@@ -24,6 +24,7 @@ class InventoryController < ApplicationController
         redirect_to store_path
       end
     rescue ArgumentError
+      # Handle invalid Base64 data
       redirect_to store_path
     end
   end
@@ -32,7 +33,7 @@ class InventoryController < ApplicationController
   def index
     @skins = current_user.skins
     @weapons = current_user.weapons
-    # You can load consumables similarly if needed, e.g. @consumables = current_user.consumables
+    #consumeables
   end
 
   # Action to set a skin as the current skin

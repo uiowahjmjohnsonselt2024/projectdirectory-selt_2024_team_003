@@ -7,9 +7,9 @@ RSpec.describe User, type: :model do
 
     context 'adding a friend' do
       it 'adds a friend successfully' do
-        expect {
+        expect do
           user.friendships.create(friend: friend)
-        }.to change { user.friends.count }.by(1)
+        end.to change { user.friends.count }.by(1)
       end
 
       it 'does not allow duplicate friendships' do
@@ -27,9 +27,9 @@ RSpec.describe User, type: :model do
       end
 
       it 'removes a friend successfully' do
-        expect {
+        expect do
           user.friendships.find_by(friend: friend).destroy
-        }.to change { user.friends.count }.by(-1)
+        end.to change { user.friends.count }.by(-1)
       end
     end
 
@@ -76,8 +76,8 @@ RSpec.describe User, type: :model do
       end
     end
 
-    describe "#shards" do
-      it "validates that shards cannot be negative" do
+    describe '#shards' do
+      it 'validates that shards cannot be negative' do
         user = build(:user, shards: -10)
         expect(user).not_to be_valid
       end

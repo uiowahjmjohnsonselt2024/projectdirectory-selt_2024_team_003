@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe GameUser, type: :model do
@@ -27,10 +29,10 @@ RSpec.describe GameUser, type: :model do
 
   describe 'validations' do
     it 'validates numericality of x_position and y_position' do
-      invalid_game_user = GameUser.new(user: user, game: game, x_position: "a", y_position: "b")
+      invalid_game_user = GameUser.new(user: user, game: game, x_position: 'a', y_position: 'b')
       expect(invalid_game_user.valid?).to be false
-      expect(invalid_game_user.errors[:x_position]).to include("is not a number")
-      expect(invalid_game_user.errors[:y_position]).to include("is not a number")
+      expect(invalid_game_user.errors[:x_position]).to include('is not a number')
+      expect(invalid_game_user.errors[:y_position]).to include('is not a number')
     end
   end
   describe '#update_health' do

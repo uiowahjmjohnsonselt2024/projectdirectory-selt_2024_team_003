@@ -1,15 +1,18 @@
 # frozen_string_literal: true
-
 class UserController < ApplicationController
   before_action :authenticate_user!
 
   # Displays the user's profile, including their current skin stats and friend list
   def index
-    @image = case current_user.current_skin.archetype
-             when 'Attacker' then 'attack.png'
-             when 'Defender' then 'defense.png'
-             when 'Healer' then 'balanced.png'
-             else 'balanced.png'
+    @image = case current_user.archetype
+             when 'Arcane Strategist'
+               'attack.png'
+             when 'Iron Guardian'
+               'defense.png'
+             when 'Omni Knight'
+               'balanced.png'
+             else
+               'balanced.png'
              end
 
     @stats = [
@@ -25,14 +28,13 @@ class UserController < ApplicationController
       { name: "Experience", value: current_user.current_skin.experience }
     ]
 
-    if params[:search].present?
-      @users = User.where("username LIKE ?", "%#{params[:search]}%").where.not(id: current_user.id)
-    else
-      @users = User.where.not(id: current_user.id)
-    end
+    @users = if params[:search].present?
+               User.where('username LIKE ?', "%#{params[:search]}%").where.not(id: current_user.id)
+             else
+               User.where.not(id: current_user.id)
+             end
   end
 
-  # Adds a user to the current user's friend list
   def add_friend
     friend = User.find(params[:friend_id])
 
@@ -59,5 +61,4 @@ class UserController < ApplicationController
 
     redirect_to account_path
   end
-
 end
