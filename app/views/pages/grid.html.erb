@@ -170,35 +170,58 @@
                 const movePath = "<%= @move_path %>"; // Embed the Ruby variable here
                 const gameId = square.getAttribute('data-game-id');
 
-                // Send a request to update the player's position
-                fetch(movePath, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
-                    },
-                    body: JSON.stringify({
-                        x_position: x,
-                        y_position: y
-                    })
-                }).then(response => response.json()) // Parse the JSON response
-                    .then(data => {
-                        if (data.success) {
-                            // Successful move
-                            //console.log("successful");
-                            //window.location.reload(); // Reload to update the grid
-                            window.location.href = `/interaction?game_id=${gameId}&x=${x}&y=${y}`;
-                        } else {
-                            // Failed move
-                            //console.log("fail");
-                            //alert(data.error || 'Error moving to the new position.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('An unexpected error occurred.');
-                    });
+                if (x === '4' && y === '5') {
+                    // Send a request to update the player's position to the backend
+                    fetch(movePath, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+                        },
+                        body: JSON.stringify({
+                            x_position: x,
+                            y_position: y
+                        })
+                    }).then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                // If the move was successful, save the position and redirect
+                                sessionStorage.setItem('current_position', JSON.stringify({ x: x, y: y }));
+                                window.location.href = '/casino/show';
+                            } else {
+                                // Handle failure (optional)
+                                alert('Failed to save position');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('An unexpected error occurred.');
+                        });
+                } else {
+                    // Send the request for other moves
+                    fetch(movePath, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+                        },
+                        body: JSON.stringify({
+                            x_position: x,
+                            y_position: y
+                        })
+                    }).then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                window.location.href = `/interaction?game_id=${gameId}&x=${x}&y=${y}`;
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('An unexpected error occurred.');
+                        });
+                }
             });
+
         });
 
         function formatDescription(description) {
