@@ -3060,3 +3060,1423 @@ Processing by GamesController#index as HTML
 Completed 200 OK in 37ms (Views: 26.9ms | ActiveRecord: 0.9ms (2 queries, 0 cached) | GC: 0.0ms)
 
 
+DEPRECATION WARNING: `to_time` will always preserve the receiver timezone rather than system local time in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /home/ralaya/SELT/projectdirectory-selt_2024_team_003/config/environment.rb:5)
+[dotenv] Set [36mAWS_ACCESS_KEY_ID[0m and [36mAWS_SECRET_ACCESS_KEY[0m
+[dotenv] Loaded [33m.env[0m
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /home/ralaya/SELT/projectdirectory-selt_2024_team_003/config/initializers/to_time_preserves_timezone.rb:10)
+Started GET "/" for 127.0.0.1 at 2024-12-11 21:21:49 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+Redirected to http://localhost:3000/games
+Completed 302 Found in 588ms (ActiveRecord: 2.4ms (1 query, 0 cached) | GC: 96.1ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-12-11 21:21:50 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  Rendered games/index.html.erb within layouts/application (Duration: 3.7ms | GC: 0.3ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.5ms | GC: 0.3ms)
+Completed 500 Internal Server Error in 81ms (ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 5.1ms)
+
+
+  
+ActionView::Template::Error (undefined method `profile_picture' for an instance of User)
+Caused by: NoMethodError (undefined method `profile_picture' for an instance of User)
+
+Information for: ActionView::Template::Error (undefined method `profile_picture' for an instance of User):
+    1: <div id="games-menu">
+    2:   <span class="current-user">
+    3:   <% if current_user.profile_picture.attached? %>
+    4:     <%= image_tag current_user.profile_picture.variant(resize_to_limit: [150, 150]) %>
+    5:   <% else %>
+    6:     <p>No profile picture uploaded.</p>
+  
+app/views/games/index.html.erb:3
+
+Information for cause: NoMethodError (undefined method `profile_picture' for an instance of User):
+  
+app/views/games/index.html.erb:3
+Started GET "/games" for 127.0.0.1 at 2024-12-11 21:22:44 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 5], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGame Load (0.4ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 5]]
+  Rendered games/index.html.erb within layouts/application (Duration: 76.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 691.6ms | GC: 225.6ms)
+Completed 200 OK in 722ms (Views: 690.0ms | ActiveRecord: 5.1ms (4 queries, 0 cached) | GC: 225.6ms)
+
+
+Started GET "/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--3fb1f5832d3dd6ab9f7b331975f00b052e85557e/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RkhKbGMybDZaVjkwYjE5c2FXMXBkRnNIYVFHV2FRR1ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--f491ac90c7c8fcae1b9694b5ad51c58ebe2d5687/Screenshot%202024-03-02%20150340.png" for 127.0.0.1 at 2024-12-11 21:22:44 -0600
+Processing by ActiveStorage::Representations::RedirectController#show as PNG
+  Parameters: {"signed_blob_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--3fb1f5832d3dd6ab9f7b331975f00b052e85557e", "variation_key"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RkhKbGMybDZaVjkwYjE5c2FXMXBkRnNIYVFHV2FRR1ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--f491ac90c7c8fcae1b9694b5ad51c58ebe2d5687", "filename"=>"Screenshot 2024-03-02 150340"}
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[36m  S3 Storage (182.8ms) [0m[34mChecked if file exists at key: variants/qgk6s7aqk1qoyswy5iy3yhufbcbo/42abaad29073346e886a3aa4b88429b287921f8c6821b8596a6b16516cabbe18 (no)[0m
+[36m  S3 Storage (33.8ms) [0m[34mDownloaded file from key: qgk6s7aqk1qoyswy5iy3yhufbcbo[0m
+Completed 500 Internal Server Error in 223ms (ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveStorage::FileNotFoundError (ActiveStorage::FileNotFoundError):
+  
+activestorage (8.0.0) lib/active_storage/service/s3_service.rb:159:in `stream'
+activestorage (8.0.0) lib/active_storage/service/s3_service.rb:43:in `block in download'
+activesupport (8.0.0) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.0) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.0) lib/active_support/notifications.rb:210:in `instrument'
+activestorage (8.0.0) lib/active_storage/service.rb:165:in `instrument'
+activestorage (8.0.0) lib/active_storage/service/s3_service.rb:42:in `download'
+activestorage (8.0.0) lib/active_storage/downloader.rb:32:in `download'
+activestorage (8.0.0) lib/active_storage/downloader.rb:13:in `block in open'
+activestorage (8.0.0) lib/active_storage/downloader.rb:24:in `open_tempfile'
+activestorage (8.0.0) lib/active_storage/downloader.rb:12:in `open'
+activestorage (8.0.0) lib/active_storage/service.rb:92:in `open'
+activestorage (8.0.0) app/models/active_storage/blob.rb:305:in `open'
+activestorage (8.0.0) app/models/active_storage/variant.rb:112:in `process'
+activestorage (8.0.0) app/models/active_storage/variant.rb:68:in `processed'
+activestorage (8.0.0) app/controllers/active_storage/representations/base_controller.rb:14:in `set_representation'
+activesupport (8.0.0) lib/active_support/callbacks.rb:361:in `block in make_lambda'
+activesupport (8.0.0) lib/active_support/callbacks.rb:178:in `block in call'
+actionpack (8.0.0) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (8.0.0) lib/active_support/callbacks.rb:179:in `call'
+activesupport (8.0.0) lib/active_support/callbacks.rb:558:in `block in invoke_before'
+activesupport (8.0.0) lib/active_support/callbacks.rb:558:in `each'
+activesupport (8.0.0) lib/active_support/callbacks.rb:558:in `invoke_before'
+activesupport (8.0.0) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+actiontext (8.0.0) lib/action_text/rendering.rb:25:in `with_renderer'
+actiontext (8.0.0) lib/action_text/engine.rb:71:in `block (4 levels) in <class:Engine>'
+activesupport (8.0.0) lib/active_support/callbacks.rb:129:in `instance_exec'
+activesupport (8.0.0) lib/active_support/callbacks.rb:129:in `block in run_callbacks'
+activesupport (8.0.0) lib/active_support/callbacks.rb:140:in `run_callbacks'
+actionpack (8.0.0) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.0) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.0) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.0) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.0) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.0) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.0) lib/abstract_controller/base.rb:163:in `process'
+actionview (8.0.0) lib/action_view/rendering.rb:40:in `process'
+actionpack (8.0.0) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.0) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.0) lib/rails/engine/lazy_route_set.rb:68:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (8.0.0) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (8.0.0) lib/action_dispatch/http/content_security_policy.rb:35:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/cookies.rb:706:in `call'
+activerecord (8.0.0) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.0) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.0) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.0) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.0) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.0) lib/rails/engine.rb:535:in `call'
+rack (2.2.10) lib/rack/handler/webrick.rb:95:in `service'
+webrick (1.9.0) lib/webrick/httpserver.rb:140:in `service'
+webrick (1.9.0) lib/webrick/httpserver.rb:96:in `run'
+webrick (1.9.0) lib/webrick/server.rb:310:in `block in start_thread'
+Started GET "/logout" for 127.0.0.1 at 2024-12-11 21:22:52 -0600
+Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-12-11 21:22:53 -0600
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.haml within layouts/application
+  Rendered home/index.html.haml within layouts/application (Duration: 16.6ms | GC: 2.6ms)
+  Rendered layout layouts/application.html.erb (Duration: 50.7ms | GC: 3.9ms)
+Completed 200 OK in 56ms (Views: 53.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 3.9ms)
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-12-11 21:22:53 -0600
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-12-11 21:22:53 -0600
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-12-11 21:22:53 -0600
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-12-11 21:22:54 -0600
+Started GET "/create" for 127.0.0.1 at 2024-12-11 21:22:55 -0600
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.html.erb within layouts/application
+  Rendered registrations/new.html.erb within layouts/application (Duration: 21.6ms | GC: 0.6ms)
+  Rendered layout layouts/application.html.erb (Duration: 93.3ms | GC: 2.1ms)
+Completed 200 OK in 105ms (Views: 102.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 2.1ms)
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-12-11 21:22:55 -0600
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-12-11 21:22:56 -0600
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-12-11 21:22:57 -0600
+Started POST "/signup" for 127.0.0.1 at 2024-12-11 21:23:35 -0600
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"yarJaGvuIAK0DzmHwFIKYyZAkSDuc3_XGxdN1CHVTFtwqcuqJ7V7ARM4aiv2iq1uhb9EUq6ObY9_m_drjwHWbw", "user"=>{"username"=>"imagetest99", "email"=>"imagetest99", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "avatar"=>#<ActionDispatch::Http::UploadedFile:0x00007f5b91992c78 @tempfile=#<Tempfile:/tmp/RackMultipart20241211-25389-au6se6.png>, @content_type="image/png", @original_filename="Screenshot 2024-11-04 193209.png", @headers="Content-Disposition: form-data; name=\"user[avatar]\"; filename=\"Screenshot 2024-11-04 193209.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Sign Up"}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "imagetest99"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "imagetest99"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.html.erb within layouts/application
+  Rendered registrations/new.html.erb within layouts/application (Duration: 5.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 28.9ms | GC: 1.1ms)
+Completed 200 OK in 377ms (Views: 30.7ms | ActiveRecord: 1.7ms (2 queries, 0 cached) | GC: 1.9ms)
+
+
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-12-11 21:23:36 -0600
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-12-11 21:23:36 -0600
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-12-11 21:23:38 -0600
+Started POST "/signup" for 127.0.0.1 at 2024-12-11 21:24:13 -0600
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"vrwZE5FvMOag6BxfzUulvnr1ETruDdEUXLRgZQNLuNYHvxvR3TRr5QffT_P7kwKz2QrESK7ww0w4ONrarZ8i4g", "user"=>{"username"=>"imagetest99", "email"=>"imagetest99@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "avatar"=>#<ActionDispatch::Http::UploadedFile:0x00007f5b91b0a920 @tempfile=#<Tempfile:/tmp/RackMultipart20241211-25389-fbwyd5.png>, @content_type="image/png", @original_filename="Screenshot 2024-11-04 193209.png", @headers="Content-Disposition: form-data; name=\"user[avatar]\"; filename=\"Screenshot 2024-11-04 193209.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Sign Up"}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "imagetest99"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "imagetest99@email.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.6ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_digest") VALUES (?, ?, ?) RETURNING "id"[0m  [["username", "imagetest99"], ["email", "imagetest99@email.com"], ["password_digest", "[FILTERED]"]]
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Create (0.3ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["key", "ztpr6a8slxvdzonrz3mrbueehd7x"], ["filename", "Screenshot 2024-11-04 193209.png"], ["content_type", "image/png"], ["metadata", "{\"identified\":true}"], ["service_name", "amazon"], ["byte_size", 23577], ["checksum", "yfHo/y0lOF9QxoFH4iJKXQ=="], ["created_at", "2024-12-12 03:24:13.721285"]]
+  [1m[36mActiveStorage::Attachment Create (1.3ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "avatar"], ["record_type", "User"], ["record_id", 9], ["blob_id", 5], ["created_at", "2024-12-12 03:24:13.724246"]]
+  [1m[36mTRANSACTION (17.4ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+[36m  S3 Storage (217.7ms) [0m[32mUploaded file to key: ztpr6a8slxvdzonrz3mrbueehd7x (checksum: yfHo/y0lOF9QxoFH4iJKXQ==)[0m
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: 08a7181e-a4c4-4bd2-a7e4-30f2f57ac0ad) to Async(default) with arguments: #<GlobalID:0x00007f5b91e766e0 @uri=#<URI::GID gid://shards-of-the-grid/ActiveStorage::Blob/5>>
+Redirected to http://localhost:3000/selections
+Completed 302 Found in 664ms (ActiveRecord: 22.5ms (7 queries, 0 cached) | GC: 2.4ms)
+
+
+[ActiveJob] [ActiveStorage::AnalyzeJob] [08a7181e-a4c4-4bd2-a7e4-30f2f57ac0ad]   [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [08a7181e-a4c4-4bd2-a7e4-30f2f57ac0ad] Performing ActiveStorage::AnalyzeJob (Job ID: 08a7181e-a4c4-4bd2-a7e4-30f2f57ac0ad) from Async(default) enqueued at 2024-12-12T03:24:14.007435349Z with arguments: #<GlobalID:0x00007f5b91e938a8 @uri=#<URI::GID gid://shards-of-the-grid/ActiveStorage::Blob/5>>
+Started GET "/selections" for 127.0.0.1 at 2024-12-11 21:24:14 -0600
+Processing by SelectionsController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering selections/index.html.erb within layouts/application
+  Rendered selections/index.html.erb within layouts/application (Duration: 3.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 20.2ms | GC: 0.2ms)
+Completed 200 OK in 24ms (Views: 21.3ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.2ms)
+
+
+[ActiveJob] [ActiveStorage::AnalyzeJob] [08a7181e-a4c4-4bd2-a7e4-30f2f57ac0ad] [36m  S3 Storage (132.8ms) [0m[34mDownloaded file from key: ztpr6a8slxvdzonrz3mrbueehd7x[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [08a7181e-a4c4-4bd2-a7e4-30f2f57ac0ad] Skipping image analysis because ImageMagick doesn't support the file
+[ActiveJob] [ActiveStorage::AnalyzeJob] [08a7181e-a4c4-4bd2-a7e4-30f2f57ac0ad]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [08a7181e-a4c4-4bd2-a7e4-30f2f57ac0ad]   [1m[36mActiveStorage::Blob Update (1.6ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = ? WHERE "active_storage_blobs"."id" = ?[0m  [["metadata", "{\"identified\":true,\"analyzed\":true}"], ["id", 5]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [08a7181e-a4c4-4bd2-a7e4-30f2f57ac0ad]   [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = ?[0m  [["blob_id", 5]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [08a7181e-a4c4-4bd2-a7e4-30f2f57ac0ad]   [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 9]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [08a7181e-a4c4-4bd2-a7e4-30f2f57ac0ad]   [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [08a7181e-a4c4-4bd2-a7e4-30f2f57ac0ad] Performed ActiveStorage::AnalyzeJob (Job ID: 08a7181e-a4c4-4bd2-a7e4-30f2f57ac0ad) from Async(default) in 302.58ms
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-12-11 21:24:14 -0600
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-12-11 21:24:16 -0600
+Started PATCH "/selections/update_archetype" for 127.0.0.1 at 2024-12-11 21:24:17 -0600
+Processing by SelectionsController#update_archetype as */*
+  Parameters: {"archetype"=>"Arcane Strategist", "selection"=>{"archetype"=>"Arcane Strategist"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = ? AND "users"."id" != ? LIMIT ?[0m  [["username", "imagetest99"], ["id", 9], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "imagetest99@email.com"], ["id", 9], ["LIMIT", 1]]
+  [1m[36mUser Update (0.4ms)[0m  [1m[33mUPDATE "users" SET "attack" = ?, "iq" = ?, "archetype" = ?, "mana" = ?, "special_attack" = ?, "special_defense" = ? WHERE "users"."id" = ?[0m  [["attack", 30], ["iq", 10], ["archetype", "Arcane Strategist"], ["mana", 100], ["special_attack", 40], ["special_defense", 20], ["id", 9]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mSkin Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "skins" WHERE "skins"."user_id" = ? AND "skins"."current" = ? AND "skins"."id" IS NOT NULL LIMIT ?[0m  [["user_id", 9], ["current", 1], ["LIMIT", 1]]
+  [1m[36mSkin Create (0.7ms)[0m  [1m[32mINSERT INTO "skins" ("user_id", "created_at", "updated_at", "current") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["user_id", 9], ["created_at", "2024-12-12 03:24:17.584731"], ["updated_at", "2024-12-12 03:24:17.584731"], ["current", 1]]
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "Skin"], ["name", "image"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Create (0.2ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["key", "jjnit01efp63kkqy6xok0vx0de3t"], ["filename", "arcane_strategist.png"], ["content_type", "image/png"], ["metadata", "{\"identified\":true}"], ["service_name", "amazon"], ["byte_size", 251138], ["checksum", "PPx8TN7JNlgJ3YiJlZm7BA=="], ["created_at", "2024-12-12 03:24:17.589203"]]
+  [1m[36mActiveStorage::Attachment Create (0.2ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "image"], ["record_type", "Skin"], ["record_id", 1], ["blob_id", 6], ["created_at", "2024-12-12 03:24:17.590615"]]
+  [1m[36mSkin Update (1.0ms)[0m  [1m[33mUPDATE "skins" SET "updated_at" = ? WHERE "skins"."id" = ?[0m  [["updated_at", "2024-12-12 03:24:17.592029"], ["id", 1]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+[36m  S3 Storage (258.3ms) [0m[32mUploaded file to key: jjnit01efp63kkqy6xok0vx0de3t (checksum: PPx8TN7JNlgJ3YiJlZm7BA==)[0m
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: 0cc32581-752d-4838-8cc8-81144e54725f) to Async(default) with arguments: #<GlobalID:0x00007f5b91eb17e0 @uri=#<URI::GID gid://shards-of-the-grid/ActiveStorage::Blob/6>>
+Completed 200 OK in 316ms (Views: 0.4ms | ActiveRecord: 7.5ms (10 queries, 0 cached) | GC: 1.6ms)
+
+
+[ActiveJob] [ActiveStorage::AnalyzeJob] [0cc32581-752d-4838-8cc8-81144e54725f]   [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [0cc32581-752d-4838-8cc8-81144e54725f] Performing ActiveStorage::AnalyzeJob (Job ID: 0cc32581-752d-4838-8cc8-81144e54725f) from Async(default) enqueued at 2024-12-12T03:24:17.858216254Z with arguments: #<GlobalID:0x00007f5b91ec6b90 @uri=#<URI::GID gid://shards-of-the-grid/ActiveStorage::Blob/6>>
+Started GET "/games" for 127.0.0.1 at 2024-12-11 21:24:17 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mGame Load (0.1ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 9]]
+  Rendered games/index.html.erb within layouts/application (Duration: 7.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 38.1ms | GC: 0.3ms)
+Completed 200 OK in 44ms (Views: 38.9ms | ActiveRecord: 0.9ms (4 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--9d113ec6390cc5b59c64b1385eb3df0169ee2c00/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RkhKbGMybDZaVjkwYjE5c2FXMXBkRnNIYVFHV2FRR1ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--f491ac90c7c8fcae1b9694b5ad51c58ebe2d5687/Screenshot%202024-11-04%20193209.png" for 127.0.0.1 at 2024-12-11 21:24:18 -0600
+Processing by ActiveStorage::Representations::RedirectController#show as PNG
+  Parameters: {"signed_blob_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--9d113ec6390cc5b59c64b1385eb3df0169ee2c00", "variation_key"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RkhKbGMybDZaVjkwYjE5c2FXMXBkRnNIYVFHV2FRR1ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--f491ac90c7c8fcae1b9694b5ad51c58ebe2d5687", "filename"=>"Screenshot 2024-11-04 193209"}
+  [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [0cc32581-752d-4838-8cc8-81144e54725f] [36m  S3 Storage (207.1ms) [0m[34mDownloaded file from key: jjnit01efp63kkqy6xok0vx0de3t[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [0cc32581-752d-4838-8cc8-81144e54725f] Skipping image analysis because ImageMagick doesn't support the file
+[ActiveJob] [ActiveStorage::AnalyzeJob] [0cc32581-752d-4838-8cc8-81144e54725f]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [0cc32581-752d-4838-8cc8-81144e54725f]   [1m[36mActiveStorage::Blob Update (0.8ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = ? WHERE "active_storage_blobs"."id" = ?[0m  [["metadata", "{\"identified\":true,\"analyzed\":true}"], ["id", 6]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [0cc32581-752d-4838-8cc8-81144e54725f]   [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = ?[0m  [["blob_id", 6]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [0cc32581-752d-4838-8cc8-81144e54725f]   [1m[36mSkin Load (0.2ms)[0m  [1m[34mSELECT "skins".* FROM "skins" WHERE "skins"."id" = ?[0m  [["id", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [0cc32581-752d-4838-8cc8-81144e54725f]   [1m[36mSkin Update (0.2ms)[0m  [1m[33mUPDATE "skins" SET "updated_at" = ? WHERE "skins"."id" = ?[0m  [["updated_at", "2024-12-12 03:24:18.157248"], ["id", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [0cc32581-752d-4838-8cc8-81144e54725f]   [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [0cc32581-752d-4838-8cc8-81144e54725f] Performed ActiveStorage::AnalyzeJob (Job ID: 0cc32581-752d-4838-8cc8-81144e54725f) from Async(default) in 291.26ms
+[36m  S3 Storage (179.4ms) [0m[34mChecked if file exists at key: variants/ztpr6a8slxvdzonrz3mrbueehd7x/42abaad29073346e886a3aa4b88429b287921f8c6821b8596a6b16516cabbe18 (no)[0m
+[36m  S3 Storage (131.5ms) [0m[34mDownloaded file from key: ztpr6a8slxvdzonrz3mrbueehd7x[0m
+Completed 500 Internal Server Error in 351ms (ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.3ms)
+
+
+  
+LoadError (Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile.)
+Caused by: LoadError (cannot load such file -- image_processing)
+
+Information for: LoadError (Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile.):
+  
+activestorage (8.0.0) lib/active_storage/transformers/image_processing_transformer.rb:6:in `rescue in <top (required)>'
+activestorage (8.0.0) lib/active_storage/transformers/image_processing_transformer.rb:3:in `<top (required)>'
+/home/ralaya/.rbenv/versions/3.3.6/lib/ruby/3.3.0/bundled_gems.rb:69:in `require'
+/home/ralaya/.rbenv/versions/3.3.6/lib/ruby/3.3.0/bundled_gems.rb:69:in `block (2 levels) in replace_require'
+zeitwerk (2.7.1) lib/zeitwerk/core_ext/kernel.rb:34:in `require'
+activestorage (8.0.0) app/models/active_storage/variation.rb:85:in `transformer'
+activestorage (8.0.0) app/models/active_storage/variation.rb:58:in `block in transform'
+activesupport (8.0.0) lib/active_support/notifications.rb:212:in `instrument'
+activestorage (8.0.0) app/models/active_storage/variation.rb:57:in `transform'
+activestorage (8.0.0) app/models/active_storage/variant.rb:113:in `block in process'
+activestorage (8.0.0) lib/active_storage/downloader.rb:15:in `block in open'
+activestorage (8.0.0) lib/active_storage/downloader.rb:24:in `open_tempfile'
+activestorage (8.0.0) lib/active_storage/downloader.rb:12:in `open'
+activestorage (8.0.0) lib/active_storage/service.rb:92:in `open'
+activestorage (8.0.0) app/models/active_storage/blob.rb:305:in `open'
+activestorage (8.0.0) app/models/active_storage/variant.rb:112:in `process'
+activestorage (8.0.0) app/models/active_storage/variant.rb:68:in `processed'
+activestorage (8.0.0) app/controllers/active_storage/representations/base_controller.rb:14:in `set_representation'
+activesupport (8.0.0) lib/active_support/callbacks.rb:361:in `block in make_lambda'
+activesupport (8.0.0) lib/active_support/callbacks.rb:178:in `block in call'
+actionpack (8.0.0) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (8.0.0) lib/active_support/callbacks.rb:179:in `call'
+activesupport (8.0.0) lib/active_support/callbacks.rb:558:in `block in invoke_before'
+activesupport (8.0.0) lib/active_support/callbacks.rb:558:in `each'
+activesupport (8.0.0) lib/active_support/callbacks.rb:558:in `invoke_before'
+activesupport (8.0.0) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+actiontext (8.0.0) lib/action_text/rendering.rb:25:in `with_renderer'
+actiontext (8.0.0) lib/action_text/engine.rb:71:in `block (4 levels) in <class:Engine>'
+activesupport (8.0.0) lib/active_support/callbacks.rb:129:in `instance_exec'
+activesupport (8.0.0) lib/active_support/callbacks.rb:129:in `block in run_callbacks'
+activesupport (8.0.0) lib/active_support/callbacks.rb:140:in `run_callbacks'
+actionpack (8.0.0) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.0) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.0) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.0) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.0) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.0) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.0) lib/abstract_controller/base.rb:163:in `process'
+actionview (8.0.0) lib/action_view/rendering.rb:40:in `process'
+actionpack (8.0.0) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.0) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.0) lib/rails/engine/lazy_route_set.rb:68:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (8.0.0) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (8.0.0) lib/action_dispatch/http/content_security_policy.rb:35:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/cookies.rb:706:in `call'
+activerecord (8.0.0) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.0) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.0) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.0) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.0) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.0) lib/rails/engine.rb:535:in `call'
+rack (2.2.10) lib/rack/handler/webrick.rb:95:in `service'
+webrick (1.9.0) lib/webrick/httpserver.rb:140:in `service'
+webrick (1.9.0) lib/webrick/httpserver.rb:96:in `run'
+webrick (1.9.0) lib/webrick/server.rb:310:in `block in start_thread'
+
+Information for cause: LoadError (cannot load such file -- image_processing):
+  
+/home/ralaya/.rbenv/versions/3.3.6/lib/ruby/3.3.0/bundled_gems.rb:69:in `require'
+/home/ralaya/.rbenv/versions/3.3.6/lib/ruby/3.3.0/bundled_gems.rb:69:in `block (2 levels) in replace_require'
+zeitwerk (2.7.1) lib/zeitwerk/core_ext/kernel.rb:34:in `require'
+activestorage (8.0.0) lib/active_storage/transformers/image_processing_transformer.rb:4:in `<top (required)>'
+/home/ralaya/.rbenv/versions/3.3.6/lib/ruby/3.3.0/bundled_gems.rb:69:in `require'
+/home/ralaya/.rbenv/versions/3.3.6/lib/ruby/3.3.0/bundled_gems.rb:69:in `block (2 levels) in replace_require'
+zeitwerk (2.7.1) lib/zeitwerk/core_ext/kernel.rb:34:in `require'
+activestorage (8.0.0) app/models/active_storage/variation.rb:85:in `transformer'
+activestorage (8.0.0) app/models/active_storage/variation.rb:58:in `block in transform'
+activesupport (8.0.0) lib/active_support/notifications.rb:212:in `instrument'
+activestorage (8.0.0) app/models/active_storage/variation.rb:57:in `transform'
+activestorage (8.0.0) app/models/active_storage/variant.rb:113:in `block in process'
+activestorage (8.0.0) lib/active_storage/downloader.rb:15:in `block in open'
+activestorage (8.0.0) lib/active_storage/downloader.rb:24:in `open_tempfile'
+activestorage (8.0.0) lib/active_storage/downloader.rb:12:in `open'
+activestorage (8.0.0) lib/active_storage/service.rb:92:in `open'
+activestorage (8.0.0) app/models/active_storage/blob.rb:305:in `open'
+activestorage (8.0.0) app/models/active_storage/variant.rb:112:in `process'
+activestorage (8.0.0) app/models/active_storage/variant.rb:68:in `processed'
+activestorage (8.0.0) app/controllers/active_storage/representations/base_controller.rb:14:in `set_representation'
+activesupport (8.0.0) lib/active_support/callbacks.rb:361:in `block in make_lambda'
+activesupport (8.0.0) lib/active_support/callbacks.rb:178:in `block in call'
+actionpack (8.0.0) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (8.0.0) lib/active_support/callbacks.rb:179:in `call'
+activesupport (8.0.0) lib/active_support/callbacks.rb:558:in `block in invoke_before'
+activesupport (8.0.0) lib/active_support/callbacks.rb:558:in `each'
+activesupport (8.0.0) lib/active_support/callbacks.rb:558:in `invoke_before'
+activesupport (8.0.0) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+actiontext (8.0.0) lib/action_text/rendering.rb:25:in `with_renderer'
+actiontext (8.0.0) lib/action_text/engine.rb:71:in `block (4 levels) in <class:Engine>'
+activesupport (8.0.0) lib/active_support/callbacks.rb:129:in `instance_exec'
+activesupport (8.0.0) lib/active_support/callbacks.rb:129:in `block in run_callbacks'
+activesupport (8.0.0) lib/active_support/callbacks.rb:140:in `run_callbacks'
+actionpack (8.0.0) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.0) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.0) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.0) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.0) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.0) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.0) lib/abstract_controller/base.rb:163:in `process'
+actionview (8.0.0) lib/action_view/rendering.rb:40:in `process'
+actionpack (8.0.0) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.0) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.0) lib/rails/engine/lazy_route_set.rb:68:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (8.0.0) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (8.0.0) lib/action_dispatch/http/content_security_policy.rb:35:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/cookies.rb:706:in `call'
+activerecord (8.0.0) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.0) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.0) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.0) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.0) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.0) lib/rails/engine.rb:535:in `call'
+rack (2.2.10) lib/rack/handler/webrick.rb:95:in `service'
+webrick (1.9.0) lib/webrick/httpserver.rb:140:in `service'
+webrick (1.9.0) lib/webrick/httpserver.rb:96:in `run'
+webrick (1.9.0) lib/webrick/server.rb:310:in `block in start_thread'
+DEPRECATION WARNING: `to_time` will always preserve the receiver timezone rather than system local time in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /home/ralaya/SELT/projectdirectory-selt_2024_team_003/config/environment.rb:5)
+[dotenv] Set [36mAWS_ACCESS_KEY_ID[0m and [36mAWS_SECRET_ACCESS_KEY[0m
+[dotenv] Loaded [33m.env[0m
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /home/ralaya/SELT/projectdirectory-selt_2024_team_003/config/initializers/to_time_preserves_timezone.rb:10)
+  [1m[36mUser Load (4.3ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+Started GET "/games" for 127.0.0.1 at 2024-12-11 21:32:18 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  Rendered games/index.html.erb within layouts/application (Duration: 2.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.6ms | GC: 0.0ms)
+Completed 500 Internal Server Error in 78ms (ActiveRecord: 1.9ms (1 query, 0 cached) | GC: 19.5ms)
+
+
+  
+ActionView::Template::Error (undefined method `avatar' for nil)
+Caused by: NoMethodError (undefined method `avatar' for nil)
+
+Information for: ActionView::Template::Error (undefined method `avatar' for nil):
+    1: <div id="games-menu">
+    2:   <span class="current-user">
+    3:     <% if @user.avatar.attached? %>
+    4:       <%= image_tag url_for(@user.avatar), alt: "User Avatar" %>
+    5:     <% else %>
+    6:       <p>No avatar uploaded.</p>
+  
+app/views/games/index.html.erb:3
+
+Information for cause: NoMethodError (undefined method `avatar' for nil):
+  
+app/views/games/index.html.erb:3
+Started GET "/games" for 127.0.0.1 at 2024-12-11 21:33:03 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  Rendered games/index.html.erb within layouts/application (Duration: 1.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.2ms | GC: 0.0ms)
+Completed 500 Internal Server Error in 54ms (ActiveRecord: 2.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `avatar' for nil)
+Caused by: NoMethodError (undefined method `avatar' for nil)
+
+Information for: ActionView::Template::Error (undefined method `avatar' for nil):
+    1: <div id="games-menu">
+    2:   <span class="current-user">
+    3:     <% if @user.avatar.attached? %>
+    4:       <%= image_tag url_for(@user.avatar), alt: "User Avatar" %>
+    5:     <% else %>
+    6:       <p>No avatar uploaded.</p>
+  
+app/views/games/index.html.erb:3
+
+Information for cause: NoMethodError (undefined method `avatar' for nil):
+  
+app/views/games/index.html.erb:3
+Started GET "/games" for 127.0.0.1 at 2024-12-11 21:33:29 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  Rendered games/index.html.erb within layouts/application (Duration: 0.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.4ms | GC: 0.0ms)
+Completed 500 Internal Server Error in 49ms (ActiveRecord: 2.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `avatar' for nil)
+Caused by: NoMethodError (undefined method `avatar' for nil)
+
+Information for: ActionView::Template::Error (undefined method `avatar' for nil):
+    1: <div id="games-menu">
+    2:   <span class="current-user">
+    3:     <% if @user.avatar.attached? %>
+    4:       <%= image_tag url_for(@user.avatar), alt: "User Avatar" %>
+    5:     <% else %>
+    6:       <p>No avatar uploaded.</p>
+  
+app/views/games/index.html.erb:3
+
+Information for cause: NoMethodError (undefined method `avatar' for nil):
+  
+app/views/games/index.html.erb:3
+Started GET "/games" for 127.0.0.1 at 2024-12-11 21:33:50 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mGame Load (0.3ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 9]]
+  Rendered games/index.html.erb within layouts/application (Duration: 70.7ms | GC: 1.6ms)
+  Rendered layout layouts/application.html.erb (Duration: 113.9ms | GC: 1.6ms)
+Completed 200 OK in 179ms (Views: 112.1ms | ActiveRecord: 9.3ms (4 queries, 0 cached) | GC: 2.9ms)
+
+
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--9d113ec6390cc5b59c64b1385eb3df0169ee2c00/Screenshot%202024-11-04%20193209.png" for 127.0.0.1 at 2024-12-11 21:33:50 -0600
+Processing by ActiveStorage::Blobs::RedirectController#show as PNG
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--9d113ec6390cc5b59c64b1385eb3df0169ee2c00", "filename"=>"Screenshot 2024-11-04 193209"}
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+[36m  S3 Storage (7.9ms) [0m[34mGenerated URL for file at key: ztpr6a8slxvdzonrz3mrbueehd7x (https://shards-of-the-grid.s3.us-east-2.amazonaws.com/ztpr6a8slxvdzonrz3mrbueehd7x?response-content-disposition=inline%3B%20filename%3D%22Screenshot%202024-11-04%20193209.png%22%3B%20filename%2A%3DUTF-8%27%27Screenshot%25202024-11-04%2520193209.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2MNVMER6357TXAR5%2F20241212%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20241212T033350Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=238c95c46d276a09c6ed2572f45b88304413bde2b1941aa2d5616972bb91acba)[0m
+Redirected to https://shards-of-the-grid.s3.us-east-2.amazonaws.com/ztpr6a8slxvdzonrz3mrbueehd7x?response-content-disposition=inline%3B%20filename%3D%22Screenshot%202024-11-04%20193209.png%22%3B%20filename%2A%3DUTF-8%27%27Screenshot%25202024-11-04%2520193209.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2MNVMER6357TXAR5%2F20241212%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20241212T033350Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=238c95c46d276a09c6ed2572f45b88304413bde2b1941aa2d5616972bb91acba
+Completed 302 Found in 15ms (ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-12-11 21:36:33 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mGame Load (0.6ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 9]]
+  Rendered games/index.html.erb within layouts/application (Duration: 38.9ms | GC: 0.9ms)
+  Rendered layout layouts/application.html.erb (Duration: 59.5ms | GC: 2.3ms)
+Completed 200 OK in 99ms (Views: 59.4ms | ActiveRecord: 7.6ms (4 queries, 0 cached) | GC: 3.8ms)
+
+
+Started GET "/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--9d113ec6390cc5b59c64b1385eb3df0169ee2c00/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RkhKbGMybDZaVjkwYjE5c2FXMXBkRnNIYVFHV2FRR1ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--f491ac90c7c8fcae1b9694b5ad51c58ebe2d5687/Screenshot%202024-11-04%20193209.png" for 127.0.0.1 at 2024-12-11 21:36:33 -0600
+Processing by ActiveStorage::Representations::RedirectController#show as PNG
+  Parameters: {"signed_blob_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--9d113ec6390cc5b59c64b1385eb3df0169ee2c00", "variation_key"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RkhKbGMybDZaVjkwYjE5c2FXMXBkRnNIYVFHV2FRR1ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--f491ac90c7c8fcae1b9694b5ad51c58ebe2d5687", "filename"=>"Screenshot 2024-11-04 193209"}
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+[36m  S3 Storage (151.6ms) [0m[34mChecked if file exists at key: variants/ztpr6a8slxvdzonrz3mrbueehd7x/42abaad29073346e886a3aa4b88429b287921f8c6821b8596a6b16516cabbe18 (no)[0m
+[36m  S3 Storage (115.0ms) [0m[34mDownloaded file from key: ztpr6a8slxvdzonrz3mrbueehd7x[0m
+Completed 500 Internal Server Error in 289ms (ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+LoadError (Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile.)
+Caused by: LoadError (cannot load such file -- image_processing)
+
+Information for: LoadError (Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile.):
+  
+activestorage (8.0.0) lib/active_storage/transformers/image_processing_transformer.rb:6:in `rescue in <top (required)>'
+activestorage (8.0.0) lib/active_storage/transformers/image_processing_transformer.rb:3:in `<top (required)>'
+/home/ralaya/.rbenv/versions/3.3.6/lib/ruby/3.3.0/bundled_gems.rb:69:in `require'
+/home/ralaya/.rbenv/versions/3.3.6/lib/ruby/3.3.0/bundled_gems.rb:69:in `block (2 levels) in replace_require'
+zeitwerk (2.7.1) lib/zeitwerk/core_ext/kernel.rb:34:in `require'
+activestorage (8.0.0) app/models/active_storage/variation.rb:85:in `transformer'
+activestorage (8.0.0) app/models/active_storage/variation.rb:58:in `block in transform'
+activesupport (8.0.0) lib/active_support/notifications.rb:212:in `instrument'
+activestorage (8.0.0) app/models/active_storage/variation.rb:57:in `transform'
+activestorage (8.0.0) app/models/active_storage/variant.rb:113:in `block in process'
+activestorage (8.0.0) lib/active_storage/downloader.rb:15:in `block in open'
+activestorage (8.0.0) lib/active_storage/downloader.rb:24:in `open_tempfile'
+activestorage (8.0.0) lib/active_storage/downloader.rb:12:in `open'
+activestorage (8.0.0) lib/active_storage/service.rb:92:in `open'
+activestorage (8.0.0) app/models/active_storage/blob.rb:305:in `open'
+activestorage (8.0.0) app/models/active_storage/variant.rb:112:in `process'
+activestorage (8.0.0) app/models/active_storage/variant.rb:68:in `processed'
+activestorage (8.0.0) app/controllers/active_storage/representations/base_controller.rb:14:in `set_representation'
+activesupport (8.0.0) lib/active_support/callbacks.rb:361:in `block in make_lambda'
+activesupport (8.0.0) lib/active_support/callbacks.rb:178:in `block in call'
+actionpack (8.0.0) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (8.0.0) lib/active_support/callbacks.rb:179:in `call'
+activesupport (8.0.0) lib/active_support/callbacks.rb:558:in `block in invoke_before'
+activesupport (8.0.0) lib/active_support/callbacks.rb:558:in `each'
+activesupport (8.0.0) lib/active_support/callbacks.rb:558:in `invoke_before'
+activesupport (8.0.0) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+actiontext (8.0.0) lib/action_text/rendering.rb:25:in `with_renderer'
+actiontext (8.0.0) lib/action_text/engine.rb:71:in `block (4 levels) in <class:Engine>'
+activesupport (8.0.0) lib/active_support/callbacks.rb:129:in `instance_exec'
+activesupport (8.0.0) lib/active_support/callbacks.rb:129:in `block in run_callbacks'
+activesupport (8.0.0) lib/active_support/callbacks.rb:140:in `run_callbacks'
+actionpack (8.0.0) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.0) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.0) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.0) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.0) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.0) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.0) lib/abstract_controller/base.rb:163:in `process'
+actionview (8.0.0) lib/action_view/rendering.rb:40:in `process'
+actionpack (8.0.0) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.0) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.0) lib/rails/engine/lazy_route_set.rb:68:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (8.0.0) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (8.0.0) lib/action_dispatch/http/content_security_policy.rb:35:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/cookies.rb:706:in `call'
+activerecord (8.0.0) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.0) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.0) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.0) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.0) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.0) lib/rails/engine.rb:535:in `call'
+rack (2.2.10) lib/rack/handler/webrick.rb:95:in `service'
+webrick (1.9.0) lib/webrick/httpserver.rb:140:in `service'
+webrick (1.9.0) lib/webrick/httpserver.rb:96:in `run'
+webrick (1.9.0) lib/webrick/server.rb:310:in `block in start_thread'
+
+Information for cause: LoadError (cannot load such file -- image_processing):
+  
+/home/ralaya/.rbenv/versions/3.3.6/lib/ruby/3.3.0/bundled_gems.rb:69:in `require'
+/home/ralaya/.rbenv/versions/3.3.6/lib/ruby/3.3.0/bundled_gems.rb:69:in `block (2 levels) in replace_require'
+zeitwerk (2.7.1) lib/zeitwerk/core_ext/kernel.rb:34:in `require'
+activestorage (8.0.0) lib/active_storage/transformers/image_processing_transformer.rb:4:in `<top (required)>'
+/home/ralaya/.rbenv/versions/3.3.6/lib/ruby/3.3.0/bundled_gems.rb:69:in `require'
+/home/ralaya/.rbenv/versions/3.3.6/lib/ruby/3.3.0/bundled_gems.rb:69:in `block (2 levels) in replace_require'
+zeitwerk (2.7.1) lib/zeitwerk/core_ext/kernel.rb:34:in `require'
+activestorage (8.0.0) app/models/active_storage/variation.rb:85:in `transformer'
+activestorage (8.0.0) app/models/active_storage/variation.rb:58:in `block in transform'
+activesupport (8.0.0) lib/active_support/notifications.rb:212:in `instrument'
+activestorage (8.0.0) app/models/active_storage/variation.rb:57:in `transform'
+activestorage (8.0.0) app/models/active_storage/variant.rb:113:in `block in process'
+activestorage (8.0.0) lib/active_storage/downloader.rb:15:in `block in open'
+activestorage (8.0.0) lib/active_storage/downloader.rb:24:in `open_tempfile'
+activestorage (8.0.0) lib/active_storage/downloader.rb:12:in `open'
+activestorage (8.0.0) lib/active_storage/service.rb:92:in `open'
+activestorage (8.0.0) app/models/active_storage/blob.rb:305:in `open'
+activestorage (8.0.0) app/models/active_storage/variant.rb:112:in `process'
+activestorage (8.0.0) app/models/active_storage/variant.rb:68:in `processed'
+activestorage (8.0.0) app/controllers/active_storage/representations/base_controller.rb:14:in `set_representation'
+activesupport (8.0.0) lib/active_support/callbacks.rb:361:in `block in make_lambda'
+activesupport (8.0.0) lib/active_support/callbacks.rb:178:in `block in call'
+actionpack (8.0.0) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (8.0.0) lib/active_support/callbacks.rb:179:in `call'
+activesupport (8.0.0) lib/active_support/callbacks.rb:558:in `block in invoke_before'
+activesupport (8.0.0) lib/active_support/callbacks.rb:558:in `each'
+activesupport (8.0.0) lib/active_support/callbacks.rb:558:in `invoke_before'
+activesupport (8.0.0) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+actiontext (8.0.0) lib/action_text/rendering.rb:25:in `with_renderer'
+actiontext (8.0.0) lib/action_text/engine.rb:71:in `block (4 levels) in <class:Engine>'
+activesupport (8.0.0) lib/active_support/callbacks.rb:129:in `instance_exec'
+activesupport (8.0.0) lib/active_support/callbacks.rb:129:in `block in run_callbacks'
+activesupport (8.0.0) lib/active_support/callbacks.rb:140:in `run_callbacks'
+actionpack (8.0.0) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.0) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.0) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.0) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.0) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.0) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.0) lib/abstract_controller/base.rb:163:in `process'
+actionview (8.0.0) lib/action_view/rendering.rb:40:in `process'
+actionpack (8.0.0) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.0) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.0) lib/rails/engine/lazy_route_set.rb:68:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (8.0.0) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (8.0.0) lib/action_dispatch/http/content_security_policy.rb:35:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/cookies.rb:706:in `call'
+activerecord (8.0.0) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.0) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.0) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.0) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.0) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.0) lib/rails/engine.rb:535:in `call'
+rack (2.2.10) lib/rack/handler/webrick.rb:95:in `service'
+webrick (1.9.0) lib/webrick/httpserver.rb:140:in `service'
+webrick (1.9.0) lib/webrick/httpserver.rb:96:in `run'
+webrick (1.9.0) lib/webrick/server.rb:310:in `block in start_thread'
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-12-11 21:36:38 -0600
+Started GET "/assets/test-d42870fff8e4dac536d27fa6757f2916d675c7a89c9de6d1f0fc72932d1c188d.mov" for 127.0.0.1 at 2024-12-11 21:36:39 -0600
+Started GET "/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--9d113ec6390cc5b59c64b1385eb3df0169ee2c00/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RkhKbGMybDZaVjkwYjE5c2FXMXBkRnNIYVFHV2FRR1ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--f491ac90c7c8fcae1b9694b5ad51c58ebe2d5687/Screenshot%202024-11-04%20193209.png" for 127.0.0.1 at 2024-12-11 21:36:39 -0600
+Processing by ActiveStorage::Representations::RedirectController#show as PNG
+  Parameters: {"signed_blob_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--9d113ec6390cc5b59c64b1385eb3df0169ee2c00", "variation_key"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RkhKbGMybDZaVjkwYjE5c2FXMXBkRnNIYVFHV2FRR1ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--f491ac90c7c8fcae1b9694b5ad51c58ebe2d5687", "filename"=>"Screenshot 2024-11-04 193209"}
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+[36m  S3 Storage (287.6ms) [0m[34mChecked if file exists at key: variants/ztpr6a8slxvdzonrz3mrbueehd7x/42abaad29073346e886a3aa4b88429b287921f8c6821b8596a6b16516cabbe18 (no)[0m
+[36m  S3 Storage (125.7ms) [0m[34mDownloaded file from key: ztpr6a8slxvdzonrz3mrbueehd7x[0m
+Completed 500 Internal Server Error in 426ms (ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 129.8ms)
+
+
+  
+LoadError (Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile.)
+Caused by: LoadError (cannot load such file -- image_processing)
+
+Information for: LoadError (Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile.):
+  
+activestorage (8.0.0) lib/active_storage/transformers/image_processing_transformer.rb:6:in `rescue in <top (required)>'
+activestorage (8.0.0) lib/active_storage/transformers/image_processing_transformer.rb:3:in `<top (required)>'
+/home/ralaya/.rbenv/versions/3.3.6/lib/ruby/3.3.0/bundled_gems.rb:69:in `require'
+/home/ralaya/.rbenv/versions/3.3.6/lib/ruby/3.3.0/bundled_gems.rb:69:in `block (2 levels) in replace_require'
+zeitwerk (2.7.1) lib/zeitwerk/core_ext/kernel.rb:34:in `require'
+activestorage (8.0.0) app/models/active_storage/variation.rb:85:in `transformer'
+activestorage (8.0.0) app/models/active_storage/variation.rb:58:in `block in transform'
+activesupport (8.0.0) lib/active_support/notifications.rb:212:in `instrument'
+activestorage (8.0.0) app/models/active_storage/variation.rb:57:in `transform'
+activestorage (8.0.0) app/models/active_storage/variant.rb:113:in `block in process'
+activestorage (8.0.0) lib/active_storage/downloader.rb:15:in `block in open'
+activestorage (8.0.0) lib/active_storage/downloader.rb:24:in `open_tempfile'
+activestorage (8.0.0) lib/active_storage/downloader.rb:12:in `open'
+activestorage (8.0.0) lib/active_storage/service.rb:92:in `open'
+activestorage (8.0.0) app/models/active_storage/blob.rb:305:in `open'
+activestorage (8.0.0) app/models/active_storage/variant.rb:112:in `process'
+activestorage (8.0.0) app/models/active_storage/variant.rb:68:in `processed'
+activestorage (8.0.0) app/controllers/active_storage/representations/base_controller.rb:14:in `set_representation'
+activesupport (8.0.0) lib/active_support/callbacks.rb:361:in `block in make_lambda'
+activesupport (8.0.0) lib/active_support/callbacks.rb:178:in `block in call'
+actionpack (8.0.0) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (8.0.0) lib/active_support/callbacks.rb:179:in `call'
+activesupport (8.0.0) lib/active_support/callbacks.rb:558:in `block in invoke_before'
+activesupport (8.0.0) lib/active_support/callbacks.rb:558:in `each'
+activesupport (8.0.0) lib/active_support/callbacks.rb:558:in `invoke_before'
+activesupport (8.0.0) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+actiontext (8.0.0) lib/action_text/rendering.rb:25:in `with_renderer'
+actiontext (8.0.0) lib/action_text/engine.rb:71:in `block (4 levels) in <class:Engine>'
+activesupport (8.0.0) lib/active_support/callbacks.rb:129:in `instance_exec'
+activesupport (8.0.0) lib/active_support/callbacks.rb:129:in `block in run_callbacks'
+activesupport (8.0.0) lib/active_support/callbacks.rb:140:in `run_callbacks'
+actionpack (8.0.0) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.0) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.0) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.0) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.0) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.0) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.0) lib/abstract_controller/base.rb:163:in `process'
+actionview (8.0.0) lib/action_view/rendering.rb:40:in `process'
+actionpack (8.0.0) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.0) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.0) lib/rails/engine/lazy_route_set.rb:68:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (8.0.0) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (8.0.0) lib/action_dispatch/http/content_security_policy.rb:35:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/cookies.rb:706:in `call'
+activerecord (8.0.0) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.0) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.0) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.0) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.0) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.0) lib/rails/engine.rb:535:in `call'
+rack (2.2.10) lib/rack/handler/webrick.rb:95:in `service'
+webrick (1.9.0) lib/webrick/httpserver.rb:140:in `service'
+webrick (1.9.0) lib/webrick/httpserver.rb:96:in `run'
+webrick (1.9.0) lib/webrick/server.rb:310:in `block in start_thread'
+
+Information for cause: LoadError (cannot load such file -- image_processing):
+  
+/home/ralaya/.rbenv/versions/3.3.6/lib/ruby/3.3.0/bundled_gems.rb:69:in `require'
+/home/ralaya/.rbenv/versions/3.3.6/lib/ruby/3.3.0/bundled_gems.rb:69:in `block (2 levels) in replace_require'
+zeitwerk (2.7.1) lib/zeitwerk/core_ext/kernel.rb:34:in `require'
+activestorage (8.0.0) lib/active_storage/transformers/image_processing_transformer.rb:4:in `<top (required)>'
+/home/ralaya/.rbenv/versions/3.3.6/lib/ruby/3.3.0/bundled_gems.rb:69:in `require'
+/home/ralaya/.rbenv/versions/3.3.6/lib/ruby/3.3.0/bundled_gems.rb:69:in `block (2 levels) in replace_require'
+zeitwerk (2.7.1) lib/zeitwerk/core_ext/kernel.rb:34:in `require'
+activestorage (8.0.0) app/models/active_storage/variation.rb:85:in `transformer'
+activestorage (8.0.0) app/models/active_storage/variation.rb:58:in `block in transform'
+activesupport (8.0.0) lib/active_support/notifications.rb:212:in `instrument'
+activestorage (8.0.0) app/models/active_storage/variation.rb:57:in `transform'
+activestorage (8.0.0) app/models/active_storage/variant.rb:113:in `block in process'
+activestorage (8.0.0) lib/active_storage/downloader.rb:15:in `block in open'
+activestorage (8.0.0) lib/active_storage/downloader.rb:24:in `open_tempfile'
+activestorage (8.0.0) lib/active_storage/downloader.rb:12:in `open'
+activestorage (8.0.0) lib/active_storage/service.rb:92:in `open'
+activestorage (8.0.0) app/models/active_storage/blob.rb:305:in `open'
+activestorage (8.0.0) app/models/active_storage/variant.rb:112:in `process'
+activestorage (8.0.0) app/models/active_storage/variant.rb:68:in `processed'
+activestorage (8.0.0) app/controllers/active_storage/representations/base_controller.rb:14:in `set_representation'
+activesupport (8.0.0) lib/active_support/callbacks.rb:361:in `block in make_lambda'
+activesupport (8.0.0) lib/active_support/callbacks.rb:178:in `block in call'
+actionpack (8.0.0) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (8.0.0) lib/active_support/callbacks.rb:179:in `call'
+activesupport (8.0.0) lib/active_support/callbacks.rb:558:in `block in invoke_before'
+activesupport (8.0.0) lib/active_support/callbacks.rb:558:in `each'
+activesupport (8.0.0) lib/active_support/callbacks.rb:558:in `invoke_before'
+activesupport (8.0.0) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+actiontext (8.0.0) lib/action_text/rendering.rb:25:in `with_renderer'
+actiontext (8.0.0) lib/action_text/engine.rb:71:in `block (4 levels) in <class:Engine>'
+activesupport (8.0.0) lib/active_support/callbacks.rb:129:in `instance_exec'
+activesupport (8.0.0) lib/active_support/callbacks.rb:129:in `block in run_callbacks'
+activesupport (8.0.0) lib/active_support/callbacks.rb:140:in `run_callbacks'
+actionpack (8.0.0) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.0) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.0) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.0) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.0) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.0) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.0) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.0) lib/abstract_controller/base.rb:163:in `process'
+actionview (8.0.0) lib/action_view/rendering.rb:40:in `process'
+actionpack (8.0.0) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.0) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.0) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.0) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.0) lib/rails/engine/lazy_route_set.rb:68:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (8.0.0) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (8.0.0) lib/action_dispatch/http/content_security_policy.rb:35:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/cookies.rb:706:in `call'
+activerecord (8.0.0) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.0) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.0) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.0) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.0) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (8.0.0) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.0) lib/rails/engine.rb:535:in `call'
+rack (2.2.10) lib/rack/handler/webrick.rb:95:in `service'
+webrick (1.9.0) lib/webrick/httpserver.rb:140:in `service'
+webrick (1.9.0) lib/webrick/httpserver.rb:96:in `run'
+webrick (1.9.0) lib/webrick/server.rb:310:in `block in start_thread'
+Started GET "/games" for 127.0.0.1 at 2024-12-11 21:37:03 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mGame Load (0.1ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 9]]
+  Rendered games/index.html.erb within layouts/application (Duration: 34.5ms | GC: 0.1ms)
+  Rendered layout layouts/application.html.erb (Duration: 53.8ms | GC: 0.2ms)
+Completed 200 OK in 98ms (Views: 52.9ms | ActiveRecord: 4.5ms (4 queries, 0 cached) | GC: 0.7ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-12-11 21:46:36 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (7.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+[36m  S3 Storage (123.8ms) [0m[34mChecked if file exists at key: variants/ztpr6a8slxvdzonrz3mrbueehd7x/6e73c96c29f8eac7758e8924d3afa63289b7d4117cf73dac5c29fd6f0f1d7387 (no)[0m
+[36m  S3 Storage (123.8ms) [0m[34mDownloaded file from key: ztpr6a8slxvdzonrz3mrbueehd7x[0m
+  Rendered games/index.html.erb within layouts/application (Duration: 306.7ms | GC: 3.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 307.7ms | GC: 3.0ms)
+Completed 500 Internal Server Error in 420ms (ActiveRecord: 7.8ms (3 queries, 0 cached) | GC: 19.3ms)
+
+
+  
+LoadError (Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile.)
+Caused by: LoadError (cannot load such file -- image_processing)
+
+Information for: LoadError (Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile.):
+  
+app/views/games/index.html.erb:4
+
+Information for cause: LoadError (cannot load such file -- image_processing):
+  
+app/views/games/index.html.erb:4
+DEPRECATION WARNING: `to_time` will always preserve the receiver timezone rather than system local time in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /home/ralaya/SELT/projectdirectory-selt_2024_team_003/config/environment.rb:5)
+[dotenv] Set [36mAWS_ACCESS_KEY_ID[0m and [36mAWS_SECRET_ACCESS_KEY[0m
+[dotenv] Loaded [33m.env[0m
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /home/ralaya/SELT/projectdirectory-selt_2024_team_003/config/initializers/to_time_preserves_timezone.rb:10)
+Started GET "/games" for 127.0.0.1 at 2024-12-11 21:49:21 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.7ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+[36m  S3 Storage (197.6ms) [0m[34mChecked if file exists at key: variants/ztpr6a8slxvdzonrz3mrbueehd7x/6e73c96c29f8eac7758e8924d3afa63289b7d4117cf73dac5c29fd6f0f1d7387 (no)[0m
+[36m  S3 Storage (149.6ms) [0m[34mDownloaded file from key: ztpr6a8slxvdzonrz3mrbueehd7x[0m
+  Rendered games/index.html.erb within layouts/application (Duration: 807.4ms | GC: 10.7ms)
+  Rendered layout layouts/application.html.erb (Duration: 808.7ms | GC: 10.7ms)
+Completed 500 Internal Server Error in 1477ms (ActiveRecord: 9.9ms (3 queries, 0 cached) | GC: 148.3ms)
+
+
+  
+ActionView::Template::Error (You must have ImageMagick or GraphicsMagick installed)
+Caused by: MiniMagick::Error (You must have ImageMagick or GraphicsMagick installed)
+
+Information for: ActionView::Template::Error (You must have ImageMagick or GraphicsMagick installed):
+    1: <div id="games-menu">
+    2:   <span class="current-user">
+    3:       <% if current_user.avatar.attached? %>
+    4:           <%= image_tag url_for(current_user.avatar.variant(resize_to_fill: [150, 150]).processed), alt: "User Avatar", class: "user-avatar" %>
+    5:       <% else %>
+    6:           <p>No avatar uploaded.</p>
+    7:       <% end %>
+  
+app/views/games/index.html.erb:4
+
+Information for cause: MiniMagick::Error (You must have ImageMagick or GraphicsMagick installed):
+  
+app/views/games/index.html.erb:4
+Started GET "/" for 127.0.0.1 at 2024-12-11 21:49:36 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+Redirected to http://localhost:3000/games
+Completed 302 Found in 5ms (ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-12-11 21:49:36 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+[36m  S3 Storage (128.6ms) [0m[34mChecked if file exists at key: variants/ztpr6a8slxvdzonrz3mrbueehd7x/6e73c96c29f8eac7758e8924d3afa63289b7d4117cf73dac5c29fd6f0f1d7387 (no)[0m
+[36m  S3 Storage (117.9ms) [0m[34mDownloaded file from key: ztpr6a8slxvdzonrz3mrbueehd7x[0m
+  Rendered games/index.html.erb within layouts/application (Duration: 509.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 510.1ms | GC: 0.0ms)
+Completed 500 Internal Server Error in 514ms (ActiveRecord: 0.8ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActionView::Template::Error (You must have ImageMagick or GraphicsMagick installed)
+Caused by: MiniMagick::Error (You must have ImageMagick or GraphicsMagick installed)
+
+Information for: ActionView::Template::Error (You must have ImageMagick or GraphicsMagick installed):
+    1: <div id="games-menu">
+    2:   <span class="current-user">
+    3:       <% if current_user.avatar.attached? %>
+    4:           <%= image_tag url_for(current_user.avatar.variant(resize_to_fill: [150, 150]).processed), alt: "User Avatar", class: "user-avatar" %>
+    5:       <% else %>
+    6:           <p>No avatar uploaded.</p>
+    7:       <% end %>
+  
+app/views/games/index.html.erb:4
+
+Information for cause: MiniMagick::Error (You must have ImageMagick or GraphicsMagick installed):
+  
+app/views/games/index.html.erb:4
+Started GET "/" for 127.0.0.1 at 2024-12-11 21:49:37 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+Redirected to http://localhost:3000/games
+Completed 302 Found in 3ms (ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-12-11 21:49:37 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+[36m  S3 Storage (37.6ms) [0m[34mChecked if file exists at key: variants/ztpr6a8slxvdzonrz3mrbueehd7x/6e73c96c29f8eac7758e8924d3afa63289b7d4117cf73dac5c29fd6f0f1d7387 (no)[0m
+[36m  S3 Storage (127.6ms) [0m[34mDownloaded file from key: ztpr6a8slxvdzonrz3mrbueehd7x[0m
+  Rendered games/index.html.erb within layouts/application (Duration: 346.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 347.0ms | GC: 0.0ms)
+Completed 500 Internal Server Error in 350ms (ActiveRecord: 0.4ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActionView::Template::Error (You must have ImageMagick or GraphicsMagick installed)
+Caused by: MiniMagick::Error (You must have ImageMagick or GraphicsMagick installed)
+
+Information for: ActionView::Template::Error (You must have ImageMagick or GraphicsMagick installed):
+    1: <div id="games-menu">
+    2:   <span class="current-user">
+    3:       <% if current_user.avatar.attached? %>
+    4:           <%= image_tag url_for(current_user.avatar.variant(resize_to_fill: [150, 150]).processed), alt: "User Avatar", class: "user-avatar" %>
+    5:       <% else %>
+    6:           <p>No avatar uploaded.</p>
+    7:       <% end %>
+  
+app/views/games/index.html.erb:4
+
+Information for cause: MiniMagick::Error (You must have ImageMagick or GraphicsMagick installed):
+  
+app/views/games/index.html.erb:4
+DEPRECATION WARNING: `to_time` will always preserve the receiver timezone rather than system local time in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /home/ralaya/SELT/projectdirectory-selt_2024_team_003/config/environment.rb:5)
+[dotenv] Set [36mAWS_ACCESS_KEY_ID[0m and [36mAWS_SECRET_ACCESS_KEY[0m
+[dotenv] Loaded [33m.env[0m
+DEPRECATION WARNING: `to_time` will always preserve the full timezone rather than offset of the receiver in Rails 8.1. To opt in to the new behavior, set `config.active_support.to_time_preserves_timezone = :zone`. (called from <top (required)> at /home/ralaya/SELT/projectdirectory-selt_2024_team_003/config/initializers/to_time_preserves_timezone.rb:10)
+Started GET "/" for 127.0.0.1 at 2024-12-11 21:58:55 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+Redirected to http://localhost:3000/games
+Completed 302 Found in 462ms (ActiveRecord: 2.4ms (1 query, 0 cached) | GC: 55.6ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-12-11 21:58:55 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mGame Load (0.2ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 9]]
+  Rendered games/index.html.erb within layouts/application (Duration: 64.8ms | GC: 1.9ms)
+  Rendered layout layouts/application.html.erb (Duration: 559.7ms | GC: 124.0ms)
+Completed 200 OK in 676ms (Views: 566.6ms | ActiveRecord: 2.7ms (4 queries, 0 cached) | GC: 189.2ms)
+
+
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--9d113ec6390cc5b59c64b1385eb3df0169ee2c00/Screenshot%202024-11-04%20193209.png" for 127.0.0.1 at 2024-12-11 21:58:56 -0600
+Processing by ActiveStorage::Blobs::RedirectController#show as PNG
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--9d113ec6390cc5b59c64b1385eb3df0169ee2c00", "filename"=>"Screenshot 2024-11-04 193209"}
+  [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+[36m  S3 Storage (215.4ms) [0m[34mGenerated URL for file at key: ztpr6a8slxvdzonrz3mrbueehd7x (https://shards-of-the-grid.s3.us-east-2.amazonaws.com/ztpr6a8slxvdzonrz3mrbueehd7x?response-content-disposition=inline%3B%20filename%3D%22Screenshot%202024-11-04%20193209.png%22%3B%20filename%2A%3DUTF-8%27%27Screenshot%25202024-11-04%2520193209.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2MNVMER6357TXAR5%2F20241212%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20241212T035856Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=c5e18f0b42ee8c0f48c65d5b27dc81c6e69b51d2b1e99f3f66297b56a8283c32)[0m
+Redirected to https://shards-of-the-grid.s3.us-east-2.amazonaws.com/ztpr6a8slxvdzonrz3mrbueehd7x?response-content-disposition=inline%3B%20filename%3D%22Screenshot%202024-11-04%20193209.png%22%3B%20filename%2A%3DUTF-8%27%27Screenshot%25202024-11-04%2520193209.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2MNVMER6357TXAR5%2F20241212%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20241212T035856Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=c5e18f0b42ee8c0f48c65d5b27dc81c6e69b51d2b1e99f3f66297b56a8283c32
+Completed 302 Found in 235ms (ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-12-11 22:04:59 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mGame Load (0.5ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 9]]
+  Rendered games/index.html.erb within layouts/application (Duration: 31.6ms | GC: 1.4ms)
+  Rendered layout layouts/application.html.erb (Duration: 51.6ms | GC: 2.5ms)
+Completed 200 OK in 121ms (Views: 52.4ms | ActiveRecord: 2.4ms (4 queries, 0 cached) | GC: 28.3ms)
+
+
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--9d113ec6390cc5b59c64b1385eb3df0169ee2c00/Screenshot%202024-11-04%20193209.png" for 127.0.0.1 at 2024-12-11 22:05:00 -0600
+Processing by ActiveStorage::Blobs::RedirectController#show as PNG
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--9d113ec6390cc5b59c64b1385eb3df0169ee2c00", "filename"=>"Screenshot 2024-11-04 193209"}
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+[36m  S3 Storage (3.8ms) [0m[34mGenerated URL for file at key: ztpr6a8slxvdzonrz3mrbueehd7x (https://shards-of-the-grid.s3.us-east-2.amazonaws.com/ztpr6a8slxvdzonrz3mrbueehd7x?response-content-disposition=inline%3B%20filename%3D%22Screenshot%202024-11-04%20193209.png%22%3B%20filename%2A%3DUTF-8%27%27Screenshot%25202024-11-04%2520193209.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2MNVMER6357TXAR5%2F20241212%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20241212T040500Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=b3d623dd407332595f4e2abddeb19448940ad763e28beb5aa1e4887a500df309)[0m
+Redirected to https://shards-of-the-grid.s3.us-east-2.amazonaws.com/ztpr6a8slxvdzonrz3mrbueehd7x?response-content-disposition=inline%3B%20filename%3D%22Screenshot%202024-11-04%20193209.png%22%3B%20filename%2A%3DUTF-8%27%27Screenshot%25202024-11-04%2520193209.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2MNVMER6357TXAR5%2F20241212%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20241212T040500Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=b3d623dd407332595f4e2abddeb19448940ad763e28beb5aa1e4887a500df309
+Completed 302 Found in 12ms (ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-12-11 22:05:39 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mGame Load (0.3ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 9]]
+  Rendered games/index.html.erb within layouts/application (Duration: 51.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 101.8ms | GC: 18.7ms)
+Completed 200 OK in 172ms (Views: 100.4ms | ActiveRecord: 9.8ms (4 queries, 0 cached) | GC: 18.9ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-12-11 22:06:05 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mGame Load (0.1ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 9]]
+  Rendered games/index.html.erb within layouts/application (Duration: 28.6ms | GC: 0.5ms)
+  Rendered layout layouts/application.html.erb (Duration: 45.4ms | GC: 0.5ms)
+Completed 200 OK in 81ms (Views: 44.7ms | ActiveRecord: 6.0ms (4 queries, 0 cached) | GC: 1.7ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-12-11 22:06:07 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mGame Load (0.1ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 9]]
+  Rendered games/index.html.erb within layouts/application (Duration: 7.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 25.0ms | GC: 0.0ms)
+Completed 200 OK in 31ms (Views: 26.2ms | ActiveRecord: 0.9ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-12-11 22:06:37 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mGame Load (0.4ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 9]]
+  Rendered games/index.html.erb within layouts/application (Duration: 46.9ms | GC: 0.7ms)
+  Rendered layout layouts/application.html.erb (Duration: 72.5ms | GC: 0.7ms)
+Completed 200 OK in 128ms (Views: 71.4ms | ActiveRecord: 7.2ms (4 queries, 0 cached) | GC: 2.6ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-12-11 22:07:15 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.5ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mGame Load (0.6ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 9]]
+  Rendered games/index.html.erb within layouts/application (Duration: 44.9ms | GC: 1.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 74.8ms | GC: 2.2ms)
+Completed 200 OK in 128ms (Views: 74.8ms | ActiveRecord: 7.4ms (4 queries, 0 cached) | GC: 5.2ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-12-11 22:07:38 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mGame Load (0.2ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 9]]
+  Rendered games/index.html.erb within layouts/application (Duration: 43.9ms | GC: 2.6ms)
+  Rendered layout layouts/application.html.erb (Duration: 66.3ms | GC: 3.6ms)
+Completed 200 OK in 141ms (Views: 67.6ms | ActiveRecord: 7.1ms (4 queries, 0 cached) | GC: 19.2ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-12-11 22:08:01 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (1.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mGame Load (0.1ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 9]]
+  Rendered games/index.html.erb within layouts/application (Duration: 40.6ms | GC: 10.9ms)
+  Rendered layout layouts/application.html.erb (Duration: 64.6ms | GC: 13.4ms)
+Completed 200 OK in 110ms (Views: 64.4ms | ActiveRecord: 4.6ms (4 queries, 0 cached) | GC: 13.4ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-12-11 22:08:07 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mGame Load (0.1ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 9]]
+  Rendered games/index.html.erb within layouts/application (Duration: 34.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 81.5ms | GC: 17.6ms)
+Completed 200 OK in 126ms (Views: 79.6ms | ActiveRecord: 5.2ms (4 queries, 0 cached) | GC: 17.6ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-12-11 22:10:13 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.5ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mGame Load (0.3ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 9]]
+  Rendered games/index.html.erb within layouts/application (Duration: 55.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 91.2ms | GC: 0.0ms)
+Completed 200 OK in 171ms (Views: 88.8ms | ActiveRecord: 11.8ms (4 queries, 0 cached) | GC: 1.4ms)
+
+
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--9d113ec6390cc5b59c64b1385eb3df0169ee2c00/Screenshot%202024-11-04%20193209.png" for 127.0.0.1 at 2024-12-11 22:10:13 -0600
+Processing by ActiveStorage::Blobs::RedirectController#show as PNG
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--9d113ec6390cc5b59c64b1385eb3df0169ee2c00", "filename"=>"Screenshot 2024-11-04 193209"}
+  [1m[36mActiveStorage::Blob Load (0.9ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+[36m  S3 Storage (4.4ms) [0m[34mGenerated URL for file at key: ztpr6a8slxvdzonrz3mrbueehd7x (https://shards-of-the-grid.s3.us-east-2.amazonaws.com/ztpr6a8slxvdzonrz3mrbueehd7x?response-content-disposition=inline%3B%20filename%3D%22Screenshot%202024-11-04%20193209.png%22%3B%20filename%2A%3DUTF-8%27%27Screenshot%25202024-11-04%2520193209.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2MNVMER6357TXAR5%2F20241212%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20241212T041013Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=be6c4e052824b98921b0949e6f71e418c106b2d509dd9661bb35a47856d5472d)[0m
+Redirected to https://shards-of-the-grid.s3.us-east-2.amazonaws.com/ztpr6a8slxvdzonrz3mrbueehd7x?response-content-disposition=inline%3B%20filename%3D%22Screenshot%202024-11-04%20193209.png%22%3B%20filename%2A%3DUTF-8%27%27Screenshot%25202024-11-04%2520193209.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2MNVMER6357TXAR5%2F20241212%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20241212T041013Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=be6c4e052824b98921b0949e6f71e418c106b2d509dd9661bb35a47856d5472d
+Completed 302 Found in 20ms (ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-12-11 22:10:31 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.5ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mGame Load (0.6ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 9]]
+  Rendered games/index.html.erb within layouts/application (Duration: 74.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 119.6ms | GC: 14.9ms)
+Completed 200 OK in 223ms (Views: 119.7ms | ActiveRecord: 9.8ms (4 queries, 0 cached) | GC: 17.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2024-12-11 22:11:16 -0600
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+Redirected to http://localhost:3000/games
+Completed 302 Found in 45ms (ActiveRecord: 2.1ms (1 query, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-12-11 22:11:16 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mGame Load (0.2ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 9]]
+  Rendered games/index.html.erb within layouts/application (Duration: 45.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 90.3ms | GC: 19.1ms)
+Completed 200 OK in 108ms (Views: 90.5ms | ActiveRecord: 4.0ms (4 queries, 0 cached) | GC: 19.1ms)
+
+
+Started GET "/games" for 127.0.0.1 at 2024-12-11 22:12:11 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mGame Load (0.2ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 9]]
+  Rendered games/index.html.erb within layouts/application (Duration: 11.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2393.6ms | GC: 22.4ms)
+Completed 200 OK in 2400ms (Views: 2395.1ms | ActiveRecord: 0.9ms (4 queries, 0 cached) | GC: 22.4ms)
+
+
+Started GET "/assets/games.self-8483997f9f2d157544ca8549868057cdd09f0983bfb6a259eb4f06b9260dd5d7.css?body=1" for 127.0.0.1 at 2024-12-11 22:12:13 -0600
+Started GET "/games" for 127.0.0.1 at 2024-12-11 22:12:22 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mGame Load (0.3ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 9]]
+  Rendered games/index.html.erb within layouts/application (Duration: 14.1ms | GC: 0.1ms)
+  Rendered layout layouts/application.html.erb (Duration: 813.0ms | GC: 18.5ms)
+Completed 200 OK in 821ms (Views: 813.3ms | ActiveRecord: 1.7ms (4 queries, 0 cached) | GC: 18.5ms)
+
+
+Started GET "/assets/games.self-97e9da42d0851afb069cb80be0ea60a0435ba11c19c5a7e006fae07ea288319a.css?body=1" for 127.0.0.1 at 2024-12-11 22:12:23 -0600
+Started GET "/games" for 127.0.0.1 at 2024-12-11 22:12:32 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mGame Load (0.1ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 9]]
+  Rendered games/index.html.erb within layouts/application (Duration: 6.9ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 1112.7ms | GC: 261.7ms)
+Completed 200 OK in 1119ms (Views: 1114.5ms | ActiveRecord: 0.6ms (4 queries, 0 cached) | GC: 261.7ms)
+
+
+Started GET "/assets/games.self-e7486b989bb2f60e648dc2431320374e2bc355abb89d9f2b413531e70b8473e2.css?body=1" for 127.0.0.1 at 2024-12-11 22:12:32 -0600
+Started GET "/games" for 127.0.0.1 at 2024-12-11 22:13:38 -0600
+Processing by GamesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering games/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 9], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mGame Load (0.3ms)[0m  [1m[34mSELECT "games".* FROM "games" INNER JOIN "game_users" ON "games"."id" = "game_users"."game_id" WHERE "game_users"."user_id" = ?[0m  [["user_id", 9]]
+  Rendered games/index.html.erb within layouts/application (Duration: 44.2ms | GC: 1.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 81.4ms | GC: 1.2ms)
+Completed 200 OK in 147ms (Views: 81.7ms | ActiveRecord: 5.0ms (4 queries, 0 cached) | GC: 3.9ms)
+
+
