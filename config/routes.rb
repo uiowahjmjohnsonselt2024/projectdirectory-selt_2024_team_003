@@ -10,6 +10,12 @@ Rails.application.routes.draw do
     post 'attack', on: :member
   end
 
+  # config/routes.rb
+  resources :store, only: [:index] do
+    post 'purchase', on: :collection
+  end
+
+
   resources :selections, only: [:index]
   patch 'selections/update_archetype', to: 'selections#update_archetype'
 

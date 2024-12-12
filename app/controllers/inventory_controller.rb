@@ -28,11 +28,11 @@ class InventoryController < ApplicationController
     end
   end
 
-
-  # Action to list all skins in the user's inventory
+  # Action to list all items in the user's inventory
   def index
-    # Fetch all skins associated with the current user
     @skins = current_user.skins
+    @weapons = current_user.weapons
+    # You can load consumables similarly if needed, e.g. @consumables = current_user.consumables
   end
 
   # Action to set a skin as the current skin
