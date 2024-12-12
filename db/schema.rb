@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_10_014455) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_12_020925) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,6 +37,17 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_014455) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "credit_cards", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "last4"
+    t.integer "expiration_month"
+    t.integer "expiration_year"
+    t.string "card_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_credit_cards_on_user_id"
   end
 
   create_table "enemies", force: :cascade do |t|
@@ -119,16 +130,14 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_014455) do
     t.integer "mana"
     t.integer "special_attack"
     t.integer "special_defense"
+    t.json "achievements"
     t.integer "shards", default: 0, null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "credit_cards", "users"
   add_foreign_key "enemies", "games"
-  add_foreign_key "friendships", "users"
-  add_foreign_key "friendships", "users", column: "friend_id"
-  add_foreign_key "game_users", "games"
-  add_foreign_key "game_users", "users"
   add_foreign_key "messages", "users"
   add_foreign_key "skins", "users"
 end

@@ -22,3 +22,7 @@ log/development.log
 
 # Ignore coverage directory
 /coverage
+
+
+.env
+/config/master.key
