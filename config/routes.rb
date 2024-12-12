@@ -16,11 +16,62 @@ Rails.application.routes.draw do
 
   resources :password_resets, only: [:new, :create, :edit, :update]
 
+  resources :interactions, param: :game_id do
+    post 'attack', on: :member
+  end
+
+  resources :selections, only: [:index]
+  patch 'selections/update_archetype', to: 'selections#update_archetype'
+
+
+  resources :pages do
+    post :move, on: :collection
+  end
+
+  resources :interactions, only: [] do
+    member do
+      post :magic_attack
+      post :magic_heal
+    end
+  end
+
+  get 'account', to: 'user#index'
+  post 'add_friend', to: 'user#add_friend'
+  delete 'remove_friend', to: 'user#remove_friend'
+  get 'win_game', to: 'games#win', as: 'win_game'
+  delete 'end_game/:game_code', to: 'games#end', as: 'end_game'
   post 'login', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy', as: :logout
   post 'signup', to: 'registrations#create'
   get 'pages/grid'
-  get 'grid', to: 'pages#grid'  # This defines the route for /grid
+  get 'grid', to: 'pages#grid'
+  get 'store', to: 'store#index'
+  get 'chat_with_user', to: 'chats#show', as: 'chat_with_user'
+  post 'send_message', to: 'chats#create', as: 'send_message'
+  patch 'mark_as_read', to: 'chats#mark_as_read', as: 'mark_as_read'
+  get 'interaction', to: 'interactions#show'
+  post 'attack', to: 'interactions#attack'
+  post 'store/purchase_shards', to: 'store#purchase_shards'
+  post 'store/purchase_item', to: 'store#purchase_item'
+
+  # Route to display the form (text box and button)
+  get 'ai_generated_skins/new', to: 'ai_generated_skins#new', as: 'new_ai_generated_skin'
+  # Route to handle the form submission and generate the image
+  post 'ai_generated_skins/generate', to: 'ai_generated_skins#generate', as: 'generate_ai_generated_skin'
+
+  resources :inventory, only: [:index, :create, :destroy] do
+    collection do
+      post :add, to: 'inventory#add' # Route for adding a new skin
+    end
+
+    member do
+      patch :set_current, to: 'inventory#set_current' # Route for setting a current skin
+      delete :destroy, to: 'inventory#destroy' # Route for removing a skin
+    end
+  end
+
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

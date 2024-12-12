@@ -1,0 +1,196 @@
+<div class="interaction-page">
+  <h1>Interaction with Enemy</h1>
+  <p>Your position: (<%= @game_user.x_position %>, <%= @game_user.y_position %>)</p>
+
+  <div class="player-info">
+    <h3>Your Health</h3>
+    <progress id="player-health" value="<%= @game_user.health %>" max="<%= @player.health %>"></progress>
+    <p>Health: <span id="player-health-text"><%= @game_user.health %> / <%= @player.health %></span></p>
+    <h3>Your Mana</h3>
+    <progress id="player-mana" value="<%= @game_user.mana %>" max="<%= @player.mana %>"></progress>
+    <p>Mana: <span id="player-mana-text"><%= @game_user.mana %> / <%= @player.mana %></span></p>
+  </div>
+
+  <div class="enemy-info">
+    <h3><%= @enemy.name %></h3>
+    <p>Level: <%= @enemy.level %></p>
+    <progress id="enemy-health" value="<%= @enemy.health %>" max="<%= @enemy.max_health %>"></progress>
+    <p>Health: <span id="enemy-health-text"><%= @enemy.health %></span></p>
+    <p>Attack: <%= @enemy.attack %></p>
+    <p>Defense: <%= @enemy.defense %></p>
+    <p>IQ: <%= @enemy.iq %></p>
+    <p id="attack-message"></p>
+  </div>
+
+  <button id="attack-button" data-game-id="<%= @game.code %>">Attack</button>
+  <button id="magic-attack-button" data-game-id="<%= @game.code %>">Magic Attack</button>
+  <button id="magic-heal-button" data-game-id="<%= @game.code %>">Magic Heal</button>
+
+  <div class="interaction-footer">
+    <%= link_to 'Return to Grid', grid_path, class: 'back-button' %>
+  </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const attackButton = document.getElementById('attack-button');
+        const enemyHealthDisplay = document.getElementById('enemy-health');
+        const playerHealthDisplay = document.getElementById('player-health');
+        const enemyHealthText = document.getElementById('enemy-health-text');
+        const playerHealthText = document.getElementById('player-health-text');
+        const attackMessage = document.getElementById('attack-message');
+        const magicAttackButton = document.getElementById('magic-attack-button');
+        const magicHealButton = document.getElementById('magic-heal-button');
+        const playerManaDisplay = document.getElementById('player-mana');
+
+        function updateHealthBarColor(healthBar, health, maxHealth) {
+            const healthPercentage = (health / maxHealth) * 100;
+            if (healthPercentage < 25) {
+                healthBar.style.setProperty('--health-bar-color', 'red');
+            } else if (healthPercentage < 50) {
+                healthBar.style.setProperty('--health-bar-color', 'yellow');
+            } else {
+                healthBar.style.setProperty('--health-bar-color', '#66cc66'); // Default green
+            }
+        }
+
+        function updateManaDisplay(mana, maxMana) {
+            playerManaDisplay.value = mana;
+            document.getElementById('player-mana-text').textContent = `${mana} / ${maxMana}`;
+        }
+
+        function disableButtonIfNeeded(playerHealth, enemyHealth) {
+            if (playerHealth <= 0 || enemyHealth <= 0) {
+                attackButton.disabled = true;
+                magicAttackButton.disabled = true;
+                magicHealButton.disabled = true;
+            } else {
+                attackButton.disabled = false;
+                magicAttackButton.disabled = false;
+                magicHealButton.disabled = false;
+            }
+        }
+
+        attackButton.addEventListener('click', () => {
+            const gameId = attackButton.getAttribute('data-game-id');
+            fetch(`/interactions/${gameId}/attack`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+                },
+                body: JSON.stringify({ game_id: gameId })
+            })
+              .then(response => response.json())
+              .then(data => {
+                  game_logic(data)
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+              });
+        });
+
+        magicAttackButton.addEventListener('click', () => {
+            const gameId = magicAttackButton.getAttribute('data-game-id');
+            fetch(`/interactions/${gameId}/magic_attack`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+                },
+                body: JSON.stringify({ game_id: gameId })
+            })
+              .then(response => response.json())
+              .then(data => {
+                  if (data.success) {
+                      game_logic(data)
+                      updateManaDisplay(data.player_mana, data.max_mana);
+                  } else {
+                      attackMessage.textContent = data.message
+                  }
+              });
+        });
+
+        magicHealButton.addEventListener('click', () => {
+            const gameId = magicHealButton.getAttribute('data-game-id');
+            fetch(`/interactions/${gameId}/magic_heal`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+                },
+                body: JSON.stringify({ game_id: gameId })
+            })
+              .then(response => response.json())
+              .then(data => {
+                  if (data.success) {
+                      game_logic(data)
+                      updateManaDisplay(data.player_mana, data.max_mana);
+                  } else {
+                      attackMessage.textContent = data.message
+                  }
+              });
+        });
+
+        attackButton.addEventListener('click', () => {
+            const gameId = attackButton.getAttribute('data-game-id');
+            fetch(`/interactions/${gameId}/attack`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+                },
+                body: JSON.stringify({ game_id: gameId })
+            })
+              .then(response => response.json())
+              .then(data => {
+                  game_logic(data)
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+              });
+        });
+
+        function game_logic(data) {
+            if (data.win) {
+                enemyHealthDisplay.value = 0;
+                enemyHealthText.textContent = 0;
+                attackMessage.textContent += " Redirecting to the win page...";
+                setTimeout(() => {
+                    window.location.href = `/win_game?game_id=${gameId}`;
+                }, 2000);
+                return;
+            }
+
+            enemyHealthDisplay.value = data.enemy_health;
+            enemyHealthText.textContent = data.enemy_health;
+
+            attackMessage.textContent = data.message;
+            updateHealthBarColor(playerHealthDisplay, data.player_health, parseInt(playerHealthDisplay.getAttribute('max')));
+
+
+            if (data.message === "You win!" || data.player_defeated || data.enemy_health <= 0) {
+                attackButton.disabled = true;
+                magicAttackButton.disabled = true;
+                magicHealButton.disabled = true;
+            }
+
+            if (data.player_defeated) {
+                playerHealthDisplay.value = 0;
+                playerHealthText.textContent = `0 / ${data.max_player_health}`;
+                setTimeout(() => {
+                    window.location.href = "/grid";
+                }, 4000);
+            } else {
+                playerHealthDisplay.value = data.player_health;
+                playerHealthText.textContent = `${data.player_health} / ${data.max_player_health}`;
+            }
+        }
+
+        const initialEnemyHealth = parseInt(enemyHealthText.textContent, 10);
+        const initialPlayerHealth = parseInt(playerHealthText.textContent, 10);
+        disableButtonIfNeeded(initialPlayerHealth, initialEnemyHealth);
+        updateHealthBarColor(playerHealthDisplay, initialPlayerHealth, parseInt(playerHealthDisplay.getAttribute('max')));
+    });
+</script>
+

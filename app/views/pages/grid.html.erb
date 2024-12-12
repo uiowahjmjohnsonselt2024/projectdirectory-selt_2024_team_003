@@ -1,31 +1,87 @@
 <div class="dark-mode-theme">
   <div class="container">
     <div class="main-layout">
-      <!-- Left Column -->
       <aside class="left-column">
-        <!-- Red Button -->
         <%= link_to 'Return to Menu', games_path, class: 'red-button' %>
 
         <div class="profile">
           <div class="profile-picture-placeholder">[Profile Picture]</div>
-          <div class="username-placeholder">Username</div>
+          <div class="username-placeholder"><%= @user_name %></div>
+          <p>Level: <%= current_user.level %></p>
+          <div class="player-experience">
+            <h3>Your Experience</h3>
+            <progress id="player-experience" value="<%= @current_experience %>" max="<%= @experience_for_next_level %>"></progress>
+            <p>XP: <span id="player-experience-text"><%= @current_experience %> / <%= @experience_for_next_level %></span></p>
+          </div>
+          <div class="player-health">
+            <h3>Your Health</h3>
+            <progress id="player-health" value="<%= @current_health %>" max="<%= @max_health %>"></progress>
+            <p>Health: <span id="player-health-text"><%= @current_health %> / <%= @max_health %></span></p>
+          </div>
+          <div class="player-mana">
+            <h3>Your Mana</h3>
+            <progress id="player-mana" value="<%= @current_mana %>" max="<%= @max_mana %>"></progress>
+            <p>Mana: <span id="player-mana-text"><%= @current_mana %> / <%= @max_mana %></span></p>
+          </div>
         </div>
         <div class="stats">
-          <div class="stat"><span class="stat-name">Stat 1:</span> <span class="stat-value">Value</span></div>
-          <div class="stat"><span class="stat-name">Stat 2:</span> <span class="stat-value">Value</span></div>
-          <div class="stat"><span class="stat-name">Stat 3:</span> <span class="stat-value">Value</span></div>
+          <% @stats.each do |stat| %>
+            <div class="stat">
+              <span class="stat-name"><%= stat[:name] %>:</span>
+              <span class="stat-value"><%= stat[:value] %></span>
+            </div>
+          <% end %>
+          <div class="current-position">
+            Current Position: (<%= @current_game_user&.x_position %>, <%= @current_game_user&.y_position %>)
+          </div>
         </div>
       </aside>
 
-
       <!-- Middle Grid -->
       <main class="grid-container">
-        <% 6.times do %>
+        <%
+          # Initialize the array with 36 "castle.PNG" entries
+          images = ['astronaut1.gif', 'rocket2.gif', 'ruins.gif', 'road.gif', 'cave.gif', 'farm.gif',
+                             'volcano.gif', 'village1.gif', 'viking.gif', 'road.gif', 'forest.gif', 'lake.jfif',
+                             'monster3.gif', 'mountains1.gif', 'colloseum.gif', 'road2.gif', 'forest.gif', 'island.gif',
+                             'castle1.gif', 'mountains2.gif', 'hospital.gif', 'road.gif', 'forest.gif', 'trail1.gif',
+                             'dragon1.gif', 'desert2.gif', 'wormDesert.gif', 'road.gif', 'forest.gif', 'farm2.gif',
+                             'monster2.gif', 'vegas.gif', 'desert3.gif', 'road.gif', 'bunker.gif', 'swamp.gif']
+        %>
+
+        <%
+          # Add descriptions matching the images
+          descriptions = [
+            'An astronaut on a mission.', 'A rocket ready for launch.', 'Ancient ruins.', 'A winding road.', 'A dark cave.',
+            'A peaceful farm.', 'A fiery volcano.', 'A bustling village.', 'Viking settlements.', 'Another road.',
+            'A dense forest.', 'A serene lake.', 'A monstrous beast.', 'Snow-capped mountains.', 'The grand colosseum.',
+            'A narrow trail.', 'A lush forest.', 'An isolated island.', 'A medieval castle.', 'Rocky highlands.',
+            'A busy hospital.', 'Another path.', 'Forest greenery.', 'A hidden trail.', 'A menacing dragon.',
+            'Arid desert sands.', 'A mysterious worm in the desert.', 'Another road.', 'Enchanted woods.', 'Farmland.',
+            'A wild monster.', 'A city of lights.', 'An expansive desert.', 'A dirt road.', 'An underground bunker.',
+            'A murky swamp.'
+          ]
+        %>
+
+        <%# images.each_with_index do |image, index| %>
+<!--          <div class="grid-square" data-description="<%#= descriptions[index] %>">-->
+<!--            <div class="square-content">-->
+              <%#= image_tag image, alt: "Map Tile #{index + 1}", style: "width: 100%; height: 100px; max-width: 100%; display: block;" %>
+<!--            </div>-->
+<!--          </div>-->
+        <%# end %>
+
+
+        <% images.each_slice(6).with_index do |row_images, row_index| %>
           <div class="grid-row">
-            <% 6.times do %>
-              <div class="grid-square">
+            <% row_images.each_with_index do |image, col_index| %>
+              <div class="grid-square"
+                   data-x="<%= 5 - col_index %>"
+                   data-y="<%= row_index %>"
+                   data-description="<%= descriptions[row_index * 6 + col_index] %>"
+                   data-game-id="<%= @game.code %>">
                 <div class="square-content">
-                  <%= image_tag 'castle.PNG', alt: 'Map Tile', class: 'image-class' %>
+                  <%= image_tag image, alt: "Map Tile #{row_index * 6 + col_index + 1}", style: "width: 100%; height: 80px; max-width: 100%; display: block;" %>
                 </div>
               </div>
             <% end %>
@@ -36,41 +92,22 @@
       <!-- Right Column (Player List) -->
       <aside class="right-column">
         <div class="player-list">
-          <div class="player">
-            <img class="player-picture" src="placeholder.jpg" alt="Player Picture">
-            <div class="player-details">
-              <div class="player-username">Player 1</div>
-              <div class="player-stats">
-                <div class="stat">Stat 1: Value</div>
-                <div class="stat">Stat 2: Value</div>
-                <div class="stat">Stat 3: Value</div>
+          <% if @players.present? %>
+            <% @players.each do |player| %>
+              <div class="player">
+                <img class="player-picture" src="<%= 'placeholder.jpg' %>" alt="Player Picture">
+                <div class="player-details">
+                  <div class="player-username"><%= player.user.username %></div>
+                  <div class="player-stats"></div>
+                  <div class="current-position">
+                    Current Position: (<%= player.x_position %>, <%= player.y_position %>)
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-
-          <div class="player">
-            <img class="player-picture" src="placeholder.jpg" alt="Player Picture">
-            <div class="player-details">
-              <div class="player-username">Player 2</div>
-              <div class="player-stats">
-                <div class="stat">Stat 1: Value</div>
-                <div class="stat">Stat 2: Value</div>
-                <div class="stat">Stat 3: Value</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="player">
-            <img class="player-picture" src="placeholder.jpg" alt="Player Picture">
-            <div class="player-details">
-              <div class="player-username">Player 3</div>
-              <div class="player-stats">
-                <div class="stat">Stat 1: Value</div>
-                <div class="stat">Stat 2: Value</div>
-                <div class="stat">Stat 3: Value</div>
-              </div>
-            </div>
-          </div>
+            <% end %>
+          <% else %>
+            <p>No players found.</p>
+          <% end %>
         </div>
       </aside>
     </div>
@@ -85,3 +122,97 @@
     </div>
   </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const gridSquares = document.querySelectorAll('.grid-square');
+        const tooltip = document.createElement('div');
+        tooltip.className = 'tooltip';
+        document.body.appendChild(tooltip);
+        const healthBar = document.getElementById('player-health');
+        const currentHealth = parseInt(healthBar.getAttribute('value'));
+        const maxHealth = parseInt(healthBar.getAttribute('max'));
+
+        const healthPercentage = (currentHealth / maxHealth) * 100;
+
+        if (healthPercentage < 25) {
+            healthBar.style.setProperty('--health-bar-color', 'red');
+        } else if (healthPercentage < 50) {
+            healthBar.style.setProperty('--health-bar-color', 'yellow');
+        } else {
+            healthBar.style.setProperty('--health-bar-color', '#66cc66'); // Default green
+        }
+
+        gridSquares.forEach(square => {
+            square.addEventListener('mouseenter', (event) => {
+                const description = square.getAttribute('data-description');
+                const x = square.getAttribute('data-x');
+                const y = square.getAttribute('data-y');
+                tooltip.innerHTML = formatDescription(description);
+                tooltip.style.opacity = 1;
+                tooltip.innerHTML = `${description} (${x}, ${y})`;
+                tooltip.style.left = `${event.pageX + 10}px`;
+                tooltip.style.top = `${event.pageY + 10}px`;
+            });
+
+            square.addEventListener('mousemove', (event) => {
+                tooltip.style.left = `${event.pageX + 10}px`;
+                tooltip.style.top = `${event.pageY + 10}px`;
+            });
+
+            square.addEventListener('mouseleave', () => {
+                tooltip.style.opacity = 0;
+            });
+
+            square.addEventListener('click', () => {
+                const x = square.getAttribute('data-x');
+                const y = square.getAttribute('data-y');
+                const movePath = "<%= @move_path %>"; // Embed the Ruby variable here
+                const gameId = square.getAttribute('data-game-id');
+
+                // Send a request to update the player's position
+                fetch(movePath, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify({
+                        x_position: x,
+                        y_position: y
+                    })
+                }).then(response => response.json()) // Parse the JSON response
+                    .then(data => {
+                        if (data.success) {
+                            // Successful move
+                            //console.log("successful");
+                            //window.location.reload(); // Reload to update the grid
+                            window.location.href = `/interaction?game_id=${gameId}&x=${x}&y=${y}`;
+                        } else {
+                            // Failed move
+                            //console.log("fail");
+                            //alert(data.error || 'Error moving to the new position.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An unexpected error occurred.');
+                    });
+            });
+        });
+
+        function formatDescription(description) {
+            // Example logic to highlight keywords
+            const keywords = ['astronaut', 'rocket', 'village', 'dragon'];
+            let formattedDescription = description;
+            keywords.forEach(keyword => {
+                const regex = new RegExp(`(${keyword})`, 'gi');
+                formattedDescription = formattedDescription.replace(
+                    regex,
+                    '<span class="keyword">$1</span>'
+                );
+            });
+            return formattedDescription;
+        }
+    });
+</script>

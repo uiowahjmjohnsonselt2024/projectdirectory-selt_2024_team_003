@@ -1,0 +1,58 @@
+<div id="ai-generated-skins-page">
+  <!-- Back Button -->
+  <div class="back-button-container">
+    <button onclick="location.href='<%= new_ai_generated_skin_path %>'"
+            class="back-button"
+            aria-label="Back to Store">
+      Back to Store
+    </button>
+  </div>
+
+  <div class="ai-content-wrapper">
+    <!-- Form Container -->
+    <div class="ai-form-container" id="ai-form-container">
+      <h1>Generate AI Skin</h1>
+
+      <!-- Form for Generating AI Skin -->
+      <%= form_tag generate_ai_generated_skin_path, method: :post, id: "generate-form" do %>
+        <div>
+          <label for="character_description">Character Description:</label>
+          <input type="text" id="character_description"
+                 name="character_description"
+                 placeholder="Enter character description"
+                 required>
+        </div>
+        <div>
+          <button type="submit" aria-label="Generate AI Skin">Generate</button>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Generated Skin Display -->
+    <div class="image-container">
+      <% if @error %>
+        <!-- Error Message -->
+        <p class="error-message" aria-live="assertive">Unable To Generate Skin</p>
+      <% elsif @image_base64 %>
+        <!-- Display Generated Image -->
+        <h2>Generated AI Skin</h2>
+        <img src="data:image/png;base64,<%= @image_base64 %>"
+             alt="Generated AI Skin" />
+
+        <!-- Add to Inventory Button -->
+        <div class="add-to-inventory-container">
+          <%= button_to "Add To Inventory", add_inventory_index_path,
+                        method: :post,
+                        class: "add-to-inventory-button",
+                        params: { image_data: @image_base64 },
+                        data: { turbo: false } %>
+        </div>
+      <% else %>
+        <!-- Placeholder Message -->
+        <p class="placeholder-message" aria-live="polite">
+          Describe your character to see its AI-generated appearance here!
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>

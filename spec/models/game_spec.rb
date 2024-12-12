@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
@@ -16,7 +18,7 @@ RSpec.describe Game, type: :model do
     it 'is invalid with a name longer than 50 characters' do
       game = Game.new(name: 'A' * 51)
       expect(game).not_to be_valid
-      expect(game.errors[:name]).to include("is too long (maximum is 50 characters)")
+      expect(game.errors[:name]).to include('is too long (maximum is 50 characters)')
     end
 
     it 'is valid with a name that is exactly 50 characters' do
@@ -28,7 +30,7 @@ RSpec.describe Game, type: :model do
       Game.create(name: 'Game One', code: 'ABCD')
       duplicate_game = Game.new(name: 'Game Two', code: 'ABCD')
       expect(duplicate_game).not_to be_valid
-      expect(duplicate_game.errors[:code]).to include("has already been taken")
+      expect(duplicate_game.errors[:code]).to include('has already been taken')
     end
   end
 
@@ -60,5 +62,21 @@ RSpec.describe Game, type: :model do
       expect(game.code).to eq('EFGH').or(eq('WXYZ'))
     end
   end
-end
+  describe '#generate_enemies' do
+    it 'creates enemies for the grid with correct attributes' do
+      game = Game.create(name: 'Game with Enemies')
+      enemies = game.enemies
 
+      expect(enemies.count).to eq(100) # 10x10 grid
+      enemies.each do |enemy|
+        level = (enemy.x_position * 3) + enemy.y_position + 1
+        expect(enemy.health).to eq(300 + (level * 20))
+        expect(enemy.attack).to eq(20 + (level * 2))
+        expect(enemy.defense).to eq(10 + (level * 2))
+        expect(enemy.iq).to eq(5 + level)
+        expect(enemy.max_health).to eq(300 + (level * 20))
+        expect(enemy.level).to eq(level)
+      end
+    end
+  end
+end

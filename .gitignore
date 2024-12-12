@@ -17,7 +17,8 @@
 # Ignore .idea directory
 /.idea
 
-# Ignore log directory
-/log
-
 .env
+log/development.log
+
+# Ignore coverage directory
+/coverage

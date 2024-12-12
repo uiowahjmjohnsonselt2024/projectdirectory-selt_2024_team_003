@@ -10,10 +10,10 @@ class RegistrationsController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      session[:user_id] = @user.id  # Log the user in after registration
-      redirect_to root_path, notice: "Account created successfully."
+      session[:user_id] = @user.id # Log the user in after registration
+      redirect_to selections_path
     else
-      flash.now[:alert] = "Invalid"
+      flash.now[:alert] = @user.errors.full_messages[0] # Display the first error
       render :new
     end
   end
