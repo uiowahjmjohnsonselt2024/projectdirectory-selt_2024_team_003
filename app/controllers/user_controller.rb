@@ -5,11 +5,11 @@ class UserController < ApplicationController
   # Displays the user's profile, including their current skin stats and friend list
   def index
     @image = case current_user.archetype
-             when 'Arcane Strategist'
+             when 'Attacker'
                'attack.png'
-             when 'Iron Guardian'
+             when 'Defender'
                'defense.png'
-             when 'Omni Knight'
+             when 'Healer'
                'balanced.png'
              else
                'balanced.png'
