@@ -1,9 +1,11 @@
-#NOTE: http://localhost:3000/ai_generated_skins/new is route
 class AiGeneratedSkinsController < ApplicationController
   require 'net/http'
   require 'json'
   require 'mini_magick'
   require 'open-uri'
+
+  before_action :check_skin_limit, only: [:generate]
+
   def new
     # This action simply renders the form
   end
@@ -18,21 +20,21 @@ class AiGeneratedSkinsController < ApplicationController
     end
 
     # Generate the AI Image using OpenAI API
-    uri = URI("https://api.openai.com/v1/images/generations")
+    uri = URI('https://api.openai.com/v1/images/generations')
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
 
     request = Net::HTTP::Post.new(uri)
-    request['Authorization'] = "Bearer #{ENV['OPENAI_API_KEY']}"
-    request['Content-Type'] = "application/json"
+    request['Authorization'] = 'Bearer sk-'
+    request['Content-Type'] = 'application/json'
     request.body = {
       prompt: "#{character_description} in retro animated style, featuring vibrant colors like red, green, and yellow, " \
-        "fully centered on a solid purple background, where each pixel has same color hex value" \
+        'fully centered on a solid purple background, where each pixel has same color hex value' \
         "The #{character_description} should have some defined features and proportions. " \
         "Ensure the entire #{character_description} is visible and does not go off the edges of the image. " \
-        "The background should remain plain with no additional features or textures.",
+        'The background should remain plain with no additional features or textures.',
       n: 1,
-      size: "1024x1024"
+      size: '1024x1024'
     }.to_json
 
     response = http.request(request)
@@ -58,6 +60,14 @@ class AiGeneratedSkinsController < ApplicationController
 
   private
 
+  # Check if the user has reached the 3-skin limit
+  def check_skin_limit
+    return unless current_user.skins.count >= 3
+
+    flash[:notice] = 'You already have 3 skins in your inventory. Please delete one before creating a new one.'
+    redirect_to inventory_index_path
+  end
+
   # Fetch and process the image entirely in memory
   def process_image(image_url)
     image = MiniMagick::Image.read(URI.open(image_url).read)
@@ -76,7 +86,7 @@ class AiGeneratedSkinsController < ApplicationController
 
     # Make the background color transparent
     image.combine_options do |config|
-      config.fuzz "25%" # 25% Tolerance
+      config.fuzz '25%' # 25% Tolerance
       config.transparent hex_color
     end
   end

@@ -1,12 +1,11 @@
 class ChatsController < ApplicationController
-
   # Displays the chat between current_user and their friend
   def show
     @friend = User.find(params[:friend_id])
     @messages = Message
-                  .where(user: current_user, recipient: @friend)
-                  .or(Message.where(user: @friend, recipient: current_user))
-                  .order(created_at: :asc)
+                .where(user: current_user, recipient: @friend)
+                .or(Message.where(user: @friend, recipient: current_user))
+                .order(created_at: :asc)
     @new_message = Message.new
   end
 
@@ -16,9 +15,9 @@ class ChatsController < ApplicationController
     @message.recipient_id = params[:friend_id]
 
     if @message.save
-      flash[:notice] = "Message sent!"
+      flash[:notice] = 'Message sent!'
     else
-      flash[:alert] = "Failed to send the message."
+      flash[:alert] = 'Failed to send the message.'
     end
     redirect_to chat_with_user_path(friend_id: params[:friend_id])
   end

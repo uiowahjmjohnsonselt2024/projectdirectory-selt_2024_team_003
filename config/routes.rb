@@ -41,11 +41,26 @@ Rails.application.routes.draw do
   patch 'mark_as_read', to: 'chats#mark_as_read', as: 'mark_as_read'
   get 'interaction', to: 'interactions#show'
   post 'attack', to: 'interactions#attack'
+  post 'store/purchase_shards', to: 'store#purchase_shards'
+  post 'store/purchase_item', to: 'store#purchase_item'
 
   # Route to display the form (text box and button)
   get 'ai_generated_skins/new', to: 'ai_generated_skins#new', as: 'new_ai_generated_skin'
   # Route to handle the form submission and generate the image
   post 'ai_generated_skins/generate', to: 'ai_generated_skins#generate', as: 'generate_ai_generated_skin'
+
+  resources :inventory, only: [:index, :create, :destroy] do
+    collection do
+      post :add, to: 'inventory#add' # Route for adding a new skin
+    end
+
+    member do
+      patch :set_current, to: 'inventory#set_current' # Route for setting a current skin
+      delete :destroy, to: 'inventory#destroy' # Route for removing a skin
+    end
+  end
+
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
