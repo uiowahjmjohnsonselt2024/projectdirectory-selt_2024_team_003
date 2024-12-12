@@ -1,0 +1,30 @@
+<div id="login-page">
+  <div class="video-overlay">
+    <video class="background-video" autoplay loop muted playsinline>
+      <source src="<%= asset_path('test.mov') %>" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div class="login-container">
+    <h2>Forgot your password?</h2>
+
+    <%= form_tag password_resets_path, method: :post do %>
+      <div class="form-group">
+        <%= label_tag :email, "Email" %>
+        <%= text_field_tag :email, nil, class: 'form-control', placeholder: "Enter your email" %>
+      </div>
+
+      <div class="form-group">
+        <%= submit_tag "Send password reset instructions", class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+
+    <% if flash[:alert].present? %>
+      <div class="alert alert-danger">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+    </div>
+</div>
+

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_10_014455) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_12_000259) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -83,8 +83,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_014455) do
   create_table "games", force: :cascade do |t|
     t.string "name"
     t.string "code"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "messages", force: :cascade do |t|
@@ -109,6 +109,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_014455) do
     t.string "username"
     t.string "email"
     t.string "password_digest"
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at", precision: nil
     t.integer "health", default: 100
     t.integer "attack", default: 10
     t.integer "defense", default: 5
@@ -127,8 +129,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_014455) do
   add_foreign_key "enemies", "games"
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "friend_id"
-  add_foreign_key "game_users", "games"
-  add_foreign_key "game_users", "users"
   add_foreign_key "messages", "users"
   add_foreign_key "skins", "users"
 end

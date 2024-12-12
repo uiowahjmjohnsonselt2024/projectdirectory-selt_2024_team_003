@@ -13,11 +13,21 @@
       <div class="form-group">
         <%= f.label :username %>
         <%= f.text_field :username, class: 'form-control', placeholder: "Enter your username" %>
+        <% if @user.errors[:username].any? %>
+          <div class="alert alert-danger">
+            <%= @user.errors[:username][0] %>
+          </div>
+        <% end %>
       </div>
 
       <div class="form-group">
         <%= f.label :email %>
         <%= f.text_field :email, class: 'form-control', placeholder: "Enter your email" %>
+        <% if @user.errors[:email].any? %>
+          <div class="alert alert-danger">
+            <%= @user.errors[:email][0] %>
+          </div>
+        <% end %>
       </div>
 
       <div class="form-group">
@@ -29,6 +39,18 @@
         <%= f.label :password_confirmation %>
         <%= f.password_field :password_confirmation, class: 'form-control', placeholder: "Confirm your password" %>
       </div>
+
+      <% if @user.errors[:password].any? %>
+        <div class="alert alert-danger">
+          <%= @user.errors[:password][0] %>
+        </div>
+      <% end %>
+
+      <% if @user.errors[:password_confirmation].any? %>
+        <div class="alert alert-danger">
+          <%= @user.errors[:password_confirmation][0] %>
+        </div>
+      <% end %>
 
       <%= f.submit "Sign Up", class: 'btn btn-primary' %>
     <% end %>

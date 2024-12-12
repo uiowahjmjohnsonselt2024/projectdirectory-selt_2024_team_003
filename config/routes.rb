@@ -1,10 +1,20 @@
 Rails.application.routes.draw do
 
+  get 'password_resets/new'
+
+  get 'password_resets/create'
+
+  get 'password_resets/edit'
+
+  get 'password_resets/update'
+
   resources :games do
     collection do
       post 'join', to: 'games#join'
     end
   end
+
+  resources :password_resets, only: [:new, :create, :edit, :update]
 
   resources :interactions, param: :game_id do
     post 'attack', on: :member
