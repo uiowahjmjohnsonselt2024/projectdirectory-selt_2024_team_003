@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   resources :games do
     collection do
       post 'join', to: 'games#join'
@@ -43,6 +42,8 @@ Rails.application.routes.draw do
   post 'attack', to: 'interactions#attack'
   post 'store/purchase_shards', to: 'store#purchase_shards'
   post 'store/purchase_item', to: 'store#purchase_item'
+  get 'casino/show', to: 'casino#show'
+  post 'casino/place_bet', to: 'casino#place_bet'
 
   # Route to display the form (text box and button)
   get 'ai_generated_skins/new', to: 'ai_generated_skins#new', as: 'new_ai_generated_skin'
