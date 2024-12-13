@@ -1,0 +1,53 @@
+name: Run RSpec Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:13
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: test_db
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3.6 # Adjusted to match the version in your Gemfile
+          bundler-cache: true
+
+      - name: Install Dependencies
+        run: |
+          bundle install
+
+      - name: Set up Database (PostgreSQL)
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:password@127.0.0.1:5432/test_db
+        run: |
+          bin/rails db:create db:schema:load db:seed # Ensure all DB setup steps are run
+
+      - name: Run Tests
+        run: |
+          bundle exec rspec # Run the RSPEC tests
