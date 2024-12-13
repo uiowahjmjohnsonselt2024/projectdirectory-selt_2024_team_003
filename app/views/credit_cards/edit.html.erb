@@ -1,0 +1,143 @@
+<!-- app/views/credit_cards/edit.html.erb -->
+
+<style>
+  form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+
+  /* Input fields and labels */
+  form div {
+    margin-bottom: 15px;
+  }
+
+  form label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+  }
+
+  form input[type="text"],
+  form input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  form input[type="text"]:focus,
+  form input[type="number"]:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  /* Error message styling */
+  .error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    margin-bottom: 15px;
+  }
+
+  /* Submit button */
+  form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  form input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+
+  /* Link styling */
+  a {
+    display: inline-block;
+    margin-top: 15px;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .submit-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .submit-container > * {
+    margin: 5px;
+  }
+</style>
+
+<div>
+  <h1>Edit Credit Card</h1>
+
+  <% if @credit_card.errors.any? %>
+    <div class="error">
+      <p><%= @credit_card.errors.full_messages.first %></p>
+    </div>
+  <% end %>
+
+  <%= form_with model: @credit_card, url: credit_card_path, method: :patch, local: true do |form| %>
+    <div>
+      <%= form.label :card_number, "New Card Number" %>
+      <%= form.text_field :card_number, maxlength: 19, placeholder: "Enter 16-digit card number", class: 'credit-card-input' %>
+    </div>
+    <div>
+      <%= form.label :expiration_month, "Expiration Month" %>
+      <%= form.number_field :expiration_month, in: 1..12 %>
+    </div>
+    <div>
+      <%= form.label :expiration_year, "Expiration Year" %>
+      <%= form.number_field :expiration_year, min: Date.today.year %>
+    </div>
+    <div class="submit-container">
+      <%= link_to "Back", games_path %>
+      <%= form.submit "Update Card" %>
+    </div>
+  <% end %>
+
+
+</div>
+
+<script>
+  function formatCreditCard(input) {
+    // Remove all non-digit characters to clean the input
+    const cleanedInput = input.replace(/\D/g, '');
+
+    // Group the digits into chunks of 4
+    const formattedInput = cleanedInput.match(/.{1,4}/g)?.join(' ') || '';
+
+    // Limit the result to a maximum of 19 characters (16 digits + 3 spaces)
+    return formattedInput.slice(0, 19);
+  }
+
+  // Attach formatting to .credit-card-input text box
+  document.addEventListener('input', (event) => {
+    const target = event.target;
+    if (target.classList.contains('credit-card-input')) {
+      target.value = formatCreditCard(target.value);
+    }
+  });
+</script>

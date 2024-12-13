@@ -35,6 +35,9 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'credit_card/redirect', to: 'credit_cards#redirect_to_card', as: :credit_card_redirect
+  resource :credit_card, only: [:new, :create, :show, :edit, :update]
+
   get 'account', to: 'user#index'
   post 'add_friend', to: 'user#add_friend'
   delete 'remove_friend', to: 'user#remove_friend'
@@ -53,6 +56,8 @@ Rails.application.routes.draw do
   post 'attack', to: 'interactions#attack'
   post 'store/purchase_shards', to: 'store#purchase_shards'
   post 'store/purchase_item', to: 'store#purchase_item'
+  get 'casino/show', to: 'casino#show'
+  post 'casino/place_bet', to: 'casino#place_bet'
 
   # Route to display the form (text box and button)
   get 'ai_generated_skins/new', to: 'ai_generated_skins#new', as: 'new_ai_generated_skin'
