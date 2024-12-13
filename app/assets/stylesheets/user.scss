@@ -112,7 +112,7 @@
   }
 }
 
-#users-list-container h3, #friends-list-container h3 {
+#users-list-container h3, #friends-list-container h3, #achievements-list-container h3 {
   font-size: 26px;
   color: #ffcc00;
   margin-bottom: 20px;
@@ -452,6 +452,19 @@ ul li:hover {
 
 #friends-list-container .chat-button:active {
   background-color: #1e7e34; /* Even darker green on click */
+}
+
+#achievements-list-container {
+  background-color: #222;
+  border: 2px solid #444;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  flex: 1;
+  margin: 0 20px 20px;
+  color: #f1f1f1;
+  max-height: 300px; /* Set a max height for scrolling */
+  overflow-y: auto; /* Enable vertical scrolling */
 }
 
 

@@ -231,6 +231,31 @@ body {
     transition: background-color 0.3s, transform 0.2s;
   }
 
+  .credit-card-button {
+    background-color: #b808a6;
+    &:hover {
+      background-color: #6d0c65;
+      transform: translateY(-2px);
+    }
+    &:active {
+      background-color: #610930;
+      transform: translateY(0);
+    }
+  }
+
+  .credit-card-button {
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+
   /* Ensuring buttons container aligns correctly */
   .buttons-container {
     display: flex;

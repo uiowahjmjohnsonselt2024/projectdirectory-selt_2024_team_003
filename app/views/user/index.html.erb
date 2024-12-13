@@ -51,24 +51,41 @@
       </div>
     </div>
 
-    <div id="friends-list-container">
-      <h3>Your Friends</h3>
-      <% if current_user.friends.present? %>
-        <ul>
-          <% current_user.friends.each do |friend| %>
-            <li>
-              <span><strong>Username:</strong> <%= friend.username %></span>
-              <%= form_tag chat_with_user_path, method: :get, class: "inline-form" do %>
-                <%= hidden_field_tag :friend_id, friend.id %>
-                <%= submit_tag "Chat", class: "button chat-button" %>
-              <% end %>
-              <%= button_to "Remove Friend", remove_friend_path(friend_id: friend.id), method: :delete, class: "button remove-friend-button" %>
-            </li>
-          <% end %>
-        </ul>
-      <% else %>
-        <p>You have no friends yet.</p>
-      <% end %>
+    <div id="vertical-container">
+      <div id="friends-list-container">
+        <h3>Your Friends</h3>
+        <% if current_user.friends.present? %>
+          <ul>
+            <% current_user.friends.each do |friend| %>
+              <li>
+                <span><strong>Username:</strong> <%= friend.username %></span>
+                <%= form_tag chat_with_user_path, method: :get, class: "inline-form" do %>
+                  <%= hidden_field_tag :friend_id, friend.id %>
+                  <%= submit_tag "Chat", class: "button chat-button" %>
+                <% end %>
+                <%= button_to "Remove Friend", remove_friend_path(friend_id: friend.id), method: :delete, class: "button remove-friend-button" %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>You have no friends yet.</p>
+        <% end %>
+      </div>
+
+      <div id="achievements-list-container">
+        <h3>Achievements</h3>
+        <% if @achievements.present? %>
+          <ul>
+            <% @achievements.each do |achievement| %>
+              <li>
+                <span><%= achievement %></span>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>You have no achievements yet.</p>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
