@@ -129,24 +129,24 @@ RSpec.describe User, type: :model do
     describe '#set_archetype_stats' do
       let(:user) { create(:user) }
 
-      it 'sets stats for Arcane Strategist' do
-        user.set_archetype_stats('Arcane Strategist')
+      it 'sets stats for Attacker' do
+        user.set_archetype_stats('Attacker')
         expect(user.attack).to eq(30)
         expect(user.iq).to eq(10)
         expect(user.defense).to eq(5)
         expect(user.health).to eq(100)
       end
 
-      it 'sets stats for Iron Guardian' do
-        user.set_archetype_stats('Iron Guardian')
+      it 'sets stats for Defender' do
+        user.set_archetype_stats('Defender')
         expect(user.attack).to eq(10)
         expect(user.iq).to eq(1)
         expect(user.defense).to eq(30)
         expect(user.health).to eq(200)
       end
 
-      it 'sets stats for Omni Knight' do
-        user.set_archetype_stats('Omni Knight')
+      it 'sets stats for Healer' do
+        user.set_archetype_stats('Healer')
         expect(user.attack).to eq(20)
         expect(user.iq).to eq(5)
         expect(user.defense).to eq(20)
@@ -164,10 +164,10 @@ RSpec.describe User, type: :model do
         user.level_up
 
         expect(user.level).to eq(2)
-        expect(user.health).to eq(120) # +20 for Arcane Strategist
-        expect(user.attack).to eq(20) # +10 for Arcane Strategist
-        expect(user.defense).to eq(10) # +5 for Arcane Strategist
-        expect(user.iq).to eq(4) # +3 for Arcane Strategist
+        expect(user.health).to eq(120) # +20 for Attacker
+        expect(user.attack).to eq(20) # +10 for Attacker
+        expect(user.defense).to eq(10) # +5 for Attacker
+        expect(user.iq).to eq(4) # +3 for Attacker
         expect(user.experience).to eq(0) # Reset experience after leveling up
       end
     end

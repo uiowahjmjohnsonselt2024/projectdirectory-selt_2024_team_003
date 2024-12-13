@@ -10,8 +10,8 @@
         font-family: Arial, sans-serif;
         background-color: #f5f5f5;
         overflow: hidden;
-        display: flex; /* Ensure a consistent layout */
-        flex-direction: column; /* Stack child elements vertically */
+        display: flex;
+        flex-direction: column;
       }
 
       .background-video {
@@ -20,8 +20,8 @@
         left: 0;
         width: 100%;
         height: 100%;
-        object-fit: cover; /* Ensures the video covers the entire screen */
-        z-index: -1; /* Sends the video behind other elements */
+        object-fit: cover;
+        z-index: -1;
       }
 
       .header {
@@ -31,14 +31,21 @@
         padding: 10px 20px;
         background-color: rgba(0, 0, 0, 0.8);
         color: white;
-        z-index: 1;
-        width: 100%; /* Ensures the header spans the full width */
-        box-sizing: border-box; /* Includes padding in width calculations */
+        width: 100%;
+        box-sizing: border-box;
       }
 
       .shards {
         font-size: 18px;
         font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .shards img {
+        width: 24px;
+        height: 24px;
       }
 
       .tabs {
@@ -59,7 +66,7 @@
       }
 
       .store-container {
-        margin-top: 20px; /* Adds spacing below the header */
+        margin-top: 20px;
         padding: 20px;
         z-index: 1;
       }
@@ -82,10 +89,10 @@
       }
 
       .item img {
-        width: 150px;         /* Set the fixed width */
-        height: 150px;        /* Set the fixed height */
-        object-fit: cover;    /* Ensures the image covers the area without distortion */
-        border-radius: 8px;   /* Optionally, give the image rounded corners */
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
       }
 
       .background-img {
@@ -94,14 +101,13 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: url('#{asset_path('shopBackground.jpg')}'); /* Your background image */
-        background-size: cover; /* Ensures the image covers the entire screen */
-        background-position: center; /* Centers the image */
-        background-repeat: no-repeat; /* Prevents image from repeating */
-        z-index: -1; /* Sends the background behind other content */
+        background-image: url('#{asset_path('shopBackground.jpg')}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        z-index: -1;
       }
 
-      /* New CSS for Description Styling */
       .item .description {
         font-size: 14px;
         color: #666;
@@ -109,6 +115,7 @@
         padding: 0 10px;
         text-align: center;
       }
+
       .currency-selector {
         flex-direction: column;
         align-items: center;
@@ -122,17 +129,6 @@
         border-radius: 8px;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
         text-align: center;
-      }
-
-      .header .shards {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .header .shards img {
-        width: 24px;
-        height: 24px;
       }
 
       .menu-button {
@@ -180,6 +176,7 @@
           %option{ value: "INR" } INR
           %option{ value: "CNY" } CNY
           %option{ value: "BRL" } BRL
+
 .item-list{ id: "shards-list" }
   .item
     %img{ src: asset_path("gem1.gif"), alt: "Shard Item 1" }
@@ -250,196 +247,181 @@
 
 .item-list{ id: "weapons-list", style: "display:none" }
   .item
-    %img{ src: asset_path("sword.gif"), alt: "Utility Item 1" }
+    %img{ src: asset_path("sword.gif"), alt: "Sword" }
     %h3 Sword
     %p Price: 250 Shards
     %p.description A close combat weapon with high damage.
     %button{ class: "purchase-item" } Purchase
 
   .item
-    %img{ src: asset_path("flameSword.gif"), alt: "Utility Item 1" }
+    %img{ src: asset_path("flameSword.gif"), alt: "Flame Sword" }
     %h3 Flame Sword
     %p Price: 250 Shards
     %p.description A flaming close combat weapon.
     %button{ class: "purchase-item" } Purchase
 
   .item
-    %img{ src: asset_path("bowAndArrow.gif"), alt: "Utility Item 1" }
+    %img{ src: asset_path("bowAndArrow.gif"), alt: "Bow and Arrow" }
     %h3 Bow and Arrow
     %p Price: 250 Shards
     %p.description A ranged weapon for quick attacks.
     %button{ class: "purchase-item" } Purchase
 
   .item
-    %img{ src: asset_path("shotgun.gif"), alt: "Utility Item 1" }
+    %img{ src: asset_path("shotgun.gif"), alt: "Shotgun" }
     %h3 Shotgun
     %p Price: 250 Shards
     %p.description A close combat weapon with high damage.
     %button{ class: "purchase-item" } Purchase
 
   .item
-    %img{ src: asset_path("sniper.gif"), alt: "Utility Item 2" }
+    %img{ src: asset_path("sniper.gif"), alt: "Sniper" }
     %h3 Sniper
     %p Price: 400 Shards
     %p.description A long-range weapon for precise shots.
     %button{ class: "purchase-item" } Purchase
 
-    :javascript
-      // Function to show popups
-      function showPopup(message, isSuccess = true) {
-        const popup = document.createElement('div');
-        popup.className = isSuccess ? 'popup success' : 'popup error';
-        popup.innerText = message;
-        document.body.appendChild(popup);
+:javascript
+  // Function to show popups
+  function showPopup(message, isSuccess = true) {
+    const popup = document.createElement('div');
+    popup.className = isSuccess ? 'popup success' : 'popup error';
+    popup.innerText = message;
+    document.body.appendChild(popup);
 
-        setTimeout(() => popup.remove(), 3000); // Remove popup after 3 seconds
+    setTimeout(() => popup.remove(), 3000);
+  }
+
+  // Purchasing shards logic
+  document.querySelectorAll('.purchase-shard').forEach(button => {
+    button.addEventListener('click', async () => {
+      const item = button.closest('.item');
+      let shardCount;
+
+      if (item.querySelector('#custom-shards-input')) {
+        const inputElement = item.querySelector('#custom-shards-input');
+        shardCount = parseInt(inputElement.value);
+      } else {
+        const shardCountElement = item.querySelector('h3');
+        shardCount = parseInt(shardCountElement.innerText.match(/\d+/)[0]);
       }
 
-      // Logic for purchasing shards (preserved from the original code)
-      document.querySelectorAll('.purchase-shard').forEach(button => {
-        button.addEventListener('click', async () => {
-          const item = button.closest('.item'); // Locate the parent .item
-          let shardCount;
-
-          // Check if the item is a shard purchase item (custom shards input or predefined price)
-          if (item.querySelector('#custom-shards-input')) {
-            const inputElement = item.querySelector('#custom-shards-input');
-            shardCount = parseInt(inputElement.value);
-          } else {
-            const shardCountElement = item.querySelector('h3');
-            shardCount = parseInt(shardCountElement.innerText.match(/\d+/)[0]);
-          }
-
-          console.log('Shard count:', shardCount); // Debug log
-
-          // Send POST request to purchase shards
-          const response = await fetch('/store/purchase_shards', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-            },
-            body: JSON.stringify({ shard_count: shardCount })
-          });
-
-          const result = await response.json();
-          console.log('Server response:', result); // Debug log
-
-          if (result.success) {
-            showPopup(`Successfully purchased ${shardCount} shards!`, true);
-            document.querySelector('.shards').innerText = `Shards: ${result.shards}`;
-          } else {
-            showPopup(result.message, false);
-          }
-        });
+      const response = await fetch('/store/purchase_shards', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+        },
+        body: JSON.stringify({ shard_count: shardCount })
       });
 
-      // Logic for purchasing items (avatars, consumables, and weapons)
-      document.querySelectorAll('.purchase-item').forEach((button) => {
-        button.addEventListener('click', async function (e) {
-          const item = e.target.closest('.item');
-          const itemPrice = parseInt(item.querySelector('p').textContent.match(/\d+/)[0]); // Extract price
-          const itemType = item.querySelector('h3').textContent.trim(); // Extract item type
+      const result = await response.json();
 
-          // Send request to backend to check if the user has enough shards for the item purchase
-          const response = await fetch('/store/purchase_item', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-            },
-            body: JSON.stringify({
-              itemType: itemType,
-              itemPrice: itemPrice
-            }),
-          });
+      if (result.success) {
+        showPopup(`Successfully purchased ${shardCount} shards!`, true);
+        document.querySelector('.shards').innerText = `Shards: ${result.shards}`;
+      } else {
+        showPopup(result.message, false);
+      }
+    });
+  });
 
-          const result = await response.json();
-          console.log('Item purchase response:', result); // Debug log
+  // Purchasing items (including weapons)
+  document.querySelectorAll('.purchase-item').forEach((button) => {
+    button.addEventListener('click', async function (e) {
+      const item = e.target.closest('.item');
+      const itemPrice = parseInt(item.querySelector('p').textContent.match(/\d+/)[0]);
+      const itemType = item.querySelector('h3').textContent.trim();
 
-          if (result.success) {
-            showPopup(`${itemType} purchased successfully!`, true);
-            document.querySelector('.shards').innerText = `Shards: ${result.shards}`;
-
-            if (itemType === "AI Generated Avatar") {
-              window.location.href = "/ai_generated_skins/new";
-            }
-          } else {
-            showPopup(`Insufficient funds for ${itemType}.`, false);
-          }
-        });
+      const response = await fetch('/store/purchase_item', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+        },
+        body: JSON.stringify({
+          itemType: itemType,
+          itemPrice: itemPrice
+        }),
       });
 
+      const result = await response.json();
 
-      function showCategory(category) {
-        document.querySelectorAll('.item-list').forEach(list => {
-          list.style.display = 'none';
-        });
-        document.getElementById(`${category}-list`).style.display = 'flex';
-
-        document.querySelectorAll('.tabs button').forEach(tab => {
-          tab.classList.remove('active');
-        });
-        event.target.classList.add('active');
-
-        // Show or hide the currency selector based on the active category
-        const currencySelector = document.querySelector('.currency-selector');
-        if (category === 'shards') {
-          currencySelector.style.display = 'block';
-        } else {
-          currencySelector.style.display = 'none';
+      if (result.success) {
+        showPopup(`${itemType} purchased successfully!`, true);
+        document.querySelector('.shards').innerText = `Shards: ${result.shards}`;
+        if (itemType === "AI Generated Avatar") {
+          window.location.href = "/ai_generated_skins/new";
         }
+      } else {
+        showPopup(result.message, false);
       }
+    });
+  });
 
-      async function fetchExchangeRates() {
-        const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
-        const data = await response.json();
-        return data.rates;
-      }
+  function showCategory(category) {
+    document.querySelectorAll('.item-list').forEach(list => {
+      list.style.display = 'none';
+    });
+    document.getElementById(`${category}-list`).style.display = 'flex';
 
-      let exchangeRates = {};
+    document.querySelectorAll('.tabs button').forEach(tab => {
+      tab.classList.remove('active');
+    });
+    event.target.classList.add('active');
 
-      async function updatePrices() {
-        if (!Object.keys(exchangeRates).length) {
-          exchangeRates = await fetchExchangeRates();
-        }
+    const currencySelector = document.querySelector('.currency-selector');
+    if (category === 'shards') {
+      currencySelector.style.display = 'block';
+    } else {
+      currencySelector.style.display = 'none';
+    }
+  }
 
-        const selectedCurrency = document.getElementById('currency-dropdown').value;
-        const conversionRate = exchangeRates[selectedCurrency] || 1;
+  async function fetchExchangeRates() {
+    const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+    const data = await response.json();
+    return data.rates;
+  }
 
-        const basePricePerShardUSD = 0.75; // New base rate
+  let exchangeRates = {};
 
-        const prices = document.querySelectorAll('.price');
+  async function updatePrices() {
+    if (!Object.keys(exchangeRates).length) {
+      exchangeRates = await fetchExchangeRates();
+    }
 
-        prices.forEach(priceElement => {
-          const shardCount = parseInt(priceElement.previousElementSibling.innerText.match(/\d+/)[0]); // Extract shard count
-          const newPrice = (shardCount * basePricePerShardUSD * conversionRate).toFixed(2);
+    const selectedCurrency = document.getElementById('currency-dropdown').value;
+    const conversionRate = exchangeRates[selectedCurrency] || 1;
+    const basePricePerShardUSD = 0.75;
 
-          const currencySymbol = selectedCurrency === 'USD' ? '$' :
-            selectedCurrency === 'EUR' ? '€' :
-            selectedCurrency === 'GBP' ? '£' : selectedCurrency;
+    const prices = document.querySelectorAll('.price');
+    prices.forEach(priceElement => {
+      const shardCount = parseInt(priceElement.previousElementSibling.innerText.match(/\d+/)[0]);
+      const newPrice = (shardCount * basePricePerShardUSD * conversionRate).toFixed(2);
 
-          priceElement.innerText = `Price: ${currencySymbol}${newPrice}`;
-        });
+      const currencySymbol = selectedCurrency === 'USD' ? '$' :
+                             selectedCurrency === 'EUR' ? '€' :
+                             selectedCurrency === 'GBP' ? '£' : selectedCurrency;
 
-        updateCustomPrice(); // Ensure custom option also updates
-      }
+      priceElement.innerText = `Price: ${currencySymbol}${newPrice}`;
+    });
 
+    updateCustomPrice();
+  }
 
-      function updateCustomPrice() {
-        const selectedCurrency = document.getElementById('currency-dropdown').value;
-        const customInput = document.getElementById('custom-shards-input').value;
-        // const basePricePerShardUSD = parseFloat(document.getElementById('custom-price').dataset.usd);
-        const basePricePerShardUSD = 0.75; // Set the base price to 0.75 USD per shard
-        const conversionRate = exchangeRates[selectedCurrency] || 1;
-        const customPrice = (customInput * basePricePerShardUSD * conversionRate).toFixed(2);
+  function updateCustomPrice() {
+    const selectedCurrency = document.getElementById('currency-dropdown').value;
+    const customInput = document.getElementById('custom-shards-input').value;
+    const basePricePerShardUSD = 0.75;
+    const conversionRate = exchangeRates[selectedCurrency] || 1;
+    const customPrice = (customInput * basePricePerShardUSD * conversionRate).toFixed(2);
 
-        const currencySymbol = selectedCurrency === 'USD' ? '$' :
-                                selectedCurrency === 'EUR' ? '€' :
-                                selectedCurrency === 'GBP' ? '£' : selectedCurrency;
+    const currencySymbol = selectedCurrency === 'USD' ? '$' :
+                           selectedCurrency === 'EUR' ? '€' :
+                           selectedCurrency === 'GBP' ? '£' : selectedCurrency;
 
-        document.getElementById('custom-price').innerText = `Price: ${currencySymbol}${customPrice}`;
-      }
+    document.getElementById('custom-price').innerText = `Price: ${currencySymbol}${customPrice}`;
+  }
 
-      // Initialize prices on page load
-      document.addEventListener('DOMContentLoaded', updatePrices);
+  document.addEventListener('DOMContentLoaded', updatePrices);

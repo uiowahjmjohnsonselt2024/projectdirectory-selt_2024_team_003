@@ -19,16 +19,28 @@ class GameUser < ActiveRecord::Base
     end
   end
 
+
+
   def update_health_and_mana
-    self.health = user.health
-    self.mana = user.mana
-    self.level = user.level
-    save!
+    current_skin = user.current_skin
+    if current_skin
+      self.health = current_skin.health
+      self.mana = current_skin.mana
+      self.level = current_skin.level
+      save!
+    else
+      raise "User does not have a current skin"
+    end
   end
 
   def set_health_and_mana
-    self.health = user.health
-    self.mana = user.mana
+    current_skin = user.current_skin
+    if current_skin
+      self.health = current_skin.health
+      self.mana = current_skin.mana
+    else
+      raise "User does not have a current skin"
+    end
   end
 
   def take_damage(damage)

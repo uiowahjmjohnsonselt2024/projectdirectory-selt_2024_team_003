@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   # app/controllers/pages_controller.rb
-
+  
   # Grid page action.
   #
   # This action populates the grid page with data. It assigns the following
@@ -13,18 +13,19 @@ class PagesController < ApplicationController
 
   def grid
     @user_name = current_user.username
-    @profile_picture_url = '/path/to/profile.jpg'
+    @profile_picture_url = "/path/to/profile.jpg"
+
+    # Pull stats from the current skin instead of the user
+    current_skin = current_user.current_skin
     @stats = [
-      { name: 'Archetype', value: current_user.archetype },
-      { name: 'Attack', value: current_user.attack },
-      { name: 'Special Attack', value: current_user.special_attack },
-      { name: 'Defense', value: current_user.defense },
-      { name: 'Special Defense', value: current_user.special_defense },
-      { name: 'IQ', value: current_user.iq }
+      { name: "Archetype", value: current_skin&.archetype },
+      { name: "Attack", value: current_skin&.attack },
+      { name: "Special Attack", value: current_skin&.special_attack },
+      { name: "Defense", value: current_skin&.defense },
+      { name: "Special Defense", value: current_skin&.special_defense },
+      { name: "IQ", value: current_skin&.iq }
     ]
-    @players = Game.find_by(code: session[:game_code])&.game_users&.reject do |player|
-      player.user.username == @user_name
-    end || []
+    @players = Game.find_by(code: session[:game_code])&.game_users&.reject { |player| player.user.username == @user_name } || []
     @game = Game.find_by(code: session[:game_code])
 
     current_game = Game.find_by(code: session[:game_code])
@@ -32,13 +33,14 @@ class PagesController < ApplicationController
     @move_path = move_pages_path
     @player = current_user
 
+    # Update health, mana, and stats to use current skin
     @current_health = @current_game_user.health
-    @max_health = @player.health
+    @max_health = current_skin&.health || 0
     @current_mana = @current_game_user.mana
-    @max_mana = @player.mana
+    @max_mana = current_skin&.mana || 0
 
-    @level = @player.level || 1
-    @current_experience = @player.experience || 0
+    @level = current_skin&.level || 1
+    @current_experience = current_skin&.experience || 0
     @experience_for_next_level = 100 * @level # Example: Next level requires 100 * current level experience points
     @experience_percentage = (@current_experience.to_f / @experience_for_next_level * 100).round(2)
     # Store current position in session to persist between pages

@@ -8,21 +8,30 @@ class SelectionsController < ApplicationController
   def update_archetype
     archetype = params[:archetype]
 
-    # Set the user's archetype stats
-    current_user.set_archetype_stats(archetype)
-
     # Add the initial skin to the user's inventory
     skin_image_path = select_skin_image(archetype)
-    skin = current_user.skins.build
+    skin = current_user.skins.build(
+      archetype: archetype, # Save the archetype
+      current: true         # Mark as current skin
+    )
     skin.image.attach(
       io: File.open(Rails.root.join("app/assets/images/#{skin_image_path}")),
       filename: "#{archetype.downcase.gsub(' ', '_')}.png",
       content_type: 'image/png'
     )
-    skin.current = true # Mark as current skin
 
     if skin.save
-      render json: { success: true }
+      # Add the knife weapon to the user's inventory
+      knife_weapon = current_user.weapons.create(
+        name: 'Knife',
+        current: true
+      )
+
+      if knife_weapon.persisted?
+        render json: { success: true }
+      else
+        render json: { success: false, error: "Failed to save weapon: #{knife_weapon.errors.full_messages.join(', ')}" }
+      end
     else
       render json: { success: false, error: "Failed to save skin: #{skin.errors.full_messages.join(', ')}" }
     end
@@ -35,11 +44,11 @@ class SelectionsController < ApplicationController
   # Map archetypes to skin image file paths
   def select_skin_image(archetype)
     case archetype
-    when 'Arcane Strategist'
+    when 'Attacker'
       'attack.png'
-    when 'Iron Guardian'
+    when 'Defender'
       'defense.png'
-    when 'Omni Knight'
+    when 'Healer'
       'balanced.png'
     else
       raise 'Invalid archetype selected'

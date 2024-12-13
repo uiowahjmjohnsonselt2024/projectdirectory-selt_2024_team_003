@@ -9,14 +9,56 @@
   </div>
 
   <div class="account-sections">
-
     <div class="user-stats-container">
-      <img src="<%= asset_path(@image) %>" width="100" height="100">
-      <% @stats.each do |stat| %>
+      <% if current_user.current_skin %>
+        <% current_skin = current_user.current_skin %>
+        <% if current_skin.image.attached? %>
+          <%= image_tag(current_skin.image, width: 100, height: 100, alt: "Skin Image") %>
+        <% else %>
+          <p>No image available for the current skin.</p>
+        <% end %>
         <div class="account-stats">
-          <span class="account-stats-name"><%= stat[:name] %>:</span>
-          <span class="account-stats-value"><%= stat[:value] %></span>
+          <span class="account-stats-name">Archetype:</span>
+          <span class="account-stats-value"><%= current_skin.archetype %></span>
         </div>
+        <div class="account-stats">
+          <span class="account-stats-name">Max Health:</span>
+          <span class="account-stats-value"><%= current_skin.health %></span>
+        </div>
+        <div class="account-stats">
+          <span class="account-stats-name">Max Mana:</span>
+          <span class="account-stats-value"><%= current_skin.mana %></span>
+        </div>
+        <div class="account-stats">
+          <span class="account-stats-name">Attack:</span>
+          <span class="account-stats-value"><%= current_skin.attack %></span>
+        </div>
+        <div class="account-stats">
+          <span class="account-stats-name">Special Attack:</span>
+          <span class="account-stats-value"><%= current_skin.special_attack %></span>
+        </div>
+        <div class="account-stats">
+          <span class="account-stats-name">Defense:</span>
+          <span class="account-stats-value"><%= current_skin.defense %></span>
+        </div>
+        <div class="account-stats">
+          <span class="account-stats-name">Special Defense:</span>
+          <span class="account-stats-value"><%= current_skin.special_defense %></span>
+        </div>
+        <div class="account-stats">
+          <span class="account-stats-name">IQ:</span>
+          <span class="account-stats-value"><%= current_skin.iq %></span>
+        </div>
+        <div class="account-stats">
+          <span class="account-stats-name">Level:</span>
+          <span class="account-stats-value"><%= current_skin.level %></span>
+        </div>
+        <div class="account-stats">
+          <span class="account-stats-name">Experience:</span>
+          <span class="account-stats-value"><%= current_skin.experience %></span>
+        </div>
+      <% else %>
+        <p>No active skin selected. Please select a skin in your inventory.</p>
       <% end %>
     </div>
 
