@@ -177,6 +177,99 @@
   }
 }
 
+.weapons-container {
+  display: flex; /* Switch from grid to flexbox */
+  flex-direction: row; /* Arrange items in a single row */
+  justify-content: space-evenly; /* Space items evenly */
+  align-items: flex-start; /* Align items at the top */
+  gap: 20px; /* Add spacing between items */
+  flex-wrap: nowrap; /* Prevent wrapping to the next row */
+  width: 100%; /* Ensure the container spans the full width */
+  max-width: 1200px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.weapon-item {
+  width: 100%; /* Optional: Maintain full width of container */
+  max-width: 320px; /* Control maximum width */
+  height: 300px; /* Set a fixed height for uniformity */
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Space content within evenly */
+  align-items: center;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden; /* Prevent content from overflowing */
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  &.current-weapon {
+    border: 4px solid #4caf50;
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+  }
+
+  .weapon-name-display {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .weapon-image {
+    width: 150px; /* Set a fixed width */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Ensure the image fits without distortion */
+    margin-bottom: 15px;
+  }
+
+  .weapon-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .current-badge {
+      background: #4caf50;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 0.9em;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .set-current-button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9em;
+      font-weight: bold;
+      background-color: #007bff;
+      color: #fff;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+
+      &:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        background-color: #004494;
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
 .modal {
   display: none; /* Hidden by default */
   position: fixed;

@@ -57,13 +57,17 @@ Rails.application.routes.draw do
 
   resources :inventory, only: [:index, :create, :destroy] do
     collection do
-      post :add, to: 'inventory#add' # Route for adding a new skin
+      post :add_skin, to: 'inventory#add_skin' # Route for adding a new skin
+      post :add_weapon, to: 'inventory#add_weapon' # Route for adding a new weapon
     end
+
     member do
-      patch :set_current, to: 'inventory#set_current' # Route for setting a current skin
-      delete :destroy, to: 'inventory#destroy' # Route for removing a skin
+      patch :set_current_skin, to: 'inventory#set_current_skin' # Route for setting a current skin
+      patch :set_current_weapon, to: 'inventory#set_current_weapon' # Route for setting a current weapon
+      delete :destroy_skin, to: 'inventory#destroy_skin' # Route for removing a skin
     end
   end
+
 
 
 

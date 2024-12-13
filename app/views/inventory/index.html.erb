@@ -24,9 +24,9 @@
 
           <div class="skin-info">
             <% if skin.current %>
-              <span class="current-badge">Current Skin</span>
+              <span class="current-badge">Currently Equipped</span>
             <% else %>
-              <%= button_to "Set as Current", set_current_inventory_path(skin), method: :patch, class: "set-current-button" %>
+              <%= button_to "Equip", set_current_skin_inventory_path(skin), method: :patch, class: "set-current-button" %>
               <%= button_to "Remove", inventory_path(skin), method: :delete, data: { confirm: "Are you sure you want to remove this skin?" }, class: "remove-skin-button" %>
             <% end %>
           </div>
@@ -43,21 +43,34 @@
   <% end %>
 
   <!-- Weapons Content -->
-  <% if params[:tab] == 'weapons' %>
-    <div class="weapons-container">
-      <% @weapons.each do |weapon| %>
-        <div class="weapon-item">
-          <p><strong><%= weapon.name %></strong></p>
-          <%# Use the helper method to get the right image filename %>
-          <%= image_tag asset_path(weapon_image_filename(weapon.name)), alt: weapon.name, class: "weapon-image" %>
-        </div>
-      <% end %>
+    <% if params[:tab] == 'weapons' %>
+      <div class="weapons-container">
+        <% @weapons.each do |weapon| %>
+          <div class="weapon-item <%= 'current-weapon' if weapon.current %>" data-weapon-id="<%= weapon.id %>">
+            <p class="weapon-name-display"><%= weapon.name %></p>
 
-      <% if @weapons.empty? %>
-        <p>You have no weapons.</p>
-      <% end %>
-    </div>
-  <% end %>
+            <%# Add a placeholder or dynamically load an image for the weapon %>
+            <% if asset_path(weapon_image_filename(weapon.name)) %>
+              <%= image_tag asset_path(weapon_image_filename(weapon.name)), alt: weapon.name, class: "weapon-image" %>
+            <% else %>
+              <p class="no-image-placeholder">No image available</p>
+            <% end %>
+
+            <div class="weapon-info">
+              <% if weapon.current %>
+                <span class="current-badge">Currently Equipped</span>
+              <% else %>
+                <%= button_to "Equip", set_current_weapon_inventory_path(weapon), method: :patch, class: "set-current-button" %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+
+        <% if @weapons.empty? %>
+          <p>You have no weapons.</p>
+        <% end %>
+      </div>
+    <% end %>
 
   <!-- Modal for Skin Stats -->
   <div id="skin-stats-modal" class="modal">

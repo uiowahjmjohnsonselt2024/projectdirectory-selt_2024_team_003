@@ -21,7 +21,17 @@ class SelectionsController < ApplicationController
     )
 
     if skin.save
-      render json: { success: true }
+      # Add the knife weapon to the user's inventory
+      knife_weapon = current_user.weapons.create(
+        name: 'Knife',
+        current: true
+      )
+
+      if knife_weapon.persisted?
+        render json: { success: true }
+      else
+        render json: { success: false, error: "Failed to save weapon: #{knife_weapon.errors.full_messages.join(', ')}" }
+      end
     else
       render json: { success: false, error: "Failed to save skin: #{skin.errors.full_messages.join(', ')}" }
     end

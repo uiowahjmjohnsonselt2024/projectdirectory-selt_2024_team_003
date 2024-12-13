@@ -37,6 +37,12 @@ class StoreController < ApplicationController
         weapons_list = ["Sword", "Flame Sword", "Bow and Arrow", "Shotgun", "Sniper"]
 
         if weapons_list.include?(item_type)
+          # Check if the weapon already exists in the user's inventory
+          if current_user.weapons.exists?(name: item_type)
+            render json: { success: false, message: "You already own #{item_type}." }, status: :unprocessable_entity
+            return
+          end
+
           # Add the weapon to the user's database
           weapon = current_user.weapons.create(name: item_type)
           unless weapon.persisted?

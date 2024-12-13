@@ -69,6 +69,12 @@ class Skin < ActiveRecord::Base
     save!
   end
 
+  # Set this skin as the current one
+  def set_as_current_skin
+    user.skins.update_all(current: false) # Reset all current flags for the user's skins
+    update!(current: true) # Mark this skin as current
+  end
+
   private
 
   # Validation to ensure only one skin is marked as current

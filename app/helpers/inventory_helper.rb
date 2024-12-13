@@ -13,6 +13,8 @@ module InventoryHelper
       "shotgun.gif"
     when "Sniper"
       "sniper.gif"
+    when "Knife"
+      "knife.gif" # Add the Knife mapping
     else
       "default_weapon.gif" # A fallback image if no match is found
     end
