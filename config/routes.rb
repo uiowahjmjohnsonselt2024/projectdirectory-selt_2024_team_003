@@ -1,9 +1,20 @@
 Rails.application.routes.draw do
+
+  get 'password_resets/new'
+
+  get 'password_resets/create'
+
+  get 'password_resets/edit'
+
+  get 'password_resets/update'
+
   resources :games do
     collection do
       post 'join', to: 'games#join'
     end
   end
+
+  resources :password_resets, only: [:new, :create, :edit, :update]
 
   resources :interactions, param: :game_id do
     post 'attack', on: :member
@@ -24,7 +35,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'credit_card/redirect', to: 'credit_cards#redirect_to_card', as: :credit_card_redirect 
+  get 'credit_card/redirect', to: 'credit_cards#redirect_to_card', as: :credit_card_redirect
   resource :credit_card, only: [:new, :create, :show, :edit, :update]
 
   get 'account', to: 'user#index'
