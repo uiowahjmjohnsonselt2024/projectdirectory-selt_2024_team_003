@@ -197,6 +197,33 @@
                             console.error('Error:', error);
                             alert('An unexpected error occurred.');
                         });
+                } else if (x === '3' && y === '2') {
+                    // Send a request to update the player's position to the backend
+                    fetch(movePath, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+                        },
+                        body: JSON.stringify({
+                            x_position: x,
+                            y_position: y
+                        })
+                    }).then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                // If the move was successful, save the position and redirect
+                                sessionStorage.setItem('current_position', JSON.stringify({ x: x, y: y }));
+                                window.location.href = '/arena';
+                            } else {
+                                // Handle failure (optional)
+                                alert('Failed to save position');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('An unexpected error occurred.');
+                        });
                 } else {
                     // Send the request for other moves
                     fetch(movePath, {

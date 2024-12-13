@@ -1,0 +1,15 @@
+<div id="waiting-room-message">
+  Waiting for another player to join...
+</div>
+
+<script>
+    const checkMatchInterval = setInterval(() => {
+        fetch('<%= battle_path %>', { method: 'GET' })
+            .then((response) => {
+                if (response.ok) {
+                    window.location.href = "/battle";
+                }
+            })
+            .catch((error) => console.error(error));
+    }, 5000);
+</script>

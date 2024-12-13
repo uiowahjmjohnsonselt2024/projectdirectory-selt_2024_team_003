@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_10_014455) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_13_023520) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -102,6 +102,16 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_014455) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "current"
+    t.string "archetype"
+    t.integer "attack"
+    t.integer "defense"
+    t.integer "iq"
+    t.integer "mana"
+    t.integer "special_attack"
+    t.integer "special_defense"
+    t.integer "health"
+    t.integer "level"
+    t.integer "experience"
     t.index ["user_id"], name: "index_skins_on_user_id"
   end
 
@@ -122,6 +132,23 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_014455) do
     t.integer "shards", default: 0, null: false
   end
 
+  create_table "waiting_rooms", force: :cascade do |t|
+    t.integer "player_id", null: false
+    t.string "status", default: "waiting", null: false
+    t.string "session_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_waiting_rooms_on_player_id"
+  end
+
+  create_table "weapons", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_weapons_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "enemies", "games"
@@ -131,4 +158,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_014455) do
   add_foreign_key "game_users", "users"
   add_foreign_key "messages", "users"
   add_foreign_key "skins", "users"
+  add_foreign_key "waiting_rooms", "users", column: "player_id"
+  add_foreign_key "weapons", "users"
 end
