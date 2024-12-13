@@ -11,11 +11,12 @@ class User < ActiveRecord::Base
   has_many :games, through: :game_users
   has_many :friendships
   has_many :friends, through: :friendships
-  has_many :inverse_friendships, class_name: "Friendship", foreign_key: "friend_id"
+  has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
   has_many :inverse_friends, through: :inverse_friendships, source: :user
-  has_many :sent_messages, class_name: "Message", foreign_key: "user_id"
-  has_many :received_messages, class_name: "Message", foreign_key: "recipient_id"
   has_one :credit_card, dependent: :destroy
+  has_many :sent_messages, class_name: 'Message', foreign_key: 'user_id'
+  has_many :received_messages, class_name: 'Message', foreign_key: 'recipient_id'
+  has_many :skins, dependent: :destroy
 
   # Validations
   validates :health, :attack, :defense, :iq, presence: true, numericality: { only_integer: true }
@@ -66,7 +67,7 @@ class User < ActiveRecord::Base
   end
 
   def level_up
-    self.experience -= self.level * 100
+    self.experience -= level * 100
     self.level += 1
     stat_increase = case archetype
                     when 'Arcane Strategist'
@@ -94,7 +95,7 @@ class User < ActiveRecord::Base
     check_milestone_achievements
   end
 
-  
+
   def add_achievement(achievement)
     self.achievements ||= []
     unless achievements.include?(achievement)

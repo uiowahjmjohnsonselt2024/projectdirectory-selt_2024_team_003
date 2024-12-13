@@ -1,5 +1,4 @@
 class GamesController < ApplicationController
-  
   # Retrieves and assigns to @games all games associated with the current user.
   def index
     @games = current_user.games
@@ -13,18 +12,17 @@ class GamesController < ApplicationController
     @game = Game.new(game_params) # create new game(name, code)
     GameUser.create(game: @game, user: current_user)
     if @game.save
-      flash[:notice] = "Game was successfully created."
+      flash[:notice] = 'Game was successfully created.'
       session[:game_code] = @game.code
       # go to the grid page associated with this game
       redirect_to grid_path
     else
-      flash[:alert] = "Failed to create game"
+      flash[:alert] = 'Failed to create game'
       # add flash warning
       redirect_to games_path
     end
   end
 
-  
   def join
     # Find the game by the provided code (converted to uppercase for consistency)
     @game = Game.find_by(code: params[:code].upcase)
@@ -40,12 +38,12 @@ class GamesController < ApplicationController
 
       if @game_user
         # User has already joined the game
-        flash[:alert] = "You have already joined this game."
+        flash[:alert] = 'You have already joined this game.'
         redirect_to grid_path
       else
         # User has not joined the game, so create a new GameUser entry
         GameUser.create(user: current_user, game: @game)
-        flash[:notice] = "Successfully joined the game!"
+        flash[:notice] = 'Successfully joined the game!'
         redirect_to grid_path
       end
     end
@@ -65,12 +63,10 @@ class GamesController < ApplicationController
     @game.destroy
     redirect_to games_path, notice: 'Game has ended. Thank you for playing!'
   end
-  
 
   private
 
   def game_params
     params.require(:game).permit(:name)
   end
-
 end

@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Message, type: :model do
   let(:user) { create(:user) }
   let(:recipient) { create(:user) }
-  let(:message) { create(:message, user: user, recipient: recipient, content: "Hello!") }
+  let(:message) { create(:message, user: user, recipient: recipient, content: 'Hello!') }
 
   describe 'validations' do
     it 'validates presence of content' do

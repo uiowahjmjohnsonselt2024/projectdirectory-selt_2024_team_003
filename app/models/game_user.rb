@@ -1,4 +1,3 @@
-
 class GameUser < ActiveRecord::Base
   belongs_to :user
   belongs_to :game
@@ -34,7 +33,7 @@ class GameUser < ActiveRecord::Base
 
   def take_damage(damage)
     self.health -= damage
-    self.save
+    save
   end
 
   def use_mana(amount)

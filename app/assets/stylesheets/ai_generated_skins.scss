@@ -109,6 +109,26 @@
             color: #6b7280; /* Neutral grey */
             font-size: 1.2rem;
         }
+
+        .add-to-inventory-container {
+            margin-top: 1.5rem;
+
+            .add-to-inventory-button {
+                padding: 0.75rem 1.5rem;
+                background-color: #10b981; /* Emerald green */
+                color: #ffffff;
+                border: none;
+                border-radius: 4px;
+                font-size: 1rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    background-color: #059669; /* Darker green on hover */
+                }
+            }
+        }
     }
 
     .back-button-container {
