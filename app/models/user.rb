@@ -2,6 +2,8 @@
 
 # app/models/user.rb
 class User < ActiveRecord::Base
+  before_save :initialize_achievements
+
   # Adds methods to set and authenticate against a BCrypt password.
   # Requires `password_digest` attribute to be present in the database.
   has_secure_password
@@ -11,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :friends, through: :friendships
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
   has_many :inverse_friends, through: :inverse_friendships, source: :user
+  has_one :credit_card, dependent: :destroy
   has_many :sent_messages, class_name: 'Message', foreign_key: 'user_id'
   has_many :received_messages, class_name: 'Message', foreign_key: 'recipient_id'
   has_many :skins, dependent: :destroy
@@ -88,5 +91,42 @@ class User < ActiveRecord::Base
     save!
 
     game_users.each { |game_user| game_user.update_health_and_mana }
+
+    check_milestone_achievements
+  end
+
+
+  def add_achievement(achievement)
+    self.achievements ||= []
+    unless achievements.include?(achievement)
+      achievements << achievement
+      save!
+    end
+  end
+
+  def initialize_achievements
+    self.achievements ||= []
+  end
+
+  def check_milestone_achievements
+    milestones = {
+      5 => 'Level 5: Novice Hero',
+      10 => 'Level 10: Experienced Warrior',
+      25 => 'Level 25: Master of the Grid',
+      50 => 'Level 50: Legend of the Game',
+      100 => 'Level 100: Immortal',
+    }
+
+    if milestones.key?(level)
+      achievement = milestones[level]
+      add_achievement(achievement)
+    end
+  end
+
+  # Returns true if the user has a credit card, false otherwise.
+  def has_credit_card?
+    credit_card.present?
   end
 end
+
+
