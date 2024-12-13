@@ -25,6 +25,7 @@ gem 'rails-ujs', '~> 0.1.0'
 
 gem 'mini_magick'
 
+gem 'dotenv-rails'
 group :development, :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'

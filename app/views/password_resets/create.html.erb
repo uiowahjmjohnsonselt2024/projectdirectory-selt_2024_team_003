@@ -1,0 +1,13 @@
+<div id="login-page">
+  <div class="video-overlay">
+    <video class="background-video" autoplay loop muted playsinline>
+      <source src="<%= asset_path('test.mov') %>" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div class="login-container">
+    <h2>If this email has an account you will receive email with link to reset your password</h2>
+    <%= link_to 'Home', root_path, class: 'create-account-link' %>
+  </div>
+</div>

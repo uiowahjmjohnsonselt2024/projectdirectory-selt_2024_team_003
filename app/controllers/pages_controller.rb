@@ -43,6 +43,18 @@ class PagesController < ApplicationController
     @current_experience = current_skin&.experience || 0
     @experience_for_next_level = 100 * @level # Example: Next level requires 100 * current level experience points
     @experience_percentage = (@current_experience.to_f / @experience_for_next_level * 100).round(2)
+    # Store current position in session to persist between pages
+    session[:current_position] = { x: @current_game_user.x_position, y: @current_game_user.y_position }
+
+    # Check if position is passed back from the casino page
+    if params[:x].present? && params[:y].present?
+      # Update the player's position
+      new_x = params[:x].to_i
+      new_y = params[:y].to_i
+
+      # Send a request to the move API to update the player's position
+      move_pages_path(x_position: new_x, y_position: new_y)
+    end
   end
 
   # Handle movement
