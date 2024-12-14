@@ -1,3 +1,14 @@
+<style>
+  .user-avatar {  
+    width: 100px; /* Set consistent width */  
+    height: 100px; /* Set consistent height */  
+    object-fit: cover; /* Ensures the image fills the space without distortion */  
+    border-radius: 50%; /* Optional: Makes the image circular */  
+    border: 2px solid #ccc; /* Optional border */
+  }
+</style>
+
+
 <div class="dark-mode-theme">
   <div class="container">
     <div class="main-layout">
@@ -5,8 +16,15 @@
         <%= link_to 'Return to Menu', games_path, class: 'red-button' %>
 
         <div class="profile">
-          <div class="profile-picture-placeholder">[Profile Picture]</div>
+          <div class="profile-picture-placeholder">
+            <% if current_user.profile_picture.attached? %>
+              <%= image_tag url_for(current_user.profile_picture), alt: "User Avatar", class: "user-avatar" %>
+            <% else %>
+              <p>No profile picture uploaded.</p>
+            <% end %>
+          </div>
           <div class="username-placeholder"><%= @user_name %></div>
+          <p> Game code: <%= @game.code %> </p>
           <p>Level: <%= current_user.level %></p>
           <div class="player-experience">
             <h3>Your Experience</h3>
@@ -99,7 +117,13 @@
           <% if @players.present? %>
             <% @players.each do |player| %>
               <div class="player">
-                <img class="player-picture" src="<%= 'placeholder.jpg' %>" alt="Player Picture">
+                <div class="player-picture">
+                  <% if player.user.profile_picture.attached? %>
+                    <%= image_tag url_for(player.user.profile_picture), alt: "User Avatar", class: "player-picture" %>
+                  <% else %>
+                    <p>No avatar uploaded.</p>
+                  <% end %>
+                </div>
                 <div class="player-details">
                   <div class="player-username"><%= player.user.username %></div>
                   <div class="player-stats"></div>
@@ -115,16 +139,6 @@
         </div>
       </aside>
     </div>
-
-    <!-- Chat Section -->
-    <div class="chat-section">
-      <div class="chat-messages" id="chat-messages"></div>
-      <div class="chat-input">
-        <input type="text" id="chat-input" placeholder="Type a message..." />
-        <button id="send-button">Send</button>
-      </div>
-    </div>
-  </div>
 </div>
 
 <script>
