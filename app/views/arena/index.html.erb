@@ -18,10 +18,13 @@
     <p>Messages will appear here...</p>
   </div>
 
-  <div id="player-stats">
-    <p>Player 1 Health: <span id="player-1-health">100</span></p>
-    <p>Player 2 Health: <span id="player-2-health">100</span></p>
-    <p>It's Player <span id="current-turn">1</span>'s turn</p>
+  <div>
+    <h3 id="player-1-name">Player 1</h3>
+    <p>Health: <span id="player-1-health">N/A</span></p>
+  </div>
+  <div>
+    <h3 id="player-2-name">Player 2</h3>
+    <p>Health: <span id="player-2-health">N/A</span></p>
   </div>
 
   <div id="assign-players">
@@ -34,6 +37,9 @@
     <button id="attack-button-2" onclick="attack(2)" disabled>Player 2 Attack</button>
     <button id="disconnect-button" onclick="disconnectChannel()">Disconnect</button>
   </div>
+  <div class="interaction-footer">
+    <%= link_to 'Return to Grid', grid_path, class: 'back-button' %>
+  </div>
 </div>
 
 <script>
@@ -41,6 +47,7 @@
     let channel = null;
     let arenaId = 1;  // Arena ID for this game
     let playerId = null;  // Player ID (assigned dynamically)
+    const currentUserName = "<%= @user.username %>";
 
     document.addEventListener('DOMContentLoaded', function() {
         const consumer = ActionCable.createConsumer();
@@ -66,20 +73,21 @@
 
                     // Update player buttons based on current game state
                     if (data.players) {
-                        if (!data.players[1]) {
-                            document.getElementById('player-1-button').disabled = false;
+                        if (data.players[1]) {
+                            document.getElementById('player-1-name').textContent = data.players[1].username;
+                            document.getElementById('player-1-health').textContent = data.players[1].health;
                         } else {
-                            document.getElementById('player-1-button').disabled = true;
-                        }
-                        if (!data.players[2]) {
-                            document.getElementById('player-2-button').disabled = false;
-                        } else {
-                            document.getElementById('player-2-button').disabled = true;
+                            document.getElementById('player-1-name').textContent = "Player 1";
+                            document.getElementById('player-1-health').textContent = "N/A";
                         }
 
-                        // Update player stats and turn display
-                        document.getElementById('player-1-health').textContent = data.players[1] ? data.players[1].health : 'N/A';
-                        document.getElementById('player-2-health').textContent = data.players[2] ? data.players[2].health : 'N/A';
+                        if (data.players[2]) {
+                            document.getElementById('player-2-name').textContent = data.players[2].username;
+                            document.getElementById('player-2-health').textContent = data.players[2].health;
+                        } else {
+                            document.getElementById('player-2-name').textContent = "Player 2";
+                            document.getElementById('player-2-health').textContent = "N/A";
+                        }
                     }
 
                     const currentTurn = data.current_turn !== undefined ? data.current_turn : 'N/A';
@@ -110,7 +118,8 @@
     function assignPlayer(playerNumber) {
         playerId = playerNumber;
         // Send the assignment to the backend
-        channel.send({ action: 'assign_player', player_id: playerId });
+        console.log(currentUserName)
+        channel.send({ action: 'assign_player', player_id: playerId, user_name: currentUserName });
     }
 
     function attack(playerId) {

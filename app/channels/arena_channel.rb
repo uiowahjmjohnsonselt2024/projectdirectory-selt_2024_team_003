@@ -20,10 +20,10 @@ class ArenaChannel < ApplicationCable::Channel
 
     if arena[:players][player_id].nil?
       if arena[:players][1].nil?
-        arena[:players][1] = { id: 1, health: 100, turn: true }
+        arena[:players][1] = { id: 1, username: data['user_name'], health: 100, turn: true }
         message = "Player 1 has joined the battle!"
       elsif arena[:players][2].nil?
-        arena[:players][2] = { id: 2, health: 100, turn: false }
+        arena[:players][2] = { id: 2, username: data['user_name'], health: 100, turn: false }
         message = "Player 2 has joined the battle!"
       else
         message = "Both players are already assigned."
@@ -52,7 +52,7 @@ class ArenaChannel < ApplicationCable::Channel
 
       # Check for game over condition
       if arena[:players][opponent][:health] <= 0
-        broadcast_player_data("Player #{opponent} has been defeated!", current_turn: nil)
+        broadcast_player_data("Player #{opponent} has been defeated!")
       else
         broadcast_player_data("Player #{player} attacked Player #{opponent} for #{damage} damage.")
       end
@@ -76,5 +76,7 @@ class ArenaChannel < ApplicationCable::Channel
       players: arena[:players],
       current_turn: arena[:current_turn]
     }
+    puts arena[:current_turn]
+    puts "|||||||||"
   end
 end
