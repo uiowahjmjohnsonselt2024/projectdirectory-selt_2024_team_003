@@ -21,7 +21,7 @@
     <% if current_user.profile_picture.attached? %>        
       <%= image_tag url_for(current_user.profile_picture), alt: "User Avatar", class: "user-avatar" %>    
     <% else %>        
-      <p>No avatar uploaded.</p>    
+      <%= image_tag asset_path('default_profile_pic.jpg'), alt: "Default User Avatar", class: "user-avatar" %>
     <% end %>    
     <%= current_user.username %>
   </div>
