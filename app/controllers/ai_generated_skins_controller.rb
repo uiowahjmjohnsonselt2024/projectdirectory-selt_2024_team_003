@@ -26,7 +26,7 @@ class AiGeneratedSkinsController < ApplicationController
     http.use_ssl = true
 
     request = Net::HTTP::Post.new(uri)
-    request['Authorization'] = 'Bearer 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'
+    request['Authorization'] = "Bearer #{ENV['OPENAI_API_KEY']}"
     request['Content-Type'] = 'application/json'
     request.body = {
       prompt: "#{character_description} in retro animated style, featuring vibrant colors like red, green, and yellow, " \
