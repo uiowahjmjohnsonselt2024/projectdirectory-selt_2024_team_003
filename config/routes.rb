@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   resources :interactions, param: :game_id do
     post 'attack', on: :member
+    post 'use_consumable/:consumable_id', to: 'interactions#use_consumable', as: 'use_consumable'
   end
 
   # config/routes.rb

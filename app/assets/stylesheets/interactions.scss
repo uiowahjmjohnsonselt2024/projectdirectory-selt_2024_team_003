@@ -29,20 +29,33 @@ body {
 }
 
 /* Enemy and player sections side-by-side layout */
-.enemy-section,
 .player-section {
   align-items: center;
   justify-content: space-between;
   background-color: rgba(30, 30, 30, 0.8);
   padding: 20px;
   border-radius: 12px;
-  width: 45%; /* Expand the width of the sections */
+  width: 55%; /* Expand the width of the sections */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.enemy-avatar,
+.enemy-section {
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(30, 30, 30, 0.8);
+  padding: 20px;
+  border-radius: 12px;
+  width: 35%; /* Expand the width of the sections */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.enemy-avatar {
+  width: 60%;
+  margin: 0 20px;
+}
+
 .player-avatar {
-  width: 30%;
+  width: 20%;
   margin: 0 20px;
 }
 

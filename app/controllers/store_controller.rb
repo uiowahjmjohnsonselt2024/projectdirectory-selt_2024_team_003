@@ -35,7 +35,7 @@ class StoreController < ApplicationController
       if current_user.save
         # Define the item categories
         weapons_list = ["Sword", "Flame Sword", "Bow and Arrow", "Shotgun", "Sniper"]
-        consumables_list = ["Health Potion", "Acid Potion", "Revive", "Invisibility Potion"]
+        consumables_list = ["Health Potion", "Acid Potion", "Revive", "Mana Refill"]
 
         if weapons_list.include?(item_type)
           # Handle weapons
@@ -52,6 +52,7 @@ class StoreController < ApplicationController
         elsif consumables_list.include?(item_type)
           # Handle consumables
           consumable = current_user.consumables.find_or_initialize_by(name: item_type)
+          Rails.logger.debug("Consumable: #{consumable.quantity}")
           if consumable.new_record?
             consumable.quantity = 1
           else

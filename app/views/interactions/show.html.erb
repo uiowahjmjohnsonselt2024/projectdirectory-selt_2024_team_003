@@ -2,52 +2,61 @@
   <div class="battle-screen">
     <!-- Player section -->
     <div class="player-section">
-      <img src="<%= asset_path(@image) %>" alt="Player Avatar" class="player-avatar">
-      <div class="player-info">
-        <h3>Your Stats</h3>
-        <p>Your position: (<%= @game_user.x_position %>, <%= @game_user.y_position %>)</p>
-        <progress id="player-health" value="<%= @game_user.health %>" max="<%= @player.health %>"></progress>
-        <p>Health: <span id="player-health-text"><%= @game_user.health %> / <%= @player.health %></span></p>
-        <progress id="player-mana" value="<%= @game_user.mana %>" max="<%= @player.mana %>"></progress>
-        <p>Mana: <span id="player-mana-text"><%= @game_user.mana %> / <%= @player.mana %></span></p>
+      <div class="player-section-header">
+          <img src="<%= asset_path(@image) %>" alt="Player Avatar" class="player-avatar">
+          <!-- Inventory Section (Weapons and Consumables Rows) -->
+          <div class="inventory-section">
+            <!-- Weapons Row -->
+            <div class="inventory-row weapons-row">
+              <% if @weapons.present? %>
+                <% @weapons.each do |weapon| %>
+                  <div class="inventory-item weapon-item <%= 'current-weapon' if weapon.current %>" onclick="useWeapon('<%= weapon.id %>', '<%= weapon.name %>')">
+                    <p class="item-name"><%= weapon.name %></p>
+                    <% if asset_path(weapon_image_filename(weapon.name)) %>
+                      <%= image_tag asset_path(weapon_image_filename(weapon.name)), alt: weapon.name, class: "weapon-image" %>
+                    <% else %>
+                      <p class="no-image-placeholder">No image available</p>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% else %>
+                <p>No weapons available.</p>
+              <% end %>
+            </div>
+
+            <!-- Consumables Row -->
+            <div class="inventory-row consumables-row">
+              <% if @consumables.present? %>
+                <% @consumables.each do |consumable| %>
+                  <% next if consumable.quantity <= 0 %> <!-- Skip if quantity is zero -->
+                  <div class="inventory-item consumable-item" onclick="useConsumable('<%= consumable.id %>')">
+                    <p class="item-name"><%= consumable.name %></p>
+                    <% if asset_path(consumable_image_filename(consumable.name)) %>
+                      <%= image_tag asset_path(consumable_image_filename(consumable.name)), alt: consumable.name, class: "consumable-image" %>
+                    <% else %>
+                      <p class="no-image-placeholder">No image available</p>
+                    <% end %>
+                    <% if consumable.quantity > 0 %>
+                      <p class="item-quantity" data-consumable-id="<%= consumable.id %>">x<%= consumable.quantity %></p>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% else %>
+                <p>No consumables available.</p>
+              <% end %>
+            </div>
+          </div>
       </div>
-
-      <!-- New Weapon and Consumable Rows -->
-      <div class="inventory-section">
-        <!-- Weapons Row -->
-        <div class="inventory-row weapons-row">
-          <% if @weapons.present? %>
-            <% @weapons.each do |weapon| %>
-              <div class="inventory-item weapon-item <%= 'current-weapon' if weapon.current %>" onclick="useWeapon('<%= weapon.id %>')">
-                <p class="item-name"><%= weapon.name %></p>
-                <% if asset_path(weapon_image_filename(weapon.name)) %>
-                  <%= image_tag asset_path(weapon_image_filename(weapon.name)), alt: weapon.name, class: "weapon-image" %>
-                <% else %>
-                  <p class="no-image-placeholder">No image available</p>
-                <% end %>
-              </div>
-            <% end %>
-          <% else %>
-            <p>No weapons available.</p>
-          <% end %>
-        </div>
-
-        <!-- Consumables Row -->
-        <div class="inventory-row consumables-row">
-          <% if @consumables.present? %>
-            <% @consumables.each do |consumable| %>
-              <div class="inventory-item consumable-item" onclick="useConsumable('<%= consumable.id %>')">
-                <p class="item-name"><%= consumable.name %></p>
-                <% if asset_path(consumable_image_filename(consumable.name)) %>
-                  <%= image_tag asset_path(consumable_image_filename(consumable.name)), alt: consumable.name, class: "consumable-image" %>
-                <% else %>
-                  <p class="no-image-placeholder">No image available</p>
-                <% end %>
-              </div>
-            <% end %>
-          <% else %>
-            <p>No consumables available.</p>
-          <% end %>
+      <!-- New container to group player info and inventory side-by-side -->
+      <div class="player-info-container">
+        <!-- Player Info Section -->
+        <div class="player-info">
+          <h3>Your Stats</h3>
+          <p>Your position: (<%= @game_user.x_position %>, <%= @game_user.y_position %>)</p>
+          <progress id="player-health" value="<%= @game_user.health %>" max="<%= @player.health %>"></progress>
+          <p>Health: <span id="player-health-text"><%= @game_user.health %> / <%= @player.health %></span></p>
+          <progress id="player-mana" value="<%= @game_user.mana %>" max="<%= @player.mana %>"></progress>
+          <p>Mana: <span id="player-mana-text"><%= @game_user.mana %> / <%= @player.mana %></span></p>
         </div>
       </div>
 
@@ -82,6 +91,101 @@
 </div>
 
 <script>
+    function useWeapon(weaponId, weaponName) {
+        console.log(`Setting weapon with ID: ${weaponName} as current.`);
+
+        // Adjust the fetch URL to match the new route
+        fetch(`/interactions/set_current_weapon/${weaponId}`, {
+            method: 'POST', // Or 'PATCH' if you prefer
+            headers: {
+                'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content,
+                'Content-Type': 'application/json'
+            }
+        })
+          .then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  alert(`Weapon ${weaponName} set as current!`);
+                  location.reload(); // Reload to update the view (optional)
+              } else {
+                  alert('Failed to set weapon as current');
+              }
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              alert('There was an error setting the weapon as current');
+          });
+    }
+
+    function useConsumable(consumableId) {
+        const attackButton = document.getElementById('attack-button');
+        const gameId = attackButton.getAttribute('data-game-id');
+        console.log(`Using consumable with ID: ${consumableId} for game ID: ${gameId}`);
+
+        fetch(`/interactions/${gameId}/use_consumable/${consumableId}`, {
+            method: 'POST',
+            headers: {
+                'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ game_id: gameId })
+        })
+          .then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  // Update health and mana
+                  const playerHealthText = document.getElementById('player-health-text');
+                  const playerManaText = document.getElementById('player-mana-text');
+                  const playerHealthBar = document.getElementById('player-health');
+                  const playerManaBar = document.getElementById('player-mana');
+
+                  if (playerHealthText && playerHealthBar) {
+                      playerHealthText.textContent = `${data.player_health} / ${playerHealthBar.max}`;
+                      playerHealthBar.value = data.player_health;
+
+                      // Calculate the health percentage
+                      const healthPercentage = (data.player_health / playerHealthBar.max) * 100;
+
+                      // Update the health bar color based on the percentage
+                      if (healthPercentage <= 20) {
+                          playerHealthBar.style.setProperty('--health-bar-color', 'red');  // Low health - red
+                      } else if (healthPercentage <= 50) {
+                          playerHealthBar.style.setProperty('--health-bar-color', 'orange');  // Medium health - orange
+                      } else {
+                          playerHealthBar.style.setProperty('--health-bar-color', 'green');  // Full health - green
+                      }
+                  }
+
+                  if (playerManaText && playerManaBar) {
+                      playerManaText.textContent = `${data.player_mana} / ${playerManaBar.max}`;
+                      playerManaBar.value = data.player_mana;
+                  }
+
+                  // Update consumable quantity
+                  const itemQuantityElement = document.querySelector(`[data-consumable-id="${consumableId}"].item-quantity`);
+                  if (itemQuantityElement) {
+                      if (data.consumable_quantity > 0) {
+                          itemQuantityElement.textContent = `x${data.consumable_quantity}`;
+                      } else {
+                          const consumableItem = itemQuantityElement.closest('.inventory-item');
+                          if (consumableItem) {
+                              consumableItem.remove(); // Remove item if quantity is zero
+                          }
+                      }
+                  }
+
+                  // Show alert after updates
+                  alert(data.message);
+              } else {
+                  alert(data.message); // Show error alert if consumable can't be used
+              }
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              alert('There was an error using the consumable.');
+          });
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         const attackButton = document.getElementById('attack-button');
         const enemyHealthDisplay = document.getElementById('enemy-health');
@@ -92,38 +196,6 @@
         const magicAttackButton = document.getElementById('magic-attack-button');
         const magicHealButton = document.getElementById('magic-heal-button');
         const playerManaDisplay = document.getElementById('player-mana');
-
-        function useWeapon(weaponId) {
-            console.log(`Setting weapon with ID: ${weaponId} as current.`);
-
-            // Adjust the fetch URL to match the new route
-            fetch(`/interactions/set_current_weapon/${weaponId}`, {
-                method: 'POST', // Or 'PATCH' if you prefer
-                headers: {
-                    'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content,
-                    'Content-Type': 'application/json'
-                }
-            })
-              .then(response => response.json())
-              .then(data => {
-                  if (data.success) {
-                      alert(`Weapon ${weaponId} set as current!`);
-                      location.reload(); // Reload to update the view (optional)
-                  } else {
-                      alert('Failed to set weapon as current');
-                  }
-              })
-              .catch(error => {
-                  console.error('Error:', error);
-                  alert('There was an error setting the weapon as current');
-              });
-        }
-
-        function useConsumable(consumableId) {
-            console.log(`Using consumable with ID: ${consumableId}`);
-            // Placeholder functionality
-            alert(`Consumable ${consumableId} used!`);
-        }
 
         function updateHealthBarColor(healthBar, health, maxHealth) {
             const healthPercentage = (health / maxHealth) * 100;
@@ -281,20 +353,60 @@
         display: flex;
         gap: 10px;
         margin: 10px 0;
+        width: 100%; /* Or a fixed width like 800px */
+        max-width: 800px; /* Example fixed width */
+        overflow-x: auto; /* Enable horizontal scrolling */
+        white-space: nowrap; /* Prevent wrapping */
+        background-color: #222; /* Dark background for the row */
+        border: 1px solid #444; /* Optional: Adds a subtle border */
+        padding: 10px; /* Optional: Adds spacing inside the row */
+        scrollbar-width: thin; /* Makes the scrollbar thinner on Firefox */
+        scrollbar-color: #666 #222; /* Custom scrollbar colors for Firefox */
+    }
+
+    /* Scrollbar styles for WebKit browsers (Chrome, Edge, Safari) */
+    .inventory-row::-webkit-scrollbar {
+        height: 8px; /* Adjust scrollbar height for horizontal scrolling */
+    }
+
+    .inventory-row::-webkit-scrollbar-track {
+        background: #222; /* Dark background for scrollbar track */
+        border-radius: 4px; /* Rounded edges for track */
+    }
+
+    .inventory-row::-webkit-scrollbar-thumb {
+        background: #666; /* Gray thumb for dark mode */
+        border-radius: 4px; /* Rounded edges for thumb */
+    }
+
+    .inventory-row::-webkit-scrollbar-thumb:hover {
+        background: #888; /* Slightly lighter thumb on hover */
     }
 
     .inventory-item {
-        background-color: #1e1e1e;
-        color: #ffffff;
-        padding: 10px;
         max-height: 50px;
         max-width: 50px;
-        border-radius: 8px;
         text-align: center;
-        flex: 1;
         position: relative; /* Ensure positioning context for the text */
         cursor: pointer;
         transition: background-color 0.2s ease;
+        flex: 0 0 auto; /* Prevent items from shrinking or wrapping */
+        color: #fff; /* Text color for dark mode */
+        background-color: #333; /* Dark background for items */
+        border: 1px solid #444; /* Border for each item */
+        border-radius: 4px; /* Rounded edges */
+        padding: 20px; /* Padding inside items */
+    }
+
+    .item-quantity {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        font-size: 12px;
+        color: #fff; /* Adjust the color as needed */
+        background-color: rgba(0, 0, 0, 0.5); /* Optional: dark background for visibility */
+        padding: 2px 5px;
+        border-radius: 5px;
     }
 
     .consumable-image,
@@ -333,4 +445,13 @@
         border: 3px solid green;
         box-shadow: 0 0 10px green; /* Optional: adds a glowing effect */
     }
+    .player-section-header {
+        display: flex;
+    }
+
+    .inventory-section {
+        width: 70%;
+    }
+
+
 </style>

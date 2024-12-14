@@ -38,13 +38,21 @@ class InteractionsController < ApplicationController
     @player = current_user.current_skin # Use current_skin for player stats
     @game_id = params[:game_id]
 
+    # Retrieve the current weapon's multiplier
+    weapon_name = current_user.weapons.find { |weapon| weapon.current }&.name || 'default'
+    weapon_multiplier = get_weapon_multiplier(weapon_name)
+
+    # Calculate damage with the weapon multiplier
     player_damage, player_critical = calculate_attack_damage(@player, @enemy)
+    player_damage *= weapon_multiplier # Apply weapon multiplier
+
     @enemy.update(health: @enemy.health - player_damage)
+    Rails.logger.debug("Enemy health: #{@enemy.health}")
 
     message = if player_critical
                 "Critical Hit! You dealt #{player_damage} damage to the enemy!"
               else
-                "You attacked the enemy! Damage dealt: #{player_damage}"
+                "You attacked the enemy with your #{weapon_name}! Damage dealt: #{player_damage}"
               end
 
     if @enemy.health <= 0
@@ -91,12 +99,75 @@ class InteractionsController < ApplicationController
     }
   end
 
+  def use_consumable
+    @game = Game.find_by(code: params[:game_id])
+    if @game.nil?
+      render json: { success: false, message: 'Game not found!' }, status: :not_found and return
+    end
+
+    @game_user = @game.game_users.find_by(user: current_user)
+    if @game_user.nil?
+      render json: { success: false, message: 'Game user not found!' }, status: :not_found and return
+    end
+
+    # Use current_user.consumables to find the consumable
+    consumable = current_user.consumables.find_by(id: params[:consumable_id])
+    Rails.logger.debug("Consumable: #{consumable.name}")
+    if consumable.nil? || consumable.quantity < 1
+      render json: { success: false, message: 'Consumable not found!' }, status: :not_found and return
+    end
+
+    # Process the consumable logic (e.g., healing)
+    if consumable.name == 'Revive'
+      max_health = current_user.current_skin.health
+      @game_user.update(health: max_health)
+
+      # Decrease consumable quantity
+      consumable.decrement!(:quantity)
+      if consumable.quantity.zero?
+        consumable.destroy
+      end
+      render json: {
+        success: true,
+        message: "You used #{consumable.name}! Health restored to #{max_health}.",
+        consumable_quantity: consumable.quantity,
+        player_health: max_health,
+        player_mana: @game_user.mana,
+      }
+    elsif consumable.name == 'Acid Potion'
+      Rails.logger.debug("Acid placeholder")
+    elsif consumable.name == 'Mana Refill'
+      Rails.logger.debug("Mana placeholder")
+      max_mana = current_user.current_skin.mana
+      @game_user.update(mana: max_mana)
+
+      # Decrease consumable quantity
+      consumable.decrement!(:quantity)
+      if consumable.quantity.zero?
+        consumable.destroy
+      end
+      render json: {
+        success: true,
+        message: "You used #{consumable.name}! Mana restored to #{max_mana}.",
+        consumable_quantity: consumable.quantity,
+        player_health: @game_user.health,
+        player_mana: max_mana,
+      }
+
+    elsif consumable.name == 'Health Potion'
+      Rails.logger.debug("Health Potion placeholder")
+    else
+      render json: { success: false, message: 'Consumable has no effect!' }
+    end
+  end
+
   def magic_attack
     @game = Game.find_by(code: params[:game_id])
     @game_user = @game.game_users.find_by(user: current_user)
     @enemy = @game.enemies.find_by(x_position: @game_user.x_position, y_position: @game_user.y_position)
     @player = current_user.current_skin # Use current_skin for player stats
     @game_id = params[:game_id]
+    message = ''
 
     case current_user.archetype
     when 'Attacker'
@@ -124,7 +195,7 @@ class InteractionsController < ApplicationController
       end
     when 'Healer'
       if @game_user.use_mana(20)
-        healing = (@game_user.user.special_attack).to_i
+        healing = (@player.special_attack).to_i
         @game_user.update(health: [@game_user.health + healing, @game_user.user.health].min)
         message += "Magic Heal restored #{healing} health!"
       else
@@ -132,7 +203,7 @@ class InteractionsController < ApplicationController
       end
     else
       if @game_user.use_mana(20)
-        healing = (@game_user.user.special_attack * 0.5).to_i
+        healing = (@player.special_attack * 0.5).to_i
         @game_user.update(health: [@game_user.health + healing, @game_user.user.health].min)
         message += "Magic Heal restored #{healing} health!"
       else
@@ -234,11 +305,20 @@ class InteractionsController < ApplicationController
     [damage, critical_hit]
   end
 
-  def calculate_magic_damage(attacker, defender)
-    base_damage = [(attacker.special_attack * 2) - (defender.special_defense / 2), 1].max
-    critical_hit = rand(0..200) < attacker.iq
-    damage = critical_hit ? base_damage * 2 : base_damage
-    [damage, critical_hit]
+  def get_weapon_multiplier(weapon_name)
+    # Define the multipliers for each weapon
+    # ["Sword", "Flame Sword", "Bow and Arrow", "Shotgun", "Sniper"]
+    weapon_multipliers = {
+      'knife' => 1.0,
+      'sword' => 1.5,
+      'flame sword' => 2.0,
+      'bow and arrow' => 2.5,
+      'shotgun' => 5.0,
+      'sniper' => 10.0
+    }
+
+    # Return the multiplier for the weapon, default to 1 if weapon is not found
+    weapon_multipliers[weapon_name.downcase] || 1.0
   end
 
   def level_up_if_needed(player)
