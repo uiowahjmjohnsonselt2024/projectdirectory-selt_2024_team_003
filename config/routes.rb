@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   get 'password_resets/update'
 
+  get 'casino/back_to_grid', to: 'pages#back_to_grid', as: :back_to_grid
+
   resources :games do
     collection do
       post 'join', to: 'games#join'

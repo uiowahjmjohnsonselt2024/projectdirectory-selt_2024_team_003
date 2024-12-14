@@ -5,12 +5,20 @@ class PagesController < ApplicationController
   #
   # This action populates the grid page with data. It assigns the following
   # instance variables:
-  #
   # * `@user_name`: The current user's username.
   # * `@players`: An array of players in the current game, excluding the current
   #   user.
   before_action :set_game_user
 
+  #Function to restore user back to current game and grid spot
+  def back_to_grid
+    current_position = session[:current_position]
+    if current_position
+      redirect_to grid_path(x: current_position[:x], y: current_position[:y])
+    else
+      redirect_to grid_path, alert: 'Unable to return to your previous position.'
+    end
+  end
   def grid
     @user_name = current_user.username
     @profile_picture_url = "/path/to/profile.jpg"
