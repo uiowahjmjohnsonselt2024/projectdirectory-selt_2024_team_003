@@ -15,6 +15,7 @@ class StoreController < ApplicationController
       if current_user.save
         render json: { success: true, message: "#{shard_count} shards purchased successfully!",
                        shards: current_user.shards }
+        NotificationMailer.purchase_notification(current_user, shard_count).deliver
       else
         render json: { success: false, message: 'Failed to update shards.' }, status: :unprocessable_entity
       end
