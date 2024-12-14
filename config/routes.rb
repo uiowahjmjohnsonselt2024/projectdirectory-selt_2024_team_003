@@ -64,6 +64,8 @@ Rails.application.routes.draw do
   post 'store/purchase_item', to: 'store#purchase_item'
   get 'casino/show', to: 'casino#show'
   post 'casino/place_bet', to: 'casino#place_bet'
+  post '/check-shards', to: 'pages#check_shards'
+  post '/force-move', to: 'pages#force_move'
 
   # Route to display the form (text box and button)
   get 'ai_generated_skins/new', to: 'ai_generated_skins#new', as: 'new_ai_generated_skin'

@@ -45,6 +45,7 @@ class PagesController < ApplicationController
     @experience_percentage = (@current_experience.to_f / @experience_for_next_level * 100).round(2)
     # Store current position in session to persist between pages
     session[:current_position] = { x: @current_game_user.x_position, y: @current_game_user.y_position }
+    @adjacent_tiles = calculate_adjacent_tiles(@current_game_user.x_position, @current_game_user.y_position)
 
     # Check if position is passed back from the casino page
     if params[:x].present? && params[:y].present?
@@ -69,6 +70,30 @@ class PagesController < ApplicationController
     end
   end
 
+  def check_shards
+    cost = params[:cost].to_i
+    if current_user.shards >= cost
+      render json: { success: true }
+    else
+      render json: { success: false, message: 'Insufficient shards' }
+    end
+  end
+
+  # Force move action
+  def force_move
+    new_x = params[:x_position].to_i
+    new_y = params[:y_position].to_i
+
+    # Deduct 1 shard for the forced move
+    if current_user.shards >= 10
+      current_user.update(shards: current_user.shards - 10)
+      @game_user.update(x_position: new_x, y_position: new_y)
+      render json: { success: true, message: 'Force move successful', x: new_x, y: new_y }, status: :ok
+    else
+      render json: { success: false, error: 'Insufficient shards' }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_game_user
@@ -77,5 +102,21 @@ class PagesController < ApplicationController
     return if @game_user
 
     render json: { success: false, errors: ['Player not found in this game'] }, status: :unprocessable_entity
+  end
+
+  def calculate_adjacent_tiles(x, y)
+    [
+      { x: x, y: y }, # Current tile
+      { x: x - 1, y: y }, # Left
+      { x: x + 1, y: y }, # Right
+      { x: x, y: y - 1 }, # Up
+      { x: x, y: y + 1 }, # Down
+      { x: x - 1, y: y - 1 }, # Top-left diagonal
+      { x: x - 1, y: y + 1 }, # Bottom-left diagonal
+      { x: x + 1, y: y - 1 }, # Top-right diagonal
+      { x: x + 1, y: y + 1 } # Bottom-right diagonal
+    ].select do |tile|
+      tile[:x] >= 0 && tile[:y] >= 0 # Ensure valid grid coordinates
+    end
   end
 end
