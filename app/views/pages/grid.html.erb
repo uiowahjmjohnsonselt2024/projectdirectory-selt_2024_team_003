@@ -75,9 +75,13 @@
         <% images.each_slice(6).with_index do |row_images, row_index| %>
           <div class="grid-row">
             <% row_images.each_with_index do |image, col_index| %>
+              <% x = 5 - col_index %>
+              <% y = row_index %>
+              <% is_adjacent = @adjacent_tiles.any? { |tile| tile[:x] == x && tile[:y] == y } %>
               <div class="grid-square"
-                   data-x="<%= 5 - col_index %>"
-                   data-y="<%= row_index %>"
+                   data-x="<%= x %>"
+                   data-y="<%= y %>"
+                   data-adjacent="<%= is_adjacent %>"
                    data-description="<%= descriptions[row_index * 6 + col_index] %>"
                    data-game-id="<%= @game.code %>">
                 <div class="square-content">
@@ -129,12 +133,13 @@
         const tooltip = document.createElement('div');
         tooltip.className = 'tooltip';
         document.body.appendChild(tooltip);
+
         const healthBar = document.getElementById('player-health');
         const currentHealth = parseInt(healthBar.getAttribute('value'));
         const maxHealth = parseInt(healthBar.getAttribute('max'));
 
+        // Update health bar color based on percentage
         const healthPercentage = (currentHealth / maxHealth) * 100;
-
         if (healthPercentage < 25) {
             healthBar.style.setProperty('--health-bar-color', 'red');
         } else if (healthPercentage < 50) {
@@ -143,7 +148,25 @@
             healthBar.style.setProperty('--health-bar-color', '#66cc66'); // Default green
         }
 
+        // Function to update grid highlighting
+        function updateGridHighlight() {
+            gridSquares.forEach(square => {
+                const isAdjacent = square.getAttribute('data-adjacent') === 'true';
+                if (isAdjacent) {
+                    square.style.filter = 'none'; // Clear grayscale filter
+                    square.style.pointerEvents = 'auto'; // Make clickable
+                } else {
+                    square.style.filter = 'grayscale(100%)'; // Apply grayscale filter
+                    square.style.pointerEvents = 'auto'; // Allow clicks for non-adjacent
+                }
+            });
+        }
+
+        // Initial grid highlight setup
+        updateGridHighlight();
+
         gridSquares.forEach(square => {
+            // Tooltip display on hover
             square.addEventListener('mouseenter', (event) => {
                 const description = square.getAttribute('data-description');
                 const x = square.getAttribute('data-x');
@@ -164,65 +187,109 @@
                 tooltip.style.opacity = 0;
             });
 
+            // Handling grid square clicks
             square.addEventListener('click', () => {
-                const x = square.getAttribute('data-x');
-                const y = square.getAttribute('data-y');
+                const x = parseInt(square.getAttribute('data-x'), 10);
+                const y = parseInt(square.getAttribute('data-y'), 10);
                 const movePath = "<%= @move_path %>"; // Embed the Ruby variable here
                 const gameId = square.getAttribute('data-game-id');
+                const isAdjacent = square.getAttribute('data-adjacent') === 'true';
 
-                if (x === '4' && y === '5') {
-                    // Send a request to update the player's position to the backend
-                    fetch(movePath, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
-                        },
-                        body: JSON.stringify({
-                            x_position: x,
-                            y_position: y
-                        })
-                    }).then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                // If the move was successful, save the position and redirect
-                                sessionStorage.setItem('current_position', JSON.stringify({ x: x, y: y }));
-                                window.location.href = '/casino/show';
-                            } else {
-                                // Handle failure (optional)
-                                alert('Failed to save position');
-                            }
-                        })
-                        .catch(error => {
+                if (!isAdjacent) {
+                    // Show confirmation popup for non-adjacent movement
+                    const confirmation = confirm("Move to this square for 10 shards?");
+                    if (confirmation) {
+                        fetch('/check-shards', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+                            },
+                            body: JSON.stringify({ cost: 10 })
+                        }).then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    forceMove(x, y, gameId);
+                                } else {
+                                    alert('Insufficient shards to make this move.');
+                                }
+                            }).catch(error => {
                             console.error('Error:', error);
                             alert('An unexpected error occurred.');
                         });
+                    }
                 } else {
-                    // Send the request for other moves
-                    fetch(movePath, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
-                        },
-                        body: JSON.stringify({
-                            x_position: x,
-                            y_position: y
-                        })
-                    }).then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                window.location.href = `/interaction?game_id=${gameId}&x=${x}&y=${y}`;
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            alert('An unexpected error occurred.');
-                        });
+                    proceedWithMove(x, y, movePath, gameId);
                 }
             });
-
         });
+
+        function proceedWithMove(x, y, movePath, gameId) {
+            fetch(movePath, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+                },
+                body: JSON.stringify({ x_position: x, y_position: y })
+            }).then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        if (x === 4 && y === 5) {
+                            // Special case: redirect to the casino
+                            sessionStorage.setItem('current_position', JSON.stringify({ x, y }));
+                            window.location.href = '/casino/show';
+                        } else {
+                            // General case: redirect to interaction page
+                            window.location.href = `/interaction?game_id=${gameId}&x=${x}&y=${y}`;
+                        }
+
+                        // Update adjacent tiles dynamically
+                        gridSquares.forEach(sq => {
+                            const sqX = parseInt(sq.getAttribute('data-x'), 10);
+                            const sqY = parseInt(sq.getAttribute('data-y'), 10);
+                            const isNowAdjacent = Math.abs(sqX - x) <= 1 && Math.abs(sqY - y) <= 1;
+                            sq.setAttribute('data-adjacent', isNowAdjacent);
+                        });
+                        updateGridHighlight();
+                    } else {
+                        alert(data.error || 'Failed to move.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An unexpected error occurred.');
+                });
+        }
+
+        function forceMove(x, y, gameId) {
+            fetch('/force-move', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+                },
+                body: JSON.stringify({ x_position: x, y_position: y })
+            }).then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        if (x === 4 && y === 5) {
+                            // Special case: redirect to the casino
+                            sessionStorage.setItem('current_position', JSON.stringify({ x, y }));
+                            window.location.href = '/casino/show';
+                        } else {
+                            // General case: redirect to interaction page
+                            window.location.href = `/interaction?game_id=${gameId}&x=${x}&y=${y}`;
+                        }
+                    } else {
+                        alert(data.error || 'Failed to force move.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An unexpected error occurred.');
+                });
+        }
 
         function formatDescription(description) {
             // Example logic to highlight keywords

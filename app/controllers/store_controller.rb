@@ -62,6 +62,10 @@ class StoreController < ApplicationController
             render json: { success: false, message: "Failed to add consumable to your inventory." }, status: :unprocessable_entity
             return
           end
+        elsif item_type == "AI Generated Avatar"
+          # Handle AI Generated Avatar
+          render json: { success: true, message: "AI Generated Avatar purchased successfully!", shards: current_user.shards }
+          return
         else
           render json: { success: false, message: "Invalid item type." }, status: :unprocessable_entity
           return
