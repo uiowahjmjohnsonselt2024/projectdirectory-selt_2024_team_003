@@ -245,7 +245,6 @@
 
         function startSpin() {
             if (spinning) return;
-
             spinning = true;
             resultDiv.textContent = "Spinning...";
             resultDiv.className = "";
@@ -321,6 +320,7 @@
                 winnings = betAmount * payoutMultiplier;
                 resultDiv.textContent = `You won! The spin landed on ${winningColor}. You gain ${winnings} shards.`;
                 resultDiv.className = "message-success";
+                if (betAmount >= 1000) confirm("HIGH ROLLER ACHIEVEMENT UNLOCKED");
             } else {
                 resultDiv.textContent = `You lost! The spin landed on ${winningColor}. You lose ${betAmount} shards.`;
                 resultDiv.className = "message-error";

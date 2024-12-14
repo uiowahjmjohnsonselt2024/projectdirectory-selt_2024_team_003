@@ -60,6 +60,7 @@ class User < ActiveRecord::Base
   def add_achievement(achievement)
     self.achievements ||= []
     unless achievements.include?(achievement)
+      self.shards += 12
       achievements << achievement
       save!
     end
