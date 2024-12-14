@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   # Associations
+  has_one_attached :profile_picture, service: :amazon
   has_many :skins, dependent: :destroy
   has_many :consumables, dependent: :destroy
   has_many :weapons, dependent: :destroy

@@ -23,6 +23,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'ffi', '~> 1.15' # Or the latest compatible version
 gem 'rails-ujs', '~> 0.1.0'
 
+gem 'aws-sdk-s3'
+
 gem 'mini_magick'
 
 gem 'dotenv-rails'
