@@ -32,27 +32,40 @@ class StoreController < ApplicationController
     if current_user.shards >= item_price
       current_user.shards -= item_price
       if current_user.save
-        # Item purchased successfully. Now check if it's a weapon.
-        # Define a list of weapons available for purchase. Update this array as needed.
+        # Define the item categories
         weapons_list = ["Sword", "Flame Sword", "Bow and Arrow", "Shotgun", "Sniper"]
+        consumables_list = ["Health Potion", "Acid Potion", "Revive", "Invisibility Potion"]
 
         if weapons_list.include?(item_type)
-          # Check if the weapon already exists in the user's inventory
+          # Handle weapons
           if current_user.weapons.exists?(name: item_type)
             render json: { success: false, message: "You already own #{item_type}." }, status: :unprocessable_entity
             return
           end
 
-          # Add the weapon to the user's database
           weapon = current_user.weapons.create(name: item_type)
           unless weapon.persisted?
-            # If weapon failed to save, return an error response
             render json: { success: false, message: "Failed to add weapon to your inventory." }, status: :unprocessable_entity
             return
           end
+        elsif consumables_list.include?(item_type)
+          # Handle consumables
+          consumable = current_user.consumables.find_or_initialize_by(name: item_type)
+          if consumable.new_record?
+            consumable.quantity = 1
+          else
+            consumable.increment_quantity
+          end
+
+          unless consumable.save
+            render json: { success: false, message: "Failed to add consumable to your inventory." }, status: :unprocessable_entity
+            return
+          end
+        else
+          render json: { success: false, message: "Invalid item type." }, status: :unprocessable_entity
+          return
         end
 
-        # If everything went well
         render json: { success: true, message: "#{item_type} purchased successfully!", shards: current_user.shards }
       else
         render json: { success: false, message: 'Failed to update shards.' }, status: :unprocessable_entity

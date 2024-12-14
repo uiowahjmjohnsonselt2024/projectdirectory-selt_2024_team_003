@@ -1,6 +1,13 @@
 class InventoryController < ApplicationController
   before_action :authenticate_user! # Ensure the user is logged in
 
+  # Action to list all items in the user's inventory
+  def index
+    @skins = current_user.skins
+    @weapons = current_user.weapons
+    @consumables = current_user.consumables
+  end
+
   # Action to add a new skin to the inventory
   def add_skin
     image_data = params[:image_data]
@@ -41,13 +48,6 @@ class InventoryController < ApplicationController
     else
       redirect_to store_path, alert: 'Failed to purchase weapon.'
     end
-  end
-
-  # Action to list all items in the user's inventory
-  def index
-    @skins = current_user.skins
-    @weapons = current_user.weapons
-    # Add consumables or other inventory items here if needed
   end
 
   # Action to set a skin as the current skin
