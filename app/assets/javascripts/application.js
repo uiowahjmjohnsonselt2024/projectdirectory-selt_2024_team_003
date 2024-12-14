@@ -1,3 +1,8 @@
+//= require jquery
+//= require rails-ujs
+//= require action_cable
+//= require_tree .
+
 document.addEventListener("DOMContentLoaded", () => {
     const inventoryPage = document.getElementById("inventory-page");
 
