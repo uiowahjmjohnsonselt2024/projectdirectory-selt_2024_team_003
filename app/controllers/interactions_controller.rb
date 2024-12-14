@@ -4,6 +4,9 @@ class InteractionsController < ApplicationController
     @game_user = @game.game_users.find_by(user: current_user)
     @enemy = @game.enemies.find_by(x_position: @game_user.x_position, y_position: @game_user.y_position)
     @player = current_user.current_skin # Use current_skin for player stats
+    @weapons = current_user.weapons
+    @consumables = current_user.consumables
+
     case current_user.archetype
     when 'Arcane Strategist'
       @image = 'attack.png'
@@ -14,6 +17,18 @@ class InteractionsController < ApplicationController
     else
       @image = 'balanced.png'
     end
+  end
+
+  # Action to set a weapon as the current weapon
+  def set_current_weapon
+    weapon = current_user.weapons.find(params[:id]) # Find the weapon by ID
+    weapon.set_as_current_weapon # Mark it as the current weapon for the user
+
+    # Respond with success
+    render json: { success: true }
+  rescue ActiveRecord::RecordNotFound
+    # If the weapon is not found, return an error response
+    render json: { success: false, message: 'Weapon not found' }, status: :not_found
   end
 
   def attack

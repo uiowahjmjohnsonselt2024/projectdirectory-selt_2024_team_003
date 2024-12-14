@@ -11,6 +11,46 @@
         <progress id="player-mana" value="<%= @game_user.mana %>" max="<%= @player.mana %>"></progress>
         <p>Mana: <span id="player-mana-text"><%= @game_user.mana %> / <%= @player.mana %></span></p>
       </div>
+
+      <!-- New Weapon and Consumable Rows -->
+      <div class="inventory-section">
+        <!-- Weapons Row -->
+        <div class="inventory-row weapons-row">
+          <% if @weapons.present? %>
+            <% @weapons.each do |weapon| %>
+              <div class="inventory-item weapon-item <%= 'current-weapon' if weapon.current %>" onclick="useWeapon('<%= weapon.id %>')">
+                <p class="item-name"><%= weapon.name %></p>
+                <% if asset_path(weapon_image_filename(weapon.name)) %>
+                  <%= image_tag asset_path(weapon_image_filename(weapon.name)), alt: weapon.name, class: "weapon-image" %>
+                <% else %>
+                  <p class="no-image-placeholder">No image available</p>
+                <% end %>
+              </div>
+            <% end %>
+          <% else %>
+            <p>No weapons available.</p>
+          <% end %>
+        </div>
+
+        <!-- Consumables Row -->
+        <div class="inventory-row consumables-row">
+          <% if @consumables.present? %>
+            <% @consumables.each do |consumable| %>
+              <div class="inventory-item consumable-item" onclick="useConsumable('<%= consumable.id %>')">
+                <p class="item-name"><%= consumable.name %></p>
+                <% if asset_path(consumable_image_filename(consumable.name)) %>
+                  <%= image_tag asset_path(consumable_image_filename(consumable.name)), alt: consumable.name, class: "consumable-image" %>
+                <% else %>
+                  <p class="no-image-placeholder">No image available</p>
+                <% end %>
+              </div>
+            <% end %>
+          <% else %>
+            <p>No consumables available.</p>
+          <% end %>
+        </div>
+      </div>
+
       <!-- Action buttons and return link -->
       <div class="action-footer">
         <%= link_to 'Return to Grid', grid_path, class: 'back-button' %>
@@ -38,10 +78,7 @@
       </div>
     </div>
 
-
   </div>
-
-
 </div>
 
 <script>
@@ -55,6 +92,38 @@
         const magicAttackButton = document.getElementById('magic-attack-button');
         const magicHealButton = document.getElementById('magic-heal-button');
         const playerManaDisplay = document.getElementById('player-mana');
+
+        function useWeapon(weaponId) {
+            console.log(`Setting weapon with ID: ${weaponId} as current.`);
+
+            // Adjust the fetch URL to match the new route
+            fetch(`/interactions/set_current_weapon/${weaponId}`, {
+                method: 'POST', // Or 'PATCH' if you prefer
+                headers: {
+                    'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content,
+                    'Content-Type': 'application/json'
+                }
+            })
+              .then(response => response.json())
+              .then(data => {
+                  if (data.success) {
+                      alert(`Weapon ${weaponId} set as current!`);
+                      location.reload(); // Reload to update the view (optional)
+                  } else {
+                      alert('Failed to set weapon as current');
+                  }
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+                  alert('There was an error setting the weapon as current');
+              });
+        }
+
+        function useConsumable(consumableId) {
+            console.log(`Using consumable with ID: ${consumableId}`);
+            // Placeholder functionality
+            alert(`Consumable ${consumableId} used!`);
+        }
 
         function updateHealthBarColor(healthBar, health, maxHealth) {
             const healthPercentage = (health / maxHealth) * 100;
@@ -207,3 +276,61 @@
     });
 </script>
 
+<style>
+    .inventory-row {
+        display: flex;
+        gap: 10px;
+        margin: 10px 0;
+    }
+
+    .inventory-item {
+        background-color: #1e1e1e;
+        color: #ffffff;
+        padding: 10px;
+        max-height: 50px;
+        max-width: 50px;
+        border-radius: 8px;
+        text-align: center;
+        flex: 1;
+        position: relative; /* Ensure positioning context for the text */
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+
+    .consumable-image,
+    .weapon-image {
+        max-height: 50px;
+        max-width: 50px;
+        object-fit: cover; /* Ensures the image fits the container */
+    }
+
+    /* Style for item names to overlap on images */
+    .item-name {
+        font-size: 14px;
+        margin: 0;
+        position: absolute;
+        top: 50%; /* Vertically center text */
+        left: 50%; /* Horizontally center text */
+        transform: translate(-50%, -50%); /* Adjust position to center exactly */
+        z-index: 1; /* Make sure the text is on top */
+        color: white; /* Text color for visibility */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Optional: Adds a shadow for better readability */
+    }
+
+    /* Optional: For item quantity if needed */
+    .item-quantity {
+        position: absolute;
+        bottom: 5px;
+        right: 10px;
+        font-size: 12px;
+        color: #cccccc;
+    }
+
+    .inventory-item:hover {
+        background-color: #333333;
+    }
+    .current-weapon {
+        border: 3px solid green;
+        box-shadow: 0 0 10px green; /* Optional: adds a glowing effect */
+    }
+</style>
