@@ -36,11 +36,26 @@
   <% end %>
 
   <!-- Consumables Content -->
-  <% if params[:tab] == 'consumables' %>
-    <div class="consumables-container">
-      <p>You currently have no consumables.</p>
-    </div>
-  <% end %>
+  <div class="consumables-container">
+    <% @consumables.each do |consumable| %>
+      <div class="consumable-item" data-consumable-id="<%= consumable.id %>">
+        <p class="consumable-name-display"><%= consumable.name %></p>
+        <p class="consumable-quantity-display">Quantity: <%= consumable.quantity %></p>
+
+        <%# Add a placeholder or dynamically load an image for the consumable %>
+        <% if asset_path(consumable_image_filename(consumable.name)) %>
+          <%= image_tag asset_path(consumable_image_filename(consumable.name)), alt: consumable.name, class: "consumable-image" %>
+        <% else %>
+          <p class="no-image-placeholder">No image available</p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if @consumables.empty? %>
+      <p>You have no consumables.</p>
+    <% end %>
+  </div>
+
 
   <!-- Weapons Content -->
     <% if params[:tab] == 'weapons' %>

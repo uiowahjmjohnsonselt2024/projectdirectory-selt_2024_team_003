@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
 
   # Associations
   has_many :skins, dependent: :destroy
+  has_many :consumables, dependent: :destroy
   has_many :weapons, dependent: :destroy
   has_many :game_users
   has_many :games, through: :game_users
