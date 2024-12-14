@@ -68,6 +68,15 @@
             &:hover {
                 background-color: #2563eb; /* Darker blue on hover */
             }
+
+            &:disabled {
+                background-color: #9ca3af; /* Grey for disabled state */
+                cursor: not-allowed; /* No pointer on hover */
+            }
+
+            &:disabled:hover {
+                background-color: #9ca3af; /* Ensure hover does not change the color */
+            }
         }
     }
 
@@ -150,5 +159,30 @@
                 background-color: #d97706; /* Darker amber on hover */
             }
         }
+    }
+}
+
+#ai-generated-skins-page .ai-form-container select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    color: #374151;
+    background-color: #f9fafb; /* Subtle background */
+    transition: border-color 0.3s ease;
+
+    &:focus {
+        border-color: #3b82f6; /* Highlight on focus */
+        outline: none;
+    }
+}
+
+#ai-generated-skins-page button:disabled {
+    background-color: #9ca3af; /* Greyed-out background for disabled state */
+    cursor: not-allowed; /* Prevent pointer change */
+    &:hover {
+        background-color: #9ca3af; /* Ensure hover effect does not change appearance */
     }
 }

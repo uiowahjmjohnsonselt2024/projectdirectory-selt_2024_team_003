@@ -23,7 +23,7 @@ RSpec.describe 'store/index.html.haml', type: :view do
                image: 'healthPotion.gif' },
              { name: 'Acid Potion', price: 150, description: 'Deals damage to enemies upon contact.',
                image: 'acidPotion.gif' },
-             { name: 'Revive', price: 150, description: 'Revives a fallen ally.', image: 'revive.gif' }
+             { name: 'Revive', price: 150, description: 'Fully restores health.', image: 'revive.gif' }
            ])
     # Add similar assigns for other categories if necessary.
   end

@@ -1,27 +1,31 @@
 # frozen_string_literal: true
-
 class UserController < ApplicationController
+  before_action :authenticate_user!
+
+  # Displays the user's profile, including their current skin stats and friend list
   def index
     @image = case current_user.archetype
-             when 'Arcane Strategist'
+             when 'Attacker'
                'attack.png'
-             when 'Iron Guardian'
+             when 'Defender'
                'defense.png'
-             when 'Omni Knight'
+             when 'Healer'
                'balanced.png'
              else
                'balanced.png'
              end
 
     @stats = [
-      { name: 'Archetype', value: current_user.archetype },
-      { name: 'Max Health', value: current_user.health },
-      { name: 'Max Mana', value: current_user.mana },
-      { name: 'Attack', value: current_user.attack },
-      { name: 'Special Attack', value: current_user.special_attack },
-      { name: 'Defense', value: current_user.defense },
-      { name: 'Special Defense', value: current_user.special_defense },
-      { name: 'IQ', value: current_user.iq }
+      { name: "Archetype", value: current_user.current_skin.archetype },
+      { name: "Max Health", value: current_user.current_skin.health },
+      { name: "Max Mana", value: current_user.current_skin.mana },
+      { name: "Attack", value: current_user.current_skin.attack },
+      { name: "Special Attack", value: current_user.current_skin.special_attack },
+      { name: "Defense", value: current_user.current_skin.defense },
+      { name: "Special Defense", value: current_user.current_skin.special_defense },
+      { name: "IQ", value: current_user.current_skin.iq },
+      { name: "Level", value: current_user.current_skin.level },
+      { name: "Experience", value: current_user.current_skin.experience }
     ]
 
     @users = if params[:search].present?
@@ -29,6 +33,7 @@ class UserController < ApplicationController
              else
                User.where.not(id: current_user.id)
              end
+    @achievements = current_user.achievements || []
   end
 
   def add_friend

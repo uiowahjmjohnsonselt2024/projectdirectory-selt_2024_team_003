@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_10_014455) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_13_232809) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,6 +37,26 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_014455) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "consumables", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "quantity", default: 0, null: false
+    t.index ["user_id"], name: "index_consumables_on_user_id"
+  end
+
+  create_table "credit_cards", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "last4"
+    t.integer "expiration_month"
+    t.integer "expiration_year"
+    t.string "card_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_credit_cards_on_user_id"
   end
 
   create_table "enemies", force: :cascade do |t|
@@ -83,8 +103,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_014455) do
   create_table "games", force: :cascade do |t|
     t.string "name"
     t.string "code"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "messages", force: :cascade do |t|
@@ -102,6 +122,16 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_014455) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "current"
+    t.string "archetype"
+    t.integer "attack"
+    t.integer "defense"
+    t.integer "iq"
+    t.integer "mana"
+    t.integer "special_attack"
+    t.integer "special_defense"
+    t.integer "health"
+    t.integer "level"
+    t.integer "experience"
     t.index ["user_id"], name: "index_skins_on_user_id"
   end
 
@@ -109,6 +139,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_014455) do
     t.string "username"
     t.string "email"
     t.string "password_digest"
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at", precision: nil
     t.integer "health", default: 100
     t.integer "attack", default: 10
     t.integer "defense", default: 5
@@ -120,10 +152,22 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_014455) do
     t.integer "special_attack"
     t.integer "special_defense"
     t.integer "shards", default: 0, null: false
+    t.json "achievements"
+  end
+
+  create_table "weapons", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "current", default: false
+    t.index ["user_id"], name: "index_weapons_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "consumables", "users"
+  add_foreign_key "credit_cards", "users"
   add_foreign_key "enemies", "games"
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "friend_id"
@@ -131,4 +175,5 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_014455) do
   add_foreign_key "game_users", "users"
   add_foreign_key "messages", "users"
   add_foreign_key "skins", "users"
+  add_foreign_key "weapons", "users"
 end

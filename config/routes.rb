@@ -1,14 +1,30 @@
 Rails.application.routes.draw do
 
+  get 'password_resets/new'
+
+  get 'password_resets/create'
+
+  get 'password_resets/edit'
+
+  get 'password_resets/update'
+
   resources :games do
     collection do
       post 'join', to: 'games#join'
     end
   end
 
+  resources :password_resets, only: [:new, :create, :edit, :update]
+
   resources :interactions, param: :game_id do
     post 'attack', on: :member
   end
+
+  # config/routes.rb
+  resources :store, only: [:index] do
+    post 'purchase', on: :collection
+  end
+
 
   resources :selections, only: [:index]
   patch 'selections/update_archetype', to: 'selections#update_archetype'
@@ -24,6 +40,9 @@ Rails.application.routes.draw do
       post :magic_heal
     end
   end
+
+  get 'credit_card/redirect', to: 'credit_cards#redirect_to_card', as: :credit_card_redirect
+  resource :credit_card, only: [:new, :create, :show, :edit, :update]
 
   get 'account', to: 'user#index'
   post 'add_friend', to: 'user#add_friend'
@@ -43,6 +62,10 @@ Rails.application.routes.draw do
   post 'attack', to: 'interactions#attack'
   post 'store/purchase_shards', to: 'store#purchase_shards'
   post 'store/purchase_item', to: 'store#purchase_item'
+  get 'casino/show', to: 'casino#show'
+  post 'casino/place_bet', to: 'casino#place_bet'
+  post '/check-shards', to: 'pages#check_shards'
+  post '/force-move', to: 'pages#force_move'
 
   # Route to display the form (text box and button)
   get 'ai_generated_skins/new', to: 'ai_generated_skins#new', as: 'new_ai_generated_skin'
@@ -51,14 +74,17 @@ Rails.application.routes.draw do
 
   resources :inventory, only: [:index, :create, :destroy] do
     collection do
-      post :add, to: 'inventory#add' # Route for adding a new skin
+      post :add_skin, to: 'inventory#add_skin' # Route for adding a new skin
+      post :add_weapon, to: 'inventory#add_weapon' # Route for adding a new weapon
     end
 
     member do
-      patch :set_current, to: 'inventory#set_current' # Route for setting a current skin
-      delete :destroy, to: 'inventory#destroy' # Route for removing a skin
+      patch :set_current_skin, to: 'inventory#set_current_skin' # Route for setting a current skin
+      patch :set_current_weapon, to: 'inventory#set_current_weapon' # Route for setting a current weapon
+      delete :destroy_skin, to: 'inventory#destroy_skin' # Route for removing a skin
     end
   end
+
 
 
 
