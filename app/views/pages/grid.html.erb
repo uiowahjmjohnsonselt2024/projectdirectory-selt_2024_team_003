@@ -8,7 +8,6 @@
   }
 </style>
 
-
 <div class="dark-mode-theme">
   <div class="container">
     <div class="main-layout">
@@ -20,7 +19,7 @@
             <% if current_user.profile_picture.attached? %>
               <%= image_tag url_for(current_user.profile_picture), alt: "User Avatar", class: "user-avatar" %>
             <% else %>
-              <p>No profile picture uploaded.</p>
+              <%= image_tag asset_path('default_profile_pic.jpg'), alt: "Default User Avatar", class: "user-avatar" %>
             <% end %>
           </div>
           <div class="username-placeholder"><%= @user_name %></div>
@@ -121,7 +120,7 @@
                   <% if player.user.profile_picture.attached? %>
                     <%= image_tag url_for(player.user.profile_picture), alt: "User Avatar", class: "player-picture" %>
                   <% else %>
-                    <p>No avatar uploaded.</p>
+                    <%= image_tag asset_path('default_profile_pic.jpg'), alt: "Default User Avatar", class: "player-picture" %>
                   <% end %>
                 </div>
                 <div class="player-details">
