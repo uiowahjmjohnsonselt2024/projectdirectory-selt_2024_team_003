@@ -29,11 +29,12 @@ class AiGeneratedSkinsController < ApplicationController
     request['Authorization'] = "Bearer #{ENV['OPENAI_API_KEY']}"
     request['Content-Type'] = 'application/json'
     request.body = {
-      prompt: "#{character_description} in retro animated style, featuring vibrant colors like red, green, and yellow, " \
-        "fully centered on a solid purple background, where each pixel has same color hex value" \
-        "The #{character_description} should have some defined features and proportions. " \
-        "Ensure the entire #{character_description} is visible and does not go off the edges of the image. " \
-        "The background should remain plain with no additional features or textures.",
+      prompt: "#{character_description} in a vibrant fantasy style. " \
+        "A fully centered #{character_description} on a plain, uniform purple background with no gradients, textures, or patterns. " \
+        "The background must be a solid, consistent purple where every pixel is the same shade of purple. " \
+        "Ensure the #{character_description} is well-defined, proportionate, and entirely visible within the image. " \
+        "IMPORTANT: The #{character_description} must not contain any purple elements, including clothing, accessories, or magical effects. " \
+        "Focus on making the #{character_description} visually distinct from the background.",
       n: 1,
       size: "1024x1024"
     }.to_json
