@@ -1,14 +1,14 @@
 class CreditCard < ActiveRecord::Base
   belongs_to :user
 
-  attr_accessor :card_number # Virtual attribute for the full card number
+  attr_accessor :card_number, :cvv # Virtual attribute for the full card number
 
   validates :card_number, presence: true, length: { is: 19, message: "must be 16 digits" }, on: :create
   validates :last4, :expiration_month, :expiration_year, :card_type, presence: true
+  validates :cvv, presence: true, length: { is: 3, message: "must be 3 digits" }, numericality: { only_integer: true }, on: :create
   validates :expiration_month, inclusion: { in: 1..12 }
   validates :expiration_year, numericality: { greater_than_or_equal_to: Date.today.year }
   validate :expiration_date_cannot_be_in_the_past
-
 
   before_validation :set_last4_and_type, if: :card_number_present?
 

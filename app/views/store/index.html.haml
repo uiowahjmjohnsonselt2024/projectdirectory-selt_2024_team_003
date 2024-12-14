@@ -161,7 +161,11 @@
         %button{ onclick: "showCategory('avatars')" } Avatars
         %button{ onclick: "showCategory('consumables')" } Consumables
         %button{ onclick: "showCategory('weapons')" } Weapons
-      %button{ onclick: "location.href='/games'", class: "menu-button" } Menu
+
+      .header-buttons
+        - if request.referrer&.include?('/casino')
+          %button{ onclick: "location.href='#{back_to_grid_path}'", class: "menu-button" } Back to Casino
+        %button{ onclick: "location.href='/games'", class: "menu-button" } Menu
 
     .store-container
       .currency-selector

@@ -40,6 +40,11 @@
         <%= f.password_field :password_confirmation, class: 'form-control', placeholder: "Confirm your password" %>
       </div>
 
+      <div class="form-group">
+        <%= f.label :profile_picture, "Profile Picture" %>
+        <%= f.file_field :profile_picture %>
+      </div>
+
       <% if @user.errors[:password].any? %>
         <div class="alert alert-danger">
           <%= @user.errors[:password][0] %>
