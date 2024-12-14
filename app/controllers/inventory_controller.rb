@@ -79,4 +79,27 @@ class InventoryController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     redirect_to inventory_index_path, alert: "Skin not found"
   end
+
+  # Action to fetch weapon stats for the modal
+  def weapon_stats
+    weapon = current_user.weapons.find(params[:id]) # Ensure weapon belongs to the logged-in user
+    weapon_multiplier = weapon_multipliers[weapon.name.downcase]
+    render json: { name: weapon.name, multiplier: weapon_multiplier }
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: "Weapon not found" }, status: :not_found
+  end
+
+  private
+
+  # Define weapon multipliers as a helper method
+  def weapon_multipliers
+    {
+      'knife' => 1,
+      'sword' => 2,
+      'flame sword' => 4,
+      'bow and arrow' => 8,
+      'shotgun' => 16,
+      'sniper' => 32
+    }
+  end
 end

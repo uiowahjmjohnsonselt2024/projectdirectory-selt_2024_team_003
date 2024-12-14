@@ -84,8 +84,10 @@ Rails.application.routes.draw do
       patch :set_current_skin, to: 'inventory#set_current_skin' # Route for setting a current skin
       patch :set_current_weapon, to: 'inventory#set_current_weapon' # Route for setting a current weapon
       delete :destroy_skin, to: 'inventory#destroy_skin' # Route for removing a skin
+      get :weapon_stats, to: 'inventory#weapon_stats' # Route for fetching weapon stats
     end
   end
+
 
 
 
