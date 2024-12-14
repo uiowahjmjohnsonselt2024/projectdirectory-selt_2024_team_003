@@ -1,9 +1,15 @@
-console.log("hello")
-import consumer from '../../assets/javascripts/consumer'
+//= require actioncable
+//= require consumer
 
-consumer.subscriptions.create("ArenaChannel", {
+window.App || (window.App = {});
+
+App.cable = ActionCable.createConsumer();
+
+console.log("App.cable has now been initialized for Arena:", App.cable);
+
+App.cable.subscriptions.create("ArenaChannel", {
     connected() {
-        console.log("Connected to ArenaChannel");
+        //console.log("Connected to ArenaChannel");
     },
 
     disconnected() {

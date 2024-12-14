@@ -1,6 +1,5 @@
 //= require jquery
-//= require rails-ujs
-//= require action_cable
+//= require actioncable
 //= require_tree .
 
 document.addEventListener("DOMContentLoaded", () => {

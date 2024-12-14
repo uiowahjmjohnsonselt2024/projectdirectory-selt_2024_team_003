@@ -25,6 +25,7 @@ gem 'rails-ujs', '~> 0.1.0'
 gem 'redis'
 gem 'actioncable'
 gem 'sprockets-rails'
+gem 'puma'
 
 gem 'mini_magick'
 

@@ -226,6 +226,8 @@ GEM
       date
       stringio
     public_suffix (6.0.1)
+    puma (6.5.0)
+      nio4r (~> 2.0)
     racc (1.8.1)
     rack (2.2.10)
     rack-session (1.0.2)
@@ -420,6 +422,7 @@ DEPENDENCIES
   jquery-rails
   mini_magick
   pg (~> 1.5)
+  puma
   rails (= 8.0.0)
   rails-controller-testing
   rails-ujs (~> 0.1.0)

@@ -4,79 +4,111 @@
   <title>Arena</title>
   <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
   <style>
-      body {
-          font-family: Arial, sans-serif;
-          margin: 0;
-          padding: 0;
-          background-color: #f4f4f4;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          height: 100vh;
-      }
-
-      #arena {
-          background: white;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-          width: 80%;
-          max-width: 600px;
-          padding: 20px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-
-      #messages {
-          height: 200px;
-          overflow-y: scroll;
-          border: 1px solid #ddd;
-          border-radius: 5px;
-          padding: 10px;
-          margin-bottom: 20px;
-          background-color: #f9f9f9;
-      }
-
-      #message-form {
-          display: flex;
-          flex-direction: column;
-      }
-
-      #message-form input {
-          padding: 10px;
-          margin-bottom: 10px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-      }
-
-      #message-form button {
-          padding: 10px;
-          background-color: #007BFF;
-          color: white;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-      }
-
-      #message-form button:hover {
-          background-color: #0056b3;
-      }
+      /* Your existing CSS */
   </style>
 </head>
 <body>
 <div id="arena">
   <h1>Welcome to the Arena</h1>
 
-  <!-- Messages Area -->
   <div id="messages">
     <p>Messages will appear here...</p>
   </div>
 
-  <!-- Message Form -->
-  <form id="message-form">
-    <input type="text" id="message-input" placeholder="Enter your message" required />
-    <button type="submit">Send</button>
-  </form>
+  <div id="player-stats">
+    <p>Player 1 Health: <span id="player-1-health">100</span></p>
+    <p>Player 2 Health: <span id="player-2-health">100</span></p>
+    <p>It's Player <span id="current-turn">1</span>'s turn</p>
+  </div>
+
+  <div id="assign-players">
+    <button id="player-1-button" onclick="assignPlayer(1)" disabled>Player 1</button>
+    <button id="player-2-button" onclick="assignPlayer(2)" disabled>Player 2</button>
+  </div>
+
+  <div id="attack-buttons">
+    <button id="attack-button" onclick="attack(1)" disabled>Player 1 Attack</button>
+    <button id="attack-button-2" onclick="attack(2)" disabled>Player 2 Attack</button>
+  </div>
 </div>
 
+<script>
+    let currentPlayer = null;
+    let channel = null;
+    let arenaId = 1;  // Arena ID for this game
+    let playerId = 1;  // Player ID (assigned dynamically)
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const consumer = ActionCable.createConsumer();
+        document.getElementById('player-1-button').disabled = false;
+        document.getElementById('player-2-button').disabled = false;
+
+        // Subscribe to the arena channel
+        channel = consumer.subscriptions.create(
+            { channel: "ArenaChannel", arena_id: arenaId },
+            {
+                connected() {
+                    console.log("Connected to ArenaChannel");
+                },
+
+                disconnected() {
+                    console.log("Disconnected from ArenaChannel");
+                },
+
+                received(data) {
+                    console.log(data);  // Log the data to see its structure
+
+                    // Update player buttons based on current game state
+                    if (data.players) {
+                        if (!data.players[1]) {
+                            document.getElementById('player-1-button').disabled = false;
+                        } else {
+                            document.getElementById('player-1-button').disabled = true;
+                        }
+                        if (!data.players[2]) {
+                            document.getElementById('player-2-button').disabled = false;
+                        } else {
+                            document.getElementById('player-2-button').disabled = true;
+                        }
+
+                        // Update player stats and turn display
+                        document.getElementById('player-1-health').textContent = data.players[1] ? data.players[1].health : 'N/A';
+                        document.getElementById('player-2-health').textContent = data.players[2] ? data.players[2].health : 'N/A';
+                    }
+
+                    const currentTurn = data.current_turn !== undefined ? data.current_turn : 'N/A';
+                    document.getElementById('current-turn').textContent = currentTurn;
+
+                    // Display the message
+                    const messageDiv = document.getElementById('messages');
+                    messageDiv.innerHTML += `<p>${data.message}</p>`;
+                    messageDiv.scrollTop = messageDiv.scrollHeight;
+
+                    // Enable/disable attack buttons based on the current turn
+                    if (data.current_turn === 1) {
+                        document.getElementById('attack-button').disabled = false;
+                        document.getElementById('attack-button-2').disabled = true;
+                    } else if (data.current_turn === 2) {
+                        document.getElementById('attack-button').disabled = true;
+                        document.getElementById('attack-button-2').disabled = false;
+                    } else {
+                        document.getElementById('attack-button').disabled = true;
+                        document.getElementById('attack-button-2').disabled = true;
+                    }
+                },
+            }
+        );
+    });
+
+    function assignPlayer(playerNumber) {
+        playerId = playerNumber;
+        // Send the assignment to the backend
+        channel.send({ action: 'assign_player', player_id: playerId });
+    }
+
+    function attack(playerId) {
+        channel.send({ action: 'attack', player_id: playerId });
+    }
+</script>
 </body>
 </html>
