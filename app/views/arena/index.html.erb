@@ -10,6 +10,9 @@
 <body>
 <div id="arena">
   <h1>Welcome to the Arena</h1>
+  <span class="current-user">
+    Current User: <%= current_user.username %>
+  </span>
 
   <div id="messages">
     <p>Messages will appear here...</p>
@@ -29,6 +32,7 @@
   <div id="attack-buttons">
     <button id="attack-button" onclick="attack(1)" disabled>Player 1 Attack</button>
     <button id="attack-button-2" onclick="attack(2)" disabled>Player 2 Attack</button>
+    <button id="disconnect-button" onclick="disconnectChannel()">Disconnect</button>
   </div>
 </div>
 
@@ -36,12 +40,14 @@
     let currentPlayer = null;
     let channel = null;
     let arenaId = 1;  // Arena ID for this game
-    let playerId = 1;  // Player ID (assigned dynamically)
+    let playerId = null;  // Player ID (assigned dynamically)
 
     document.addEventListener('DOMContentLoaded', function() {
         const consumer = ActionCable.createConsumer();
         document.getElementById('player-1-button').disabled = false;
         document.getElementById('player-2-button').disabled = false;
+        document.getElementById('attack-button').disabled = false;
+        document.getElementById('attack-button-2').disabled = false;
 
         // Subscribe to the arena channel
         channel = consumer.subscriptions.create(
@@ -92,12 +98,13 @@
                         document.getElementById('attack-button').disabled = true;
                         document.getElementById('attack-button-2').disabled = false;
                     } else {
-                        document.getElementById('attack-button').disabled = true;
-                        document.getElementById('attack-button-2').disabled = true;
+                        document.getElementById('attack-button').disabled = false;
+                        document.getElementById('attack-button-2').disabled = false;
                     }
                 },
             }
         );
+
     });
 
     function assignPlayer(playerNumber) {
@@ -108,6 +115,14 @@
 
     function attack(playerId) {
         channel.send({ action: 'attack', player_id: playerId });
+    }
+
+    function disconnectChannel() {
+        if (channel) {
+            console.log("You have disconnected from ArenaChannel");
+        } else {
+            console.log("No active channel to disconnect from.");
+        }
     }
 </script>
 </body>
