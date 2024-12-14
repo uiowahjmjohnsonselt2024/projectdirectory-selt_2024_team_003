@@ -26,7 +26,7 @@
   }
 
   form input[type="text"],
-  form input[type="number"] {
+  form input[type="number"], form input[type="password"] {
     width: 100%;
     padding: 10px;
     font-size: 14px;
@@ -103,6 +103,10 @@
     <div>
       <%= form.label :card_number, "Card Number" %>
       <%= form.text_field :card_number, maxlength: 19, placeholder: "Enter 16-digit card number", class: 'credit-card-input' %>
+    </div>
+    <div>
+      <%= form.label :cvv, "CVV" %>
+      <%= form.password_field :cvv, class: 'cvv-input' %>
     </div>
     <div>
       <%= form.label :expiration_month, "Expiration Month" %>
