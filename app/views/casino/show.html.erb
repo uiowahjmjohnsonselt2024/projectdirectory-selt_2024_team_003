@@ -207,7 +207,7 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const colors = ["red", "black", "green"];
+        const colors = ["red", "black"]; // Only red and black by default
         const carousel = document.querySelector(".carousel");
         const line = document.querySelector(".line");
         const spinButton = document.getElementById("spin_button");
@@ -219,9 +219,21 @@
         let userBet = null;
         let betAmount = 0;
 
+        let tileCounter = 0; // Track the number of red/black tiles added
+
         // Generate initial tiles
         for (let i = 0; i < 100; i++) {
-            addTile(colors[i % 3]);
+            addTile(getNextTileColor());
+        }
+
+        function getNextTileColor() {
+            tileCounter++;
+            // Add green tile every 15 tiles
+            if (tileCounter % 15 === 0) {
+                return "green";
+            }
+            // Randomly alternate between red and black
+            return colors[Math.floor(Math.random() * colors.length)];
         }
 
         function addTile(color) {
@@ -263,7 +275,7 @@
                 // Add new tiles to the right if needed
                 const lastTile = tiles[tiles.length - 1];
                 if (lastTile.getBoundingClientRect().right < window.innerWidth) {
-                    addTile(colors[Math.floor(Math.random() * 3)]);
+                    addTile(getNextTileColor());
                 }
 
                 // Remove tiles that exit the left
@@ -298,8 +310,16 @@
         }
 
         function displayResult(winningColor) {
+            let winnings = 0;
+            let payoutMultiplier = 2; // Default payout multiplier for red/black
+
+            if (winningColor === "green") {
+                payoutMultiplier = 14; // Higher multiplier for green
+            }
+
             if (userBet === winningColor) {
-                resultDiv.textContent = `You won! The spin landed on ${winningColor}. You gain ${betAmount * 2} shards.`;
+                winnings = betAmount * payoutMultiplier;
+                resultDiv.textContent = `You won! The spin landed on ${winningColor}. You gain ${winnings} shards.`;
                 resultDiv.className = "message-success";
             } else {
                 resultDiv.textContent = `You lost! The spin landed on ${winningColor}. You lose ${betAmount} shards.`;
@@ -308,7 +328,6 @@
         }
 
         function updateShards(winner) {
-            // Make an AJAX request to the backend to update the shards
             fetch("/casino/place_bet", {
                 method: "POST",
                 headers: {
@@ -318,7 +337,7 @@
                 body: JSON.stringify({
                     bet_amount: betAmount,
                     user_bet: userBet,
-                    winner: winner
+                    winner: winner // Winner is known at this point
                 })
             })
               .then(response => response.json())
@@ -331,7 +350,7 @@
                   }
               })
               .catch(error => {
-                  console.error('Error:', error);
+                  console.error("Error:", error);
               });
         }
 
@@ -345,31 +364,51 @@
 
         spinButton.addEventListener("click", () => {
             betAmount = parseInt(betAmountInput.value) || 0;
+
+            if (!userBet) {
+                alert("Please select a color (Red, Black, or Green) before spinning.");
+                return; // Stop further execution if no color is selected
+            }
+
             if (betAmount > 0) {
-                // Send the bet info to the backend before spinning
-                fetch("/casino/place_bet", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
-                    },
-                    body: JSON.stringify({
-                        bet_amount: betAmount,
-                        user_bet: userBet,
-                        winner: "pending" // Initially, winner is unknown
+                const currentShardsDisplay = document.getElementById("shards_display");
+                const currentShards = parseInt(currentShardsDisplay.textContent.match(/\d+/)[0]);
+
+                if (currentShards >= betAmount) {
+                    // Temporarily update the shards display immediately
+                    currentShardsDisplay.textContent = `Your Shards: ${currentShards - betAmount}`;
+
+                    // Send the bet info to the backend before spinning
+                    fetch("/casino/place_bet", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
+                        },
+                        body: JSON.stringify({
+                            bet_amount: betAmount,
+                            user_bet: userBet,
+                            winner: "pending" // Initially, winner is unknown
+                        })
                     })
-                })
-                  .then(response => response.json())
-                  .then(data => {
-                      if (data.success) {
-                          startSpin(); // Start spinning only after successful bet placement
-                      } else {
-                          alert(data.message);
-                      }
-                  })
-                  .catch(error => {
-                      console.error('Error:', error);
-                  });
+                      .then(response => response.json())
+                      .then(data => {
+                          if (data.success) {
+                              startSpin(); // Start spinning only after successful bet placement
+                          } else {
+                              // Revert shards display on failure
+                              currentShardsDisplay.textContent = `Your Shards: ${currentShards}`;
+                              alert(data.message);
+                          }
+                      })
+                      .catch(error => {
+                          // Revert shards display in case of error
+                          currentShardsDisplay.textContent = `Your Shards: ${currentShards}`;
+                          console.error("Error:", error);
+                      });
+                } else {
+                    alert("You don't have enough shards to place this bet.");
+                }
             } else {
                 alert("Please enter a valid bet amount.");
             }
