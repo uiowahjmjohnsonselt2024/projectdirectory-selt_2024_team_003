@@ -44,6 +44,6 @@ class CreditCardsController < ApplicationController
     private
   
     def credit_card_params
-      params.require(:credit_card).permit(:card_number, :expiration_month, :expiration_year)
+      params.require(:credit_card).permit(:card_number, :cvv, :expiration_month, :expiration_year)
     end
 end
