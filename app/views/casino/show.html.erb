@@ -206,6 +206,8 @@
 </div>
 
 <script>
+    const highRoller = <%= @current_user.has_achievement('High Roller: The casino calls to you') %>
+
     document.addEventListener("DOMContentLoaded", () => {
         const colors = ["red", "black"]; // Only red and black by default
         const carousel = document.querySelector(".carousel");
@@ -245,7 +247,6 @@
 
         function startSpin() {
             if (spinning) return;
-
             spinning = true;
             resultDiv.textContent = "Spinning...";
             resultDiv.className = "";
@@ -288,6 +289,7 @@
                 if (elapsed >= totalDuration) {
                     clearInterval(interval);
                     stopSpin();
+                    if (betAmount >= 250 && !highRoller) confirm("HIGH ROLLER ACHIEVEMENT UNLOCKED");
                 }
             }, 20);
         }

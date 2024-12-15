@@ -1,101 +1,273 @@
 <style>
-  .current-user {  
-    display: flex;  
-    flex-direction: column;
-  }
-  .user-avatar {  
-    width: 100px; /* Set consistent width */  
-    height: 100px; /* Set consistent height */  
-    object-fit: cover; /* Ensures the image fills the space without distortion */  
-    border-radius: 50%; /* Optional: Makes the image circular */  
-    border: 2px solid #ccc; /* Optional border */
-  }
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #121212;
+        color: white;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
 
-  .account-buttons {
-    margin-left: 100px;
-  }
+    #navbar {
+        width: 250px;
+        height: 100vh;
+        background-color: #1a1a1a;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Align to the left */
+        padding: 15px;
+        border-right: 2px solid #333;
+    }
+
+    .navbar-item {
+        width: 60%;
+        padding: 15px;
+        text-align: left;
+        color: white;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        margin: 10px 0;
+        border-radius: 5px;
+        background-color: #333; /* Prominent background color */
+    }
+
+    .navbar-item:hover {
+        background-color: #444; /* Lighter on hover */
+    }
+
+    .navbar-item i {
+        margin-right: 10px;
+    }
+
+    .current-user {
+        text-align: center;
+    }
+
+    .user-avatar {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid #ccc;
+        margin-bottom: 10px;
+    }
+
+    .main-content {
+        flex-grow: 1;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Quad layout */
+        grid-gap: 20px;
+    }
+
+    .content-box {
+        background-color: #1f1f1f;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+        margin-top: 0;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group input[type="file"] {
+        padding: 5px;
+        background-color: #2b2b2b;
+        color: white;
+        border: 1px solid #444;
+    }
+
+    .button {
+        background-color: #333;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .button:hover {
+        background-color: #444;
+    }
+
+    .search-form input,
+    .search-form select,
+    .search-form button {
+        background-color: #2b2b2b;
+        color: white;
+        border: 1px solid #444;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .search-form button {
+        margin-left: 10px;
+    }
+
+    /* User Stats Table */
+    .stats-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .stats-table th, .stats-table td {
+        padding: 10px;
+        border: 1px solid #444;
+        text-align: center;
+    }
+
+    .stats-table th {
+        background-color: #333;
+    }
+
+    .stats-table td {
+        background-color: #2b2b2b;
+    }
+
+    /* Golden text with gradient, shadow, and animation */
+    .golden-text {
+        font-size: 24px;
+        font-weight: bold;
+        color: #f9d671;
+        background: linear-gradient(45deg, #f9d671, #ffcc00, #f4a300);
+        background-clip: text;
+        -webkit-background-clip: text; /* For Safari */
+        color: transparent;
+        display: inline-block;
+        position: relative;
+        animation: shiny 2s infinite linear;
+    }
+
+    /* Shiny effect animation */
+    @keyframes shiny {
+        0% {
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.7), 0 0 10px rgba(255, 215, 0, 0.7), 0 0 15px rgba(255, 215, 0, 0.7);
+        }
+        50% {
+            text-shadow: 0 0 10px rgba(255, 215, 0, 1), 0 0 20px rgba(255, 215, 0, 1), 0 0 30px rgba(255, 215, 0, 1);
+        }
+        100% {
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.7), 0 0 10px rgba(255, 215, 0, 0.7), 0 0 15px rgba(255, 215, 0, 0.7);
+        }
+    }
 </style>
-
-<div id="account-menu">
-  <div class="current-user">    
-    <% if current_user.profile_picture.attached? %>        
-      <%= image_tag url_for(current_user.profile_picture), alt: "User Avatar", class: "user-avatar" %>    
-    <% else %>        
-      <p>No avatar uploaded.</p>    
-    <% end %>    
-    <%= current_user.username %>
-  </div>
-  <div class="account-buttons">
-    <%= link_to "Logout", logout_path, method: :get, class: "account-logout-button" %>
-    <%= link_to "Menu", games_path, class: "account-menu-button" %>
-    <%= link_to "Inventory", inventory_index_path, class: "account-inventory-button" %>
-
-    <%= form_with(model: current_user, local: true) do |form| %>
-      <div class="form-group">
-        <%= form.label :profile_picture, "Change Profile Picture" %>
-        <%= form.file_field :profile_picture %>
-      </div>
-
-      <div class="form-group">
-        <%= form.submit "Update Profile" %>
-      </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<div id="navbar">
+  <div class="current-user">
+    <% if current_user.profile_picture.attached? %>
+      <%= image_tag url_for(current_user.profile_picture), alt: "User Avatar", class: "user-avatar" %>
+    <% else %>
+      <p>No avatar uploaded.</p>
     <% end %>
   </div>
+  <%#= current_user.username %>
+  <h1 class="golden-text"><%= current_user.username %></h1>
 
-  <div class="account-sections">
-    <div class="user-stats-container">
+  <%= form_with(model: current_user, local: true) do |form| %>
+    <div class="form-group">
+      <%= form.file_field :profile_picture %>
+    </div>
+    <div class="form-group">
+      <%= form.submit 'Update Profile', class: 'button' %>
+    </div>
+  <% end %>
+
+  <!-- Logout Link -->
+  <%= link_to(logout_path, method: :get, class: 'navbar-item') do %>
+    <i class="fas fa-sign-out-alt"></i> Logout
+  <% end %>
+
+  <!-- Menu Link -->
+  <%= link_to(games_path, class: 'navbar-item') do %>
+    <i class="fas fa-bars"></i> Menu
+  <% end %>
+
+  <!-- Inventory Link -->
+  <%= link_to(inventory_index_path, class: 'navbar-item') do %>
+    <i class="fas fa-box"></i> Inventory
+  <% end %>
+</div>
+
+<div class="main-content">
+  <div class="content-box">
+    <div id="user-stats-container">
+      <h3>User Stats</h3>
       <% if current_user.current_skin %>
-        <% current_skin = current_user.current_skin %>
-        <% if current_skin.image.attached? %>
-          <%= image_tag(current_skin.image, width: 100, height: 100, alt: "Skin Image") %>
-        <% else %>
-          <p>No image available for the current skin.</p>
-        <% end %>
-        <div class="account-stats">
-          <span class="account-stats-name">Archetype:</span>
-          <span class="account-stats-value"><%= current_skin.archetype %></span>
-        </div>
-        <div class="account-stats">
-          <span class="account-stats-name">Max Health:</span>
-          <span class="account-stats-value"><%= current_skin.health %></span>
-        </div>
-        <div class="account-stats">
-          <span class="account-stats-name">Max Mana:</span>
-          <span class="account-stats-value"><%= current_skin.mana %></span>
-        </div>
-        <div class="account-stats">
-          <span class="account-stats-name">Attack:</span>
-          <span class="account-stats-value"><%= current_skin.attack %></span>
-        </div>
-        <div class="account-stats">
-          <span class="account-stats-name">Special Attack:</span>
-          <span class="account-stats-value"><%= current_skin.special_attack %></span>
-        </div>
-        <div class="account-stats">
-          <span class="account-stats-name">Defense:</span>
-          <span class="account-stats-value"><%= current_skin.defense %></span>
-        </div>
-        <div class="account-stats">
-          <span class="account-stats-name">Special Defense:</span>
-          <span class="account-stats-value"><%= current_skin.special_defense %></span>
-        </div>
-        <div class="account-stats">
-          <span class="account-stats-name">IQ:</span>
-          <span class="account-stats-value"><%= current_skin.iq %></span>
-        </div>
-        <div class="account-stats">
-          <span class="account-stats-name">Level:</span>
-          <span class="account-stats-value"><%= current_skin.level %></span>
-        </div>
-        <div class="account-stats">
-          <span class="account-stats-name">Experience:</span>
-          <span class="account-stats-value"><%= current_skin.experience %></span>
-        </div>
+        <%= current_skin = current_user.current_skin %>
+        <%= image_tag(current_skin.image, width: 100, height: 100, alt: "Skin Image") if current_skin.image.attached? %>
+
+        <!-- User Stats Table -->
+        <table class="stats-table">
+          <tr>
+            <th>Archetype</th>
+            <td><%= current_skin.archetype %></td>
+          </tr>
+          <tr>
+            <th>Max Health</th>
+            <td><%= current_skin.health %></td>
+          </tr>
+          <tr>
+            <th>Max Mana</th>
+            <td><%= current_skin.mana %></td>
+          </tr>
+          <tr>
+            <th>Attack</th>
+            <td><%= current_skin.attack %></td>
+          </tr>
+          <tr>
+            <th>Special Attack</th>
+            <td><%= current_skin.special_attack %></td>
+          </tr>
+          <tr>
+            <th>Defense</th>
+            <td><%= current_skin.defense %></td>
+          </tr>
+          <tr>
+            <th>Special Defense</th>
+            <td><%= current_skin.special_defense %></td>
+          </tr>
+          <tr>
+            <th>IQ</th>
+            <td><%= current_skin.iq %></td>
+          </tr>
+          <tr>
+            <th>Level</th>
+            <td><%= current_skin.level %></td>
+          </tr>
+          <tr>
+            <th>Experience</th>
+            <td><%= current_skin.experience %></td>
+          </tr>
+        </table>
       <% else %>
         <p>No active skin selected. Please select a skin in your inventory.</p>
       <% end %>
     </div>
+  </div>
 
+  <div class="content-box">
+    <div id="achievements-list-container">
+      <h3>Achievements</h3>
+      <% if @achievements.present? %>
+        <ul>
+          <% @achievements.each do |achievement| %>
+            <li><%= achievement %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>No achievements yet.</p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="content-box">
     <div id="user-search-container">
       <h3>Search for Users</h3>
       <%= form_tag account_path, method: :get, class: "search-form" do %>
@@ -107,61 +279,31 @@
       <% end %>
 
       <div id="users-list-container">
-        <h3>Search Results</h3>
         <% if @users.present? %>
           <ul>
             <% @users.each do |user| %>
-              <li>
-                <span><strong>Username:</strong> <%= user.username %></span>
-                <% if current_user.friends.include?(user) %>
-                  <%= button_to "Remove Friend", remove_friend_path(friend_id: user.id), method: :delete, class: "button remove-friend-button" %>
-                <% else %>
-                  <%= button_to "Add Friend", add_friend_path(friend_id: user.id), method: :post, class: "button add-friend-button" %>
-                <% end %>
-              </li>
+              <li><%= user.username %></li>
             <% end %>
           </ul>
         <% else %>
-          <p>No users found matching your search.</p>
+          <p>No users found.</p>
         <% end %>
       </div>
     </div>
+  </div>
 
-    <div id="vertical-container">
-      <div id="friends-list-container">
-        <h3>Your Friends</h3>
-        <% if current_user.friends.present? %>
-          <ul>
-            <% current_user.friends.each do |friend| %>
-              <li>
-                <span><strong>Username:</strong> <%= friend.username %></span>
-                <%= form_tag chat_with_user_path, method: :get, class: "inline-form" do %>
-                  <%= hidden_field_tag :friend_id, friend.id %>
-                  <%= submit_tag "Chat", class: "button chat-button" %>
-                <% end %>
-                <%= button_to "Remove Friend", remove_friend_path(friend_id: friend.id), method: :delete, class: "button remove-friend-button" %>
-              </li>
-            <% end %>
-          </ul>
-        <% else %>
-          <p>You have no friends yet.</p>
-        <% end %>
-      </div>
-
-      <div id="achievements-list-container">
-        <h3>Achievements</h3>
-        <% if @achievements.present? %>
-          <ul>
-            <% @achievements.each do |achievement| %>
-              <li>
-                <span><%= achievement %></span>
-              </li>
-            <% end %>
-          </ul>
-        <% else %>
-          <p>You have no achievements yet.</p>
-        <% end %>
-      </div>
+  <div class="content-box">
+    <div id="friends-list-container">
+      <h3>Your Friends</h3>
+      <% if current_user.friends.present? %>
+        <ul>
+          <% current_user.friends.each do |friend| %>
+            <li><%= friend.username %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>You have no friends yet.</p>
+      <% end %>
     </div>
   </div>
 </div>

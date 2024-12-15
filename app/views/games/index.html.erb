@@ -1,61 +1,206 @@
-<style>
-  .current-user {  
-    display: flex;  
-    flex-direction: column;
-  }
-  .user-avatar {  
-    width: 100px; /* Set consistent width */  
-    height: 100px; /* Set consistent height */  
-    object-fit: cover; /* Ensures the image fills the space without distortion */  
-    border-radius: 50%; /* Optional: Makes the image circular */  
-    border: 2px solid #ccc; /* Optional border */
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Menu</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- FontAwesome for icons -->
+  <style>
+      body {
+          display: flex;
+          background-color: #121212;
+          color: white;
+          font-family: Arial, sans-serif;
+          margin: 0;
+      }
 
-  .buttons-container {
-    margin-top: 100px;
-  }
-</style>
+      /* Left Sidebar */
+      #sidebar {
+          width: 250px;
+          background-color: #2c2c2c;
+          height: 100vh;
+          padding-top: 50px;
+          position: fixed;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding-bottom: 20px;
+      }
 
-<div id="games-menu">
-  <div class="current-user">    
-    <% if current_user.profile_picture.attached? %>        
-      <%= image_tag url_for(current_user.profile_picture), alt: "User Avatar", class: "user-avatar" %>    
-    <% else %>        
+      #sidebar .current-user {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 40px;
+      }
+
+      #sidebar .user-avatar {
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          object-fit: cover;
+          margin-bottom: 10px;
+      }
+
+      #sidebar .buttons-container a {
+          color: white;
+          text-decoration: none;
+          margin: 10px 0;
+          font-size: 16px;
+          padding: 10px;
+          background-color: #3a3a3a;
+          border-radius: 5px;
+          width: 80%;
+          text-align: left;
+          display: flex;
+          align-items: center;
+      }
+
+      #sidebar .buttons-container a i {
+          margin-right: 10px; /* Space between icon and text */
+      }
+
+      #sidebar .buttons-container a:hover {
+          background-color: #575757;
+      }
+
+      /* Main Content */
+      #main-content {
+          margin-left: 250px;
+          padding: 20px;
+          width: calc(100% - 250px);
+      }
+
+      .form-container {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 30px;
+          margin: 0 auto;
+          width: 90%;
+      }
+
+      .form-container div {
+          margin-bottom: 15px;
+      }
+
+      .form-container .left-column,
+      .form-container .right-column {
+          width: 48%;
+      }
+
+      .form-container input[type="text"] {
+          width: 90%; /* Reduced width of input fields */
+          padding: 10px;
+          margin-top: 5px;
+          background-color: #333;
+          border: 1px solid #555;
+          color: white;
+          border-radius: 5px;
+      }
+
+      .form-container .button {
+          background-color: #4CAF50;
+          color: white;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          margin-top: 10px;
+      }
+
+      .form-container .button:hover {
+          background-color: #45a049;
+      }
+
+      .games-list-container {
+          background-color: #1f1f1f;
+          padding: 20px;
+          border-radius: 8px;
+      }
+
+      .games-list-container h3 {
+          margin-top: 0;
+      }
+
+      .games-list-container ul {
+          list-style-type: none;
+          padding-left: 0;
+      }
+
+      .games-list-container li {
+          margin: 10px 0;
+          padding: 10px;
+          background-color: #333;
+          border-radius: 5px;
+      }
+
+      .games-list-container li strong {
+          color: #4CAF50;
+      }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div id="sidebar">
+  <div class="current-user">
+    <% if current_user.profile_picture.attached? %>
+      <%= image_tag url_for(current_user.profile_picture), alt: "User Avatar", class: "user-avatar" %>
+    <% else %>
       <%= image_tag asset_path('default_profile_pic.jpg'), alt: "Default User Avatar", class: "user-avatar" %>
-    <% end %>    
+    <% end %>
     <%= current_user.username %>
   </div>
+
   <div class="buttons-container">
-    <%= link_to "Logout", logout_path, method: :get, class: "logout-button" %>
-    <%= link_to "Shop", store_path, class: "shop-button" %>
-    <%= link_to "Account", account_path, class: "account-button" %>
-    <%= link_to 'Credit Card', credit_card_redirect_path, class: 'credit-card-button' %>
+    <%= link_to logout_path, method: :get, class: "logout-button" do %>
+      <i class="fas fa-sign-out-alt"></i>Logout
+    <% end %>
+    <%= link_to store_path, class: "shop-button" do %>
+      <i class="fas fa-store"></i>Shop
+    <% end %>
+    <%= link_to account_path, class: "account-button" do %>
+      <i class="fas fa-user"></i>Account
+    <% end %>
+    <%= link_to credit_card_redirect_path, class: 'credit-card-button' do %>
+      <i class="fas fa-credit-card"></i>Credit Card
+    <% end %>
   </div>
+</div>
 
+<!-- Main Content -->
+<div id="main-content">
   <div class="form-container">
-    <%= form_for Game.new, url: games_path, html: { method: :post, local: true } do |form| %>
-      <div>
-        <%= form.label :name, 'Game Name:' %>
-        <%= form.text_field :name %>
-      </div>
-      <%= form.submit 'Create Game', class: 'button' %>
-    <% end %>
+    <div class="left-column">
+      <%= form_for Game.new, url: games_path, html: { method: :post, local: true } do |form| %>
+        <div>
+          <%= form.label :name, 'Game Name:' %>
+          <%= form.text_field :name %>
+        </div>
+        <%= form.submit 'Create Game', class: 'button' %>
+      <% end %>
+    </div>
 
-    <%= form_tag join_games_path, method: :post, local: true do %>
-      <div>
-        <%= label_tag :code, 'Game Code:' %>
-        <%= text_field_tag :code %>
-      </div>
-      <%= submit_tag 'Join Game', class: 'button' %>
-    <% end %>
+    <div class="right-column">
+      <%= form_tag join_games_path, method: :post, local: true do %>
+        <div>
+          <%= label_tag :code, 'Game Code:' %>
+          <%= text_field_tag :code %>
+        </div>
+        <%= submit_tag 'Join Game', class: 'button' %>
+      <% end %>
+    </div>
   </div>
 
   <div class="games-list-container">
     <h3>Games List</h3>
     <ul>
       <% @games.each do |game| %>
-        <li><strong>Name:</strong> <%= game.name %> | <strong>Code:</strong> <%= game.code %></li>
+        <li><strong>Name:</strong> <%= game.name %> <strong>Code:</strong> <%= game.code %></li>
       <% end %>
     </ul>
   </div>
 </div>
+
+</body>
+</html>

@@ -481,6 +481,14 @@ class InteractionsController < ApplicationController
     weapon_multipliers[weapon_name.downcase] || 1.0
   end
 
+  def calculate_magic_damage(attacker, defender)
+    base_damage = [attacker.special_attack - (defender.special_defense / 2), 1].max
+    base_damage = [(attacker.special_attack * 2) - (defender.special_defense / 2), 1].max
+    critical_hit = rand(0..200) < attacker.iq
+    damage = critical_hit ? base_damage * 2 : base_damage
+    [damage, critical_hit]
+  end
+
   def level_up_if_needed(player)
     xp_threshold = player.level * 100
     return unless player.experience >= xp_threshold
