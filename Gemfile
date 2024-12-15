@@ -22,7 +22,6 @@ gem 'activerecord', '~> 8.0.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'ffi', '~> 1.15' # Or the latest compatible version
 gem 'rails-ujs', '~> 0.1.0'
-gem 'redis'
 gem 'actioncable'
 gem 'sprockets-rails'
 gem 'puma'
@@ -44,7 +43,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'sqlite3', '~> 2.1'
   gem 'webmock'
-  # gem 'capybara'
+  gem 'capybara'
   # gem 'selenium-webdriver'
   gem 'simplecov', require: false
 end
@@ -53,6 +52,8 @@ group :development do
 end
 
 group :production do
+  gem 'redis'
+  gem 'redis-rails'
   gem 'pg', '~> 1.5'
   gem 'rails_12factor'
 end

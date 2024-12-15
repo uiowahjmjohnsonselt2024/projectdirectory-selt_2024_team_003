@@ -305,6 +305,7 @@ GEM
       redis-client (>= 0.22.0)
     redis-client (0.23.0)
       connection_pool
+    redis-rails (0.0.0)
     regexp_parser (2.9.3)
     reline (0.5.12)
       io-console (~> 0.5)
@@ -430,6 +431,7 @@ DEPENDENCIES
   aws-sdk-s3
   bcrypt (~> 3.1.7)
   bootstrap (~> 5.0.0)
+  capybara
   cucumber-rails
   database_cleaner
   devise
@@ -446,6 +448,7 @@ DEPENDENCIES
   rails-ujs (~> 0.1.0)
   rails_12factor
   redis
+  redis-rails
   rspec-rails
   rubocop
   rubocop-rails
