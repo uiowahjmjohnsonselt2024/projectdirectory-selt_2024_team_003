@@ -16,6 +16,7 @@ class ChatsController < ApplicationController
 
     if @message.save
       flash[:notice] = 'Message sent!'
+      current_user.add_achievement("Yapper: Spreading positivity one message at a time.")
     else
       flash[:alert] = 'Failed to send the message.'
     end

@@ -11,6 +11,9 @@ class CasinoController < ApplicationController
     user_bet = params[:user_bet] # Passed from the frontend ('red', 'black', 'green')
     winner = params[:winner] # The winner ('red', 'black', or 'green') passed from the frontend
 
+    if bet_amount >= 250
+      current_user.add_achievement('High Roller: The casino calls to you')
+    end
     # Check if the user has enough shards to place the bet
     if bet_amount > 0 && current_user.shards >= bet_amount
       if winner == "pending"
