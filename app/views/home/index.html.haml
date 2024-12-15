@@ -1,18 +1,29 @@
--# app/views/home/index.html.haml
-#home-page
-  .video-overlay
-    %video.background-video{ autoplay: true, loop: true, muted: true, playsinline: true }
-      %source{ src: asset_path('test.mov'), type: 'video/mp4' }
-      Your browser does not support the video tag.
+#home-page-container
+  #home-page
+    .video-overlay
+      %video.background-video{ autoplay: true, loop: true, muted: true, playsinline: true }
+        %source{ src: asset_path('test.mov'), type: 'video/mp4' }
+        Your browser does not support the video tag.
 
-  %div.center-container
-    %h1.shards-title= @welcome_message
-    .button-container
-      = link_to @login_button, login_button_path, class: 'btn btn-login'
-      = link_to @create_button, create_button_path, class: 'btn btn-create'
+    %div.center-container
+      %h1.shards-title= @welcome_message
+      .button-container
+        = link_to @login_button, login_button_path, class: 'btn btn-login'
+        = link_to @create_button, create_button_path, class: 'btn btn-create'
+      .how-to-play-container
+        %button.btn.btn-how-to-play{ id: 'how-to-play-button' } How to Play
 
-  %footer.footer
-    %p!= @copyright_text
-    -# Below are optional; we will think about them later
-    -# %a{ href: "/terms" } Terms of Service
-    -# %a{ href: "/privacy" } Privacy Policy
+    %footer.footer
+      %p.centered-copyright!= @copyright_text
+
+    / Modal for How to Play
+    #how-to-play-modal.modal.hidden
+      .modal-content
+        %h2 How to Play
+        %p
+          Embark on an epic journey through the grid to collect powerful shards!
+          Join forces with friends online to crush enemies, claim epic loot, and unlock custom skins.
+          Arm yourself with legendary weapons, consume rare power-ups, and battle your way to the edge of the grid.
+          Challenge rivals in thrilling online duels or try your luck at the casino for even bigger rewards.
+          The grid is yours to conquer—are you ready?
+        %button.close-button Close
