@@ -1,3 +1,34 @@
+<style>
+    .players-list {
+        padding: 1rem;
+    }
+
+    .player-card {
+        display: flex;
+        flex-direction: column; /* Arrange items vertically within each card */
+        align-items: center; /* Center content horizontally */
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 1rem;
+        width: 78px; /* Fixed width for each card */
+    }
+
+    .profile-picture {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        object-fit: cover; /* Ensures the image is cropped to fit without distortion */
+        margin-bottom: 0.5rem;
+    }
+
+    .player-name {
+        font-size: 1rem;
+        font-weight: bold;
+        text-align: center;
+        margin: 0;
+    }
+</style>
+
 <div class="interaction-page">
   <div class="battle-screen">
     <!-- Player section -->
@@ -85,6 +116,26 @@
         <p id="enemy-iq">IQ: <%= @enemy.iq %></p>
         <p id="attack-message"></p>
       </div>
+    </div>
+
+    <div class="players-list">
+        <% if @players_in_same_pos.any? %>
+            <h3>Who's here?</h3>
+            <ul class="player-cards-container">
+                <% @players_in_same_pos.each do |game_user| %>
+                    <li class="player-card">
+                    <!-- Display profile picture if attached, else show a default -->
+                    <% if game_user.user.profile_picture.attached? %>
+                        <%= image_tag game_user.user.profile_picture, alt: "Profile Picture", class: "profile-picture" %>
+                    <% else %>
+                        <%= image_tag asset_path('default_profile_pic.jpg'), alt: "Default Profile Picture", class: "profile-picture" %>
+                    <% end %>
+                    <!-- Display the player's username -->
+                    <p class="player-name"><%= game_user.user.username %></p>
+                    </li>
+                <% end %>
+            </ul>
+        <% end %>
     </div>
 
   </div>
