@@ -31,7 +31,6 @@ gem 'aws-sdk-s3'
 gem 'mini_magick'
 
 gem 'redis', '~> 5.0'
-gem 'redis-rails'
 
 gem 'dotenv-rails'
 group :development, :test do
