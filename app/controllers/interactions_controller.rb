@@ -8,11 +8,11 @@ class InteractionsController < ApplicationController
     @consumables = current_user.consumables
 
     case current_user.archetype
-    when 'Arcane Strategist'
+    when 'Attacker'
       @image = 'attack.png'
-    when 'Iron Guardian'
+    when 'Defender'
       @image = 'defense.png'
-    when 'Omni Knight'
+    when 'Healer'
       @image = 'balanced.png'
     else
       @image = 'balanced.png'
