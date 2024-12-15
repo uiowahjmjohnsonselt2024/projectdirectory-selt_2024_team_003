@@ -10,7 +10,7 @@
           <div class="inventory-row weapons-row">
             <% if @weapons.present? %>
               <% @weapons.each do |weapon| %>
-                <div class="inventory-item weapon-item <%= 'current-weapon' if weapon.current %>" onclick="useWeapon('<%= weapon.id %>', '<%= weapon.name %>')">
+                <div class="inventory-item weapon-item <%= 'current-weapon' if weapon.current %>" onclick="useWeapon2('<%= weapon.id %>', '<%= weapon.name %>')">
                   <p class="item-name"><%= weapon.name %></p>
                   <% if asset_path(weapon_image_filename(weapon.name)) %>
                     <%= image_tag asset_path(weapon_image_filename(weapon.name)), alt: weapon.name, class: "weapon-image" %>
@@ -326,7 +326,7 @@
             console.log("No active channel to disconnect from.");
         }
     }
-    function useWeapon(weaponId, weaponName) {
+    function useWeapon2(weaponId, weaponName) {
         console.log(`Setting weapon with ID: ${weaponName} as current.`);
 
         // Adjust the fetch URL to match the new route
