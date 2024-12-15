@@ -56,6 +56,7 @@ class InteractionsController < ApplicationController
               end
 
     if @enemy.health <= 0
+      current_user.update(shards: current_user.shards + @enemy.level * 10)
       @enemy.update(health: 0)
       experience_gain = @enemy.level * 50
       @player.update(experience: @player.experience + experience_gain)
@@ -153,6 +154,7 @@ class InteractionsController < ApplicationController
         consumable.destroy
       end
       if @enemy.health <= 0
+        current_user.update(shards: current_user.shards + @enemy.level * 10)
         @enemy.update(health: 0)
         experience_gain = @enemy.level * 50
         @player.update(experience: @player.experience + experience_gain)
@@ -289,6 +291,7 @@ class InteractionsController < ApplicationController
     end
 
     if @enemy.health <= 0
+      current_user.update(shards: current_user.shards + @enemy.level * 10)
       @enemy.update(health: 0)
       experience_gain = @enemy.level * 50
       @player.update(experience: @player.experience + experience_gain)
