@@ -27,6 +27,8 @@ gem 'actioncable'
 gem 'sprockets-rails'
 gem 'puma'
 
+gem 'aws-sdk-s3'
+
 gem 'mini_magick'
 
 gem 'dotenv-rails'

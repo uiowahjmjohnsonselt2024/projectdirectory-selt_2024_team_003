@@ -38,7 +38,31 @@
   <!-- Consumables Content -->
   <% if params[:tab] == 'consumables' %>
     <div class="consumables-container">
-      <p>You currently have no consumables.</p>
+      <% @consumables.each do |consumable| %>
+        <div class="consumable-item"
+             data-consumable-id="<%= consumable.id %>"
+             data-description="<%= case consumable.name.downcase
+                                   when 'health potion' then 'Restores 100 health'
+                                   when 'acid potion' then 'Deals 100 damage'
+                                   when 'revive' then 'Restores to full health'
+                                   when 'invisibility potion' then 'Refills mana'
+                                   else 'No description available'
+                                   end %>"
+             onclick="showConsumableStats(this)">
+          <p class="consumable-name-display"><%= consumable.name %></p>
+          <p class="consumable-quantity-display">Quantity: <%= consumable.quantity %></p>
+
+          <% if asset_path(consumable_image_filename(consumable.name)) %>
+            <%= image_tag asset_path(consumable_image_filename(consumable.name)), alt: consumable.name, class: "consumable-image" %>
+          <% else %>
+            <p class="no-image-placeholder">No image available</p>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if @consumables.empty? %>
+        <p>You have no consumables.</p>
+      <% end %>
     </div>
   <% end %>
 
@@ -46,10 +70,9 @@
     <% if params[:tab] == 'weapons' %>
       <div class="weapons-container">
         <% @weapons.each do |weapon| %>
-          <div class="weapon-item <%= 'current-weapon' if weapon.current %>" data-weapon-id="<%= weapon.id %>">
+          <div class="weapon-item <%= 'current-weapon' if weapon.current %>" data-weapon-id="<%= weapon.id %>" onclick="showWeaponStats(<%= weapon.id %>)">
             <p class="weapon-name-display"><%= weapon.name %></p>
 
-            <%# Add a placeholder or dynamically load an image for the weapon %>
             <% if asset_path(weapon_image_filename(weapon.name)) %>
               <%= image_tag asset_path(weapon_image_filename(weapon.name)), alt: weapon.name, class: "weapon-image" %>
             <% else %>
@@ -65,7 +88,6 @@
             </div>
           </div>
         <% end %>
-
         <% if @weapons.empty? %>
           <p>You have no weapons.</p>
         <% end %>
@@ -82,4 +104,28 @@
       </div>
     </div>
   </div>
+
+  <!-- Modal for Weapon Stats -->
+  <div id="weapon-stats-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" onclick="closeModal()">&times;</span>
+      <h2>Weapon Stats</h2>
+      <div id="weapon-stats">
+        <!-- Stats will be dynamically populated here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Consumable Stats -->
+  <div id="consumable-stats-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" onclick="closeModal()">&times;</span>
+      <h2>Consumable Details</h2>
+      <div id="consumable-stats">
+        <!-- Stats will be dynamically populated here -->
+      </div>
+    </div>
+  </div>
 </div>
+
+

@@ -1,6 +1,13 @@
 class InventoryController < ApplicationController
   before_action :authenticate_user! # Ensure the user is logged in
 
+  # Action to list all items in the user's inventory
+  def index
+    @skins = current_user.skins
+    @weapons = current_user.weapons
+    @consumables = current_user.consumables
+  end
+
   # Action to add a new skin to the inventory
   def add_skin
     image_data = params[:image_data]
@@ -43,13 +50,6 @@ class InventoryController < ApplicationController
     end
   end
 
-  # Action to list all items in the user's inventory
-  def index
-    @skins = current_user.skins
-    @weapons = current_user.weapons
-    # Add consumables or other inventory items here if needed
-  end
-
   # Action to set a skin as the current skin
   def set_current_skin
     skin = current_user.skins.find(params[:id]) # Ensure the skin belongs to the logged-in user
@@ -78,5 +78,28 @@ class InventoryController < ApplicationController
     end
   rescue ActiveRecord::RecordNotFound
     redirect_to inventory_index_path, alert: "Skin not found"
+  end
+
+  # Action to fetch weapon stats for the modal
+  def weapon_stats
+    weapon = current_user.weapons.find(params[:id]) # Ensure weapon belongs to the logged-in user
+    weapon_multiplier = weapon_multipliers[weapon.name.downcase]
+    render json: { name: weapon.name, multiplier: weapon_multiplier }
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: "Weapon not found" }, status: :not_found
+  end
+
+  private
+
+  # Define weapon multipliers as a helper method
+  def weapon_multipliers
+    {
+      'knife' => 1,
+      'sword' => 2,
+      'flame sword' => 4,
+      'bow and arrow' => 8,
+      'shotgun' => 16,
+      'sniper' => 32
+    }
   end
 end

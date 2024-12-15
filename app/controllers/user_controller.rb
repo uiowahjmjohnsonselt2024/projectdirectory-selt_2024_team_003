@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 class UserController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_user, only: [:edit, :update]
 
   # Displays the user's profile, including their current skin stats and friend list
   def index
@@ -61,5 +62,27 @@ class UserController < ApplicationController
     end
 
     redirect_to account_path
+  end
+
+  def edit
+  end
+
+  def update
+    if @user.update(user_params)
+      redirect_to account_path, notice: 'Profile updated successfully.'
+    else
+      flash[:alert] = 'Failed to update profile.'
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def user_params
+    params.require(:user).permit(:profile_picture)
   end
 end

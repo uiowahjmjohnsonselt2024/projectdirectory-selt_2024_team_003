@@ -11,6 +11,7 @@ class RegistrationsController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id # Log the user in after registration
+      NotificationMailer.signup_notification(@user).deliver
       redirect_to selections_path
     else
       flash.now[:alert] = @user.errors.full_messages[0] # Display the first error
@@ -21,6 +22,6 @@ class RegistrationsController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :profile_picture)
   end
 end

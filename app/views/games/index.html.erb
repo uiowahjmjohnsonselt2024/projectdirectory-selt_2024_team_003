@@ -1,7 +1,30 @@
+<style>
+  .current-user {  
+    display: flex;  
+    flex-direction: column;
+  }
+  .user-avatar {  
+    width: 100px; /* Set consistent width */  
+    height: 100px; /* Set consistent height */  
+    object-fit: cover; /* Ensures the image fills the space without distortion */  
+    border-radius: 50%; /* Optional: Makes the image circular */  
+    border: 2px solid #ccc; /* Optional border */
+  }
+
+  .buttons-container {
+    margin-top: 100px;
+  }
+</style>
+
 <div id="games-menu">
-  <span class="current-user">
-    Current User: <%= current_user.username %>
-  </span>
+  <div class="current-user">    
+    <% if current_user.profile_picture.attached? %>        
+      <%= image_tag url_for(current_user.profile_picture), alt: "User Avatar", class: "user-avatar" %>    
+    <% else %>        
+      <%= image_tag asset_path('default_profile_pic.jpg'), alt: "Default User Avatar", class: "user-avatar" %>
+    <% end %>    
+    <%= current_user.username %>
+  </div>
   <div class="buttons-container">
     <%= link_to "Logout", logout_path, method: :get, class: "logout-button" %>
     <%= link_to "Shop", store_path, class: "shop-button" %>
