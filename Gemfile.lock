@@ -305,7 +305,6 @@ GEM
       redis-client (>= 0.22.0)
     redis-client (0.23.0)
       connection_pool
-    redis-rails (0.0.0)
     regexp_parser (2.9.3)
     reline (0.5.12)
       io-console (~> 0.5)
@@ -448,7 +447,6 @@ DEPENDENCIES
   rails-ujs (~> 0.1.0)
   rails_12factor
   redis (~> 5.0)
-  redis-rails
   rspec-rails
   rubocop
   rubocop-rails
