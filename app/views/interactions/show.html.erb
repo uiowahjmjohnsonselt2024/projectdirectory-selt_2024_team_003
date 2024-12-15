@@ -105,12 +105,12 @@
 
     <!-- Enemy section -->
     <div class="enemy-section">
-      <img src="<%= asset_path('skeleton.png') %>" alt="Enemy Avatar" class="enemy-avatar">
+      <%= image_tag @enemy_image, alt: "Enemy Avatar", class: "enemy-avatar" %>
       <div class="enemy-info">
         <h3><%= @enemy.name %></h3>
         <p>Level: <%= @enemy.level %></p>
-        <progress id="enemy-health" value="<%= @enemy.health %>" max="<%= @enemy.max_health %>"></progress>
         <p id="enemy-health-text">Health: <%= @enemy.health %></p>
+        <progress id="enemy-health" value="<%= @enemy.health %>" max="<%= @enemy.max_health %>"></progress>
         <p id="enemy-attack">Attack: <%= @enemy.attack %></p>
         <p id="enemy-defense">Defense: <%= @enemy.defense %></p>
         <p id="enemy-iq">IQ: <%= @enemy.iq %></p>
