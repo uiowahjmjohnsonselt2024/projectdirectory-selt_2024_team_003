@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+  before_action :authenticate_user! # Ensure the user is logged in
   # Retrieves and assigns to @games all games associated with the current user.
   def index
     @games = current_user.games

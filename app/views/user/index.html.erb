@@ -200,8 +200,12 @@
     <div id="user-stats-container">
       <h3>User Stats</h3>
       <% if current_user.current_skin %>
-        <%= current_skin = current_user.current_skin %>
-        <%= image_tag(current_skin.image, width: 100, height: 100, alt: "Skin Image") if current_skin.image.attached? %>
+        <% current_skin = current_user.current_skin %>
+        <% if current_skin.image.attached? %>
+          <%= image_tag url_for(current_skin.image), width: 100, height: 100, alt: "Skin Image", class: "user-skin-image" %>
+        <% else %>
+          <p>No image available for this skin.</p>
+        <% end %>
 
         <!-- User Stats Table -->
         <table class="stats-table">

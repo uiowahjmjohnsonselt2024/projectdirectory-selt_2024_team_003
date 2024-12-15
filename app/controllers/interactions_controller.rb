@@ -1,5 +1,5 @@
 class InteractionsController < ApplicationController
-  include ImageProcessingHelper
+  before_action :authenticate_user! # Ensure the user is logged in
   def show
     @game = Game.find_by(code: params[:game_id])
     @game_user = @game.game_users.find_by(user: current_user)

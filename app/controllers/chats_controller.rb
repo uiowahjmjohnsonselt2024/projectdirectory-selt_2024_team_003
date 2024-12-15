@@ -1,4 +1,5 @@
 class ChatsController < ApplicationController
+  before_action :authenticate_user! # Ensure the user is logged in
   # Displays the chat between current_user and their friend
   def show
     @friend = User.find(params[:friend_id])
