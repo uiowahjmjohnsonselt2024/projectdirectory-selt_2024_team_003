@@ -10,4 +10,5 @@ production:
   adapter: redis
   url: <%= ENV["REDIS_URL"] %>
   channel_prefix: production_shards_of_the_grid
-  ssl: { verify: :none }
+  ssl:
+    verify: none
