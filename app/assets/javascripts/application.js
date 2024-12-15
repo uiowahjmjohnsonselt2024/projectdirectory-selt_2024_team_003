@@ -1,3 +1,7 @@
+//= require jquery
+//= require actioncable
+//= require_tree .
+
 document.addEventListener("DOMContentLoaded", () => {
     const inventoryPage = document.getElementById("inventory-page");
 

@@ -1,9 +1,9 @@
 <style>
-  .user-avatar {  
-    width: 100px; /* Set consistent width */  
-    height: 100px; /* Set consistent height */  
-    object-fit: cover; /* Ensures the image fills the space without distortion */  
-    border-radius: 50%; /* Optional: Makes the image circular */  
+  .user-avatar {
+    width: 100px; /* Set consistent width */
+    height: 100px; /* Set consistent height */
+    object-fit: cover; /* Ensures the image fills the space without distortion */
+    border-radius: 50%; /* Optional: Makes the image circular */
     border: 2px solid #ccc; /* Optional border */
   }
 </style>
@@ -139,6 +139,7 @@
       </aside>
     </div>
 </div>
+</div>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -252,6 +253,8 @@
                             // Special case: redirect to the casino
                             sessionStorage.setItem('current_position', JSON.stringify({ x, y }));
                             window.location.href = '/casino/show';
+                        }  else if (x === 3 && y === 2) {
+                            window.location.href = `/arena?game_id=${gameId}&x=${x}&y=${y}`;
                         } else {
                             // General case: redirect to interaction page
                             window.location.href = `/interaction?game_id=${gameId}&x=${x}&y=${y}`;

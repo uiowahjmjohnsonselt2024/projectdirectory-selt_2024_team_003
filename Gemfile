@@ -22,6 +22,10 @@ gem 'activerecord', '~> 8.0.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'ffi', '~> 1.15' # Or the latest compatible version
 gem 'rails-ujs', '~> 0.1.0'
+gem 'redis'
+gem 'actioncable'
+gem 'sprockets-rails'
+gem 'puma'
 
 gem 'aws-sdk-s3'
 
