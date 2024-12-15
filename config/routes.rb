@@ -156,4 +156,7 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login_button'
   get 'create', to: 'registrations#new', as: 'create_button'
 
+
+  # config/routes.rb
+  resources :users, controller: 'user', only: [:edit, :update]
 end
