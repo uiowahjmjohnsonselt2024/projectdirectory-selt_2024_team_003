@@ -347,6 +347,7 @@ GEM
       rubocop (>= 1.52.0, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
     ruby-progressbar (1.13.0)
+    rubyzip (2.3.2)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -367,6 +368,12 @@ GEM
       sprockets-rails
       tilt
     securerandom (0.4.0)
+    selenium-webdriver (4.27.0)
+      base64 (~> 0.2)
+      logger (~> 1.4)
+      rexml (~> 3.2, >= 3.2.5)
+      rubyzip (>= 1.2.2, < 3.0)
+      websocket (~> 1.0)
     shoulda-matchers (6.4.0)
       activesupport (>= 5.2.0)
     simplecov (0.22.0)
@@ -412,6 +419,7 @@ GEM
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
     webrick (1.9.1)
+    websocket (1.2.11)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -446,11 +454,12 @@ DEPENDENCIES
   rails-controller-testing
   rails-ujs (~> 0.1.0)
   rails_12factor
-  redis (~> 5.0)
+  redis
   rspec-rails
   rubocop
   rubocop-rails
   sass-rails (~> 5.0)
+  selenium-webdriver
   shoulda-matchers
   simplecov
   sprockets-rails

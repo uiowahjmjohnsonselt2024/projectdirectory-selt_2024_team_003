@@ -30,7 +30,7 @@ gem 'aws-sdk-s3'
 
 gem 'mini_magick'
 
-gem 'redis', '~> 5.0'
+gem 'redis'
 
 gem 'dotenv-rails'
 group :development, :test do
@@ -46,7 +46,7 @@ group :development, :test do
   gem 'sqlite3', '~> 2.1'
   gem 'webmock'
   gem 'capybara'
-  # gem 'selenium-webdriver'
+  gem 'selenium-webdriver'
   gem 'simplecov', require: false
 end
 

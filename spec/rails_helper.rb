@@ -7,6 +7,11 @@ require File.expand_path('../config/environment', __dir__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 require 'webmock/rspec'
+require 'capybara/rails'
+require 'capybara/rspec'  # This adds RSpec-specific Capybara matchers
+
+# Optional: Configure Capybara to use a specific driver (e.g., Selenium)
+Capybara.default_driver = :selenium_chrome_headless
 
 # Add Shoulda Matchers configuration
 Shoulda::Matchers.configure do |config|

@@ -1,8 +1,9 @@
-# spec/factories/skins.rb
 FactoryBot.define do
   factory :skin do
     user
-    archetype { "Attacker" } # Replace with a valid default archetype for your app
+    archetype { "Attacker" }
+    health { 100 }  # Default health value
+    mana { 50 }     # Default mana value
 
     after(:build) do |skin|
       skin.image.attach(
