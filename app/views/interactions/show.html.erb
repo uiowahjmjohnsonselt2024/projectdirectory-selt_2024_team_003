@@ -142,6 +142,10 @@
 </div>
 
 <script>
+    firstBlood = <% current_user.has_achievement("First Blood: The thrill of victory, the first taste of triumph.") %>
+    finalBoss = <% current_user.has_achievement("The Final Boss: Defeat the final boss and claim victory over the game.") %>
+    bossPosition = <% @game_user.x_position == 5 && @game_user.y_position == 5 %>
+
     function useWeapon(weaponId, weaponName) {
         console.log(`Setting weapon with ID: ${weaponName} as current.`);
 
@@ -438,6 +442,9 @@
         function game_logic(data) {
             const gameId = attackButton.getAttribute('data-game-id');
             if (data.win) {
+                if (!firstBlood) confirm("FIRST BLOOD ACHIEVEMENT UNLOCKED");
+                if (!finalBoss && bossPosition) confirm("FINAL BOSS ACHIEVEMENT UNLOCKED")
+
                 enemyHealthDisplay.value = 0;
                 enemyHealthText.textContent = "Health: " + 0;
                 attackMessage.textContent += " Redirecting to the win page...";

@@ -57,13 +57,17 @@ class User < ActiveRecord::Base
     skins.find_by(current: true)
   end
 
-
   def add_achievement(achievement)
     self.achievements ||= []
     unless achievements.include?(achievement)
+      self.shards += 12
       achievements << achievement
       save!
     end
+  end
+
+  def has_achievement(achievement)
+    self.achievements.include?(achievement)
   end
 
   def initialize_achievements
