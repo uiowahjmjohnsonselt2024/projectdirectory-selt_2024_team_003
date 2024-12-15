@@ -157,7 +157,7 @@ RSpec.describe User, type: :model do
     describe '#level_up' do
       let(:user) do
         create(:user, level: 1, experience: 100, health: 100, attack: 10, defense: 5, iq: 1,
-               archetype: 'Arcane Strategist')
+               archetype: 'Attacker')
       end
 
       it 'levels up and increases stats based on archetype' do
