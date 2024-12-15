@@ -10,6 +10,8 @@ RSpec.feature "UserRegistrations", type: :feature do
     fill_in 'Enter your password', with: 'password123'
     fill_in 'Confirm your password', with: 'password123'
 
+    # If the file field for profile picture is required in the test:
+    attach_file 'Profile Picture', 'path_to_test_image.jpg'  # Adjust as needed
 
     click_button 'Sign Up'
 

@@ -8,13 +8,10 @@ RSpec.feature "UserRegistrations", type: :feature do
     visit signup_path
 
     # Fill out the registration form
-    fill_in 'user[username]', with: 'testuser'
-    fill_in 'user[email]', with: 'testuser@example.com'
-    fill_in 'user[password]', with: 'password123'
-    fill_in 'user[password_confirmation]', with: 'password123'
-
-    # Attach a file for the profile picture
-    attach_file 'user[profile_picture]', Rails.root.join('spec/fixtures/files/profile_picture.jpg')
+    fill_in 'Enter your username', with: 'testuser'
+    fill_in 'Enter your email', with: 'testuser@example.com'
+    fill_in 'Enter your password', with: 'password123'
+    fill_in 'Confirm your password', with: 'password123'
 
     # Submit the form
     click_button 'Sign Up'
