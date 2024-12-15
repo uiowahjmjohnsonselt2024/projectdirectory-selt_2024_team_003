@@ -8,7 +8,7 @@ class StoreController < ApplicationController
 
   # Purchase Shards
   def purchase_shards
-    if true # Placeholder for credit card check
+    if current_user.has_credit_card?
       shard_count = params[:shard_count].to_i
 
       current_user.shards += shard_count
