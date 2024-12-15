@@ -5,15 +5,16 @@ class ArenaController < ApplicationController
     @enemy = @game.enemies.find_by(x_position: @game_user.x_position, y_position: @game_user.y_position)
     @player = current_user.current_skin
     @weapons = current_user.weapons
-    #@consumables = current_user.consumables
+    @consumables = current_user.consumables
     @user = current_user
 
-    case current_user.archetype
-    when 'Arcane Strategist'
+
+    case @player.archetype
+    when 'Attacker'
       @image = 'attack.png'
-    when 'Iron Guardian'
+    when 'Defender'
       @image = 'defense.png'
-    when 'Omni Knight'
+    when 'Healer'
       @image = 'balanced.png'
     else
       @image = 'balanced.png'

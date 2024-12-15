@@ -96,7 +96,9 @@
         <p>Defense: <span id="player-2-defense">N/A</span></p>
         <p>Special Defense: <span id="player-2-special-defense">N/A</span></p>
         <p>IQ: <span id="player-2-iq">N/A</span></p>
-        <p id="attack-message"></p>
+        <div class="attack-messages-container">
+          <p id="attack-message"></p>
+        </div>
       </div>
     </div>
 
@@ -112,15 +114,15 @@
     const user_id = "<%= @user.id %>";
     const player_level = "<%= @player.level %>";
     const max_health = "<%= @player.health %>";
-    const player_hp = "<%= @game_user.health %>";
+    const player_hp = "<%= @player.health %>";
     const player_mana = "<%= @player.mana %>";
-    const max_mana = "<%= @game_user.mana %>";
+    const max_mana = "<%= @player.mana %>";
     const player_attack = "<%= @player.attack %>";
     const player_special_attack = "<%= @player.special_attack %>";
     const player_defense = "<%= @player.defense %>";
     const player_special_defense = "<%= @player.special_defense %>";
     const player_IQ = "<%= @player.iq %>";
-    const archetype = "<%= @player.archetype %>";
+    const player_archetype = "<%= @player.archetype %>";
 
     document.addEventListener('DOMContentLoaded', function() {
         const consumer = ActionCable.createConsumer();
@@ -138,29 +140,46 @@
               },
 
               received(data) {
+                  console.log("DaATA")
                   console.log(data);  // Log the data to see its structure
 
                   // Update player buttons based on current game state
                   if (data.players) {
                       if (data.players[1]) {
                           if (data.players[1].username === currentUserName) {
-                              document.getElementById('player-1-health').textContent = data.players[1].health;
+                              document.getElementById('player-1-health').textContent = data.players[1].health + " / " + data.players[1].max_health;
                               document.getElementById('player-1-level').textContent = data.players[1].level;
-                              document.getElementById('player-1-mana').textContent = data.players[1].mana;
+                              document.getElementById('player-1-mana').textContent = data.players[1].mana + " / " + data.players[1].max_mana;
                               document.getElementById('player-1-attack').textContent = data.players[1].attack;
                               document.getElementById('player-1-special-attack').textContent = data.players[1].special_attack;
                               document.getElementById('player-1-defense').textContent = data.players[1].defense;
                               document.getElementById('player-1-special-defense').textContent = data.players[1].special_defense;
                               document.getElementById('player-1-iq').textContent = data.players[1].iq;
-                          } else {
-                              document.getElementById('player-1-health').textContent = data.players[2].health;
+                              // Update progress bars for health and mana
+                              const playerHealthBar = document.getElementById('player-health');
+                              playerHealthBar.value = data.players[1].health;
+                              playerHealthBar.max = data.players[1].max_health;
+
+                              const playerManaBar = document.getElementById('player-mana');
+                              playerManaBar.value = data.players[1].mana;
+                              playerManaBar.max = data.players[1].max_mana;
+                          } else if (data.players[2]) {
+                              document.getElementById('player-1-health').textContent = data.players[2].health + " / " + data.players[2].max_health;
                               document.getElementById('player-1-level').textContent = data.players[2].level;
-                              document.getElementById('player-1-mana').textContent = data.players[2].mana;
+                              document.getElementById('player-1-mana').textContent = data.players[2].mana + " / " + data.players[2].max_mana;
                               document.getElementById('player-1-attack').textContent = data.players[2].attack;
                               document.getElementById('player-1-special-attack').textContent = data.players[2].special_attack;
                               document.getElementById('player-1-defense').textContent = data.players[2].defense;
                               document.getElementById('player-1-special-defense').textContent = data.players[2].special_defense;
                               document.getElementById('player-1-iq').textContent = data.players[2].iq;
+
+                              const playerHealthBar = document.getElementById('player-health');
+                              playerHealthBar.value = data.players[2].health;
+                              playerHealthBar.max = data.players[2].max_health;
+
+                              const playerManaBar = document.getElementById('player-mana');
+                              playerManaBar.value = data.players[2].mana;
+                              playerManaBar.max = data.players[2].max_mana;
                           }
                       } else {
                           document.getElementById('player-1-health').textContent = "N/A";
@@ -169,24 +188,44 @@
                       if (data.players[2]) {
                           if (data.players[2].username === currentUserName) {
                               document.getElementById('player-2-name').textContent = data.players[1].username;
-                              document.getElementById('player-2-health').textContent = data.players[1].health;
+                              document.getElementById('player-2-health').textContent = data.players[1].health + " / " + data.players[1].max_health;;
                               document.getElementById('player-2-level').textContent = data.players[1].level;
-                              document.getElementById('player-2-mana').textContent = data.players[1].mana;
+                              document.getElementById('player-2-mana').textContent = data.players[1].mana + " / " + data.players[1].max_mana;
                               document.getElementById('player-2-attack').textContent = data.players[1].attack;
                               document.getElementById('player-2-special-attack').textContent = data.players[1].attack;
                               document.getElementById('player-2-defense').textContent = data.players[1].defense;
                               document.getElementById('player-2-special-defense').textContent = data.players[1].defense;
                               document.getElementById('player-2-iq').textContent = data.players[1].iq;
+
+                              const enemyHealthBar = document.getElementById('player-2-health-bar');
+                              enemyHealthBar.value = data.players[1].health;
+                              enemyHealthBar.max = data.players[1].max_health;
+
+                              const enemyManaBar = document.getElementById('player-2-mana-bar');
+                              enemyManaBar.value = data.players[1].mana;
+                              enemyManaBar.max = data.players[1].max_mana;
                           } else {
                               document.getElementById('player-2-name').textContent = data.players[2].username;
-                              document.getElementById('player-2-health').textContent = data.players[2].health;
+                              document.getElementById('player-2-health').textContent = data.players[1].health + " / " + data.players[1].max_health;
                               document.getElementById('player-2-level').textContent = data.players[2].level;
-                              document.getElementById('player-2-mana').textContent = data.players[2].mana;
+                              document.getElementById('player-2-mana').textContent = data.players[1].mana + " / " + data.players[1].max_mana;
                               document.getElementById('player-2-attack').textContent = data.players[2].attack;
                               document.getElementById('player-2-special-attack').textContent = data.players[2].attack;
                               document.getElementById('player-2-defense').textContent = data.players[2].defense;
                               document.getElementById('player-2-special-defense').textContent = data.players[2].defense;
                               document.getElementById('player-2-iq').textContent = data.players[2].iq;
+
+                              const enemyHealthBar = document.getElementById('player-2-health-bar');
+                              enemyHealthBar.value = data.players[2].health;
+                              enemyHealthBar.max = data.players[2].max_health;
+
+                              const enemyManaBar = document.getElementById('player-2-mana-bar');
+                              enemyManaBar.value = data.players[2].mana;
+                              enemyManaBar.max = data.players[2].max_mana;
+
+                              if (data.players[2].health === 0) {
+
+                              }
                           }
                           document.getElementById('join-game-btn').style.display = 'none';
                       } else {
@@ -196,11 +235,12 @@
                       }
                   }
 
-                  const currentTurn = data.current_turn
-                    ? `${data.players[1].username}'s Turn`
-                    : `${data.players[2].username}'s Turn`;
-
-                  document.getElementById('current-turn').textContent = currentTurn;
+                  if (data.current_turn) {
+                      const currentTurn = data.current_turn === data.players[1].id
+                        ? `${data.players[1].username}'s Turn`
+                        : `${data.players[2].username}'s Turn`;
+                      document.getElementById('current-turn').textContent = currentTurn;
+                  }
 
                   // Display the message
                   const messageDiv = document.getElementById('attack-message');
@@ -212,17 +252,15 @@
     });
 
     function assignPlayer() {
-        channel.send({ action: 'assign_player', player_id: user_id, user_name: currentUserName, level: player_level, health: player_hp, max_health: max_health, max_mana: max_mana, mana: player_mana, attack: player_attack, special_attack: player_special_attack, defense: player_defense, special_defense: player_special_defense, iq: player_IQ, archetype: archetype});
+        channel.send({ action: 'assign_player', player_id: user_id, user_name: currentUserName, level: player_level, health: player_hp, max_health: max_health, max_mana: max_mana, mana: player_mana, attack: player_attack, special_attack: player_special_attack, defense: player_defense, special_defense: player_special_defense, iq: player_IQ, archetype: player_archetype});
     }
 
     function attack() {
-        console.log("Print")
         channel.send({ action: 'attack', player_id: user_id });
     }
 
     function special_attack() {
-        console.log("special")
-        channel.send({ action: 'attack', player_id: user_id });
+        channel.send({ action: 'special_attack', player_id: user_id });
     }
 
     function disconnectChannel() {
@@ -337,6 +375,13 @@
 
     .inventory-section {
         width: 70%;
+    }
+
+    .attack-messages-container {
+        max-width: 100%;
+        max-height: 350px; /* Adjust as necessary */
+        overflow-y: auto; /* Makes the container scrollable */
+        margin-top: 10px;
     }
 
 
