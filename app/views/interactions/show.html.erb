@@ -1,37 +1,219 @@
 <div class="interaction-page">
-  <h1>Interaction with Enemy</h1>
-  <p>Your position: (<%= @game_user.x_position %>, <%= @game_user.y_position %>)</p>
+  <div class="battle-screen">
+    <!-- Player section -->
+    <div class="player-section">
+      <div class="player-section-header">
+          <img src="<%= asset_path(@image) %>" alt="Player Avatar" class="player-avatar">
+          <!-- Inventory Section (Weapons and Consumables Rows) -->
+          <div class="inventory-section">
+            <!-- Weapons Row -->
+            <div class="inventory-row weapons-row">
+              <% if @weapons.present? %>
+                <% @weapons.each do |weapon| %>
+                  <div class="inventory-item weapon-item <%= 'current-weapon' if weapon.current %>" onclick="useWeapon('<%= weapon.id %>', '<%= weapon.name %>')">
+                    <p class="item-name"><%= weapon.name %></p>
+                    <% if asset_path(weapon_image_filename(weapon.name)) %>
+                      <%= image_tag asset_path(weapon_image_filename(weapon.name)), alt: weapon.name, class: "weapon-image" %>
+                    <% else %>
+                      <p class="no-image-placeholder">No image available</p>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% else %>
+                <p>No weapons available.</p>
+              <% end %>
+            </div>
 
-  <div class="player-info">
-    <h3>Your Health</h3>
-    <progress id="player-health" value="<%= @game_user.health %>" max="<%= @player.health %>"></progress>
-    <p>Health: <span id="player-health-text"><%= @game_user.health %> / <%= @player.health %></span></p>
-    <h3>Your Mana</h3>
-    <progress id="player-mana" value="<%= @game_user.mana %>" max="<%= @player.mana %>"></progress>
-    <p>Mana: <span id="player-mana-text"><%= @game_user.mana %> / <%= @player.mana %></span></p>
-  </div>
+            <!-- Consumables Row -->
+            <div class="inventory-row consumables-row">
+              <% if @consumables.present? %>
+                <% @consumables.each do |consumable| %>
+                  <% next if consumable.quantity <= 0 %> <!-- Skip if quantity is zero -->
+                  <div class="inventory-item consumable-item" onclick="useConsumable('<%= consumable.id %>')">
+                    <p class="item-name"><%= consumable.name %></p>
+                    <% if asset_path(consumable_image_filename(consumable.name)) %>
+                      <%= image_tag asset_path(consumable_image_filename(consumable.name)), alt: consumable.name, class: "consumable-image" %>
+                    <% else %>
+                      <p class="no-image-placeholder">No image available</p>
+                    <% end %>
+                    <% if consumable.quantity > 0 %>
+                      <p class="item-quantity" data-consumable-id="<%= consumable.id %>">x<%= consumable.quantity %></p>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% else %>
+                <p>No consumables available.</p>
+              <% end %>
+            </div>
+          </div>
+      </div>
+      <!-- New container to group player info and inventory side-by-side -->
+      <div class="player-info-container">
+        <!-- Player Info Section -->
+        <div class="player-info">
+          <h3>Your Stats</h3>
+          <p>Your position: (<%= @game_user.x_position %>, <%= @game_user.y_position %>)</p>
+          <progress id="player-health" value="<%= @game_user.health %>" max="<%= @player.health %>"></progress>
+          <p>Health: <span id="player-health-text"><%= @game_user.health %> / <%= @player.health %></span></p>
+          <progress id="player-mana" value="<%= @game_user.mana %>" max="<%= @player.mana %>"></progress>
+          <p>Mana: <span id="player-mana-text"><%= @game_user.mana %> / <%= @player.mana %></span></p>
+        </div>
+      </div>
 
-  <div class="enemy-info">
-    <h3><%= @enemy.name %></h3>
-    <p>Level: <%= @enemy.level %></p>
-    <progress id="enemy-health" value="<%= @enemy.health %>" max="<%= @enemy.max_health %>"></progress>
-    <p>Health: <span id="enemy-health-text"><%= @enemy.health %></span></p>
-    <p>Attack: <%= @enemy.attack %></p>
-    <p>Defense: <%= @enemy.defense %></p>
-    <p>IQ: <%= @enemy.iq %></p>
-    <p id="attack-message"></p>
-  </div>
+      <!-- Action buttons and return link -->
+      <div class="action-footer">
+        <%= link_to 'Return to Grid', grid_path, class: 'back-button' %>
+        <div class="divider"></div>
+        <div class="action-buttons">
+          <button id="attack-button" data-game-id="<%= @game.code %>">Attack</button>
+          <button id="magic-attack-button" data-game-id="<%= @game.code %>">Magic Attack</button>
+          <button id="magic-heal-button" data-game-id="<%= @game.code %>">Magic Heal</button>
+        </div>
+      </div>
+    </div>
 
-  <button id="attack-button" data-game-id="<%= @game.code %>">Attack</button>
-  <button id="magic-attack-button" data-game-id="<%= @game.code %>">Magic Attack</button>
-  <button id="magic-heal-button" data-game-id="<%= @game.code %>">Magic Heal</button>
+    <!-- Enemy section -->
+    <div class="enemy-section">
+      <img src="<%= asset_path('skeleton.png') %>" alt="Enemy Avatar" class="enemy-avatar">
+      <div class="enemy-info">
+        <h3><%= @enemy.name %></h3>
+        <p>Level: <%= @enemy.level %></p>
+        <progress id="enemy-health" value="<%= @enemy.health %>" max="<%= @enemy.max_health %>"></progress>
+        <p id="enemy-health-text">Health: <%= @enemy.health %></p>
+        <p id="enemy-attack">Attack: <%= @enemy.attack %></p>
+        <p id="enemy-defense">Defense: <%= @enemy.defense %></p>
+        <p id="enemy-iq">IQ: <%= @enemy.iq %></p>
+        <p id="attack-message"></p>
+      </div>
+    </div>
 
-  <div class="interaction-footer">
-    <%= link_to 'Return to Grid', grid_path, class: 'back-button' %>
   </div>
 </div>
 
 <script>
+    function useWeapon(weaponId, weaponName) {
+        console.log(`Setting weapon with ID: ${weaponName} as current.`);
+
+        // Adjust the fetch URL to match the new route
+        fetch(`/interactions/set_current_weapon/${weaponId}`, {
+            method: 'POST', // Or 'PATCH' if you prefer
+            headers: {
+                'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content,
+                'Content-Type': 'application/json'
+            }
+        })
+          .then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  // alert(`Weapon ${weaponName} set as current!`);
+                  location.reload(); // Reload to update the view (optional)
+              } else {
+                  alert('Failed to set weapon as current');
+              }
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              alert('There was an error setting the weapon as current');
+          });
+    }
+
+    function useConsumable(consumableId) {
+        const attackButton = document.getElementById('attack-button');
+        const gameId = attackButton.getAttribute('data-game-id');
+        console.log(`Using consumable with ID: ${consumableId} for game ID: ${gameId}`);
+
+        fetch(`/interactions/${gameId}/use_consumable/${consumableId}`, {
+            method: 'POST',
+            headers: {
+                'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ game_id: gameId })
+        })
+          .then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  // Update health and mana of the player
+                  const playerHealthText = document.getElementById('player-health-text');
+                  const playerManaText = document.getElementById('player-mana-text');
+                  const playerHealthBar = document.getElementById('player-health');
+                  const playerManaBar = document.getElementById('player-mana');
+
+                  if (playerHealthText && playerHealthBar) {
+                      playerHealthText.textContent = `${data.player_health} / ${playerHealthBar.max}`;
+                      playerHealthBar.value = data.player_health;
+
+                      // Calculate the health percentage
+                      const healthPercentage = (data.player_health / playerHealthBar.max) * 100;
+
+                      // Update the health bar color based on the percentage
+                      if (healthPercentage <= 20) {
+                          playerHealthBar.style.setProperty('--health-bar-color', 'red');  // Low health - red
+                      } else if (healthPercentage <= 50) {
+                          playerHealthBar.style.setProperty('--health-bar-color', 'orange');  // Medium health - orange
+                      } else {
+                          playerHealthBar.style.setProperty('--health-bar-color', 'green');  // Full health - green
+                      }
+                  }
+
+                  if (playerManaText && playerManaBar) {
+                      playerManaText.textContent = `${data.player_mana} / ${playerManaBar.max}`;
+                      playerManaBar.value = data.player_mana;
+                  }
+
+                  // Update consumable quantity
+                  const itemQuantityElement = document.querySelector(`[data-consumable-id="${consumableId}"].item-quantity`);
+                  if (itemQuantityElement) {
+                      if (data.consumable_quantity > 0) {
+                          itemQuantityElement.textContent = `x${data.consumable_quantity}`;
+                      } else {
+                          const consumableItem = itemQuantityElement.closest('.inventory-item');
+                          if (consumableItem) {
+                              consumableItem.remove(); // Remove item if quantity is zero
+                          }
+                      }
+                  }
+
+                  disableButtonIfNeeded(data.player_health, data.enemy_health);
+
+                  // Update enemy stats
+                  const enemyHealthDisplay = document.getElementById('enemy-health');
+                  const enemyHealthText = document.getElementById('enemy-health-text');
+
+                  if (enemyHealthDisplay && enemyHealthText) {
+                      enemyHealthDisplay.value = data.enemy_health;
+                      enemyHealthText.textContent = "Health: " + data.enemy_health;
+                  }
+
+                  // Show alert after updates
+                  // alert(data.message);
+              } else {
+                  alert(data.message); // Show error alert if consumable can't be used
+              }
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              alert('There was an error using the consumable.');
+          });
+    }
+
+    // Helper function to disable action buttons based on player or enemy health
+    function disableButtonIfNeeded(playerHealth, enemyHealth) {
+        const attackButton = document.getElementById('attack-button');
+        const magicAttackButton = document.getElementById('magic-attack-button');
+        const magicHealButton = document.getElementById('magic-heal-button');
+
+        if (playerHealth <= 0 || enemyHealth <= 0) {
+            attackButton.disabled = true;
+            magicAttackButton.disabled = true;
+            magicHealButton.disabled = true;
+        } else {
+            attackButton.disabled = false;
+            magicAttackButton.disabled = false;
+            magicHealButton.disabled = false;
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         const attackButton = document.getElementById('attack-button');
         const enemyHealthDisplay = document.getElementById('enemy-health');
@@ -72,6 +254,65 @@
         }
 
         attackButton.addEventListener('click', () => {
+            const enemyAvatar = document.querySelector('.enemy-avatar');
+            enemyAvatar.parentElement.style.position = 'relative'; // Ensure the parent has a positioning context
+            let audioElement = new Audio('<%= asset_path('stab.mp3') %>');  // Use the correct path for the MP3
+
+            // Assuming @weapons is passed as a JSON object from the controller
+            let weapons = <%= @weapons.to_json.html_safe %>; // Convert @weapons to JSON
+
+            // Iterate through the weapons and find the one with `current: true`
+            let currentWeapon = null;
+            for (let i = 0; i < weapons.length; i++) {
+                if (weapons[i].current === true) {
+                    currentWeapon = weapons[i].name;  // Get the name of the current weapon
+                    break;  // Exit the loop once the weapon is found
+                }
+            }
+            const gifOverlay = document.createElement('img');
+            if (currentWeapon === 'Sword' || currentWeapon === 'Knife' || currentWeapon === 'Flame Sword') {
+                gifOverlay.src = '<%= asset_path("slash.gif") %>'; // Use the correct path for the GIF
+            } else if (currentWeapon === 'Shotgun' || currentWeapon === 'Sniper') {
+                gifOverlay.src = '<%= asset_path("explosion.gif") %>'; // Use the correct path for the GIF
+            } else if (currentWeapon === 'Bow and Arrow') {
+                gifOverlay.src = '<%= asset_path("arrow.gif") %>'; // Use the correct path for the GIF
+            } else {
+                gifOverlay.src = '<%= asset_path("slash.gif") %>'; // Use the correct path for the GIF
+            }
+
+            if (currentWeapon === 'Sword' || currentWeapon === 'Flame Sword') {
+                audioElement = new Audio('<%= asset_path('sword.mp3') %>');
+            } else if (currentWeapon === 'Bow and Arrow') {
+                audioElement = new Audio('<%= asset_path('arrow.mp3') %>');
+            } else if (currentWeapon === 'Shotgun') {
+                audioElement = new Audio('<%= asset_path('shotgun.mp3') %>');
+            } else if (currentWeapon === 'Sniper') {
+                audioElement = new Audio('<%= asset_path('sniper.mp3') %>');
+            }
+
+            gifOverlay.alt = 'Attack Animation';
+            gifOverlay.classList.add('attack-animation-overlay');
+
+            // Style the overlay to cover only the enemy-avatar
+            gifOverlay.style.position = 'absolute';
+            gifOverlay.style.top = '0';
+            gifOverlay.style.left = '0';
+            gifOverlay.style.width = `${enemyAvatar.offsetWidth}px`; // Match the avatar width
+            gifOverlay.style.height = `${enemyAvatar.offsetHeight}px`; // Match the avatar height`;
+            gifOverlay.style.pointerEvents = 'none'; // Ensure the overlay doesn't block interactions
+
+            enemyAvatar.parentElement.appendChild(gifOverlay); // Add overlay as a child to the parent container
+
+            audioElement.play();
+
+            // Automatically remove the overlay after the animation duration
+            gifOverlay.addEventListener('load', () => {
+                setTimeout(() => {
+                    gifOverlay.remove();
+                }, 1000); // Adjust timing based on GIF duration
+            });
+
+            // Perform the attack logic
             const gameId = attackButton.getAttribute('data-game-id');
             fetch(`/interactions/${gameId}/attack`, {
                 method: 'POST',
@@ -83,12 +324,13 @@
             })
               .then(response => response.json())
               .then(data => {
-                  game_logic(data)
+                  game_logic(data);
               })
               .catch(error => {
                   console.error('Error:', error);
               });
         });
+
 
         magicAttackButton.addEventListener('click', () => {
             const gameId = magicAttackButton.getAttribute('data-game-id');
@@ -132,29 +374,11 @@
               });
         });
 
-        attackButton.addEventListener('click', () => {
-            const gameId = attackButton.getAttribute('data-game-id');
-            fetch(`/interactions/${gameId}/attack`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
-                },
-                body: JSON.stringify({ game_id: gameId })
-            })
-              .then(response => response.json())
-              .then(data => {
-                  game_logic(data)
-              })
-              .catch(error => {
-                  console.error('Error:', error);
-              });
-        });
-
         function game_logic(data) {
+            const gameId = attackButton.getAttribute('data-game-id');
             if (data.win) {
                 enemyHealthDisplay.value = 0;
-                enemyHealthText.textContent = 0;
+                enemyHealthText.textContent = "Health: " + 0;
                 attackMessage.textContent += " Redirecting to the win page...";
                 setTimeout(() => {
                     window.location.href = `/win_game?game_id=${gameId}`;
@@ -163,7 +387,7 @@
             }
 
             enemyHealthDisplay.value = data.enemy_health;
-            enemyHealthText.textContent = data.enemy_health;
+            enemyHealthText.textContent = "Health: " + data.enemy_health;
 
             attackMessage.textContent = data.message;
             updateHealthBarColor(playerHealthDisplay, data.player_health, parseInt(playerHealthDisplay.getAttribute('max')));
@@ -194,3 +418,119 @@
     });
 </script>
 
+<style>
+    .inventory-row {
+        display: flex;
+        gap: 10px;
+        margin: 10px 0;
+        width: 100%; /* Or a fixed width like 800px */
+        max-width: 800px; /* Example fixed width */
+        overflow-x: auto; /* Enable horizontal scrolling */
+        white-space: nowrap; /* Prevent wrapping */
+        background-color: #222; /* Dark background for the row */
+        border: 1px solid #444; /* Optional: Adds a subtle border */
+        padding: 10px; /* Optional: Adds spacing inside the row */
+        scrollbar-width: thin; /* Makes the scrollbar thinner on Firefox */
+        scrollbar-color: #666 #222; /* Custom scrollbar colors for Firefox */
+    }
+
+    /* Scrollbar styles for WebKit browsers (Chrome, Edge, Safari) */
+    .inventory-row::-webkit-scrollbar {
+        height: 8px; /* Adjust scrollbar height for horizontal scrolling */
+    }
+
+    .inventory-row::-webkit-scrollbar-track {
+        background: #222; /* Dark background for scrollbar track */
+        border-radius: 4px; /* Rounded edges for track */
+    }
+
+    .inventory-row::-webkit-scrollbar-thumb {
+        background: #666; /* Gray thumb for dark mode */
+        border-radius: 4px; /* Rounded edges for thumb */
+    }
+
+    .inventory-row::-webkit-scrollbar-thumb:hover {
+        background: #888; /* Slightly lighter thumb on hover */
+    }
+
+    .inventory-item {
+        max-height: 50px;
+        max-width: 50px;
+        text-align: center;
+        position: relative; /* Ensure positioning context for the text */
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        flex: 0 0 auto; /* Prevent items from shrinking or wrapping */
+        color: #fff; /* Text color for dark mode */
+        background-color: #333; /* Dark background for items */
+        border: 1px solid #444; /* Border for each item */
+        border-radius: 4px; /* Rounded edges */
+        padding: 20px; /* Padding inside items */
+    }
+
+    .item-quantity {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        font-size: 12px;
+        color: #fff; /* Adjust the color as needed */
+        background-color: rgba(0, 0, 0, 0.5); /* Optional: dark background for visibility */
+        padding: 2px 5px;
+        border-radius: 5px;
+    }
+
+    .consumable-image,
+    .weapon-image {
+        max-height: 50px;
+        max-width: 50px;
+        object-fit: cover; /* Ensures the image fits the container */
+    }
+
+    /* Style for item names to overlap on images */
+    .item-name {
+        font-size: 14px;
+        margin: 0;
+        position: absolute;
+        top: 50%; /* Vertically center text */
+        left: 50%; /* Horizontally center text */
+        transform: translate(-50%, -50%); /* Adjust position to center exactly */
+        z-index: 1; /* Make sure the text is on top */
+        color: white; /* Text color for visibility */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Optional: Adds a shadow for better readability */
+    }
+
+    /* Optional: For item quantity if needed */
+    .item-quantity {
+        position: absolute;
+        bottom: 5px;
+        right: 10px;
+        font-size: 12px;
+        color: #cccccc;
+    }
+
+    .inventory-item:hover {
+        background-color: #333333;
+    }
+    .current-weapon {
+        border: 3px solid green;
+        box-shadow: 0 0 10px green; /* Optional: adds a glowing effect */
+    }
+    .player-section-header {
+        display: flex;
+    }
+
+    .inventory-section {
+        width: 70%;
+    }
+
+    .attack-animation-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%; /* Match the avatar's width */
+        height: 100%; /* Match the avatar's height */
+        pointer-events: none; /* Ensure the overlay doesn't block interactions */
+        z-index: 10; /* Make sure it's above the avatar */
+        object-fit: cover; /* Ensure it covers the avatar properly */
+    }
+</style>
