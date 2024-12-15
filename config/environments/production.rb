@@ -90,6 +90,11 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 
+  config.action_cable.url = ENV['WEBSOCKET_URL']
+  config.action_cable.allowed_request_origins = [
+    "https://warm-lowlands-84389-524aa4649939.herokuapp.com"
+  ]
+
   # Set the default URL options for the development environment
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end
