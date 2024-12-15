@@ -5,14 +5,19 @@ class InteractionsController < ApplicationController
     @game_user = @game.game_users.find_by(user: current_user)
     @enemy = @game.enemies.find_or_initialize_by(x_position: @game_user.x_position, y_position: @game_user.y_position)
 
+    # Ensure that the enemy exists
+    if @enemy.nil?
+      # Handle the case where there is no enemy, such as creating a new one
+      @enemy = @game.enemies.create(x_position: @game_user.x_position, y_position: @game_user.y_position, level: @game.level)
+    end
+
     if @enemy.new_record? || !@enemy.image.attached?
-      # If the enemy is new or doesn't have an attached image, generate it
-      @enemy.level = @game.level if @enemy.new_record? # Set level dynamically if new
+      @enemy.level = @game.level if @enemy.new_record?
       ai_image_base64 = generate_ai_image
       if ai_image_base64
         attach_image_to_enemy(@enemy, ai_image_base64)
       end
-      @enemy.save! # Save the enemy to the database
+      @enemy.save! # This should be fine now since @enemy is a valid object
     end
 
     # Use the enemy image for display

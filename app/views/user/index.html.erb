@@ -286,7 +286,14 @@
         <% if @users.present? %>
           <ul>
             <% @users.each do |user| %>
-              <li><%= user.username %></li>
+              <li>
+                <span><strong>Username:</strong> <%= user.username %></span>
+                <% if current_user.friends.include?(user) %>
+                  <%= button_to "Remove Friend", remove_friend_path(friend_id: user.id), method: :delete, class: "button remove-friend-button" %>
+                <% else %>
+                  <%= button_to "Add Friend", add_friend_path(friend_id: user.id), method: :post, class: "button add-friend-button" %>
+                <% end %>
+              </li>
             <% end %>
           </ul>
         <% else %>
@@ -302,7 +309,14 @@
       <% if current_user.friends.present? %>
         <ul>
           <% current_user.friends.each do |friend| %>
-            <li><%= friend.username %></li>
+            <li>
+              <span><strong>Username:</strong> <%= friend.username %></span>
+              <%= form_tag chat_with_user_path, method: :get, class: "inline-form" do %>
+                <%= hidden_field_tag :friend_id, friend.id %>
+                <%= submit_tag "Chat", class: "button chat-button" %>
+              <% end %>
+              <%= button_to "Remove Friend", remove_friend_path(friend_id: friend.id), method: :delete, class: "button remove-friend-button" %>
+            </li>
           <% end %>
         </ul>
       <% else %>
