@@ -11,11 +11,6 @@
 </head>
 <body>
 <!-- Flash Messages Section -->
-<% flash.each do |key, message| %>
-  <div class="flash <%= key %>">
-    <%= message %>
-  </div>
-<% end %>
 
 <%= yield %> <!-- Main content of the view will be inserted here -->
 </body>
