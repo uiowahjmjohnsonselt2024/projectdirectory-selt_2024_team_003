@@ -30,6 +30,9 @@ gem 'aws-sdk-s3'
 
 gem 'mini_magick'
 
+gem 'redis', '~> 5.0'
+gem 'redis-rails'
+
 gem 'dotenv-rails'
 group :development, :test do
   gem 'cucumber-rails', require: false
@@ -52,8 +55,6 @@ group :development do
 end
 
 group :production do
-  gem 'redis'
-  gem 'redis-rails'
   gem 'pg', '~> 1.5'
   gem 'rails_12factor'
 end
