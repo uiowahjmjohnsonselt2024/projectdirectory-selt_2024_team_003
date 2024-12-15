@@ -71,11 +71,15 @@ class ArenaChannel < ApplicationCable::Channel
     player = data['player_id'].to_i
 
     current_player = arena[:players].values.find { |p| p[:id].to_i == player }
-    puts current_player[:username]
     opponent = arena[:players].values.find { |p| p[:id].to_i != player }
 
     if current_player && current_player[:turn]
       player_damage, player_critical = calculate_attack_damage(current_player, opponent)
+      user = User.find_by(username: current_player[:username])
+      weapon_name = user.weapons.find { |weapon| weapon.current }&.name || 'default'
+      weapon_multiplier = get_weapon_multiplier(weapon_name)
+      player_damage *= weapon_multiplier
+
       opponent[:health] -= player_damage
       message = if player_critical
                   "Critical Hit! #{current_player[:username]} dealt #{player_damage} damage to #{opponent[:username]}!"
@@ -103,8 +107,6 @@ class ArenaChannel < ApplicationCable::Channel
   def special_attack(data)
     arena = @@arenas[@arena_id]
     player = data['player_id'].to_i
-    puts arena[:players]
-    puts "|||||||||||||||||||||||||||||||||||||||||||||||"
 
     current_player = arena[:players].values.find { |p| p[:id].to_i == player }
     opponent = arena[:players].values.find { |p| p[:id].to_i != player }
@@ -138,7 +140,7 @@ class ArenaChannel < ApplicationCable::Channel
           message = if player_critical
                       "Critical Hit! #{current_player[:username]} dealt #{player_damage} damage to #{opponent[:username]}!"
                     else
-                      "#{current_player[:username]} used their special move on #{opponent[:username]} for #{opponent[:username]} damage."
+                      "#{current_player[:username]} used their special move on #{opponent[:username]} for #{player_damage} damage."
                     end
         else
           message = "Not enough mana, #{current_player[:username]}!"
@@ -166,13 +168,94 @@ class ArenaChannel < ApplicationCable::Channel
       # Check for game over condition
       if opponent[:health] <= 0
         opponent[:health] = 0
-        broadcast_player_data(message + " #{opponent[:username]} has been defeated!")
+        broadcast_player_data(message + " " + " #{opponent[:username]} has been defeated!")
       else
         broadcast_player_data(message)
       end
     else
       broadcast_player_data("It's not your turn, #{current_player[:username]}!")
     end
+  end
+
+  def use_consumable(data)
+    arena = @@arenas[@arena_id]
+    player = data['player_id'].to_i
+    current_player = arena[:players].values.find { |p| p[:id].to_i == player }
+    opponent = arena[:players].values.find { |p| p[:id].to_i != player }
+    if current_player && current_player[:turn]
+      message = ''
+      # Use current_user.consumables to find the consumable
+      user = User.find_by(username: current_player[:username])
+      consumable = user.consumables.find_by(id: data['consumable_id'])
+      current_player[:turn] = false
+      opponent[:turn] = true
+      arena[:current_turn] = opponent[:id]
+
+      # Process the consumable logic (e.g., healing)
+      if consumable.name == 'Revive'
+        old = current_player[:health]
+        current_player[:health] = current_player[:max_health]
+        message = "#{current_player[:username]} healed #{current_player[:health] - old} health using a full heal."
+
+        # Decrease consumable quantity
+        consumable.decrement!(:quantity)
+        if consumable.quantity.zero?
+          consumable.destroy
+        end
+      elsif consumable.name == 'Acid Potion'
+        opponent[:health] -= 100
+        message = "#{current_player[:username]} attacked #{opponent[:username]} with an Acid Potion, dealing 100 damage."
+
+        # Decrease consumable quantity
+        consumable.decrement!(:quantity)
+        if consumable.quantity.zero?
+          consumable.destroy
+        end
+      elsif consumable.name == 'Mana Refill'
+        current_player[:mana] = current_player[:max_mana]
+        # Decrease consumable quantity
+        consumable.decrement!(:quantity)
+        if consumable.quantity.zero?
+          consumable.destroy
+        end
+      elsif consumable.name == 'Health Potion'
+        old = current_player[:health]
+        current_player[:health] = [current_player[:max_health], current_player[:health] + 100].min
+        message = "#{current_player[:username]} healed #{current_player[:health] - old} health using a health potion."
+
+        # Decrease consumable quantity
+        consumable.decrement!(:quantity)
+        if consumable.quantity.zero?
+          consumable.destroy
+        end
+      else
+        broadcast_player_data("No consumables, #{current_player[:username]}!")
+      end
+      if opponent[:health] <= 0
+        opponent[:health] = 0
+        broadcast_player_data(message + "#{opponent[:username]} has been defeated!")
+      else
+        broadcast_player_data(message)
+      end
+    else
+      broadcast_player_data("It's not your turn, #{current_player[:username]}!")
+    end
+  end
+
+  def get_weapon_multiplier(weapon_name)
+    # Define the multipliers for each weapon
+    # ["Sword", "Flame Sword", "Bow and Arrow", "Shotgun", "Sniper"]
+    weapon_multipliers = {
+      'knife' => 1,
+      'sword' => 2,
+      'flame sword' => 4,
+      'bow and arrow' => 8,
+      'shotgun' => 16,
+      'sniper' => 32
+    }
+
+    # Return the multiplier for the weapon, default to 1 if weapon is not found
+    weapon_multipliers[weapon_name.downcase] || 1.0
   end
 
   def calculate_attack_damage(attacker, defender)
@@ -193,6 +276,16 @@ class ArenaChannel < ApplicationCable::Channel
     arena = @@arenas[@arena_id]
     arena[:players].delete(@player_id)
     broadcast_player_data("Player #{@player_id} has left the battle.")
+
+    # Find and remove the player by their ID
+    player_to_remove = arena[:players].delete(@player_id)
+
+    # Broadcast a message if the player was successfully removed
+    if player_to_remove
+      broadcast_player_data("#{player_to_remove[:username]} has left the battle.")
+    else
+      broadcast_player_data("A player has left the battle.")
+    end
   end
 
   private

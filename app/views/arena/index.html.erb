@@ -140,7 +140,6 @@
               },
 
               received(data) {
-                  console.log("DaATA")
                   console.log(data);  // Log the data to see its structure
 
                   // Update player buttons based on current game state
@@ -223,23 +222,23 @@
                               enemyManaBar.value = data.players[2].mana;
                               enemyManaBar.max = data.players[2].max_mana;
 
-                              if (data.players[2].health === 0) {
-
+                              if (data.players[2].health === 0 || data.players[1].health === 0) {
+                                  document.getElementById('attack-button').disabled = true;
+                                  document.getElementById('magic-attack-button').disabled = true;
                               }
                           }
                           document.getElementById('join-game-btn').style.display = 'none';
+                          if (data.current_turn) {
+                              const currentTurn = data.current_turn === data.players[1].id
+                                ? `${data.players[1].username}'s Turn`
+                                : `${data.players[2].username}'s Turn`;
+                              document.getElementById('current-turn').textContent = currentTurn;
+                          }
                       } else {
                           document.getElementById('player-2-name').textContent = "Player 2";
                           document.getElementById('player-2-health').textContent = "N/A";
                           document.getElementById('join-game-btn').style.display = 'block';
                       }
-                  }
-
-                  if (data.current_turn) {
-                      const currentTurn = data.current_turn === data.players[1].id
-                        ? `${data.players[1].username}'s Turn`
-                        : `${data.players[2].username}'s Turn`;
-                      document.getElementById('current-turn').textContent = currentTurn;
                   }
 
                   // Display the message
@@ -249,7 +248,64 @@
               },
           }
         );
+
+        const weapons = document.querySelectorAll(".weapon");
+        const inventoryRow = document.querySelector(".inventory-row");
+
+        inventoryRow.addEventListener("click", function(event) {
+            const clickedWeapon = event.target.closest(".weapon-item");
+
+            // Make sure the clicked element is a weapon item
+            if (clickedWeapon) {
+                // Remove 'current-weapon' class from all weapon items
+                const allWeapons = inventoryRow.querySelectorAll(".weapon-item");
+                allWeapons.forEach(function(weapon) {
+                    weapon.classList.remove("current-weapon");
+                });
+
+                // Add 'current-weapon' class to the clicked weapon
+                clickedWeapon.classList.add("current-weapon");
+            }
+        });
+
+        weapons.forEach(function(weapon) {
+            weapon.addEventListener("click", function() {
+                // Remove the green outline from all weapons
+                weapons.forEach(function(weapon) {
+                    weapon.classList.remove("current-weapon");
+                });
+
+                // Add the current-weapon class to the clicked weapon
+                this.classList.add("current-weapon");
+            });
+        });
+
+        const consumableItems = document.querySelectorAll(".inventory-item.consumable-item");
+        consumableItems.forEach((item) => {
+            item.addEventListener("click", () => {
+                const quantityElement = item.querySelector(".item-quantity");
+                const consumableId = quantityElement.getAttribute("data-consumable-id");
+
+                // Fetch current quantity
+                let quantityText = quantityElement.textContent.trim().substring(1); // Remove the "x" prefix
+                let quantity = parseInt(quantityText, 10);
+
+                if (quantity > 1) {
+                    // Decrease quantity and update DOM
+                    quantity -= 1;
+                    quantityElement.textContent = `x${quantity}`;
+                } else {
+                    // Remove the consumable from the DOM if quantity reaches 0
+                    item.remove();
+                }
+
+                // Call useConsumable with the consumable ID
+                useConsumable(consumableId);
+            });
+        });
     });
+
+
 
     function assignPlayer() {
         channel.send({ action: 'assign_player', player_id: user_id, user_name: currentUserName, level: player_level, health: player_hp, max_health: max_health, max_mana: max_mana, mana: player_mana, attack: player_attack, special_attack: player_special_attack, defense: player_defense, special_defense: player_special_defense, iq: player_IQ, archetype: player_archetype});
@@ -270,6 +326,34 @@
             console.log("No active channel to disconnect from.");
         }
     }
+    function useWeapon(weaponId, weaponName) {
+        console.log(`Setting weapon with ID: ${weaponName} as current.`);
+
+        // Adjust the fetch URL to match the new route
+        fetch(`/interactions/set_current_weapon/${weaponId}`, {
+            method: 'POST', // Or 'PATCH' if you prefer
+            headers: {
+                'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content,
+                'Content-Type': 'application/json'
+            }
+        })
+          .then(response => response.json())
+          .then(data => {
+              if (data.success) {
+              } else {
+                  alert('Failed to set weapon as current');
+              }
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              alert('There was an error setting the weapon as current');
+          });
+    }
+
+    function useConsumable(consumableId) {
+        channel.send({ action: 'use_consumable', player_id: user_id, consumable_id: consumableId});
+    }
+
 </script>
 
 <style>
@@ -365,10 +449,12 @@
     .inventory-item:hover {
         background-color: #333333;
     }
+
     .current-weapon {
         border: 3px solid green;
         box-shadow: 0 0 10px green; /* Optional: adds a glowing effect */
     }
+
     .player-section-header {
         display: flex;
     }
