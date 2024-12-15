@@ -1,4 +1,5 @@
 class CreditCardsController < ApplicationController
+  before_action :authenticate_user! # Ensure the user is logged in
     def redirect_to_card
       if current_user.credit_card
         redirect_to credit_card_path # Show action

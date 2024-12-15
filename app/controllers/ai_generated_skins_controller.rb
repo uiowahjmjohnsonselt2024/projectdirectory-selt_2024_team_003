@@ -3,8 +3,8 @@ class AiGeneratedSkinsController < ApplicationController
   require 'json'
   require 'mini_magick'
   require 'open-uri'
-  include ImageProcessingHelper
 
+  before_action :authenticate_user! # Ensure the user is logged in
   before_action :check_skin_limit, only: [:generate]
 
   def new

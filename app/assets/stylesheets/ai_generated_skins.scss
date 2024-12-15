@@ -1,140 +1,141 @@
 #ai-generated-skins-page {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 2rem;
-    padding: 2rem;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem; /* Increased gap between sections */
+    padding: 3rem;
     font-family: 'Arial', sans-serif;
-    background-color: #f9fafb; /* Light background for the page */
+    background-color: #f3f4f6; /* Softer background for better contrast */
     min-height: 100vh; /* Full-page height */
     box-sizing: border-box;
 
     .ai-form-container {
-        flex: 1; /* Take 50% of the width */
-        max-width: 100%; /* Prevent it from growing too wide */
-        background-color: #ffffff; /* White background for the form */
-        padding: 2rem;
-        border: 2px solid #e5e7eb; /* Light grey border */
-        border-radius: 8px;
-        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        flex: 1; /* Adjust form size */
+        max-width: 600px; /* Wider form for better usability */
+        background-color: #ffffff;
+        padding: 3rem; /* Increased padding for larger appearance */
+        border: 3px solid #e5e7eb; /* Slightly thicker border */
+        border-radius: 12px;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
         display: flex;
         flex-direction: column;
-        justify-content: center; /* Center align vertically */
+        justify-content: center;
         text-align: center;
 
         h1 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: #111827; /* Dark heading */
+            font-size: 2.5rem; /* Larger heading */
+            margin-bottom: 2rem;
+            color: #111827;
         }
 
         label {
-            font-weight: 600; /* Semi-bold for emphasis */
-            margin-bottom: 0.5rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
             display: block;
-            color: #374151; /* Dark grey */
-            font-size: 1rem;
-            text-align: left; /* Align labels to the left */
+            color: #374151;
+            font-size: 1.2rem;
+            text-align: left;
         }
 
-        input[type="text"] {
+        input[type="text"],
+        select {
             width: 100%;
-            padding: 0.75rem;
+            padding: 1rem; /* Larger inputs */
             border: 1px solid #d1d5db;
-            border-radius: 4px;
-            margin-bottom: 1.5rem;
-            font-size: 1rem;
+            border-radius: 6px;
+            margin-bottom: 2rem;
+            font-size: 1.1rem; /* Larger text */
             color: #374151;
-            background-color: #f9fafb; /* Subtle background */
+            background-color: #f9fafb;
             transition: border-color 0.3s ease;
 
             &:focus {
-                border-color: #3b82f6; /* Highlight on focus */
+                border-color: #3b82f6;
                 outline: none;
             }
         }
 
         button {
-            padding: 0.75rem 1.5rem;
-            background-color: #3b82f6; /* Vibrant blue */
+            padding: 1rem 2rem; /* Larger button */
+            background-color: #3b82f6;
             color: #ffffff;
             border: none;
-            border-radius: 4px;
-            font-size: 1rem;
+            border-radius: 6px;
+            font-size: 1.2rem;
             font-weight: 600;
             cursor: pointer;
             transition: background-color 0.3s ease;
 
             &:hover {
-                background-color: #2563eb; /* Darker blue on hover */
+                background-color: #2563eb;
             }
 
             &:disabled {
-                background-color: #9ca3af; /* Grey for disabled state */
-                cursor: not-allowed; /* No pointer on hover */
+                background-color: #9ca3af;
+                cursor: not-allowed;
             }
 
             &:disabled:hover {
-                background-color: #9ca3af; /* Ensure hover does not change the color */
+                background-color: #9ca3af;
             }
         }
     }
 
     .image-container {
-        flex: 1; /* Take 50% of the width */
-        max-width: 100%; /* Prevent it from growing too wide */
-        background-color: #ffffff; /* White background for the image box */
-        padding: 2rem;
-        border: 2px solid #e5e7eb; /* Light grey border */
-        border-radius: 8px;
-        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+        flex: 1; /* Matches form size */
+        max-width: 600px; /* Prevent overly wide image container */
+        background-color: #ffffff;
+        padding: 3rem; /* Increased padding */
+        border: 3px solid #e5e7eb;
+        border-radius: 12px;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
         display: flex;
         flex-direction: column;
-        justify-content: center; /* Center align vertically */
-        align-items: center; /* Center content horizontally */
+        justify-content: center;
+        align-items: center;
         text-align: center;
 
         h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
+            font-size: 2.5rem; /* Larger heading */
+            margin-bottom: 2rem;
             color: #111827;
         }
 
         img {
             max-width: 100%;
-            max-height: 400px; /* Restrict image height */
+            max-height: 500px; /* Increased max-height for larger images */
             border-radius: 8px;
-            border: 1px solid #e5e7eb;
+            border: 2px solid #e5e7eb;
             object-fit: cover; /* Prevents distortion */
         }
 
         .error-message {
-            color: #dc2626; /* Bold red for errors */
+            color: #dc2626;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.5rem; /* More visible error message */
         }
 
         .placeholder-message {
-            color: #6b7280; /* Neutral grey */
-            font-size: 1.2rem;
+            color: #6b7280;
+            font-size: 1.5rem; /* More visible placeholder */
         }
 
         .add-to-inventory-container {
-            margin-top: 1.5rem;
+            margin-top: 2rem;
 
             .add-to-inventory-button {
-                padding: 0.75rem 1.5rem;
-                background-color: #10b981; /* Emerald green */
+                padding: 1rem 2rem;
+                background-color: #10b981;
                 color: #ffffff;
                 border: none;
-                border-radius: 4px;
-                font-size: 1rem;
+                border-radius: 6px;
+                font-size: 1.2rem; /* Larger button */
                 font-weight: 600;
                 cursor: pointer;
                 transition: background-color 0.3s ease;
 
                 &:hover {
-                    background-color: #059669; /* Darker green on hover */
+                    background-color: #059669;
                 }
             }
         }
@@ -142,47 +143,31 @@
 
     .back-button-container {
         position: absolute;
-        top: 1rem;
-        left: 1rem;
+        top: 2rem;
+        left: 2rem;
 
         .back-button {
-            padding: 0.75rem 1.5rem;
-            background-color: #f59e0b; /* Amber color for button */
+            padding: 1rem 2rem;
+            background-color: #f59e0b;
             color: #ffffff;
             border: none;
-            border-radius: 4px;
-            font-size: 1rem;
+            border-radius: 6px;
+            font-size: 1.2rem; /* Larger back button */
             cursor: pointer;
             transition: background-color 0.3s ease;
 
             &:hover {
-                background-color: #d97706; /* Darker amber on hover */
+                background-color: #d97706;
             }
         }
     }
 }
 
-#ai-generated-skins-page .ai-form-container select {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #d1d5db;
-    border-radius: 4px;
-    margin-bottom: 1.5rem;
-    font-size: 1rem;
-    color: #374151;
-    background-color: #f9fafb; /* Subtle background */
-    transition: border-color 0.3s ease;
-
-    &:focus {
-        border-color: #3b82f6; /* Highlight on focus */
-        outline: none;
-    }
-}
-
 #ai-generated-skins-page button:disabled {
-    background-color: #9ca3af; /* Greyed-out background for disabled state */
-    cursor: not-allowed; /* Prevent pointer change */
+    background-color: #9ca3af;
+    cursor: not-allowed;
+
     &:hover {
-        background-color: #9ca3af; /* Ensure hover effect does not change appearance */
+        background-color: #9ca3af;
     }
 }

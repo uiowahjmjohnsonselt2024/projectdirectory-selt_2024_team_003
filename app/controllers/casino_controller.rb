@@ -1,4 +1,5 @@
 class CasinoController < ApplicationController
+  before_action :authenticate_user! # Ensure the user is logged in
   before_action :set_game_user
 
   def show

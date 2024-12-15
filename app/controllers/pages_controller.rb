@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  before_action :authenticate_user! # Ensure the user is logged in
   # app/controllers/pages_controller.rb
   
   # Grid page action.
