@@ -1,28 +1,32 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 RSpec.describe Message, type: :model do
-  let(:user) { create(:user) }
-  let(:recipient) { create(:user) }
-  let(:message) { create(:message, user: user, recipient: recipient, content: 'Hello!') }
+  let(:sender) { User.create(email: "sender@example.com", password: "password") }
+  let(:recipient) { User.create(email: "recipient@example.com", password: "password") }
 
-  describe 'validations' do
-    it 'validates presence of content' do
-      invalid_message = build(:message, user: user, recipient: recipient, content: nil)
+  context "associations" do
+    it "belongs to a user" do
+      association = described_class.reflect_on_association(:user)
+      expect(association.macro).to eq(:belongs_to)
+    end
 
-      expect(invalid_message).not_to be_valid
-      expect(invalid_message.errors[:content]).to include("can't be blank")
+    it "belongs to a recipient" do
+      association = described_class.reflect_on_association(:recipient)
+      expect(association.macro).to eq(:belongs_to)
+      expect(association.class_name).to eq('User')
     end
   end
 
-  describe 'associations' do
-    it 'belongs to a user' do
-      expect(message.user).to eq(user)
+  context "validations" do
+    it "is valid with valid attributes" do
+      message = Message.new(content: "Hello", user: sender, recipient: recipient)
+      expect(message).to be_valid
     end
 
-    it 'belongs to a recipient' do
-      expect(message.recipient).to eq(recipient)
+    it "is not valid without content" do
+      message = Message.new(content: nil, user: sender, recipient: recipient)
+      expect(message).not_to be_valid
+      expect(message.errors[:content]).to include("can't be blank")
     end
   end
 end
