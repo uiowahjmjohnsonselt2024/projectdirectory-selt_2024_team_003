@@ -21,7 +21,7 @@ class ArenaChannel < ApplicationCable::Channel
     if arena[:players][player_id].nil?
       if arena[:players][1].nil?
         arena[:players][1] = {
-          id: 1,
+          id: data['player_id'],
           username: data['user_name'],
           health: data['health'],
           mana: data['mana'],
@@ -36,7 +36,7 @@ class ArenaChannel < ApplicationCable::Channel
         message = "Player 1 has joined the battle!"
       elsif arena[:players][2].nil?
         arena[:players][2] = {
-          id: 2,
+          id: data['player_id'],
           username: data['user_name'],
           health: data['health'],
           mana: data['mana'],
@@ -63,9 +63,12 @@ class ArenaChannel < ApplicationCable::Channel
   def attack(data)
     arena = @@arenas[@arena_id]
     player = data['player_id'].to_i
-    opponent = player == 1 ? 2 : 1
+    puts arena[:players]
 
-    if arena[:players][player][:turn]
+    current_player = arena[:players].values.find { |p| p[:id].to_i == player }
+    opponent = arena[:players].values.find { |p| p[:id].to_i != player }
+
+    if current_player && current_player[:turn]
       damage = rand(10..30)
       arena[:players][opponent][:health] -= damage
 

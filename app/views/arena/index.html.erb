@@ -75,9 +75,8 @@
         <%= link_to 'Return to Grid', grid_path, class: 'back-button' %>
         <div class="divider"></div>
         <div class="action-buttons">
-          <button id="attack-button" data-game-id="<%= @game.code %>">Attack</button>
-          <button id="magic-attack-button" data-game-id="<%= @game.code %>">Magic Attack</button>
-          <button id="magic-heal-button" data-game-id="<%= @game.code %>">Magic Heal</button>
+          <button id="attack-button" onclick="attack()" data-game-id="<%= @game.code %>">Attack</button>
+          <button id="magic-attack-button" onclick="special_attack()" data-game-id="<%= @game.code %>">Magic Attack</button>
         </div>
       </div>
     </div>
@@ -121,6 +120,7 @@
     const player_defense = "<%= @player.defense %>";
     const player_special_defense = "<%= @player.special_defense %>";
     const player_IQ = "<%= @player.iq %>";
+    const archetype = "<%= @player.archetype %>";
 
     document.addEventListener('DOMContentLoaded', function() {
         const consumer = ActionCable.createConsumer();
@@ -163,7 +163,6 @@
                               document.getElementById('player-1-iq').textContent = data.players[2].iq;
                           }
                       } else {
-                          document.getElementById('player-1-name').textContent = "Player 1";
                           document.getElementById('player-1-health').textContent = "N/A";
                       }
 
@@ -189,13 +188,18 @@
                               document.getElementById('player-2-special-defense').textContent = data.players[2].defense;
                               document.getElementById('player-2-iq').textContent = data.players[2].iq;
                           }
+                          document.getElementById('join-game-btn').style.display = 'none';
                       } else {
                           document.getElementById('player-2-name').textContent = "Player 2";
                           document.getElementById('player-2-health').textContent = "N/A";
+                          document.getElementById('join-game-btn').style.display = 'block';
                       }
                   }
 
-                  const currentTurn = data.current_turn ? 'Player 1\'s Turn' : 'Player 2\'s Turn';
+                  const currentTurn = data.current_turn
+                    ? `${data.players[1].username}'s Turn`
+                    : `${data.players[2].username}'s Turn`;
+
                   document.getElementById('current-turn').textContent = currentTurn;
 
                   // Display the message
@@ -208,11 +212,17 @@
     });
 
     function assignPlayer() {
-        channel.send({ action: 'assign_player', player_id: user_id, user_name: currentUserName, level: player_level, health: player_hp, max_health: max_health, max_mana: max_mana, mana: player_mana, attack: player_attack, special_attack: player_special_attack, defense: player_defense, special_defense: player_special_defense, iq: player_IQ});
+        channel.send({ action: 'assign_player', player_id: user_id, user_name: currentUserName, level: player_level, health: player_hp, max_health: max_health, max_mana: max_mana, mana: player_mana, attack: player_attack, special_attack: player_special_attack, defense: player_defense, special_defense: player_special_defense, iq: player_IQ, archetype: archetype});
     }
 
-    function attack(playerId) {
-        channel.send({ action: 'attack', player_id: playerId });
+    function attack() {
+        console.log("Print")
+        channel.send({ action: 'attack', player_id: user_id });
+    }
+
+    function special_attack() {
+        console.log("special")
+        channel.send({ action: 'attack', player_id: user_id });
     }
 
     function disconnectChannel() {
