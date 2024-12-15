@@ -252,6 +252,8 @@
                             // Special case: redirect to the casino
                             sessionStorage.setItem('current_position', JSON.stringify({ x, y }));
                             window.location.href = '/casino/show';
+                        }  else if (x === 3 && y === 2) {
+                            window.location.href = `/arena?game_id=${gameId}&x=${x}&y=${y}`;
                         } else {
                             // General case: redirect to interaction page
                             window.location.href = `/interaction?game_id=${gameId}&x=${x}&y=${y}`;

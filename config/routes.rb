@@ -70,6 +70,8 @@ Rails.application.routes.draw do
   post '/check-shards', to: 'pages#check_shards'
   post '/force-move', to: 'pages#force_move'
   post 'interactions/set_current_weapon/:id', to: 'interactions#set_current_weapon', as: 'set_current_weapon'
+  get '/arena', to: 'arena#index'
+  post '/arena/broadcast', to: 'arena#broadcast_message'
 
   # Route to display the form (text box and button)
   get 'ai_generated_skins/new', to: 'ai_generated_skins#new', as: 'new_ai_generated_skin'
