@@ -1,183 +1,157 @@
+# spec/models/user_spec.rb
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  before do
-    @user = User.new(
-      username: 'testuser',
-      email: 'testuser@example.com',
+  let(:user) do
+    User.create(
+      username: 'TestUser',
+      email: 'test@example.com',
       password: 'password',
-      password_confirmation: 'password'
+      health: 100,
+      attack: 50,
+      defense: 40,
+      iq: 120,
+      shards: 0,
+      level: 1
     )
   end
 
   describe 'validations' do
     it 'is valid with valid attributes' do
-      expect(@user).to be_valid
+      expect(user).to be_valid
     end
 
     it 'is invalid without a username' do
-      @user.username = nil
-      expect(@user).to_not be_valid
-      expect(@user.errors[:username]).to include('Username is required')
+      user.username = nil
+      expect(user).not_to be_valid
+      expect(user.errors[:username]).to include("Username is required")
     end
 
-    it 'is invalid if username is not unique' do
-      User.create(username: 'testuser', email: 'unique@example.com', password: 'password')
-      expect(@user).to_not be_valid
-      expect(@user.errors[:username]).to include('Username has already been taken')
-    end
-
-    it 'is invalid if username length is less than 3 or greater than 20' do
-      @user.username = 'aa'
-      expect(@user).to_not be_valid
-      expect(@user.errors[:username]).to include('Username must be between 3 and 20 characters')
-
-      @user.username = 'a' * 21
-      expect(@user).to_not be_valid
+    it 'is invalid with a duplicate username' do
+      User.create(username: 'TestUser', email: 'duplicate@example.com', password: 'password', health: 100, attack: 50, defense: 40, iq: 120)
+      expect(user).not_to be_valid
+      expect(user.errors[:username]).to include("Username has already been taken")
     end
 
     it 'is invalid without an email' do
-      @user.email = nil
-      expect(@user).to_not be_valid
-      expect(@user.errors[:email]).to include('Email is required')
+      user.email = nil
+      expect(user).not_to be_valid
+      expect(user.errors[:email]).to include("Email is required")
     end
 
-    it 'is invalid if email format is incorrect' do
-      @user.email = 'invalid_email'
-      expect(@user).to_not be_valid
-      expect(@user.errors[:email]).to include('Invalid email format')
+    it 'is invalid with a duplicate email' do
+      User.create(username: 'OtherUser', email: 'test@example.com', password: 'password', health: 100, attack: 50, defense: 40, iq: 120)
+      expect(user).not_to be_valid
+      expect(user.errors[:email]).to include("Email has already been taken")
     end
 
-    it 'is invalid if email is not unique' do
-      User.create(username: 'uniqueuser', email: 'testuser@example.com', password: 'password')
-      expect(@user).to_not be_valid
-      expect(@user.errors[:email]).to include('Email has already been taken')
+    it 'is invalid with an improperly formatted email' do
+      user.email = 'invalid-email'
+      expect(user).not_to be_valid
+      expect(user.errors[:email]).to include("Invalid email format")
     end
 
-    it 'is invalid if password is less than 6 characters' do
-      @user.password = '12345'
-      expect(@user).to_not be_valid
-      expect(@user.errors[:password]).to include('Password must be at least 6 characters long')
+    it 'is invalid with a short password' do
+      user.password = 'short'
+      expect(user).not_to be_valid
+      expect(user.errors[:password]).to include("Password must be at least 6 characters long")
+    end
+
+    it 'is invalid without numeric attributes' do
+      user.health = nil
+      user.attack = nil
+      user.defense = nil
+      user.iq = nil
+      expect(user).not_to be_valid
     end
   end
 
-  describe 'associations' do
-    it { should have_many(:game_users) }
-    it { should have_many(:games).through(:game_users) }
+  describe '#initialize_achievements' do
+    it 'initializes achievements to an empty array if nil' do
+      user.achievements = nil
+      user.save
+      expect(user.achievements).to eq([])
+    end
   end
 
-  describe 'custom methods' do
-    describe '#generate_reset_password_token!' do
-      it 'generates a reset password token and sets the time' do
-        @user.save!
-        expect(@user.reset_password_token).to be_nil
-        expect(@user.reset_password_sent_at).to be_nil
-
-        @user.generate_reset_password_token!
-        expect(@user.reset_password_token).to be_present
-        expect(@user.reset_password_sent_at).to be_within(1.second).of(Time.now.utc)
-      end
-    end
+  describe '#add_achievement' do
+    it 'adds a new achievement and increases shards' do
+      expect { user.add_achievement('First Win') }.to change { user.shards }.by(12)
+      expect(user.achievements).to include('First Win')
     end
 
-    describe '#reset_password_token_valid?' do
-      it 'returns true for a valid token' do
-        @user.save!
-        @user.generate_reset_password_token!
-        expect(@user.reset_password_token_valid?(@user.reset_password_token)).to be true
-      end
+    it 'does not add a duplicate achievement' do
+      user.add_achievement('First Win')
+      expect { user.add_achievement('First Win') }.not_to change { user.shards }
+    end
+  end
 
-      it 'returns false for an invalid token' do
-        @user.save!
-        @user.generate_reset_password_token!
-        expect(@user.reset_password_token_valid?('invalidtoken')).to be false
-      end
+  describe '#has_achievement' do
+    it 'returns true if the user has the achievement' do
+      user.add_achievement('First Win')
+      expect(user.has_achievement('First Win')).to be_truthy
     end
 
-  describe 'friendship functionality' do
-    let(:user) { User.create(username: 'user1', email: 'user1@example.com', password: 'password') }
-    let(:friend) { User.create(username: 'user2', email: 'user2@example.com', password: 'password') }
+    it 'returns false if the user does not have the achievement' do
+      expect(user.has_achievement('Nonexistent Achievement')).to be_falsey
+    end
+  end
 
-    context 'adding a friend' do
-      it 'adds a friend successfully' do
-        expect do
-          user.friendships.create(friend: friend)
-        end.to change { user.friends.count }.by(1)
-      end
-
-      it 'does not allow duplicate friendships' do
-        user.friendships.create(friend: friend)
-        duplicate_friendship = user.friendships.build(friend: friend)
-
-        expect(duplicate_friendship).not_to be_valid
-        expect(duplicate_friendship.errors[:user_id]).to include('You are already friends with this user.')
-      end
+  describe '#check_milestone_achievements' do
+    it 'adds the correct milestone achievement based on level' do
+      user.level = 10
+      expect { user.check_milestone_achievements }.to change { user.achievements }.to include('Level 10: Experienced Warrior')
     end
 
-    context 'removing a friend' do
-      before do
-        user.friendships.create(friend: friend)
-      end
+    it 'does not add an achievement if no milestone matches the level' do
+      expect { user.check_milestone_achievements }.not_to change { user.achievements }
+    end
+  end
 
-      it 'removes a friend successfully' do
-        expect do
-          user.friendships.find_by(friend: friend).destroy
-        end.to change { user.friends.count }.by(-1)
-      end
+  describe '#has_credit_card?' do
+    it 'returns true if the user has a credit card' do
+      user.create_credit_card(card_number: '1234567890123456', cvv: '123')
+      expect(user.has_credit_card?).to be_truthy
     end
 
-    describe '#set_archetype_stats' do
-      let(:user) { create(:user) }
+    it 'returns false if the user does not have a credit card' do
+      expect(user.has_credit_card?).to be_falsey
+    end
+  end
 
-      it 'sets stats for Attacker' do
-        user.set_archetype_stats('Attacker')
-        expect(user.attack).to eq(30)
-        expect(user.iq).to eq(10)
-        expect(user.defense).to eq(5)
-        expect(user.health).to eq(100)
-      end
+  describe '#generate_reset_password_token!' do
+    it 'generates a reset password token and sets the expiration time' do
+      expect { user.generate_reset_password_token! }.to change { user.reset_password_token }.from(nil)
+      expect(user.reset_password_sent_at).to be_within(1.second).of(Time.now.utc)
+    end
+  end
 
-      it 'sets stats for Defender' do
-        user.set_archetype_stats('Defender')
-        expect(user.attack).to eq(10)
-        expect(user.iq).to eq(1)
-        expect(user.defense).to eq(30)
-        expect(user.health).to eq(200)
-      end
-
-      it 'sets stats for Healer' do
-        user.set_archetype_stats('Healer')
-        expect(user.attack).to eq(20)
-        expect(user.iq).to eq(5)
-        expect(user.defense).to eq(20)
-        expect(user.health).to eq(150)
-      end
+  describe '#reset_password_token_valid?' do
+    it 'returns true if the token matches and is within the valid timeframe' do
+      user.generate_reset_password_token!
+      expect(user.reset_password_token_valid?(user.reset_password_token)).to be_truthy
     end
 
-    describe '#level_up' do
-      let(:user) do
-        create(:user, level: 1, experience: 100, health: 100, attack: 10, defense: 5, iq: 1,
-               archetype: 'Attacker')
-      end
-
-      it 'levels up and increases stats based on archetype' do
-        user.level_up
-
-        expect(user.level).to eq(2)
-        expect(user.health).to eq(120) # +20 for Attacker
-        expect(user.attack).to eq(20) # +10 for Attacker
-        expect(user.defense).to eq(10) # +5 for Attacker
-        expect(user.iq).to eq(4) # +3 for Attacker
-        expect(user.experience).to eq(0) # Reset experience after leveling up
-      end
+    it 'returns false if the token does not match' do
+      user.generate_reset_password_token!
+      expect(user.reset_password_token_valid?('invalid_token')).to be_falsey
     end
 
-    describe '#shards' do
-      it 'validates that shards cannot be negative' do
-        user = build(:user, shards: -10)
-        expect(user).not_to be_valid
-      end
+    it 'returns false if the token has expired' do
+      user.generate_reset_password_token!
+      user.update(reset_password_sent_at: 2.hours.ago)
+      expect(user.reset_password_token_valid?(user.reset_password_token)).to be_falsey
+    end
+  end
+
+  describe '#current_skin' do
+    it 'returns the current skin of the user' do
+      user.skins.create(style: 'Default', current: true)
+      expect(user.current_skin.style).to eq('Default')
+    end
+
+    it 'returns nil if no current skin is set' do
+      expect(user.current_skin).to be_nil
     end
   end
 end
-

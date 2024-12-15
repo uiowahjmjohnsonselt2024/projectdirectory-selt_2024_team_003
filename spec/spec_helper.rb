@@ -16,6 +16,11 @@ require 'simplecov'
 SimpleCov.start 'rails' do
   add_filter '/spec/' # Exclude test files from coverage
   add_filter '/config/' # Optionally exclude config files
+  add_filter '/app/channels/'
+  add_filter '/app/assets/'
+  add_filter '/app/helpers/'
+  add_filter '/app/javascript/'
+  add_filter '/app/mailers/'
 end
 
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration

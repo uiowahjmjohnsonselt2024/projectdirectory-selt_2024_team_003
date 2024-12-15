@@ -34,49 +34,54 @@
     <!-- Player section -->
     <div class="player-section">
       <div class="player-section-header">
-          <img src="<%= asset_path(@image) %>" alt="Player Avatar" class="player-avatar">
-          <!-- Inventory Section (Weapons and Consumables Rows) -->
-          <div class="inventory-section">
-            <!-- Weapons Row -->
-            <div class="inventory-row weapons-row">
-              <% if @weapons.present? %>
-                <% @weapons.each do |weapon| %>
-                  <div class="inventory-item weapon-item <%= 'current-weapon' if weapon.current %>" onclick="useWeapon('<%= weapon.id %>', '<%= weapon.name %>')">
-                    <p class="item-name"><%= weapon.name %></p>
-                    <% if asset_path(weapon_image_filename(weapon.name)) %>
-                      <%= image_tag asset_path(weapon_image_filename(weapon.name)), alt: weapon.name, class: "weapon-image" %>
-                    <% else %>
-                      <p class="no-image-placeholder">No image available</p>
-                    <% end %>
-                  </div>
-                <% end %>
-              <% else %>
-                <p>No weapons available.</p>
-              <% end %>
-            </div>
+        <% if current_user.current_skin&.image&.attached? %>
+          <%= image_tag url_for(current_user.current_skin.image), alt: "Player Avatar", class: "player-avatar" %>
+        <% else %>
+          <%= image_tag asset_path('default_player_avatar.png'), alt: "Default Player Avatar", class: "player-avatar" %>
+        <% end %>
 
-            <!-- Consumables Row -->
-            <div class="inventory-row consumables-row">
-              <% if @consumables.present? %>
-                <% @consumables.each do |consumable| %>
-                  <% next if consumable.quantity <= 0 %> <!-- Skip if quantity is zero -->
-                  <div class="inventory-item consumable-item" onclick="useConsumable('<%= consumable.id %>', '<%= consumable.name %>')">
-                    <p class="item-name"><%= consumable.name %></p>
-                    <% if asset_path(consumable_image_filename(consumable.name)) %>
-                      <%= image_tag asset_path(consumable_image_filename(consumable.name)), alt: consumable.name, class: "consumable-image" %>
-                    <% else %>
-                      <p class="no-image-placeholder">No image available</p>
-                    <% end %>
-                    <% if consumable.quantity > 0 %>
-                      <p class="item-quantity" data-consumable-id="<%= consumable.id %>">x<%= consumable.quantity %></p>
-                    <% end %>
-                  </div>
-                <% end %>
-              <% else %>
-                <p>No consumables available.</p>
+        <!-- Inventory Section (Weapons and Consumables Rows) -->
+        <div class="inventory-section">
+          <!-- Weapons Row -->
+          <div class="inventory-row weapons-row">
+            <% if @weapons.present? %>
+              <% @weapons.each do |weapon| %>
+                <div class="inventory-item weapon-item <%= 'current-weapon' if weapon.current %>" onclick="useWeapon('<%= weapon.id %>', '<%= weapon.name %>')">
+                  <p class="item-name"><%= weapon.name %></p>
+                  <% if asset_path(weapon_image_filename(weapon.name)) %>
+                    <%= image_tag asset_path(weapon_image_filename(weapon.name)), alt: weapon.name, class: "weapon-image" %>
+                  <% else %>
+                    <p class="no-image-placeholder">No image available</p>
+                  <% end %>
+                </div>
               <% end %>
-            </div>
+            <% else %>
+              <p>No weapons available.</p>
+            <% end %>
           </div>
+
+          <!-- Consumables Row -->
+          <div class="inventory-row consumables-row">
+            <% if @consumables.present? %>
+              <% @consumables.each do |consumable| %>
+                <% next if consumable.quantity <= 0 %> <!-- Skip if quantity is zero -->
+                <div class="inventory-item consumable-item" onclick="useConsumable('<%= consumable.id %>', '<%= consumable.name %>')">
+                  <p class="item-name"><%= consumable.name %></p>
+                  <% if asset_path(consumable_image_filename(consumable.name)) %>
+                    <%= image_tag asset_path(consumable_image_filename(consumable.name)), alt: consumable.name, class: "consumable-image" %>
+                  <% else %>
+                    <p class="no-image-placeholder">No image available</p>
+                  <% end %>
+                  <% if consumable.quantity > 0 %>
+                    <p class="item-quantity" data-consumable-id="<%= consumable.id %>">x<%= consumable.quantity %></p>
+                  <% end %>
+                </div>
+              <% end %>
+            <% else %>
+              <p>No consumables available.</p>
+            <% end %>
+          </div>
+        </div>
       </div>
       <!-- New container to group player info and inventory side-by-side -->
       <div class="player-info-container">
@@ -119,23 +124,23 @@
     </div>
 
     <div class="players-list">
-        <% if @players_in_same_pos.any? %>
-            <h3>Who's here?</h3>
-            <ul class="player-cards-container">
-                <% @players_in_same_pos.each do |game_user| %>
-                    <li class="player-card">
-                    <!-- Display profile picture if attached, else show a default -->
-                    <% if game_user.user.profile_picture.attached? %>
-                        <%= image_tag game_user.user.profile_picture, alt: "Profile Picture", class: "profile-picture" %>
-                    <% else %>
-                        <%= image_tag asset_path('default_profile_pic.jpg'), alt: "Default Profile Picture", class: "profile-picture" %>
-                    <% end %>
-                    <!-- Display the player's username -->
-                    <p class="player-name"><%= game_user.user.username %></p>
-                    </li>
-                <% end %>
-            </ul>
-        <% end %>
+      <% if @players_in_same_pos.any? %>
+        <h3>Who's here?</h3>
+        <ul class="player-cards-container">
+          <% @players_in_same_pos.each do |game_user| %>
+            <li class="player-card">
+              <!-- Display profile picture if attached, else show a default -->
+              <% if game_user.user.profile_picture.attached? %>
+                <%= image_tag game_user.user.profile_picture, alt: "Profile Picture", class: "profile-picture" %>
+              <% else %>
+                <%= image_tag asset_path('default_profile_pic.jpg'), alt: "Default Profile Picture", class: "profile-picture" %>
+              <% end %>
+              <!-- Display the player's username -->
+              <p class="player-name"><%= game_user.user.username %></p>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
 
   </div>
@@ -143,34 +148,34 @@
 
 <script>
     firstBlood = <% current_user.has_achievement("First Blood: The thrill of victory, the first taste of triumph.") %>
-    finalBoss = <% current_user.has_achievement("The Final Boss: Defeat the final boss and claim victory over the game.") %>
-    bossPosition = <% @game_user.x_position == 5 && @game_user.y_position == 5 %>
+      finalBoss = <% current_user.has_achievement("The Final Boss: Defeat the final boss and claim victory over the game.") %>
+        bossPosition = <% @game_user.x_position == 5 && @game_user.y_position == 5 %>
 
-    function useWeapon(weaponId, weaponName) {
-        console.log(`Setting weapon with ID: ${weaponName} as current.`);
+          function useWeapon(weaponId, weaponName) {
+              console.log(`Setting weapon with ID: ${weaponName} as current.`);
 
-        // Adjust the fetch URL to match the new route
-        fetch(`/interactions/set_current_weapon/${weaponId}`, {
-            method: 'POST', // Or 'PATCH' if you prefer
-            headers: {
-                'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content,
-                'Content-Type': 'application/json'
-            }
-        })
-          .then(response => response.json())
-          .then(data => {
-              if (data.success) {
-                  // alert(`Weapon ${weaponName} set as current!`);
-                  location.reload(); // Reload to update the view (optional)
-              } else {
-                  alert('Failed to set weapon as current');
-              }
-          })
-          .catch(error => {
-              console.error('Error:', error);
-              alert('There was an error setting the weapon as current');
-          });
-    }
+              // Adjust the fetch URL to match the new route
+              fetch(`/interactions/set_current_weapon/${weaponId}`, {
+                  method: 'POST', // Or 'PATCH' if you prefer
+                  headers: {
+                      'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content,
+                      'Content-Type': 'application/json'
+                  }
+              })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // alert(`Weapon ${weaponName} set as current!`);
+                        location.reload(); // Reload to update the view (optional)
+                    } else {
+                        alert('Failed to set weapon as current');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('There was an error setting the weapon as current');
+                });
+          }
 
     function useConsumable(consumableId, consumableName) {
         const attackButton = document.getElementById('attack-button');
