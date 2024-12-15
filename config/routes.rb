@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   resources :interactions, param: :game_id do
     post 'attack', on: :member
+    post 'use_consumable/:consumable_id', to: 'interactions#use_consumable', as: 'use_consumable'
   end
 
   # config/routes.rb
@@ -68,6 +69,7 @@ Rails.application.routes.draw do
   post 'casino/place_bet', to: 'casino#place_bet'
   post '/check-shards', to: 'pages#check_shards'
   post '/force-move', to: 'pages#force_move'
+  post 'interactions/set_current_weapon/:id', to: 'interactions#set_current_weapon', as: 'set_current_weapon'
 
   # Route to display the form (text box and button)
   get 'ai_generated_skins/new', to: 'ai_generated_skins#new', as: 'new_ai_generated_skin'
@@ -84,8 +86,10 @@ Rails.application.routes.draw do
       patch :set_current_skin, to: 'inventory#set_current_skin' # Route for setting a current skin
       patch :set_current_weapon, to: 'inventory#set_current_weapon' # Route for setting a current weapon
       delete :destroy_skin, to: 'inventory#destroy_skin' # Route for removing a skin
+      get :weapon_stats, to: 'inventory#weapon_stats' # Route for fetching weapon stats
     end
   end
+
 
 
 
@@ -152,4 +156,7 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login_button'
   get 'create', to: 'registrations#new', as: 'create_button'
 
+
+  # config/routes.rb
+  resources :users, controller: 'user', only: [:edit, :update]
 end

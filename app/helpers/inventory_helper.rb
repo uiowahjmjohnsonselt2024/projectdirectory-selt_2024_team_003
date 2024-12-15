@@ -28,7 +28,7 @@ module InventoryHelper
       "acidPotion.gif"
     when "Revive"
       "revive.gif"
-    when "Invisibility Potion"
+    when "Mana Refill"
       "invisibilityPotion.gif"
     else
       "defaultConsumable.gif"
