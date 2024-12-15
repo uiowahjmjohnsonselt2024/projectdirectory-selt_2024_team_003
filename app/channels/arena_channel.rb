@@ -20,10 +20,34 @@ class ArenaChannel < ApplicationCable::Channel
 
     if arena[:players][player_id].nil?
       if arena[:players][1].nil?
-        arena[:players][1] = { id: 1, username: data['user_name'], health: 100, turn: true }
+        arena[:players][1] = {
+          id: 1,
+          username: data['user_name'],
+          health: data['health'],
+          mana: data['mana'],
+          attack: data['attack'],
+          special_attack: data['special_attack'],
+          defense: data['defense'],
+          special_defense: data['special_defense'],
+          iq: data['iq'],
+          level: data['level'],
+          turn: true
+        }
         message = "Player 1 has joined the battle!"
       elsif arena[:players][2].nil?
-        arena[:players][2] = { id: 2, username: data['user_name'], health: 100, turn: false }
+        arena[:players][2] = {
+          id: 2,
+          username: data['user_name'],
+          health: data['health'],
+          mana: data['mana'],
+          attack: data['attack'],
+          special_attack: data['special_attack'],
+          defense: data['defense'],
+          special_defense: data['special_defense'],
+          iq: data['iq'],
+          level: data['level'],
+          turn: false
+        }
         message = "Player 2 has joined the battle!"
       else
         message = "Both players are already assigned."

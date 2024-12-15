@@ -1,44 +1,106 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Arena</title>
-  <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
-  <style>
-      /* Your existing CSS */
-  </style>
-</head>
-<body>
-<div id="arena">
-  <h1>Welcome to the Arena</h1>
-  <span class="current-user">
-    Current User: <%= current_user.username %>
-  </span>
+<div class="interaction-page">
+  <div class="battle-screen">
+    <!-- Player section -->
+    <div class="player-section">
+      <div class="player-section-header">
+        <img src="<%= asset_path(@image) %>" alt="Player Avatar" class="player-avatar">
+        <!-- Inventory Section (Weapons and Consumables Rows) -->
+        <div class="inventory-section">
+          <!-- Weapons Row -->
+          <div class="inventory-row weapons-row">
+            <% if @weapons.present? %>
+              <% @weapons.each do |weapon| %>
+                <div class="inventory-item weapon-item <%= 'current-weapon' if weapon.current %>" onclick="useWeapon('<%= weapon.id %>', '<%= weapon.name %>')">
+                  <p class="item-name"><%= weapon.name %></p>
+                  <% if asset_path(weapon_image_filename(weapon.name)) %>
+                    <%= image_tag asset_path(weapon_image_filename(weapon.name)), alt: weapon.name, class: "weapon-image" %>
+                  <% else %>
+                    <p class="no-image-placeholder">No image available</p>
+                  <% end %>
+                </div>
+              <% end %>
+            <% else %>
+              <p>No weapons available.</p>
+            <% end %>
+          </div>
 
-  <div id="messages">
-    <p>Messages will appear here...</p>
-  </div>
+          <!-- Consumables Row -->
+          <div class="inventory-row consumables-row">
+            <% if @consumables.present? %>
+              <% @consumables.each do |consumable| %>
+                <% next if consumable.quantity <= 0 %> <!-- Skip if quantity is zero -->
+                <div class="inventory-item consumable-item" onclick="useConsumable('<%= consumable.id %>')">
+                  <p class="item-name"><%= consumable.name %></p>
+                  <% if asset_path(consumable_image_filename(consumable.name)) %>
+                    <%= image_tag asset_path(consumable_image_filename(consumable.name)), alt: consumable.name, class: "consumable-image" %>
+                  <% else %>
+                    <p class="no-image-placeholder">No image available</p>
+                  <% end %>
+                  <% if consumable.quantity > 0 %>
+                    <p class="item-quantity" data-consumable-id="<%= consumable.id %>">x<%= consumable.quantity %></p>
+                  <% end %>
+                </div>
+              <% end %>
+            <% else %>
+              <p>No consumables available.</p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <!-- New container to group player info and inventory side-by-side -->
+      <div class="player-info-container">
+        <!-- Player Info Section -->
+        <div class="player-info">
+          <h3>Your Stats</h3>
+          <progress id="player-health" value="<%= @game_user.health %>" max="<%= @player.health %>"></progress>
+          <p>Health: <span id="player-1-health"><%= @game_user.health %> / <%= @player.health %></span></p>
+          <progress id="player-mana" value="<%= @game_user.mana %>" max="<%= @player.mana %>"></progress>
+          <p>Mana: <span id="player-1-mana"><%= @game_user.mana %> / <%= @player.mana %></span></p>
+        </div>
+      </div>
+      <div id="player-1-stats">
+        <p><strong>Level:</strong> <span id="player-1-level">N/A</span></p>
+        <p><strong>Attack:</strong> <span id="player-1-attack">N/A</span></p>
+        <p><strong>Special Attack:</strong> <span id="player-1-special-attack">N/A</span></p>
+        <p><strong>Defense:</strong> <span id="player-1-defense">N/A</span></p>
+        <p><strong>Special Defense:</strong> <span id="player-1-special-defense">N/A</span></p>
+        <p><strong>IQ:</strong> <span id="player-1-iq">N/A</span></p>
+        <p><strong>Turn:</strong> <span id="current-turn">N/A</span></p>
+      </div>
 
-  <div>
-    <h3 id="player-1-name">Player 1</h3>
-    <p>Health: <span id="player-1-health">N/A</span></p>
-  </div>
-  <div>
-    <h3 id="player-2-name">Player 2</h3>
-    <p>Health: <span id="player-2-health">N/A</span></p>
-  </div>
+      <button id="join-game-btn" onclick="assignPlayer()">Join Game</button>
 
-  <div id="assign-players">
-    <button id="player-1-button" onclick="assignPlayer(1)" disabled>Player 1</button>
-    <button id="player-2-button" onclick="assignPlayer(2)" disabled>Player 2</button>
-  </div>
+      <!-- Action buttons and return link -->
+      <div class="action-footer">
+        <%= link_to 'Return to Grid', grid_path, class: 'back-button' %>
+        <div class="divider"></div>
+        <div class="action-buttons">
+          <button id="attack-button" data-game-id="<%= @game.code %>">Attack</button>
+          <button id="magic-attack-button" data-game-id="<%= @game.code %>">Magic Attack</button>
+          <button id="magic-heal-button" data-game-id="<%= @game.code %>">Magic Heal</button>
+        </div>
+      </div>
+    </div>
 
-  <div id="attack-buttons">
-    <button id="attack-button" onclick="attack(1)" disabled>Player 1 Attack</button>
-    <button id="attack-button-2" onclick="attack(2)" disabled>Player 2 Attack</button>
-    <button id="disconnect-button" onclick="disconnectChannel()">Disconnect</button>
-  </div>
-  <div class="interaction-footer">
-    <%= link_to 'Return to Grid', grid_path, class: 'back-button' %>
+    <!-- Enemy section -->
+    <div class="enemy-section">
+<!--      <img src="<%#= asset_path('skeleton.png') %>" alt="Enemy Avatar" class="enemy-avatar"> -->
+      <div class="enemy-info">
+        <h3 id="player-2-name">Player 2</h3>
+        <p>Level: <span id="player-2-level">N/A</span></p>
+        <progress id="player-2-health-bar" value="100" max="100"></progress>
+        <p>Health: <span id="player-2-health">N/A</span></p>
+        <progress id="player-2-mana-bar" value="100" max="100"></progress>
+        <p>Mana: <span id="player-2-mana">N/A</span></p>
+        <p>Attack: <span id="player-2-attack">N/A</span></p>
+        <p>Special Attack: <span id="player-2-special-attack">N/A</span></p>
+        <p>Defense: <span id="player-2-defense">N/A</span></p>
+        <p>Special Defense: <span id="player-2-special-defense">N/A</span></p>
+        <p>IQ: <span id="player-2-iq">N/A</span></p>
+        <p id="attack-message"></p>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -48,78 +110,105 @@
     let arenaId = 1;  // Arena ID for this game
     let playerId = null;  // Player ID (assigned dynamically)
     const currentUserName = "<%= @user.username %>";
+    const user_id = "<%= @user.id %>";
+    const player_level = "<%= @player.level %>";
+    const max_health = "<%= @player.health %>";
+    const player_hp = "<%= @game_user.health %>";
+    const player_mana = "<%= @player.mana %>";
+    const max_mana = "<%= @game_user.mana %>";
+    const player_attack = "<%= @player.attack %>";
+    const player_special_attack = "<%= @player.special_attack %>";
+    const player_defense = "<%= @player.defense %>";
+    const player_special_defense = "<%= @player.special_defense %>";
+    const player_IQ = "<%= @player.iq %>";
 
     document.addEventListener('DOMContentLoaded', function() {
         const consumer = ActionCable.createConsumer();
-        document.getElementById('player-1-button').disabled = false;
-        document.getElementById('player-2-button').disabled = false;
-        document.getElementById('attack-button').disabled = false;
-        document.getElementById('attack-button-2').disabled = false;
 
         // Subscribe to the arena channel
         channel = consumer.subscriptions.create(
-            { channel: "ArenaChannel", arena_id: arenaId },
-            {
-                connected() {
-                    console.log("Connected to ArenaChannel");
-                },
+          { channel: "ArenaChannel", arena_id: arenaId },
+          {
+              connected() {
+                  console.log("Connected to ArenaChannel");
+              },
 
-                disconnected() {
-                    console.log("Disconnected from ArenaChannel");
-                },
+              disconnected() {
+                  console.log("Disconnected from ArenaChannel");
+              },
 
-                received(data) {
-                    console.log(data);  // Log the data to see its structure
+              received(data) {
+                  console.log(data);  // Log the data to see its structure
 
-                    // Update player buttons based on current game state
-                    if (data.players) {
-                        if (data.players[1]) {
-                            document.getElementById('player-1-name').textContent = data.players[1].username;
-                            document.getElementById('player-1-health').textContent = data.players[1].health;
-                        } else {
-                            document.getElementById('player-1-name').textContent = "Player 1";
-                            document.getElementById('player-1-health').textContent = "N/A";
-                        }
+                  // Update player buttons based on current game state
+                  if (data.players) {
+                      if (data.players[1]) {
+                          if (data.players[1].username === currentUserName) {
+                              document.getElementById('player-1-health').textContent = data.players[1].health;
+                              document.getElementById('player-1-level').textContent = data.players[1].level;
+                              document.getElementById('player-1-mana').textContent = data.players[1].mana;
+                              document.getElementById('player-1-attack').textContent = data.players[1].attack;
+                              document.getElementById('player-1-special-attack').textContent = data.players[1].special_attack;
+                              document.getElementById('player-1-defense').textContent = data.players[1].defense;
+                              document.getElementById('player-1-special-defense').textContent = data.players[1].special_defense;
+                              document.getElementById('player-1-iq').textContent = data.players[1].iq;
+                          } else {
+                              document.getElementById('player-1-health').textContent = data.players[2].health;
+                              document.getElementById('player-1-level').textContent = data.players[2].level;
+                              document.getElementById('player-1-mana').textContent = data.players[2].mana;
+                              document.getElementById('player-1-attack').textContent = data.players[2].attack;
+                              document.getElementById('player-1-special-attack').textContent = data.players[2].special_attack;
+                              document.getElementById('player-1-defense').textContent = data.players[2].defense;
+                              document.getElementById('player-1-special-defense').textContent = data.players[2].special_defense;
+                              document.getElementById('player-1-iq').textContent = data.players[2].iq;
+                          }
+                      } else {
+                          document.getElementById('player-1-name').textContent = "Player 1";
+                          document.getElementById('player-1-health').textContent = "N/A";
+                      }
 
-                        if (data.players[2]) {
-                            document.getElementById('player-2-name').textContent = data.players[2].username;
-                            document.getElementById('player-2-health').textContent = data.players[2].health;
-                        } else {
-                            document.getElementById('player-2-name').textContent = "Player 2";
-                            document.getElementById('player-2-health').textContent = "N/A";
-                        }
-                    }
+                      if (data.players[2]) {
+                          if (data.players[2].username === currentUserName) {
+                              document.getElementById('player-2-name').textContent = data.players[1].username;
+                              document.getElementById('player-2-health').textContent = data.players[1].health;
+                              document.getElementById('player-2-level').textContent = data.players[1].level;
+                              document.getElementById('player-2-mana').textContent = data.players[1].mana;
+                              document.getElementById('player-2-attack').textContent = data.players[1].attack;
+                              document.getElementById('player-2-special-attack').textContent = data.players[1].attack;
+                              document.getElementById('player-2-defense').textContent = data.players[1].defense;
+                              document.getElementById('player-2-special-defense').textContent = data.players[1].defense;
+                              document.getElementById('player-2-iq').textContent = data.players[1].iq;
+                          } else {
+                              document.getElementById('player-2-name').textContent = data.players[2].username;
+                              document.getElementById('player-2-health').textContent = data.players[2].health;
+                              document.getElementById('player-2-level').textContent = data.players[2].level;
+                              document.getElementById('player-2-mana').textContent = data.players[2].mana;
+                              document.getElementById('player-2-attack').textContent = data.players[2].attack;
+                              document.getElementById('player-2-special-attack').textContent = data.players[2].attack;
+                              document.getElementById('player-2-defense').textContent = data.players[2].defense;
+                              document.getElementById('player-2-special-defense').textContent = data.players[2].defense;
+                              document.getElementById('player-2-iq').textContent = data.players[2].iq;
+                          }
+                      } else {
+                          document.getElementById('player-2-name').textContent = "Player 2";
+                          document.getElementById('player-2-health').textContent = "N/A";
+                      }
+                  }
 
-                    const currentTurn = data.current_turn !== undefined ? data.current_turn : 'N/A';
-                    document.getElementById('current-turn').textContent = currentTurn;
+                  const currentTurn = data.current_turn ? 'Player 1\'s Turn' : 'Player 2\'s Turn';
+                  document.getElementById('current-turn').textContent = currentTurn;
 
-                    // Display the message
-                    const messageDiv = document.getElementById('messages');
-                    messageDiv.innerHTML += `<p>${data.message}</p>`;
-                    messageDiv.scrollTop = messageDiv.scrollHeight;
-
-                    // Enable/disable attack buttons based on the current turn
-                    if (data.current_turn === 1) {
-                        document.getElementById('attack-button').disabled = false;
-                        document.getElementById('attack-button-2').disabled = true;
-                    } else if (data.current_turn === 2) {
-                        document.getElementById('attack-button').disabled = true;
-                        document.getElementById('attack-button-2').disabled = false;
-                    } else {
-                        document.getElementById('attack-button').disabled = false;
-                        document.getElementById('attack-button-2').disabled = false;
-                    }
-                },
-            }
+                  // Display the message
+                  const messageDiv = document.getElementById('attack-message');
+                  messageDiv.innerHTML += `<p>${data.message}</p>`;
+                  messageDiv.scrollTop = messageDiv.scrollHeight;
+              },
+          }
         );
-
     });
 
-    function assignPlayer(playerNumber) {
-        playerId = playerNumber;
-        // Send the assignment to the backend
-        console.log(currentUserName)
-        channel.send({ action: 'assign_player', player_id: playerId, user_name: currentUserName });
+    function assignPlayer() {
+        channel.send({ action: 'assign_player', player_id: user_id, user_name: currentUserName, level: player_level, health: player_hp, max_health: max_health, max_mana: max_mana, mana: player_mana, attack: player_attack, special_attack: player_special_attack, defense: player_defense, special_defense: player_special_defense, iq: player_IQ});
     }
 
     function attack(playerId) {
@@ -134,5 +223,111 @@
         }
     }
 </script>
-</body>
-</html>
+
+<style>
+    .inventory-row {
+        display: flex;
+        gap: 10px;
+        margin: 10px 0;
+        width: 100%; /* Or a fixed width like 800px */
+        max-width: 800px; /* Example fixed width */
+        overflow-x: auto; /* Enable horizontal scrolling */
+        white-space: nowrap; /* Prevent wrapping */
+        background-color: #222; /* Dark background for the row */
+        border: 1px solid #444; /* Optional: Adds a subtle border */
+        padding: 10px; /* Optional: Adds spacing inside the row */
+        scrollbar-width: thin; /* Makes the scrollbar thinner on Firefox */
+        scrollbar-color: #666 #222; /* Custom scrollbar colors for Firefox */
+    }
+
+    /* Scrollbar styles for WebKit browsers (Chrome, Edge, Safari) */
+    .inventory-row::-webkit-scrollbar {
+        height: 8px; /* Adjust scrollbar height for horizontal scrolling */
+    }
+
+    .inventory-row::-webkit-scrollbar-track {
+        background: #222; /* Dark background for scrollbar track */
+        border-radius: 4px; /* Rounded edges for track */
+    }
+
+    .inventory-row::-webkit-scrollbar-thumb {
+        background: #666; /* Gray thumb for dark mode */
+        border-radius: 4px; /* Rounded edges for thumb */
+    }
+
+    .inventory-row::-webkit-scrollbar-thumb:hover {
+        background: #888; /* Slightly lighter thumb on hover */
+    }
+
+    .inventory-item {
+        max-height: 50px;
+        max-width: 50px;
+        text-align: center;
+        position: relative; /* Ensure positioning context for the text */
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        flex: 0 0 auto; /* Prevent items from shrinking or wrapping */
+        color: #fff; /* Text color for dark mode */
+        background-color: #333; /* Dark background for items */
+        border: 1px solid #444; /* Border for each item */
+        border-radius: 4px; /* Rounded edges */
+        padding: 20px; /* Padding inside items */
+    }
+
+    .item-quantity {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        font-size: 12px;
+        color: #fff; /* Adjust the color as needed */
+        background-color: rgba(0, 0, 0, 0.5); /* Optional: dark background for visibility */
+        padding: 2px 5px;
+        border-radius: 5px;
+    }
+
+    .consumable-image,
+    .weapon-image {
+        max-height: 50px;
+        max-width: 50px;
+        object-fit: cover; /* Ensures the image fits the container */
+    }
+
+    /* Style for item names to overlap on images */
+    .item-name {
+        font-size: 14px;
+        margin: 0;
+        position: absolute;
+        top: 50%; /* Vertically center text */
+        left: 50%; /* Horizontally center text */
+        transform: translate(-50%, -50%); /* Adjust position to center exactly */
+        z-index: 1; /* Make sure the text is on top */
+        color: white; /* Text color for visibility */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Optional: Adds a shadow for better readability */
+    }
+
+    /* Optional: For item quantity if needed */
+    .item-quantity {
+        position: absolute;
+        bottom: 5px;
+        right: 10px;
+        font-size: 12px;
+        color: #cccccc;
+    }
+
+    .inventory-item:hover {
+        background-color: #333333;
+    }
+    .current-weapon {
+        border: 3px solid green;
+        box-shadow: 0 0 10px green; /* Optional: adds a glowing effect */
+    }
+    .player-section-header {
+        display: flex;
+    }
+
+    .inventory-section {
+        width: 70%;
+    }
+
+
+</style>
