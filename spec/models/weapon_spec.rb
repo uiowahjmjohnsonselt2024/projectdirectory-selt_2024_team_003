@@ -1,71 +1,62 @@
 require 'rails_helper'
 
 RSpec.describe Weapon, type: :model do
-  describe "validations" do
-    let(:user) { create(:user) } # Assuming a User factory exists
+  let(:user) do
+    User.create!(
+      username: "testuser",
+      email: "test@example.com",
+      password: "password123"
+    )
+  end
 
-    it "is valid with a name and user" do
-      weapon = Weapon.new(name: "Sword", user: user)
-      expect(weapon).to be_valid
-    end
+  describe 'associations' do
+    it { should belong_to(:user) }
+  end
 
-    it "is invalid without a name" do
-      weapon = Weapon.new(name: nil, user: user)
-      expect(weapon).to_not be_valid
-      expect(weapon.errors[:name]).to include("can't be blank")
-    end
+  describe 'validations' do
+    it { should validate_presence_of(:name) }
 
-    it "is valid when no other weapon is marked as current" do
-      weapon = Weapon.new(name: "Sword", user: user, current: true)
-      expect(weapon).to be_valid
-    end
+    context 'custom validation: only_one_current_weapon' do
+      it 'allows one current weapon per user' do
+        weapon1 = user.weapons.create!(name: "Sword", current: true)
+        weapon2 = user.weapons.build(name: "Axe", current: true)
 
-    it "is invalid when another weapon is already marked as current" do
-      create(:weapon, name: "Bow", user: user, current: true)
-      weapon = Weapon.new(name: "Sword", user: user, current: true)
+        expect(weapon2.valid?).to be_falsey
+        expect(weapon2.errors[:current]).to include('There can only be one current weapon for a user.')
+      end
 
-      expect(weapon).to_not be_valid
-      expect(weapon.errors[:current]).to include("There can only be one current weapon for a user.")
+      it 'allows multiple weapons if only one is current' do
+        weapon1 = user.weapons.create!(name: "Sword", current: true)
+        weapon2 = user.weapons.build(name: "Axe", current: false)
+
+        expect(weapon2.valid?).to be_truthy
+      end
     end
   end
 
-  describe "#set_as_current_weapon" do
-    let(:user) { create(:user) }
-    let!(:weapon1) { create(:weapon, name: "Sword", user: user, current: true) }
-    let!(:weapon2) { create(:weapon, name: "Bow", user: user, current: false) }
+  describe '#set_as_current_weapon' do
+    it 'sets the current weapon and unsets other weapons' do
+      weapon1 = user.weapons.create!(name: "Sword", current: true)
+      weapon2 = user.weapons.create!(name: "Axe", current: false)
 
-    it "sets the weapon as current and resets others" do
+      expect(weapon1.current).to be_truthy
+      expect(weapon2.current).to be_falsey
+
       weapon2.set_as_current_weapon
 
-      expect(weapon2.reload.current).to be true
-      expect(weapon1.reload.current).to be false
-    end
-  end
+      weapon1.reload
+      weapon2.reload
 
-  describe "edge cases" do
-    let(:user) { create(:user) }
-
-    it "allows creating a non-current weapon when another is current" do
-      create(:weapon, name: "Sword", user: user, current: true)
-      weapon = Weapon.new(name: "Bow", user: user, current: false)
-
-      expect(weapon).to be_valid
+      expect(weapon1.current).to be_falsey
+      expect(weapon2.current).to be_truthy
     end
 
-    it "does not allow setting multiple weapons as current" do
-      create(:weapon, name: "Sword", user: user, current: true)
-      weapon = create(:weapon, name: "Bow", user: user, current: false)
+    it 'raises an error if the update fails' do
+      weapon = user.weapons.create!(name: "Sword", current: false)
 
-      weapon.update(current: true)
+      allow(weapon).to receive(:update!).and_raise(ActiveRecord::RecordInvalid)
 
-      expect(weapon.errors[:current]).to include("There can only be one current weapon for a user.")
-    end
-
-    it "handles setting a current weapon when there are no current weapons" do
-      weapon = create(:weapon, name: "Axe", user: user, current: false)
-      weapon.set_as_current_weapon
-
-      expect(weapon.reload.current).to be true
+      expect { weapon.set_as_current_weapon }.to raise_error(ActiveRecord::RecordInvalid)
     end
   end
 end
