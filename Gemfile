@@ -22,7 +22,6 @@ gem 'activerecord', '~> 8.0.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'ffi', '~> 1.15' # Or the latest compatible version
 gem 'rails-ujs', '~> 0.1.0'
-gem 'redis'
 gem 'actioncable'
 gem 'sprockets-rails'
 gem 'puma'
@@ -30,6 +29,8 @@ gem 'puma'
 gem 'aws-sdk-s3'
 
 gem 'mini_magick'
+
+gem 'redis', '~> 5.0'
 
 gem 'dotenv-rails'
 group :development, :test do
@@ -44,7 +45,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'sqlite3', '~> 2.1'
   gem 'webmock'
-  # gem 'capybara'
+  gem 'capybara'
   # gem 'selenium-webdriver'
   gem 'simplecov', require: false
 end

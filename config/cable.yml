@@ -2,7 +2,6 @@ development:
   adapter: async
   channel_prefix: development_shards_of_the_grid
 
-
 test:
   adapter: async
 
