@@ -29,7 +29,7 @@
               <% if @consumables.present? %>
                 <% @consumables.each do |consumable| %>
                   <% next if consumable.quantity <= 0 %> <!-- Skip if quantity is zero -->
-                  <div class="inventory-item consumable-item" onclick="useConsumable('<%= consumable.id %>')">
+                  <div class="inventory-item consumable-item" onclick="useConsumable('<%= consumable.id %>', '<%= consumable.name %>')">
                     <p class="item-name"><%= consumable.name %></p>
                     <% if asset_path(consumable_image_filename(consumable.name)) %>
                       <%= image_tag asset_path(consumable_image_filename(consumable.name)), alt: consumable.name, class: "consumable-image" %>
@@ -53,10 +53,10 @@
         <div class="player-info">
           <h3>Your Stats</h3>
           <p>Your position: (<%= @game_user.x_position %>, <%= @game_user.y_position %>)</p>
-          <progress id="player-health" value="<%= @game_user.health %>" max="<%= @player.health %>"></progress>
           <p>Health: <span id="player-health-text"><%= @game_user.health %> / <%= @player.health %></span></p>
-          <progress id="player-mana" value="<%= @game_user.mana %>" max="<%= @player.mana %>"></progress>
+          <progress id="player-health" value="<%= @game_user.health %>" max="<%= @player.health %>"></progress>
           <p>Mana: <span id="player-mana-text"><%= @game_user.mana %> / <%= @player.mana %></span></p>
+          <progress id="player-mana" value="<%= @game_user.mana %>" max="<%= @player.mana %>"></progress>
         </div>
       </div>
 
@@ -78,8 +78,8 @@
       <div class="enemy-info">
         <h3><%= @enemy.name %></h3>
         <p>Level: <%= @enemy.level %></p>
-        <progress id="enemy-health" value="<%= @enemy.health %>" max="<%= @enemy.max_health %>"></progress>
         <p id="enemy-health-text">Health: <%= @enemy.health %></p>
+        <progress id="enemy-health" value="<%= @enemy.health %>" max="<%= @enemy.max_health %>"></progress>
         <p id="enemy-attack">Attack: <%= @enemy.attack %></p>
         <p id="enemy-defense">Defense: <%= @enemy.defense %></p>
         <p id="enemy-iq">IQ: <%= @enemy.iq %></p>
@@ -117,7 +117,7 @@
           });
     }
 
-    function useConsumable(consumableId) {
+    function useConsumable(consumableId, consumableName) {
         const attackButton = document.getElementById('attack-button');
         const gameId = attackButton.getAttribute('data-game-id');
         console.log(`Using consumable with ID: ${consumableId} for game ID: ${gameId}`);
@@ -133,6 +133,16 @@
           .then(response => response.json())
           .then(data => {
               if (data.success) {
+                  let audioElement = new Audio('<%= asset_path('mana.mp3') %>');
+                  if (consumableName === 'Revive') {
+                      audioElement = new Audio('<%= asset_path('revive.mp3') %>');
+                  } else if (consumableName === 'Acid Potion') {
+                      audioElement = new Audio('<%= asset_path('acid.mp3') %>');
+                  } else if (consumableName === 'Health Potion') {
+                      audioElement = new Audio('<%= asset_path('potion.mp3') %>');
+                  }
+                  audioElement.play();
+
                   // Update health and mana of the player
                   const playerHealthText = document.getElementById('player-health-text');
                   const playerManaText = document.getElementById('player-mana-text');
