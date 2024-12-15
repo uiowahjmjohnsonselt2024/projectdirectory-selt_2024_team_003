@@ -40,6 +40,7 @@ body {
 }
 
 .enemy-section {
+  position: relative; /* Ensure the overlay is positioned relative to this container */
   align-items: center;
   justify-content: space-between;
   background-color: rgba(30, 30, 30, 0.8);
@@ -50,6 +51,7 @@ body {
 }
 
 .enemy-avatar {
+  position: relative; /* Ensure this container is the reference point for absolute positioning */
   width: 60%;
   margin: 0 20px;
 }
