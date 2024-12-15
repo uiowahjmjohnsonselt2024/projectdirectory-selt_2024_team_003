@@ -147,35 +147,34 @@
 </div>
 
 <script>
-    firstBlood = <% current_user.has_achievement("First Blood: The thrill of victory, the first taste of triumph.") %>
+    function useWeapon(weaponId, weaponName) {
+        console.log(`Setting weapon with ID: ${weaponName} as current.`);
+
+        // Adjust the fetch URL to match the new route
+        fetch(`/interactions/set_current_weapon/${weaponId}`, {
+            method: 'POST', // Or 'PATCH' if you prefer
+            headers: {
+                'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content,
+                'Content-Type': 'application/json'
+            }
+        })
+          .then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  // alert(`Weapon ${weaponName} set as current!`);
+                  location.reload(); // Reload to update the view (optional)
+              } else {
+                  alert('Failed to set weapon as current');
+              }
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              alert('There was an error setting the weapon as current');
+          });
+    }
+firstBlood = <% current_user.has_achievement("First Blood: The thrill of victory, the first taste of triumph.") %>
       finalBoss = <% current_user.has_achievement("The Final Boss: Defeat the final boss and claim victory over the game.") %>
         bossPosition = <% @game_user.x_position == 5 && @game_user.y_position == 5 %>
-
-          function useWeapon(weaponId, weaponName) {
-              console.log(`Setting weapon with ID: ${weaponName} as current.`);
-
-              // Adjust the fetch URL to match the new route
-              fetch(`/interactions/set_current_weapon/${weaponId}`, {
-                  method: 'POST', // Or 'PATCH' if you prefer
-                  headers: {
-                      'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content,
-                      'Content-Type': 'application/json'
-                  }
-              })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // alert(`Weapon ${weaponName} set as current!`);
-                        location.reload(); // Reload to update the view (optional)
-                    } else {
-                        alert('Failed to set weapon as current');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('There was an error setting the weapon as current');
-                });
-          }
 
     function useConsumable(consumableId, consumableName) {
         const attackButton = document.getElementById('attack-button');
