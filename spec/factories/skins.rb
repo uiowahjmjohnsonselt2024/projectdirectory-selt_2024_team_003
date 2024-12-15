@@ -2,6 +2,7 @@
 FactoryBot.define do
   factory :skin do
     user
+    archetype { "Attacker" } # Replace with a valid default archetype for your app
 
     after(:build) do |skin|
       skin.image.attach(

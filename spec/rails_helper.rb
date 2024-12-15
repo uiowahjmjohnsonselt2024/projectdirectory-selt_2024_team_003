@@ -30,6 +30,7 @@ end
 RSpec.configure do |config|
   # Include Devise helpers for controller specs if using Devise
   config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
 
   # Include FactoryBot methods for cleaner syntax
   config.include FactoryBot::Syntax::Methods
