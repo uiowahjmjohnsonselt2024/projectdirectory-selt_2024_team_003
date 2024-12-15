@@ -17,6 +17,11 @@ class InteractionsController < ApplicationController
     else
       @image = 'balanced.png'
     end
+
+    other_players = @game.game_users.where.not(user: current_user)
+    @players_in_same_pos = other_players.select do |other_player|
+      other_player.x_position == @game_user.x_position && other_player.y_position == @game_user.y_position
+    end
   end
 
   # Action to set a weapon as the current weapon
