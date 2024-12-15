@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :weapon do
     name { "MyString" }
-    user { nil }
+    game
+    user
   end
 end
