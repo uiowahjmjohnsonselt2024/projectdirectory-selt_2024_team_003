@@ -447,7 +447,7 @@ DEPENDENCIES
   rails-controller-testing
   rails-ujs (~> 0.1.0)
   rails_12factor
-  redis
+  redis (~> 5.0)
   redis-rails
   rspec-rails
   rubocop
