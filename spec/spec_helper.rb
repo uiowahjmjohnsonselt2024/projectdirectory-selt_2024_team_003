@@ -21,6 +21,8 @@ SimpleCov.start 'rails' do
   add_filter '/app/helpers/'
   add_filter '/app/javascript/'
   add_filter '/app/mailers/'
+  add_filter '/app/views/layouts/'
+  add_filter '/app/views/notification_mailer/'
 end
 
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
