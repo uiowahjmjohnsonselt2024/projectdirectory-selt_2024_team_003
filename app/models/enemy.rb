@@ -2,6 +2,8 @@
 class Enemy < ActiveRecord::Base
   belongs_to :game
 
+  has_one_attached :image # Add Active Storage attachment
+
   validates :health, :attack, :defense, :iq, :special_attack, :special_defense, :mana, presence: true,
                                                                                        numericality: { only_integer: true }
   validates :level, numericality: { only_integer: true, greater_than_or_equal_to: 1 }

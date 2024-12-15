@@ -1,8 +1,23 @@
 class InteractionsController < ApplicationController
+  include ImageProcessingHelper
   def show
     @game = Game.find_by(code: params[:game_id])
     @game_user = @game.game_users.find_by(user: current_user)
-    @enemy = @game.enemies.find_by(x_position: @game_user.x_position, y_position: @game_user.y_position)
+    @enemy = @game.enemies.find_or_initialize_by(x_position: @game_user.x_position, y_position: @game_user.y_position)
+
+    if @enemy.new_record? || !@enemy.image.attached?
+      # If the enemy is new or doesn't have an attached image, generate it
+      @enemy.level = @game.level if @enemy.new_record? # Set level dynamically if new
+      ai_image_base64 = generate_ai_image
+      if ai_image_base64
+        attach_image_to_enemy(@enemy, ai_image_base64)
+      end
+      @enemy.save! # Save the enemy to the database
+    end
+
+    # Use the enemy image for display
+    @enemy_image = url_for(@enemy.image)
+
     @player = current_user.current_skin # Use current_skin for player stats
     @weapons = current_user.weapons
     @consumables = current_user.consumables
@@ -22,6 +37,66 @@ class InteractionsController < ApplicationController
     @players_in_same_pos = other_players.select do |other_player|
       other_player.x_position == @game_user.x_position && other_player.y_position == @game_user.y_position
     end
+  end
+
+  def generate_ai_image
+    uri = URI("https://api.openai.com/v1/images/generations")
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+
+    request = Net::HTTP::Post.new(uri)
+    request['Authorization'] = "Bearer #{ENV['OPENAI_API_KEY']}"
+    request['Content-Type'] = 'application/json'
+    request.body = {
+      prompt: "A monster or enemy in a vibrant fantasy style. " \
+        "A fully centered monster or enemy on a plain, uniform purple background with no gradients, textures, or patterns. " \
+        "The background must be a solid, consistent purple where every pixel is the same shade of purple. " \
+        "Ensure the monster or enemy is well-defined, proportionate, and entirely visible within the image. " \
+        "IMPORTANT: The monster or enemy must not contain any purple elements, including clothing, accessories, or magical effects. " \
+        "Focus on making the monster or enemy visually distinct from the all-purple background.",
+      n: 1,
+      size: "1024x1024"
+    }.to_json
+
+    response = http.request(request)
+    if response.is_a?(Net::HTTPSuccess)
+      data = JSON.parse(response.body)
+      generated_image_url = data['data'][0]['url']
+
+      # Process and return the Base64-encoded processed image
+      process_image(generated_image_url).to_blob
+    else
+      nil # Return nil if the generation fails
+    end
+  end
+
+  def process_image(image_url)
+    image = MiniMagick::Image.read(URI.open(image_url).read)
+
+    # Detect the background color and make it transparent
+    remove_background(image)
+
+    image
+  end
+
+  def remove_background(image)
+    # Get top left corner pixel, assume this is the background, get hex value of color
+    background_color = image.get_pixels[0][0]
+    hex_color = "##{background_color.map { |c| c.to_s(16).rjust(2, '0') }.join.upcase}"
+
+    # Make the background color transparent
+    image.combine_options do |config|
+      config.fuzz "25%" # 25% Tolerance
+      config.transparent hex_color
+    end
+  end
+
+  def attach_image_to_enemy(enemy, image_blob)
+    enemy.image.attach(
+      io: StringIO.new(image_blob),
+      filename: "enemy_image_#{Time.now.to_i}.png",
+      content_type: 'image/png'
+    )
   end
 
   # Action to set a weapon as the current weapon

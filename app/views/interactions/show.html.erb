@@ -105,7 +105,7 @@
 
     <!-- Enemy section -->
     <div class="enemy-section">
-      <img src="<%= asset_path('skeleton.png') %>" alt="Enemy Avatar" class="enemy-avatar">
+      <%= image_tag @enemy_image, alt: "Enemy Avatar", class: "enemy-avatar" %>
       <div class="enemy-info">
         <h3><%= @enemy.name %></h3>
         <p>Level: <%= @enemy.level %></p>
